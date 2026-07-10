@@ -1,5 +1,5 @@
-export const shadows = {
-  sm: "0 2px 4px rgba(0,0,0,.08)",
-  md: "0 8px 20px rgba(0,0,0,.15)",
-  lg: "0 20px 40px rgba(0,0,0,.25)",
+export const shadow = {
+  glass: "0 24px 80px rgba(0,0,0,.45)",
+
+  glow: "0 0 60px rgba(99,102,241,.25)",
 };
