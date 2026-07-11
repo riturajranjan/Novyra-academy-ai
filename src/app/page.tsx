@@ -7,6 +7,7 @@ import LearningJourney from "@/components/landing/LearningJourney";
 import ParentsTrust from "@/components/landing/ParentsTrust";
 import Curriculum from "@/components/landing/Curriculum";
 import CTA from "@/components/landing/CTA";
+import Footer from "@/components/layout/Footer";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <ParentsTrust />
       <Curriculum />
       <CTA />
+      <Footer />
     </>
   );
 }

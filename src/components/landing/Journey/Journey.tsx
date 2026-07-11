@@ -16,8 +16,8 @@ export default function Journey() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-6">
           {/* Journey Steps */}
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:[#c0c1ff33] group-hover:[#c0c1ff80] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-primary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-primary">
                 app_registration
               </span>
             </div>
@@ -27,8 +27,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#4cd7f633] group-hover:border-[#4cd7f680] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-tertiary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-tertiary/20 group-hover:border-tertiary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-tertiary">
                 subject
               </span>
             </div>
@@ -38,8 +38,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#b8c4ff33] group-hover:border-[#b8c4ff80] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-secondary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 group-hover:border-secondary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-secondary">
                 play_circle
               </span>
             </div>
@@ -49,8 +49,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#c0c1ff33] group-hover:border-[#c0c1ff80] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-primary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-primary">
                 forum
               </span>
             </div>
@@ -60,8 +60,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#4cd7f633] group-hover:border-[#4cd7f680] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-tertiary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-tertiary/20 group-hover:border-tertiary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-tertiary">
                 quiz
               </span>
             </div>
@@ -71,8 +71,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#b8c4ff33] group-hover:border-[#b8c4ff80] group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-secondary text-[24px]">
+            <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 group-hover:border-secondary/50 group-hover:scale-110 transition-all">
+              <span className="material-symbols-outlined text-secondary">
                 history_edu
               </span>
             </div>
@@ -82,8 +82,8 @@ export default function Journey() {
             </p>
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
-            <div className="w-16 h-16 rounded-2xl bg-[#c0c1ff33] border border-[#c0c1ff80] flex items-center justify-center mb-6 scale-110 shadow-lg shadow-[#c0c1ff33]">
-              <span className="material-symbols-outlined text-primary text-[24px] font-bold">
+            <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/50 flex items-center justify-center mb-6 scale-110 shadow-lg shadow-primary/20">
+              <span className="material-symbols-outlined text-primary font-bold">
                 emoji_events
               </span>
             </div>

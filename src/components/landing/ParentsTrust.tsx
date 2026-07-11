@@ -1,4 +1,3 @@
-
 const ParentsTrust = () => {
   return (
     <section
@@ -12,7 +11,7 @@ const ParentsTrust = () => {
           </h2>
           <p className="text-on-surface-variant text-body-lg">
             We believe education is a partnership. We provide parents with
-            complete transparency into their child&apos;s growth.
+            complete transparency into their child's growth.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex items-start gap-4">
@@ -67,7 +66,7 @@ const ParentsTrust = () => {
               <div>
                 <p className="font-bold text-on-surface">Milestone Alerts</p>
                 <p className="text-sm text-on-surface-variant mt-1">
-                  Celebrate your child&apos;s learning wins with live notifications.
+                  Celebrate your child's learning wins with live notifications.
                 </p>
               </div>
             </div>
@@ -96,13 +95,13 @@ const ParentsTrust = () => {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-on-surface-variant">
-                    Aryan&apos;s Physics Mastery
+                    Aryan's Physics Mastery
                   </span>
-                  <span className="text-[#c0c1ff] font-bold">88%</span>
+                  <span className="text-primary font-bold">88%</span>
                 </div>
                 <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#c0c1ff] rounded-full"
+                    className="h-full bg-primary rounded-full"
                     style={{ width: "88%" }}
                   />
                 </div>
@@ -112,19 +111,19 @@ const ParentsTrust = () => {
                   <span className="text-on-surface-variant">
                     Weekly Study Goal
                   </span>
-                  <span className="text-[#4cd7f6] font-bold">Completed</span>
+                  <span className="text-tertiary font-bold">Completed</span>
                 </div>
                 <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#4cd7f6] rounded-full"
+                    className="h-full bg-tertiary rounded-full"
                     style={{ width: "100%" }}
                   />
                 </div>
               </div>
               <div className="p-4 bg-primary/5 rounded-2xl border border-primary/20">
                 <p className="text-[12px] italic text-on-surface-variant">
-                  &quot;Aryan cleared 12 doubts about Newton&apos;s Laws this week. His
-                  confidence score improved by 15%.&quot;
+                  "Aryan cleared 12 doubts about Newton's Laws this week. His
+                  confidence score improved by 15%."
                 </p>
               </div>
             </div>

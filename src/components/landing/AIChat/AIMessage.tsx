@@ -23,22 +23,22 @@ export default function AIMessage() {
         <div className="mt-6 flex items-center gap-6">
           <div className="flex gap-1.5 items-end h-6">
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.1s" }}></div>
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.3s" }}></div>
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.2s" }}></div>
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.5s" }}></div>
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.4s" }}></div>
             <div
-              className="waveform-bar1 w-1.5 bg-[#c0c1ff] rounded-full"
+              className="waveform-bar w-1.5 bg-primary rounded-full"
               style={{ animationDelay: "0.6s" }}></div>
           </div>
 

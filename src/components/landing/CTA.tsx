@@ -4,7 +4,7 @@ const CTA = () => {
   return (
     <section className="py-section-gap px-margin-desktop transition-all duration-1000 ease-out opacity-100 translate-y-0">
       <div className="max-w-container-max mx-auto">
-        <div className="relative glass-panel rounded-[60px] p-16 md:p-24 text-center overflow-hidden border-white/15 bg-gradient-to-br from-primary/20 via-surface-container-low to-tertiary shadow-4xl">
+        <div className="relative glass-panel1 rounded-[60px] p-16 md:p-24 text-center overflow-hidden border-white/15 bg-gradient-to-br from-primary/20 via-surface-container-low to-tertiary/20 shadow-4xl">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
           <div className="relative z-10 space-y-10 max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-[12px] uppercase tracking-widest">

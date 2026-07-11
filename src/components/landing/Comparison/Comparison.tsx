@@ -16,9 +16,9 @@ export default function Comparison() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Traditional Learning Card */}
-          <div className="glass-panel p-10 rounded-[40px] bg-[#ffffff05] border-[#ffffff0d] opacity-80 hover:opacity-100 transition-all">
+          <div className="glass-panel p-10 rounded-[40px] bg-white/[0.02] border-white/5 opacity-80 hover:opacity-100 transition-all">
             <div className="flex items-center gap-4 mb-10">
-              <div className="w-14 h-14 rounded-2xl bg-[#ffb4ab1a] flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-error/10 flex items-center justify-center">
                 <span className="material-symbols-outlined text-error text-[32px]">
                   timer_off
                 </span>
@@ -29,7 +29,7 @@ export default function Comparison() {
             </div>
             <ul className="space-y-8">
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-error mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-error mt-1">
                   cancel
                 </span>
                 <div>
@@ -41,7 +41,7 @@ export default function Comparison() {
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-error mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-error mt-1">
                   cancel
                 </span>
                 <div>
@@ -49,12 +49,12 @@ export default function Comparison() {
                     Fixed Learning Pace
                   </p>
                   <p className="text-sm text-on-surface-variant mt-1">
-                    If you don&apos;t understand something, the video keeps playing.
+                    If you don't understand something, the video keeps playing.
                   </p>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-error mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-error mt-1">
                   cancel
                 </span>
                 <div>
@@ -69,13 +69,12 @@ export default function Comparison() {
             </ul>
           </div>
           {/* Novyra Academy AI Card */}
-          <div
-            className="glass-panel1 p-10 rounded-[40px] bg-[#c0c1ff0d] border-[#c0c1ff33] shadow-2xl shadow-[#c0c1ff1a] relative overflow-hidden">
-            <div className="absolute top-0 right-0 px-6 py-2 bg-[#c0c1ff] text-on-primary font-bold text-[10px] uppercase tracking-[0.2em] rounded-bl-3xl">
+          <div className="glass-panel p-10 rounded-[40px] bg-primary/5 border-primary/20 shadow-2xl shadow-primary/10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 px-6 py-2 bg-primary text-on-primary font-bold text-[10px] uppercase tracking-[0.2em] rounded-bl-3xl">
               The Future
             </div>
             <div className="flex items-center gap-4 mb-10">
-              <div className="w-14 h-14 rounded-2xl bg-[#c0c1ff33] flex items-center justify-center pulse-orb">
+              <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center pulse-orb">
                 <span className="material-symbols-outlined text-primary text-[32px]">
                   auto_awesome
                 </span>
@@ -86,7 +85,7 @@ export default function Comparison() {
             </div>
             <ul className="space-y-8">
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-primary mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-primary mt-1">
                   check_circle
                 </span>
                 <div>
@@ -94,13 +93,13 @@ export default function Comparison() {
                     1:1 AI Interaction
                   </p>
                   <p className="text-sm text-on-surface-variant mt-1">
-                    Real-time conversations with Dr. Nova. It&apos;s like having a
+                    Real-time conversations with Dr. Nova. It's like having a
                     private tutor at home.
                   </p>
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-primary mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-primary mt-1">
                   check_circle
                 </span>
                 <div>
@@ -114,7 +113,7 @@ export default function Comparison() {
                 </div>
               </li>
               <li className="flex gap-4">
-                <span className="material-symbols-outlined text-primary mt-1 text-[24px]">
+                <span className="material-symbols-outlined text-primary mt-1">
                   check_circle
                 </span>
                 <div>
