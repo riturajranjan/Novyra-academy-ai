@@ -17,6 +17,7 @@ export default function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [loading] = useState(false);
 
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -48,7 +49,11 @@ export default function LoginForm() {
 
             <RememberMe checked={rememberMe} onChange={setRememberMe} />
 
-            <ContinueButton loading={loading} title="Continue Learning" />
+            <ContinueButton
+              loading={loading}
+              title="Continue Learning"
+              path="/board"
+            />
           </form>
         </div>
       </div>

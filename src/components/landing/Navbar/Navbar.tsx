@@ -1,10 +1,9 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import Logo from "./Logo";
-import Navigation from "./Navigation";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const route = useRouter();
   return (
     <nav className="fixed top-0 w-full z-[100] bg-surface/60 backdrop-blur-2xl border-b border-white/5 h-20">
       <div className="max-w-container-max mx-auto px-margin-desktop flex items-center justify-between h-full">
@@ -34,7 +33,9 @@ export default function Navbar() {
             href="#parents">
             Parents
           </a>
-          <button className="bg-primary text-on-primary px-7 py-3 rounded-xl  font-bold hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 active:scale-95 transition-all">
+          <button
+            onClick={() => route.push("/login")}
+            className="bg-primary text-on-primary px-7 py-3 rounded-xl  font-bold hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 active:scale-95 transition-all">
             Start Learning Free
           </button>
         </div>

@@ -49,7 +49,7 @@ export default function ChooseBoard() {
           <div className="w-full pb-4 lg:hidden">
             <ProgressHeader step={1} totalSteps={8} />
           </div>
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl overflow-scroll">
             <div className="glass-card  rounded-xl p-stack-md md:p-stack-lg border-white/5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md mb-stack-lg">
                 {boards.map((item) => (
@@ -70,6 +70,7 @@ export default function ChooseBoard() {
                   Back
                 </button>
                 <button
+                  onClick={() => router.push("/class")}
                   className="px-12 py-2 md:py-3 rounded-lg  transition-all duration-300 bg-primary text-on-primary-container hover:brightness-110 shadow-lg shadow-primary/20"
                   id="continue-btn">
                   Continue

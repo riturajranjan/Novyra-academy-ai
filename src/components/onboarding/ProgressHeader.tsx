@@ -10,46 +10,19 @@ export default function ProgressHeader({
   const progress = (step / totalSteps) * 100;
 
   return (
-    <div className="w-full">
-      {/* Top Row */}
-      <div className="mb-5 flex items-center justify-between">
-        <span className="font-headline-md text-headline-md font-bold text-primary">
-          Nova Academy
+    <div className="pt-stack-lg">
+      <div className="flex items-center gap-stack-md">
+        <span className=" text-mono-sm text-primary uppercase tracking-widest">
+          STEP {step} OF {totalSteps}
         </span>
-
-        <span
-          className="
-            text-sm
-            font-medium
-            text-slate-400
-
-            lg:text-base
-          ">
-          Step {step} of {totalSteps}
-        </span>
-      </div>
-
-      {/* Progress */}
-      <div className="relative h-[6px] w-full overflow-hidden rounded-full bg-white/10">
-        <div
-          className="
-            absolute
-            left-0
-            top-0
-            h-full
-            rounded-full
-
-            bg-gradient-to-r
-            from-cyan-400
-            to-sky-300
-
-            transition-all
-            duration-500
-          "
-          style={{
-            width: `${progress}%`,
-          }}
-        />
+        <div className="flex-grow h-1 bg-surface-container-high rounded-full overflow-hidden">
+          <div
+            className="h-full w-1/4 bg-gradient-to-r from-primary to-tertiary"
+            style={{
+              width: `${progress}%`,
+            }}
+          />
+        </div>
       </div>
     </div>
   );

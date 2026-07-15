@@ -9,8 +9,6 @@ interface HeroPanelProps {
 export default function HeroPanel({ step, totalSteps }: HeroPanelProps) {
   return (
     <aside className="relative z-10 flex flex-col h-full">
-      <ProgressHeader step={step} totalSteps={totalSteps} />
-
       {/* Illustration */}
 
       <div className="flex-1 h-full flex flex-col justify-center items-center relative">
@@ -34,6 +32,7 @@ export default function HeroPanel({ step, totalSteps }: HeroPanelProps) {
           </p>
         </div>
       </div>
+      <ProgressHeader step={step} totalSteps={totalSteps} />
     </aside>
   );
 }

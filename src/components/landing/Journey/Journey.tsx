@@ -17,7 +17,7 @@ export default function Journey() {
           {/* Journey Steps */}
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-primary">
+              <span className="material-symbols-outlined text-primary text-[24px]">
                 app_registration
               </span>
             </div>
@@ -28,7 +28,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-tertiary/20 group-hover:border-tertiary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-tertiary">
+              <span className="material-symbols-outlined text-tertiary text-[24px]">
                 subject
               </span>
             </div>
@@ -39,7 +39,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 group-hover:border-secondary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-secondary">
+              <span className="material-symbols-outlined text-secondary text-[24px]">
                 play_circle
               </span>
             </div>
@@ -50,7 +50,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-primary">
+              <span className="material-symbols-outlined text-primary text-[24px]">
                 forum
               </span>
             </div>
@@ -61,7 +61,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-tertiary/20 group-hover:border-tertiary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-tertiary">
+              <span className="material-symbols-outlined text-tertiary text-[24px]">
                 quiz
               </span>
             </div>
@@ -72,7 +72,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-surface border border-white/10 flex items-center justify-center mb-6 group-hover:bg-secondary/20 group-hover:border-secondary/50 group-hover:scale-110 transition-all">
-              <span className="material-symbols-outlined text-secondary">
+              <span className="material-symbols-outlined text-secondary text-[24px]">
                 history_edu
               </span>
             </div>
@@ -83,7 +83,7 @@ export default function Journey() {
           </div>
           <div className="relative flex flex-col items-center text-center timeline-step group">
             <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/50 flex items-center justify-center mb-6 scale-110 shadow-lg shadow-primary/20">
-              <span className="material-symbols-outlined text-primary font-bold">
+              <span className="material-symbols-outlined text-primary font-bold text-[24px]">
                 emoji_events
               </span>
             </div>

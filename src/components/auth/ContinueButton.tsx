@@ -1,16 +1,23 @@
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 interface ContinueButtonProps {
   loading?: boolean;
   title: string;
+  path?: string;
 }
 
 export default function ContinueButton({
   loading = false,
   title,
+  path,
 }: ContinueButtonProps) {
+  const route = useRouter();
   return (
-    <button className="glow-button w-full bg-primary-container text-[#fff] font-bold py-2 rounded-md text-md flex items-center justify-center gap-2 mt-2">
+    <button
+      onClick={() => route.push(path ?? "")}
+      className="glow-button w-full bg-primary-container text-[#fff] font-bold py-2 rounded-md text-md flex items-center justify-center gap-2 mt-2">
       {title}
       <span className="material-symbols-outlined">arrow_forward</span>
     </button>
