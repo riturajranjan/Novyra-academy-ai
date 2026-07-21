@@ -27,8 +27,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${jakarta.variable} h-full antialiased`}>
-      <body className="overflow-x-hidden selection:bg-primary/30">
+      <body className="overflow-x-hidden selection:bg-primary/30 bg-background">
         <GridHome />
+
         {children}
       </body>
     </html>
