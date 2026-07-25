@@ -1,11 +1,26 @@
+"use client";
+
 import Image from "next/image";
+import { useGoalSelection } from "@/hooks/useGoalSelection";
+
+function daysUntil(date: Date): number {
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const target = new Date(date);
+  target.setHours(0, 0, 0, 0);
+  return Math.round((target.getTime() - today.getTime()) / msPerDay);
+}
 
 export default function Quote() {
+  const { selectedScore, examDate } = useGoalSelection();
+  const remaining = examDate ? daysUntil(examDate) : null;
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-5 gap-stack-sm md:gap-stack-lg md:mt-stack-md">
-        {/* Prob Meter */}
-        <div className="md:col-span-2 glass-panel rounded-2xl p-6 relative overflow-hidden group">
+        {/* Dr. Nova summary */}
+        <div className="md:col-span-full glass-panel rounded-2xl p-6 relative overflow-hidden group">
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative">
@@ -31,9 +46,11 @@ export default function Quote() {
             </div>
             <div className="space-y-3 text-sm text-on-surface-variant leading-relaxed">
               <p className="text-on-surface font-medium">
-                "Excellent choice. You're targeting 95%."
+                {selectedScore
+                  ? `Excellent choice. You're targeting ${selectedScore}%.`
+                  : "Choose a target score above to get started."}
               </p>
-              <p>I'll now generate:</p>
+              <p>I&apos;ll now generate:</p>
               <ul className="grid grid-cols-2 gap-2 text-[11px]">
                 <li className="flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px] text-primary">
@@ -60,76 +77,22 @@ export default function Quote() {
                   Mock Tests
                 </li>
               </ul>
-              <div className="pt-3 border-t border-white/5 flex justify-between items-center">
-                <div className="text-[10px]">
-                  <span className="block text-on-surface-variant uppercase">
-                    Completion
-                  </span>
-                  <span className="text-primary font-bold">108 Days</span>
+              {remaining !== null && (
+                <div className="pt-3 border-t border-white/5 flex justify-between items-center">
+                  <div className="text-[10px]">
+                    <span className="block text-on-surface-variant uppercase">
+                      Time To Exam
+                    </span>
+                    <span className="text-primary font-bold">
+                      {remaining >= 0 ? `${remaining} Days` : "Date passed"}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-[10px] text-right">
-                  <span className="block text-on-surface-variant uppercase">
-                    Confidence
-                  </span>
-                  <span className="text-tertiary font-bold">91%</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
-        {/* Animated Timeline */}
-        <div className="md:col-span-2 glass-panel rounded-2xl p-6 flex flex-col justify-center items-center text-center">
-          <div className="relative w-32 h-32 mb-4">
-            <svg className="w-full h-full" viewBox="0 0 100 100">
-              <circle
-                className="text-white/5"
-                cx={50}
-                cy={50}
-                fill="none"
-                r={45}
-                stroke="currentColor"
-                strokeWidth={8}
-              />
-              <circle
-                className="text-primary"
-                cx={50}
-                cy={50}
-                fill="none"
-                r={45}
-                stroke="url(#grad)"
-                strokeDasharray={292}
-                strokeDashoffset={20}
-                strokeLinecap="round"
-                strokeWidth={8}
-              />
-              <defs>
-                <linearGradient id="grad" x1="0%" x2="100%" y1="0%" y2="0%">
-                  <stop
-                    offset="0%"
-                    style={{ stopColor: "#8083ff", stopOpacity: 1 }}
-                  />
-                  <stop
-                    offset="100%"
-                    style={{ stopColor: "#4cd7f6", stopOpacity: 1 }}
-                  />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-3xl font-bold">93%</span>
-              <span className="text-[10px] text-green-400 font-bold">
-                +7% ↑
-              </span>
-            </div>
-          </div>
-          <div className="space-y-1">
-            <div className="text-sm font-bold">Success Probability</div>
-            <p className="text-[10px] text-on-surface-variant px-4">
-              Based on Current Goal, Study Time, Style, and Board Difficulty.
-            </p>
-          </div>
-        </div>
-        <div className="md:col-span-3 glass-panel rounded-2xl p-6">
+        <div className="md:col-span-full glass-panel rounded-2xl p-6">
           <h4 className=" text-label-md mb-6 uppercase tracking-widest text-on-surface-variant">
             Dynamic Roadmap
           </h4>
@@ -161,8 +124,8 @@ export default function Quote() {
                 </span>
               </div>
             </div>
-            <div className="relative">
-              <div className="absolute -left-[27px] w-4 h-4 rounded-full bg-surface-container-high border-2 border-white/20" />
+            <div className="relative opacity-40">
+              <div className="absolute -left-[27px] w-4 h-4 rounded-full bg-on-surface-variant" />
               <div className="flex justify-between items-start">
                 <div>
                   <div className="text-sm font-bold text-on-surface-variant">

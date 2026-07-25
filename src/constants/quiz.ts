@@ -1,4 +1,4 @@
-import { Question, QuizStats, QuestionNavigatorItem, AIHint } from "./types";
+import { Question, QuizStats, QuestionNavigatorItem, AIHint } from "@/types/quiz";
 
 export const quizStats: QuizStats = {
   totalQuestions: 25,

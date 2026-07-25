@@ -1,11 +1,20 @@
+import { redirect } from "next/navigation";
 import ChooseHeader from "@/components/common/ChooseHeader";
 import { ReactNode } from "react";
 
-export default function OnboardingLayout({
+import { getCurrentUser, isOnboardingComplete } from "@/lib/dal";
+
+export default async function OnboardingLayout({
   children,
 }: {
   children: ReactNode;
 }) {
+  const user = await getCurrentUser();
+
+  if (user && (await isOnboardingComplete())) {
+    redirect("/dashboard");
+  }
+
   return (
     <>
       <ChooseHeader />

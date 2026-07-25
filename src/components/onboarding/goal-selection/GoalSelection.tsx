@@ -1,11 +1,8 @@
 "use client";
 
-import { useGoalSelection } from "@/hooks/useGoalSelection";
+import type { DailyGoal, TargetScore as TargetScoreModel } from "@prisma/client";
+import { GoalSelectionProvider } from "@/hooks/useGoalSelection";
 
-import ProgressHeader from "./ProgressHeader";
-import GoalHeader from "./GoalHeader";
-import SuccessMeter from "./SuccessMeter";
-import SmartInsight from "./SmartInsight";
 import TargetScore from "./TargetScore";
 import DailyStudyGoal from "./DailyStudyGoal";
 import ExamDate from "./ExamDate";
@@ -13,12 +10,45 @@ import BottomDateSheet from "./BottomDateSheet";
 import Quote from "./Quote";
 import BuildLearningPath from "./BuildLearningPath";
 import LeftSectionGoal from "./LeftSectionGoal";
-import TargetScoreCard from "./TargetScoreCard";
-import StudySchedule from "./StudySchedule";
 
-export default function GoalSelection() {
-  const { openCalendar, setOpenCalendar } = useGoalSelection();
+interface GoalSelectionProps {
+  dailyGoals: DailyGoal[];
+  targetScores: TargetScoreModel[];
+  initialTargetScoreId: number | null;
+  initialDailyGoalId: string | null;
+  initialExamDate: Date | null;
+  subjectCount: number;
+  totalChapters: number;
+}
 
+export default function GoalSelection({
+  dailyGoals,
+  targetScores,
+  initialTargetScoreId,
+  initialDailyGoalId,
+  initialExamDate,
+  subjectCount,
+  totalChapters,
+}: GoalSelectionProps) {
+  return (
+    <GoalSelectionProvider
+      initialTargetScoreId={initialTargetScoreId}
+      initialDailyGoalId={initialDailyGoalId}
+      initialExamDate={initialExamDate}
+      subjectCount={subjectCount}
+      totalChapters={totalChapters}>
+      <GoalSelectionContent dailyGoals={dailyGoals} targetScores={targetScores} />
+    </GoalSelectionProvider>
+  );
+}
+
+function GoalSelectionContent({
+  dailyGoals,
+  targetScores,
+}: {
+  dailyGoals: DailyGoal[];
+  targetScores: TargetScoreModel[];
+}) {
   return (
     <>
       <main className="min-h-screen flex">
@@ -35,13 +65,11 @@ export default function GoalSelection() {
               </p>
             </header>
             <div className="grid grid-cols-1 gap-stack-lg">
-              <TargetScore />
+              <TargetScore targetScores={targetScores} />
 
-              <DailyStudyGoal />
+              <DailyStudyGoal dailyGoals={dailyGoals} />
 
-              <StudySchedule />
-
-              <ExamDate onOpen={() => setOpenCalendar(true)} />
+              <ExamDate />
 
               <Quote />
               <BuildLearningPath />

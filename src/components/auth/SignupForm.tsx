@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
+import { signup } from "@/app/actions/auth";
 import AIMessage from "./AIMessage";
 import AuthFooter from "./AuthFooter";
 import ContinueButton from "./ContinueButton";
@@ -14,18 +15,28 @@ import ConfirmPasswordField from "./ConfirmPasswordField";
 import TermsCheckbox from "./TermsCheckbox";
 
 export default function SignupForm() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [loading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
 
-    console.log({
-      email,
-      password,
-      rememberMe,
+    const formData = new FormData();
+    formData.set("name", name);
+    formData.set("email", email);
+    formData.set("password", password);
+    formData.set("confirmPassword", confirmPassword);
+    if (termsAccepted) formData.set("termsAccepted", "on");
+
+    startTransition(async () => {
+      const result = await signup(undefined, formData);
+      if (result?.error) setError(result.error);
     });
   };
 
@@ -40,7 +51,7 @@ export default function SignupForm() {
           <Divider />
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <NameField />
+            <NameField value={name} onChange={setName} />
             <EmailField value={email} onChange={setEmail} />
 
             <PasswordField
@@ -49,10 +60,19 @@ export default function SignupForm() {
               isforget={false}
             />
 
-            <ConfirmPasswordField />
-            <TermsCheckbox />
+            <ConfirmPasswordField
+              value={confirmPassword}
+              onChange={setConfirmPassword}
+            />
+            <TermsCheckbox checked={termsAccepted} onChange={setTermsAccepted} />
 
-            <ContinueButton loading={loading} title="Create Free Account" />
+            {error && (
+              <p className="text-sm text-red-400" role="alert">
+                {error}
+              </p>
+            )}
+
+            <ContinueButton loading={isPending} title="Create Free Account" />
           </form>
         </div>
       </div>

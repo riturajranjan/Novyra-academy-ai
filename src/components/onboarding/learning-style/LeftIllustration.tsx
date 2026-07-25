@@ -57,7 +57,7 @@ export default function LeftIllustration() {
             </div>
           </div>
           <h1 className="font-headline-lg text-headline-lg text-on-surface mb-stack-md">
-            Let's personalize the way you learn.
+            Let&apos;s personalize the way you learn.
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
             Choose the learning styles that help you understand concepts best.

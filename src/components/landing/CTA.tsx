@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 
 const CTA = () => {
+  const router = useRouter();
 
   return (
     <section className="py-section-gap px-margin-desktop transition-all duration-1000 ease-out opacity-100 translate-y-0">
@@ -23,7 +24,7 @@ const CTA = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
               <button
-                onClick={() => route.push("login")}
+                onClick={() => router.push("/login")}
                 className="bg-primary text-on-primary px-12 py-6 rounded-[24px] font-extrabold text-[20px] hover:shadow-3xl hover:shadow-primary/50 hover:-translate-y-1 transition-all w-full sm:w-auto active:scale-95">
                 Start Learning Free
               </button>

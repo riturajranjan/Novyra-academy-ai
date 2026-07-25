@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export function useBoard() {
-  const [selectedBoard, setSelectedBoard] = useState("cbse");
+export function useBoard(initialBoardId: string | null = null) {
+  const [selectedBoard, setSelectedBoard] = useState<string | null>(initialBoardId);
 
   return {
     selectedBoard,

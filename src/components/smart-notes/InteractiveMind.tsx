@@ -12,9 +12,7 @@ const InteractiveMind = () => {
             Card 4/12
           </span>
         </div>
-        <div
-          className="perspective-1000 w-full h-64 cursor-pointer"
-          onclick="this.querySelector('.card-inner').classList.toggle('card-flip')">
+        <div className="perspective-1000 w-full h-64 cursor-pointer">
           <div className="card-inner relative w-full h-full shadow-2xl">
             {/* Front of Card */}
             <div className="card-front absolute inset-0 glass-panel flashcard-gradient rounded-3xl flex flex-col items-center justify-center p-8 text-center border-primary/20">

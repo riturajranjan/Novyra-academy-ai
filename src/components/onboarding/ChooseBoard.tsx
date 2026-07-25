@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import type { Board } from "@prisma/client";
 
-import { boards } from "@/constants/boards";
 import { useBoard } from "@/hooks/useBoard";
+import { saveBoardSelection } from "@/app/actions/onboarding";
 
 import HeroPanel from "./HeroPanel";
 import BoardCard from "./BoardCard";
@@ -12,12 +13,32 @@ import AIHint from "./AIHint";
 import ProgressHeader from "./ProgressHeader";
 // import FooterActions from "./FooterActions";
 
-export default function ChooseBoard() {
+interface ChooseBoardProps {
+  boards: Board[];
+  initialBoardId: string | null;
+}
+
+export default function ChooseBoard({ boards, initialBoardId }: ChooseBoardProps) {
   const router = useRouter();
 
-  const { selectedBoard, setSelectedBoard } = useBoard();
+  const { selectedBoard, setSelectedBoard } = useBoard(initialBoardId);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
-  const board = boards.find((item) => item.id === selectedBoard);
+  const handleContinue = () => {
+    if (isPending || !selectedBoard) return;
+    const boardId = selectedBoard;
+    setError(null);
+
+    startTransition(async () => {
+      const result = await saveBoardSelection(boardId);
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+      router.push("/class");
+    });
+  };
 
   const aiMessage = useMemo(() => {
     switch (selectedBoard) {
@@ -51,18 +72,29 @@ export default function ChooseBoard() {
           </div>
           <div className="w-full max-w-2xl overflow-scroll">
             <div className="glass-card  rounded-xl p-stack-md md:p-stack-lg border-white/5">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md mb-stack-lg">
-                {boards.map((item) => (
-                  <BoardCard
-                    key={item.id}
-                    board={item}
-                    selected={selectedBoard === item.id}
-                    onClick={() => setSelectedBoard(item.id)}
-                  />
-                ))}
-              </div>
+              {boards.length === 0 ? (
+                <p className="text-on-surface-variant text-body-md pb-stack-lg" role="status">
+                  No boards are available right now. Please check back shortly.
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md mb-stack-lg">
+                  {boards.map((item) => (
+                    <BoardCard
+                      key={item.id}
+                      board={item}
+                      selected={selectedBoard === item.id}
+                      onClick={() => setSelectedBoard(item.id)}
+                    />
+                  ))}
+                </div>
+              )}
 
               <AIHint message={aiMessage} />
+              {error && (
+                <p className="text-sm text-red-400 pt-stack-md" role="alert">
+                  {error}
+                </p>
+              )}
               {/* Actions */}
               <div className="flex items-center justify-between gap-stack-md pt-stack-md border-t border-white/5">
                 <button className="px-gutter py-2 md:py-3 rounded-lg  text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all flex items-center gap-2">
@@ -70,10 +102,11 @@ export default function ChooseBoard() {
                   Back
                 </button>
                 <button
-                  onClick={() => router.push("/class")}
-                  className="px-12 py-2 md:py-3 rounded-lg  transition-all duration-300 bg-primary text-on-primary-container hover:brightness-110 shadow-lg shadow-primary/20"
+                  onClick={handleContinue}
+                  disabled={isPending || !selectedBoard}
+                  className="px-12 py-2 md:py-3 rounded-lg  transition-all duration-300 bg-primary text-on-primary-container hover:brightness-110 shadow-lg shadow-primary/20 disabled:opacity-40 disabled:cursor-not-allowed"
                   id="continue-btn">
-                  Continue
+                  {isPending ? "Saving..." : "Continue"}
                 </button>
               </div>
             </div>

@@ -1,37 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import type { Subject } from "@prisma/client";
 
 import SubjectHeader from "./SubjectHeader";
 import SubjectHero from "./SubjectHero";
 import SubjectGrid from "./SubjectGrid";
 import AIRecommendation from "./AIRecommendation";
 import SubjectFooter from "./SubjectFooter";
+import useSubjects from "@/hooks/useSubjects";
+import { saveSubjectsSelection } from "@/app/actions/onboarding";
 
-const subjectMap: Record<number, string> = {
-  1: "Physics",
-  2: "Chemistry",
-  3: "Biology",
-  4: "Mathematics",
-  5: "Social Science",
-  6: "English",
-  7: "Hindi",
-  8: "Computer Science",
-};
+interface ChooseSubjectsProps {
+  subjects: Subject[];
+  initialSelectedSubjectIds: number[];
+}
 
-export default function ChooseSubjects() {
+export default function ChooseSubjects({ subjects, initialSelectedSubjectIds }: ChooseSubjectsProps) {
   const router = useRouter();
 
-  const [selectedSubjects, setSelectedSubjects] = useState<number[]>([1, 2, 4]);
+  const { selectedSubjects, toggleSubject } = useSubjects(initialSelectedSubjectIds);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
-  const toggleSubject = (id: number) => {
-    setSelectedSubjects((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    );
+  const selectedNames = subjects
+    .filter((subject) => selectedSubjects.includes(subject.id))
+    .map((subject) => subject.title);
+
+  const handleContinue = () => {
+    if (isPending) return;
+    setError(null);
+
+    startTransition(async () => {
+      const result = await saveSubjectsSelection(selectedSubjects);
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+      router.push("/learning-style");
+    });
   };
-
-  const selectedNames = selectedSubjects.map((id) => subjectMap[id]);
 
   return (
     <div className="flex h-screen ">
@@ -70,20 +79,33 @@ export default function ChooseSubjects() {
 
           {/* Grid */}
 
-          <SubjectGrid
-            selectedSubjects={selectedSubjects}
-            toggleSubject={toggleSubject}
-          />
+          {subjects.length === 0 ? (
+            <p className="text-on-surface-variant text-body-md py-stack-lg" role="status">
+              No subjects are available for your selected board and class right now.
+            </p>
+          ) : (
+            <SubjectGrid
+              subjects={subjects}
+              selectedSubjects={selectedSubjects}
+              toggleSubject={toggleSubject}
+            />
+          )}
 
           {/* AI */}
 
           <AIRecommendation selectedSubjects={selectedNames} />
+
+          {error && (
+            <p className="text-sm text-red-400 mt-stack-md" role="alert">
+              {error}
+            </p>
+          )}
         </div>
 
         <SubjectFooter
           selectedCount={selectedSubjects.length}
           onBack={() => router.push("/class")}
-          onNext={() => router.push("/learning-style")}
+          onNext={handleContinue}
         />
       </section>
     </div>

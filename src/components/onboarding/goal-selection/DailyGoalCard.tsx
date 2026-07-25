@@ -2,6 +2,7 @@
 
 import { CheckCircle } from "lucide-react";
 import { DailyGoal } from "@/types/goal-selection";
+import { lucideIconsByName, DEFAULT_ICON_NAME } from "@/lib/icons";
 
 interface DailyGoalCardProps {
   item: DailyGoal;
@@ -14,7 +15,7 @@ export default function DailyGoalCard({
   selected,
   onClick,
 }: DailyGoalCardProps) {
-  const Icon = item.icon;
+  const Icon = lucideIconsByName[item.icon] ?? lucideIconsByName[DEFAULT_ICON_NAME];
 
   return (
     <button

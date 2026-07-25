@@ -1,29 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
+import { requestPasswordReset } from "@/app/actions/auth";
 import AIMessage from "./AIMessage";
-import AuthFooter from "./AuthFooter";
 import ContinueButton from "./ContinueButton";
-import Divider from "./Divider";
 import EmailField from "./EmailField";
-import PasswordField from "./PasswordField";
-import RememberMe from "./RememberMe";
-import SocialButtons from "./SocialButtons";
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [loading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
 
-    console.log({
-      email,
-      password,
-      rememberMe,
+    const formData = new FormData();
+    formData.set("email", email);
+
+    startTransition(async () => {
+      const result = await requestPasswordReset(undefined, formData);
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        setSubmitted(true);
+      }
     });
   };
 
@@ -33,13 +36,23 @@ export default function ForgotPasswordForm() {
         <div className="glass-card inner-glow p-stack-lg md:p-10 rounded-3xl flex flex-col gap-6">
           <AIMessage />
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <EmailField value={email} onChange={setEmail} />
+          {submitted ? (
+            <p className="text-on-surface-variant" role="status">
+              If an account exists for that email, a reset link has been sent.
+            </p>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <EmailField value={email} onChange={setEmail} />
 
-            {/* <PasswordField value={password} onChange={setPassword} /> */}
+              {error && (
+                <p className="text-sm text-red-400" role="alert">
+                  {error}
+                </p>
+              )}
 
-            <ContinueButton loading={loading} title="Reset Your Password" />
-          </form>
+              <ContinueButton loading={isPending} title="Reset Your Password" />
+            </form>
+          )}
         </div>
       </div>
     </>

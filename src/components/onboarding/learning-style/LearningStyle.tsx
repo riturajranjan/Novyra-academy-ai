@@ -1,15 +1,22 @@
 "use client";
 
+import type { LearningStyle as LearningStyleModel } from "@prisma/client";
+
 import LeftIllustration from "./LeftIllustration";
 import RightPanel from "./RightPanel";
 
-export default function LearningStyle() {
+interface LearningStyleProps {
+  learningStyles: LearningStyleModel[];
+  initialSelectedIds: string[];
+}
+
+export default function LearningStyle({ learningStyles, initialSelectedIds }: LearningStyleProps) {
   return (
     <>
       <main className="flex min-h-screen ">
         <LeftIllustration />
 
-        <RightPanel />
+        <RightPanel learningStyles={learningStyles} initialSelectedIds={initialSelectedIds} />
       </main>
     </>
   );

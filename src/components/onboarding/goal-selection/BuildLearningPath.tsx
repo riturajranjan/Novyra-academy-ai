@@ -1,41 +1,46 @@
 "use client";
 
 import { Sparkles } from "lucide-react";
+import { useGoalSelection } from "@/hooks/useGoalSelection";
+
+function daysUntil(date: Date): number {
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const target = new Date(date);
+  target.setHours(0, 0, 0, 0);
+  return Math.round((target.getTime() - today.getTime()) / msPerDay);
+}
 
 export default function BuildLearningPath() {
+  const { totalChapters, subjectCount, examDate } = useGoalSelection();
+  const remaining = examDate ? daysUntil(examDate) : null;
+
   return (
     <>
-      <div className="md:grid hidden grid-cols-2 md:grid-cols-5 gap-4 mt-6">
+      <div className="md:grid hidden grid-cols-2 md:grid-cols-3 gap-4 mt-6">
         <div className="glass-panel p-3 rounded-xl border-white/5">
           <div className="text-[10px] text-on-surface-variant uppercase">
             Chapters
           </div>
-          <div className="text-lg font-bold text-primary">52</div>
+          <div className="text-lg font-bold text-primary">{totalChapters}</div>
         </div>
         <div className="glass-panel p-3 rounded-xl border-white/5">
           <div className="text-[10px] text-on-surface-variant uppercase">
-            Duration
+            Subjects
           </div>
-          <div className="text-lg font-bold text-primary">112 Days</div>
+          <div className="text-lg font-bold text-primary">{subjectCount}</div>
         </div>
-        <div className="glass-panel p-3 rounded-xl border-white/5">
-          <div className="text-[10px] text-on-surface-variant uppercase">
-            Daily Tasks
+        {remaining !== null && (
+          <div className="glass-panel p-3 rounded-xl border-white/5">
+            <div className="text-[10px] text-on-surface-variant uppercase">
+              Days To Exam
+            </div>
+            <div className="text-lg font-bold text-primary">
+              {remaining >= 0 ? remaining : 0}
+            </div>
           </div>
-          <div className="text-lg font-bold text-primary">4</div>
-        </div>
-        <div className="glass-panel p-3 rounded-xl border-white/5">
-          <div className="text-[10px] text-on-surface-variant uppercase">
-            AI Confidence
-          </div>
-          <div className="text-lg font-bold text-primary">93%</div>
-        </div>
-        <div className="glass-panel p-3 rounded-xl border-white/5">
-          <div className="text-[10px] text-on-surface-variant uppercase">
-            Revision
-          </div>
-          <div className="text-lg font-bold text-primary">7 Days</div>
-        </div>
+        )}
       </div>
       <footer
         className="

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React from "react";
+import type { SchoolClass } from "@prisma/client";
 
 interface ClassCardProps {
   item: SchoolClass;
@@ -32,7 +33,7 @@ const ClassCardMobile = ({ item, selected, onClick }: ClassCardProps) => {
               auto_stories
             </span>
             <span className="text-[12px] text-tertiary ">
-              {item?.chapters} Chapters
+              {item?.chapterCount} Chapters
             </span>
           </div>
         </div>

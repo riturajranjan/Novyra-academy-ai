@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export function useLearningStyle() {
-  const [selected, setSelected] = useState<string[]>([]);
+export function useLearningStyle(initialSelected: string[] = []) {
+  const [selected, setSelected] = useState<string[]>(initialSelected);
 
   const toggle = (id: string) => {
     setSelected((prev) =>

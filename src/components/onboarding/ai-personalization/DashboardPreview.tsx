@@ -2,7 +2,11 @@
 
 import { Rocket, BookOpen } from "lucide-react";
 
-export default function DashboardPreview() {
+interface DashboardPreviewProps {
+  firstSubjectTitle: string | null;
+}
+
+export default function DashboardPreview({ firstSubjectTitle }: DashboardPreviewProps) {
   return (
     <section
       className="
@@ -61,9 +65,11 @@ export default function DashboardPreview() {
             </div>
 
             <div>
-              <h4 className="font-medium text-white">Today's Mission</h4>
+              <h4 className="font-medium text-white">Today&apos;s Mission</h4>
 
-              <p className="text-xs text-[#9CA3AF]">Kinematics Deep Dive</p>
+              <p className="text-xs text-[#9CA3AF]">
+                {firstSubjectTitle ? `${firstSubjectTitle} Fundamentals` : "Your first lesson"}
+              </p>
             </div>
           </div>
 
@@ -113,7 +119,7 @@ export default function DashboardPreview() {
               <h4 className="font-medium text-white">Upcoming Quiz</h4>
 
               <p className="text-xs text-[#9CA3AF]">
-                Starts after today's lesson
+                Starts after today&apos;s lesson
               </p>
             </div>
           </div>

@@ -1,7 +1,10 @@
 "use client";
 
-import { insightCards } from "@/constants/personalization";
+import type { InsightCard } from "@/types/personalization";
 
+interface InsightCardsProps {
+  cards: InsightCard[];
+}
 
 const colors = [
   {
@@ -21,10 +24,10 @@ const colors = [
   },
 ];
 
-export default function InsightCards() {
+export default function InsightCards({ cards }: InsightCardsProps) {
   return (
     <section className="grid grid-cols-1 gap-4 grid-cols-2 sm:grid-cols-3">
-      {insightCards.map((item, index) => (
+      {cards.map((item, index) => (
         <div
           key={item.title}
           className={`

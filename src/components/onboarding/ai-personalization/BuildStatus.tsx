@@ -1,13 +1,14 @@
 "use client";
 
-import { personalizationSteps } from "@/constants/personalization";
 import { CheckCircle2, Loader2, Circle } from "lucide-react";
+import type { PersonalizationStep } from "@/types/personalization";
 
 interface BuildStatusProps {
-  progress?: number;
+  progress: number;
+  steps: PersonalizationStep[];
 }
 
-export default function BuildStatus({ progress = 87 }: BuildStatusProps) {
+export default function BuildStatus({ progress, steps }: BuildStatusProps) {
   return (
     <section
       className="
@@ -34,7 +35,7 @@ export default function BuildStatus({ progress = 87 }: BuildStatusProps) {
       {/* Status List */}
 
       <div className="space-y-5">
-        {personalizationSteps.map((step) => (
+        {steps.map((step) => (
           <div key={step.id} className="flex items-center gap-3">
             {/* Icon */}
 

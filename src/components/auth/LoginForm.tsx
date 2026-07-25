@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
+import { login } from "@/app/actions/auth";
 import AIMessage from "./AIMessage";
 import AuthFooter from "./AuthFooter";
 import ContinueButton from "./ContinueButton";
@@ -15,16 +16,21 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading] = useState(false);
-
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
 
-    console.log({
-      email,
-      password,
-      rememberMe,
+    const formData = new FormData();
+    formData.set("email", email);
+    formData.set("password", password);
+    formData.set("rememberMe", String(rememberMe));
+
+    startTransition(async () => {
+      const result = await login(undefined, formData);
+      if (result?.error) setError(result.error);
     });
   };
 
@@ -49,11 +55,13 @@ export default function LoginForm() {
 
             <RememberMe checked={rememberMe} onChange={setRememberMe} />
 
-            <ContinueButton
-              loading={loading}
-              title="Continue Learning"
-              path="/board"
-            />
+            {error && (
+              <p className="text-sm text-red-400" role="alert">
+                {error}
+              </p>
+            )}
+
+            <ContinueButton loading={isPending} title="Continue Learning" />
           </form>
         </div>
       </div>

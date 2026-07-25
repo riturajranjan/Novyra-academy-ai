@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { SchoolClass } from "../../../../types/class";
+import type { SchoolClass } from "@prisma/client";
 
 interface ClassCardProps {
   item: SchoolClass;
@@ -34,9 +34,9 @@ export default function ClassCard({ item, selected, onClick }: ClassCardProps) {
         {item.title}
       </span>
       <span className="text-mono-sm text-mono-sm opacity-50">
-        {item.subjects} Subjects
+        {item.subjectCount} Subjects
       </span>
-      {selected && item.title == "Class 10" && (
+      {selected && item.personalized && (
         <div className="mt-2 px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded-full text-[10px] font-bold uppercase tracking-tighter">
           AI Personalized
         </div>

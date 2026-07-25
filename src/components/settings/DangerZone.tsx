@@ -1,11 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useTransition } from "react";
+
+import { logout } from "@/app/actions/auth";
 
 const DangerZone = () => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleSignOut = () => {
+    startTransition(() => {
+      logout();
+    });
+  };
+
   return (
     <>
       <div className="md:hidden pt-4">
         <div className="bg-error-container/10 border border-error/20 rounded-2xl overflow-hidden">
-          <button className="w-full flex items-center justify-between p-4 active:bg-error-container/20 transition-colors">
+          <button
+            onClick={handleSignOut}
+            disabled={isPending}
+            className="w-full flex items-center justify-between p-4 active:bg-error-container/20 transition-colors">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-error/20 flex items-center justify-center">
                 <span className="material-symbols-outlined text-error">

@@ -1,16 +1,42 @@
 "use client";
 
-import { learningStyles } from "@/constants/learningStyles";
+import { useState, useTransition } from "react";
+import type { LearningStyle } from "@prisma/client";
 import { useLearningStyle } from "@/hooks/useLearningStyle";
 import LearningCard from "./LearningCard";
-import Recommendation from "./Recommendation";
 import NovaMessage from "./NovaMessage";
 import { useRouter } from "next/navigation";
+import { saveLearningStyleSelection } from "@/app/actions/onboarding";
 
-export default function RightPanel() {
-  const { selected, toggle } = useLearningStyle();
+interface RightPanelProps {
+  learningStyles: LearningStyle[];
+  initialSelectedIds: string[];
+}
+
+export default function RightPanel({ learningStyles, initialSelectedIds }: RightPanelProps) {
+  const { selected, toggle } = useLearningStyle(initialSelectedIds);
 
   const route = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const selectedTitles = learningStyles
+    .filter((item) => selected.includes(item.id))
+    .map((item) => item.title);
+
+  const handleContinue = () => {
+    if (isPending || selected.length === 0) return;
+    setError(null);
+
+    startTransition(async () => {
+      const result = await saveLearningStyleSelection(selected);
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+      route.push("/goal-selection");
+    });
+  };
 
   return (
     <>
@@ -38,20 +64,30 @@ export default function RightPanel() {
             </p>
           </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-stack-lg">
-            {learningStyles.map((item) => (
-              <LearningCard
-                key={item.id}
-                item={item}
-                selected={selected.includes(item.id)}
-                onClick={() => toggle(item.id)}
-              />
-            ))}
-          </div>
+          {learningStyles.length === 0 ? (
+            <p className="text-on-surface-variant text-body-md mb-stack-lg" role="status">
+              No learning styles are available right now.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-stack-lg">
+              {learningStyles.map((item) => (
+                <LearningCard
+                  key={item.id}
+                  item={item}
+                  selected={selected.includes(item.id)}
+                  onClick={() => toggle(item.id)}
+                />
+              ))}
+            </div>
+          )}
 
-          <Recommendation />
+          <NovaMessage selected={selectedTitles} />
 
-          <NovaMessage selected={selected} />
+          {error && (
+            <p className="text-sm text-red-400 mb-stack-md" role="alert">
+              {error}
+            </p>
+          )}
 
           <div className="flex justify-between items-center pt-stack-md border-t border-white/5">
             <button onClick={()=>route.push("/subjects")} className="hidden px-6 py-3 text-on-surface-variant hover:text-on-surface transition-colors  md:flex items-center gap-2">
@@ -60,9 +96,9 @@ export default function RightPanel() {
             </button>
             <button
               className="w-auto px-10 py-3 bg-primary text-on-primary rounded-lg  font-bold disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95 shadow-lg shadow-primary/20"
-              disabled={selected?.length == 0}
-              id="continue-btn" onClick={()=>route.push("/goal-selection")}>
-              Continue
+              disabled={selected?.length === 0 || isPending}
+              id="continue-btn" onClick={handleContinue}>
+              {isPending ? "Saving..." : "Continue"}
             </button>
           </div>
         </div>

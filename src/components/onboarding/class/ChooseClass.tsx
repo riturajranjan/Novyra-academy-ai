@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import type { SchoolClass } from "@prisma/client";
 
 import useClass from "@/hooks/useClass";
-import { classes } from "@/constants/classes";
+import { saveClassSelection } from "@/app/actions/onboarding";
 
 import DesktopHero from "./DesktopHero";
 
@@ -14,16 +15,47 @@ import AIClassInfo from "./AIClassInfo";
 import FooterActions from "../FooterActions";
 import MobileHeader from "./MobileHeader";
 
-export default function ChooseClass() {
+interface ChooseClassProps {
+  classes: SchoolClass[];
+  boardTitle: string;
+  initialClassId: number | null;
+}
+
+export default function ChooseClass({ classes, boardTitle, initialClassId }: ChooseClassProps) {
   const router = useRouter();
 
-  const { selectedClass, setSelectedClass } = useClass();
+  const { selectedClass, setSelectedClass } = useClass(initialClassId);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleContinue = () => {
+    if (isPending || selectedClass === null) return;
+    const classId = selectedClass;
+    setError(null);
+
+    startTransition(async () => {
+      const result = await saveClassSelection(classId);
+      if (result?.error) {
+        setError(result.error);
+        return;
+      }
+      router.push("/subjects");
+    });
+  };
 
   const currentClass = useMemo(() => {
-    return classes.find((item) => item.id === selectedClass);
-  }, [selectedClass]);
+    return classes.find((item) => item.id === selectedClass) ?? null;
+  }, [classes, selectedClass]);
 
-  if (!currentClass) return null;
+  if (classes.length === 0) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-surface">
+        <p className="text-on-surface-variant text-body-md" role="status">
+          No classes are available for your selected board right now.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -48,20 +80,29 @@ export default function ChooseClass() {
               </div>
               {/* Class Grid */}
               <ClassGrid
+                classes={classes}
                 selectedClass={selectedClass}
                 onSelect={setSelectedClass}
               />
               {/* AI Preview Panel */}
-              <AIClassInfo
-                className={currentClass.title}
-                board="CBSE"
-                chapters={currentClass.chapters}
-                subjects={["Physics", "Chemistry", "Biology", "Mathematics"]}
-              />
+              {currentClass && (
+                <AIClassInfo
+                  className={currentClass.title}
+                  board={boardTitle}
+                  chapters={currentClass.chapterCount}
+                  subjectCount={currentClass.subjectCount}
+                />
+              )}
+              {error && (
+                <p className="text-sm text-red-400" role="alert">
+                  {error}
+                </p>
+              )}
               {/* Actions */}
               <FooterActions
                 onBack={() => router.push("/board")}
-                onNext={() => router.push("/subjects")}
+                onNext={handleContinue}
+                nextDisabled={isPending || selectedClass === null}
               />
             </div>
           </div>

@@ -1,12 +1,25 @@
 "use client";
 
+import type { DailyGoal } from "@prisma/client";
 import { useGoalSelection } from "@/hooks/useGoalSelection";
 
 import DailyGoalCard from "./DailyGoalCard";
-import { dailyGoals } from "@/constants/dailyGoals";
 
-export default function DailyStudyGoal() {
+const shortLabels: Record<string, string> = {
+  light: "30m",
+  steady: "1h",
+  intense: "2h",
+  elite: "4h",
+};
+
+interface DailyStudyGoalProps {
+  dailyGoals: DailyGoal[];
+}
+
+export default function DailyStudyGoal({ dailyGoals }: DailyStudyGoalProps) {
   const { selectedGoal, setSelectedGoal } = useGoalSelection();
+
+  if (dailyGoals.length === 0) return null;
 
   return (
     <>
@@ -14,25 +27,19 @@ export default function DailyStudyGoal() {
         <label className="&quot; text-label-md text-on-surface-variant">
           HOW MUCH TIME CAN YOU STUDY?
         </label>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-          <button className="p-3 rounded-xl border border-white/10 hover:bg-white/5 transition-all text-sm">
-            30m
-          </button>
-          <button className="p-3 rounded-xl border hover:bg-white/5 transition-all text-sm border-white/10">
-            45m
-          </button>
-          <button className="p-3 rounded-xl border hover:bg-white/5 transition-all text-sm border-white/10">
-            1h
-          </button>
-          <button className="p-3 rounded-xl border font-bold transition-all text-sm border-primary bg-primary/10 ring-1 ring-primary/30 text-primary">
-            2h <span className="block text-[8px] opacity-70">AI REC</span>
-          </button>
-          <button className="p-3 rounded-xl border border-white/10 hover:bg-white/5 transition-all text-sm">
-            3h
-          </button>
-          <button className="p-3 rounded-xl border border-white/10 hover:bg-white/5 transition-all text-sm">
-            Flex
-          </button>
+        <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+          {dailyGoals.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setSelectedGoal(item.id)}
+              className={
+                selectedGoal === item.id
+                  ? "p-3 rounded-xl border font-bold transition-all text-sm border-primary bg-primary/10 ring-1 ring-primary/30 text-primary"
+                  : "p-3 rounded-xl border border-white/10 hover:bg-white/5 transition-all text-sm"
+              }>
+              {shortLabels[item.id] ?? item.title}
+            </button>
+          ))}
         </div>
       </div>{" "}
       <section className="mb-4 md:mb-8 md:hidden">

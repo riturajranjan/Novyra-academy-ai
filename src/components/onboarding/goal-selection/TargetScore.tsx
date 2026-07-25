@@ -1,12 +1,18 @@
 "use client";
 
+import type { TargetScore as TargetScoreModel } from "@prisma/client";
 import { useGoalSelection } from "@/hooks/useGoalSelection";
 
 import TargetScoreCard from "./TargetScoreCard";
-import { targetScores } from "@/constants/targetScores";
 
-export default function TargetScore() {
+interface TargetScoreProps {
+  targetScores: TargetScoreModel[];
+}
+
+export default function TargetScore({ targetScores }: TargetScoreProps) {
   const { selectedScore, setSelectedScore } = useGoalSelection();
+
+  if (targetScores.length === 0) return null;
 
   return (
     <section className="mb-8">

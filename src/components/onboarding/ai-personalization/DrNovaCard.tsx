@@ -2,7 +2,12 @@
 
 import { Bot } from "lucide-react";
 
-export default function DrNovaCard() {
+interface DrNovaCardProps {
+  subjectCount: number;
+  learningStyleTitles: string[];
+}
+
+export default function DrNovaCard({ subjectCount, learningStyleTitles }: DrNovaCardProps) {
   return (
     <section
       className="
@@ -72,29 +77,28 @@ export default function DrNovaCard() {
               leading-7
               text-[#E5E7EB]
             ">
-            I've analyzed over
+            I&apos;ve indexed your{" "}
             <span className="font-semibold text-white">
-              {" "}
-              2 million learning patterns{" "}
-            </span>
-            based on your Visual + Practice learning style. Your AI classroom is
-            now being optimized for maximum retention and faster concept
-            mastery.
+              {subjectCount} selected subject{subjectCount === 1 ? "" : "s"}
+            </span>{" "}
+            based on your {learningStyleTitles.join(" + ") || "selected"} learning
+            style. Your AI classroom is now being optimized to match how you
+            learn best.
           </p>
 
           {/* Footer */}
 
           <div className="mt-6 flex flex-wrap gap-6">
             <div>
-              <p className="text-xs text-[#9CA3AF]">Estimated Success</p>
+              <p className="text-xs text-[#9CA3AF]">Subjects</p>
 
-              <p className="mt-1 text-[#4CD7F6] font-semibold">93%</p>
+              <p className="mt-1 text-[#4CD7F6] font-semibold">{subjectCount}</p>
             </div>
 
             <div>
               <p className="text-xs text-[#9CA3AF]">Learning Mode</p>
 
-              <p className="mt-1 text-white">Visual / Voice</p>
+              <p className="mt-1 text-white">{learningStyleTitles.join(" / ") || "Not set"}</p>
             </div>
           </div>
         </div>

@@ -1,24 +1,18 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-
 interface ContinueButtonProps {
   loading?: boolean;
   title: string;
-  path?: string;
 }
 
 export default function ContinueButton({
   loading = false,
   title,
-  path,
 }: ContinueButtonProps) {
-  const route = useRouter();
   return (
     <button
-      onClick={() => route.push(path ?? "")}
-      className="glow-button w-full bg-primary-container text-[#fff] font-bold py-2 rounded-md text-md flex items-center justify-center gap-2 mt-2">
-      {title}
+      type="submit"
+      disabled={loading}
+      className="glow-button w-full bg-primary-container text-[#fff] font-bold py-2 rounded-md text-md flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+      {loading ? "Please wait..." : title}
       <span className="material-symbols-outlined">arrow_forward</span>
     </button>
   );

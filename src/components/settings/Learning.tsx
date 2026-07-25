@@ -24,9 +24,7 @@ const Learning = () => {
                 </p>
               </div>
             </div>
-            <div
-              className="relative inline-block w-12 h-6 rounded-full bg-surface-container-high transition-colors duration-200 ease-in-out cursor-pointer"
-              onclick="this.querySelector('.toggle-knob').classList.toggle('translate-x-6'); this.classList.toggle('bg-primary');">
+            <div className="relative inline-block w-12 h-6 rounded-full bg-surface-container-high transition-colors duration-200 ease-in-out cursor-pointer">
               <div className="toggle-knob absolute left-0.5 top-0.5 w-5 h-5 rounded-full bg-white transition-transform duration-200 ease-in-out shadow-sm" />
             </div>
           </div>

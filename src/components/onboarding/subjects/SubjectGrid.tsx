@@ -1,14 +1,16 @@
 "use client";
 
-import { subjects } from "@/constants/subjects";
+import type { Subject } from "@prisma/client";
 import SubjectCard from "./SubjectCard";
 
 interface SubjectGridProps {
+  subjects: Subject[];
   selectedSubjects: number[];
   toggleSubject: (id: number) => void;
 }
 
 export default function SubjectGrid({
+  subjects,
   selectedSubjects,
   toggleSubject,
 }: SubjectGridProps) {
@@ -20,9 +22,9 @@ export default function SubjectGrid({
             key={subject.id}
             title={subject.title}
             description={subject.description}
-            chapters={subject.chapters}
+            chapters={subject.chapterCount}
             level={subject.level}
-            badge={subject.badge}
+            badge={subject.badge ?? undefined}
             icon={subject.icon}
             selected={selectedSubjects.includes(subject.id)}
             onClick={() => toggleSubject(subject.id)}

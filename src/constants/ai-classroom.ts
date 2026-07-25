@@ -1,4 +1,4 @@
-import { LearningMode, JourneyStep, ModuleCard } from "./types";
+import { LearningMode, JourneyStep, ModuleCard } from "@/types/ai-classroom";
 
 export const learningModes: LearningMode[] = [
   { id: "learn", title: "Learn" },

@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import type { StudyPlan as StudyPlanData } from "@/types/study-plan";
 
-import StudyPlanHeader from "./StudyPlanHeader";
 import StudyPlanHero from "./StudyPlanHero";
 import SummaryCard from "./SummaryCard";
 import TodayMission from "./TodayMission";
@@ -15,29 +15,48 @@ import MiniCalendar from "./MiniCalendar";
 import MotivationCard from "./MotivationCard";
 import StudyPlanFooter from "./StudyPlanFooter";
 
-export default function StudyPlan() {
+interface StudyPlanProps {
+  studentName: string;
+  boardTitle: string;
+  classTitle: string;
+  subjectTitles: string[];
+  targetScore: string | null;
+  dailyGoalTitle: string;
+  dailyGoalDuration: string;
+  examDate: Date | null;
+  totalChapters: number;
+  plan: StudyPlanData;
+}
+
+export default function StudyPlan({
+  studentName,
+  boardTitle,
+  classTitle,
+  subjectTitles,
+  targetScore,
+  dailyGoalTitle,
+  dailyGoalDuration,
+  examDate,
+  totalChapters,
+  plan,
+}: StudyPlanProps) {
   const router = useRouter();
+
+  const todayIndex = new Date().getDay();
+  const today = plan.days[todayIndex];
 
   return (
     <>
-      {/* Header */}
-
-      {/* <StudyPlanHeader /> */}
-
-      {/* Body */}
-
       <main
         className="
          flex w-full  h-screen overflow-hidden
         ">
         <StudyPlanHero />
-        
 
         <section
-          className="w-full 
+          className="w-full
            md:w-[60%] overflow-y-auto px-[14px] md:px-margin-desktop md:py-stack-lg relative
           ">
-          {/* Welcome */}
           <div className="floating-glow -top-20 -right-20"></div>
           <div
             className="floating-glow bottom-40 left-10"
@@ -50,64 +69,58 @@ export default function StudyPlan() {
                   Your Personalized Study Roadmap
                 </h2>
                 <p className="text-body-md font-body-md text-on-surface-variant">
-                  Generated 2 minutes ago based on your learning style.
+                  Built from your board, class, subjects, learning style, and daily goal.
                 </p>
               </div>
-              <button className="flex items-center font-bold gap-2 text-label-md  text-primary hover:bg-primary/10 px-4 py-2 rounded-lg transition-all">
-                <span
-                  className="material-symbols-outlined text-[24px]"
-                  data-icon="share">
-                  share
-                </span>
-                Share Plan
-              </button>
             </div>
 
-            {/* Summary */}
-
-            <SummaryCard />
-
-            {/* Row */}
+            <SummaryCard
+              studentName={studentName}
+              boardTitle={boardTitle}
+              classTitle={classTitle}
+              dailyGoalDuration={dailyGoalDuration}
+              targetScore={targetScore}
+              subjectTitles={subjectTitles}
+              examDate={examDate}
+            />
 
             <div
               className="
                md:grid grid-cols-3 gap-gutter
             ">
-              <TodayMission />
+              <TodayMission day={today} />
 
-              <PredictionCard />
+              <PredictionCard targetScore={targetScore} />
             </div>
-
-            {/* Row */}
 
             <div
               className="
              md:grid grid-cols-2 gap-gutter
             ">
-              <WeeklyChart />
+              <WeeklyChart days={plan.days} />
 
               <ProgressTimeline />
             </div>
 
-            {/* Row */}
-
-            <DailyRoutine />
-
-            {/* Row */}
+            <DailyRoutine day={today} />
 
             <div
               className="
               md:grid grid-cols-5 gap-gutter
             ">
-              <AIInsights />
+              <AIInsights
+                subjectCount={subjectTitles.length}
+                dailyMinutes={plan.dailyMinutes}
+                dailyGoalTitle={dailyGoalTitle}
+                totalChapters={totalChapters}
+                examDate={examDate}
+              />
               <MiniCalendar />
             </div>
             <MotivationCard />
 
-            {/* Footer */}
-
             <StudyPlanFooter
-              onEdit={() => router.push("/goals")}
+              onEdit={() => router.push("/goal-selection")}
               onStart={() => router.push("/dashboard")}
             />
           </div>

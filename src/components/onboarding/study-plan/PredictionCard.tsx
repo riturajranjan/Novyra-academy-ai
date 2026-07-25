@@ -1,18 +1,15 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-
 interface PredictionCardProps {
-  score?: number;
+  targetScore: string | null;
 }
 
-export default function PredictionCard({ score = 95 }: PredictionCardProps) {
+export default function PredictionCard({ targetScore }: PredictionCardProps) {
+  const numeric = targetScore ? parseInt(targetScore, 10) : 0;
   const radius = 58;
   const stroke = 8;
-
   const circumference = 2 * Math.PI * radius;
-
-  const offset = circumference - (score / 100) * circumference;
+  const offset = circumference - (Math.min(numeric, 100) / 100) * circumference;
 
   return (
     <div className="glass-panel rounded-xl p-stack-lg flex flex-col items-center justify-center text-center">
@@ -23,36 +20,33 @@ export default function PredictionCard({ score = 95 }: PredictionCardProps) {
             cx={64}
             cy={64}
             fill="transparent"
-            r={58}
+            r={radius}
             stroke="currentColor"
-            strokeWidth={8}
+            strokeWidth={stroke}
           />
           <circle
             className="text-tertiary"
             cx={64}
             cy={64}
             fill="transparent"
-            r={58}
+            r={radius}
             stroke="currentColor"
-            strokeDasharray={364}
-            strokeDashoffset={18}
-            strokeWidth={8}
-            style={{
-              strokeDasharray: "364.425, 364.425",
-              strokeDashoffset: "18.2212",
-            }}
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeWidth={stroke}
+            style={{ transition: "stroke-dashoffset 1s ease" }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-headline-md font-bold">{score}%</span>
+          <span className="text-headline-md font-bold">{targetScore ?? "--"}</span>
           <span className="text-[10px] text-on-surface-variant uppercase">
-            Predicted
+            Target
           </span>
         </div>
       </div>
-      <p className="text-label-md font-bold text-on-surface">94% Confidence</p>
+      <p className="text-label-md font-bold text-on-surface">Your Goal</p>
       <p className="text-mono-sm text-on-surface-variant mt-2">
-        AI Analysis Score
+        The score you&apos;re working toward
       </p>
     </div>
   );

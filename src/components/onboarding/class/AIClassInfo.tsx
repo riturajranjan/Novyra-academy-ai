@@ -6,14 +6,14 @@ interface AIClassInfoProps {
   className: string;
   board: string;
   chapters: number;
-  subjects: string[];
+  subjectCount: number;
 }
 
 export default function AIClassInfo({
   className,
   board,
   chapters,
-  subjects,
+  subjectCount,
 }: AIClassInfoProps) {
   return (
     <div className="mt-stack-md p-stack-md bg-primary-container/10 border border-primary/20 rounded-xl flex gap-stack-md items-start">
@@ -28,7 +28,7 @@ export default function AIClassInfo({
       </div>
       <div className="flex-grow space-y-2">
         <p className="text-body-md font-medium text-primary">
-          &quot;Great choice! I&apos;ll prepare your complete Class 10 learning
+          &quot;Great choice! I&apos;ll prepare your complete {className} learning
           journey.&quot;
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-label-md  text-on-surface-variant">
@@ -51,20 +51,11 @@ export default function AIClassInfo({
           <div className="flex items-center gap-2">
             <span
               className="material-symbols-outlined text-sm"
-              data-icon="schedule">
-              schedule
+              data-icon="menu_book">
+              menu_book
             </span>
-            120 Hours
+            {subjectCount} Subjects
           </div>
-        </div>
-        <div className="flex flex-wrap gap-1 mt-1">
-          {subjects.map((subject) => (
-            <span
-              key={subject}
-              className="px-2 py-0.5 bg-surface-container-high border border-outline-variant rounded-md text-[11px]">
-              {subject}
-            </span>
-          ))}
         </div>
       </div>
     </div>
