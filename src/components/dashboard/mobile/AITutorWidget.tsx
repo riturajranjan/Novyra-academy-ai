@@ -1,8 +1,28 @@
 "use client";
 
-import Image from "next/image";
+interface AITutorWidgetProps {
+  userName: string | null;
+  todayGoalPercent: number;
+  dailyGoalMinutes: number | null;
+  todayStudyMinutes: number;
+}
 
-export default function AITutorWidget() {
+export default function AITutorWidget({
+  userName,
+  todayGoalPercent,
+  dailyGoalMinutes,
+  todayStudyMinutes,
+}: AITutorWidgetProps) {
+  const displayName = userName ?? "there";
+  const remainingMinutes = dailyGoalMinutes !== null ? Math.max(dailyGoalMinutes - todayStudyMinutes, 0) : null;
+
+  const message =
+    dailyGoalMinutes === null
+      ? `Hi ${displayName}, finish onboarding to get a daily study goal.`
+      : remainingMinutes === 0
+        ? `${displayName}, you've hit today's study goal. Nice work!`
+        : `${displayName}, you're ${remainingMinutes} minutes from hitting today's goal.`;
+
   return (
     <section className="mb-4">
       <div className="bg-primary/5 rounded-3xl p-5 border border-primary/10 relative overflow-hidden">
@@ -10,14 +30,8 @@ export default function AITutorWidget() {
           {/* Avatar */}
 
           <div className="relative">
-            <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/30">
-              <Image
-                src="/user.jpg"
-                alt="AI Tutor"
-                width={48}
-                height={48}
-                className="w-full h-full object-cover"
-              />
+            <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/30 bg-surface-container-high flex items-center justify-center">
+              <span className="material-symbols-outlined text-primary text-2xl">smart_toy</span>
             </div>
 
             {/* Mic */}
@@ -97,10 +111,7 @@ export default function AITutorWidget() {
               </div>
             </div>
 
-            <p className="text-sm text-on-surface-variant leading-relaxed italic">
-              &quot;Arjun, you&apos;re 15 minutes from hitting your Physics
-              goal. Ready to finalize?&quot;
-            </p>
+            <p className="text-sm text-on-surface-variant leading-relaxed italic">&quot;{message}&quot;</p>
 
             <div className="flex gap-2 mt-4">
               <button
@@ -120,7 +131,7 @@ export default function AITutorWidget() {
 
                 shadow-sm
               ">
-                Let&apos;s go
+                {todayGoalPercent >= 100 ? "Nice!" : "Let's go"}
               </button>
 
               <button

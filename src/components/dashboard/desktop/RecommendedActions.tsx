@@ -1,43 +1,21 @@
 "use client";
 
-import { Brain, BookOpen, Bot, ClipboardCheck, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-const actions = [
-  {
-    icon: Brain,
-    title: "Adaptive Quiz",
-    description: "10 AI-generated questions based on yesterday's performance.",
-    color: "text-primary",
-    bg: "bg-primary/10",
-    border: "border-primary/20",
-  },
-  {
-    icon: BookOpen,
-    title: "Revision Mode",
-    description: "Revise weak Physics concepts in under 15 minutes.",
-    color: "text-tertiary",
-    bg: "bg-tertiary/10",
-    border: "border-tertiary/20",
-  },
-  {
-    icon: Bot,
-    title: "Ask AI Teacher",
-    description: "Clear doubts instantly with Dr. Nova AI Mentor.",
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-400/20",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Practice Test",
-    description: "Start a full-length exam simulation with AI evaluation.",
-    color: "text-orange-400",
-    bg: "bg-orange-400/10",
-    border: "border-orange-400/20",
-  },
-];
+import type { Recommendation } from "@/lib/recommendations";
 
-export default function RecommendedActions() {
+interface RecommendedActionsProps {
+  recommendations: Recommendation[];
+}
+
+const STYLES_BY_PRIORITY: Record<Recommendation["priority"], { text: string; bg: string; border: string; badgeBg: string }> = {
+  high: { text: "text-tertiary", bg: "bg-tertiary/5", border: "border-tertiary/20", badgeBg: "bg-tertiary/20" },
+  medium: { text: "text-primary", bg: "bg-primary/5", border: "border-primary/20", badgeBg: "bg-primary/20" },
+  low: { text: "text-cyan-400", bg: "bg-cyan-400/5", border: "border-cyan-400/20", badgeBg: "bg-cyan-400/20" },
+};
+
+export default function RecommendedActions({ recommendations }: RecommendedActionsProps) {
   return (
     <section>
       <div className="flex items-center gap-2 mb-6">
@@ -50,49 +28,47 @@ export default function RecommendedActions() {
           Recommended Actions
         </h3>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-        <button className="text-left p-6 rounded-2xl border border-tertiary/20 bg-tertiary/5 hover:bg-tertiary/10 transition-all group relative overflow-hidden">
-          <div className="flex justify-between items-start mb-2">
-            <h4 className="font-headline-md text-headline-md text-tertiary">
-              Study Optics
-            </h4>
-            <span className="px-2 py-1 bg-tertiary/20 text-tertiary rounded text-[10px] font-bold">
-              CRITICAL
-            </span>
-          </div>
-          <p className="text-body-md text-on-surface-variant mb-4">
-            Your accuracy in refraction principles dropped to{" "}
-            <span className="text-tertiary font-bold">42%</span>. AI recommends
-            immediate conceptual review.
-          </p>
-          <div className="flex items-center gap-2 text-tertiary  text-label-md font-bold">
-            Repair Gap{" "}
-            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-              arrow_forward
-            </span>
-          </div>
-        </button>
-        <button className="text-left p-6 rounded-2xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all group">
-          <div className="flex justify-between items-start mb-2">
-            <h4 className="font-headline-md text-headline-md text-primary">
-              Practice Momentum
-            </h4>
-            <span className="px-2 py-1 bg-primary/20 text-primary rounded text-[10px] font-bold">
-              +18% EXP.
-            </span>
-          </div>
-          <p className="text-body-md text-on-surface-variant mb-4">
-            Complete 5 momentum challenges to secure yesterday&apos;s learning.{" "}
-            <span className="text-primary">Expected 18% improvement</span>.
-          </p>
-          <div className="flex items-center gap-2 text-primary  text-label-md font-bold">
-            Start Drill{" "}
-            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
-              arrow_forward
-            </span>
-          </div>
-        </button>
-      </div>
+      {recommendations.length === 0 ? (
+        <div className="p-6 rounded-2xl border border-white/10 bg-white/5 text-on-surface-variant text-body-md">
+          Nothing to recommend right now — you&apos;re all caught up.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+          {recommendations.map((recommendation) => {
+            const styles = STYLES_BY_PRIORITY[recommendation.priority];
+            const content = (
+              <>
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className={`font-headline-md text-headline-md ${styles.text}`}>{recommendation.title}</h4>
+                  <span className={`px-2 py-1 ${styles.badgeBg} ${styles.text} rounded text-[10px] font-bold uppercase`}>
+                    {recommendation.priority}
+                  </span>
+                </div>
+                <p className="text-body-md text-on-surface-variant mb-4">{recommendation.description}</p>
+                <div className={`flex items-center gap-2 ${styles.text} text-label-md font-bold`}>
+                  View
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </>
+            );
+
+            return recommendation.href ? (
+              <Link
+                key={recommendation.id}
+                href={recommendation.href}
+                className={`text-left p-6 rounded-2xl border ${styles.border} ${styles.bg} hover:brightness-110 transition-all group relative overflow-hidden block`}>
+                {content}
+              </Link>
+            ) : (
+              <div
+                key={recommendation.id}
+                className={`text-left p-6 rounded-2xl border ${styles.border} ${styles.bg} group relative overflow-hidden`}>
+                {content}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }

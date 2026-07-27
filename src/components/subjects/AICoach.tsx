@@ -1,6 +1,37 @@
 "use client";
 
-export default function AICoach() {
+import { generateRecommendations } from "@/lib/recommendations";
+
+interface AICoachProps {
+  subjectId: number;
+  subjectTitle: string;
+  progressPercent: number;
+  lessonCount: number;
+  completedLessonCount: number;
+  quizAverageScore: number | null;
+  href: string;
+}
+
+export default function AICoach({
+  subjectId,
+  subjectTitle,
+  progressPercent,
+  lessonCount,
+  completedLessonCount,
+  quizAverageScore,
+  href,
+}: AICoachProps) {
+  const [insight] = generateRecommendations({
+    dailyGoalMinutes: null,
+    todayStudyMinutes: 0,
+    streak: 0,
+    subjects: [
+      { id: subjectId, title: subjectTitle, progressPercent, lessonCount, completedLessonCount, quizAverageScore, href },
+    ],
+  });
+
+  const insightText = insight?.description ?? `Keep going in ${subjectTitle} — you're at ${progressPercent}% progress.`;
+
   return (
     <>
       {/* Mobile */}
@@ -32,29 +63,19 @@ export default function AICoach() {
             style={{ opacity: 1 }}>
             <div className="flex items-start gap-stack-md">
               <div className="flex-1">
-                <h4 className="font-label-md text-primary mb-1">
-                  Critical Action Needed
-                </h4>
-                <p className="font-body-md text-on-surface">
-                  You've missed 4 questions related to{" "}
-                  <span className="text-on-secondary-container font-medium">
-                    Circular Motion
-                  </span>
-                  . Reviewing this now will increase your projected exam score
-                  by 12%.
-                </p>
+                <h4 className="font-label-md text-primary mb-1">{insight?.title ?? "You're on track"}</h4>
+                <p className="font-body-md text-on-surface">{insightText}</p>
               </div>
             </div>
-            <div className="flex gap-stack-sm">
-              <button className="flex-1 bg-surface-container-highest border border-white/10 py-3 rounded-lg font-label-md hover:bg-surface-bright active:scale-[0.98] transition-all">
-                Review Circular Motion
-              </button>
-              <button className="w-12 h-12 flex items-center justify-center rounded-lg border border-white/10 bg-surface-container-highest">
-                <span className="material-symbols-outlined text-on-surface-variant">
-                  close
-                </span>
-              </button>
-            </div>
+            {insight?.href && (
+              <div className="flex gap-stack-sm">
+                <a
+                  href={insight.href}
+                  className="flex-1 text-center bg-surface-container-highest border border-white/10 py-3 rounded-lg font-label-md hover:bg-surface-bright active:scale-[0.98] transition-all">
+                  {insight.title}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -73,59 +94,47 @@ export default function AICoach() {
             <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
           </div>
           <div className="p-stack-md rounded-xl bg-surface-container-highest/50 border border-white/5 space-y-stack-sm">
-            <p className="text-sm leading-relaxed">
-              &quot;Based on your last quiz, you&apos;re struggling with{" "}
-              <span className="text-primary font-bold">
-                Friction Coefficients
-              </span>
-              . Let&apos;s tackle that first.&quot;
-            </p>
-            <button className="w-full py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg text-sm font-bold transition-all">
-              Practice Now
-            </button>
+            <p className="text-sm leading-relaxed">&quot;{insightText}&quot;</p>
+            {insight?.href && (
+              <a
+                href={insight.href}
+                className="block text-center w-full py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-lg text-sm font-bold transition-all">
+                {insight.title}
+              </a>
+            )}
           </div>
         </div>
         <div className="p-stack-lg space-y-stack-lg">
           <div>
             <h4 className="text-xs font-mono-sm font-bold text-on-surface-variant uppercase tracking-widest mb-stack-md">
-              Today&apos;s Focus
+              Progress
             </h4>
             <div className="space-y-stack-md">
-              <div className="flex gap-stack-md">
-                <div className="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
-                  1
-                </div>
-                <p className="text-sm">Review 2D Motion equations (15m)</p>
-              </div>
-              <div className="flex gap-stack-md">
-                <div className="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
-                  2
+              <div className="flex gap-stack-md items-center">
+                <div className="h-8 w-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0 text-xs">
+                  {progressPercent}%
                 </div>
                 <p className="text-sm">
-                  Complete &apos;Forces in Slopes&apos; quiz (10m)
+                  {completedLessonCount} of {lessonCount} lessons complete
                 </p>
               </div>
             </div>
           </div>
-          <div className="pt-stack-lg border-t border-white/5">
-            <div className="flex items-center gap-unit mb-stack-md">
-              <span className="material-symbols-outlined text-error text-sm">
-                warning
-              </span>
-              <span className="text-xs font-bold text-error uppercase">
-                Weak Topic Detected
-              </span>
+          {quizAverageScore !== null && quizAverageScore < 60 && (
+            <div className="pt-stack-lg border-t border-white/5">
+              <div className="flex items-center gap-unit mb-stack-md">
+                <span className="material-symbols-outlined text-error text-sm">
+                  warning
+                </span>
+                <span className="text-xs font-bold text-error uppercase">
+                  Quiz Average Low
+                </span>
+              </div>
+              <p className="text-sm text-on-surface mb-stack-md">
+                Your quiz average in {subjectTitle} is {quizAverageScore}%.
+              </p>
             </div>
-            <p className="text-sm text-on-surface mb-stack-md">
-              Centripetal Force Calculations (62% accuracy)
-            </p>
-            <button className="flex items-center gap-unit text-primary text-sm font-bold hover:gap-stack-sm transition-all">
-              Remediate Now{" "}
-              <span className="material-symbols-outlined text-sm">
-                arrow_forward
-              </span>
-            </button>
-          </div>
+          )}
         </div>
       </div>
     </>

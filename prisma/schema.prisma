@@ -8,22 +8,25 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// --- Auth (Auth.js v5 PrismaAdapter-compatible; wired up in Phase 2) ---
-
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  passwordHash  String?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  accounts            Account[]
-  sessions            Session[]
-  onboardingProfile   OnboardingProfile?
-  passwordResetTokens PasswordResetToken[]
+  id                   String                @id @default(cuid())
+  name                 String?
+  email                String                @unique
+  emailVerified        DateTime?
+  passwordHash         String?
+  image                String?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  accounts             Account[]
+  activities           Activity[]
+  lessonCompletions    LessonCompletion[]
+  notes                Note[]
+  onboardingProfile    OnboardingProfile?
+  passwordResetTokens  PasswordResetToken[]
+  quizAttempts         QuizAttempt[]
+  sessions             Session[]
+  studySessions        StudySession[]
+  studyTaskCompletions StudyTaskCompletion[]
 }
 
 model Account {
@@ -32,15 +35,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -50,8 +52,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -69,69 +70,65 @@ model PasswordResetToken {
   expiresAt DateTime
   usedAt    DateTime?
   createdAt DateTime  @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// --- Content taxonomy (mirrors src/constants/{boards,classes,subjects,learningStyles,targetScores,dailyGoals}.ts) ---
-
 model Board {
-  id       String   @id
-  title    String
-  subtitle String
-  badge    String?
-  icon     String
-  features String[]
-
-  onboardingProfiles OnboardingProfile[]
+  id                 String              @id
+  title              String
+  subtitle           String
+  badge              String?
+  icon               String
+  features           String[]
   classes            BoardClass[]
   subjects           BoardClassSubject[]
+  onboardingProfiles OnboardingProfile[]
+  chapters           Chapter[]
 }
 
 model SchoolClass {
-  id           Int     @id
-  title        String
-  subtitle     String
-  chapterCount Int
-  subjectCount Int
-  streamCount  Int?
-  personalized Boolean @default(false)
-
-  onboardingProfiles OnboardingProfile[]
+  id                 Int                 @id
+  title              String
+  subtitle           String
+  chapterCount       Int
+  subjectCount       Int
+  streamCount        Int?
+  personalized       Boolean             @default(false)
   boards             BoardClass[]
   subjects           BoardClassSubject[]
+  onboardingProfiles OnboardingProfile[]
 }
 
 model Subject {
-  id           Int     @id
-  title        String
-  description  String
-  chapterCount Int
-  level        String
-  badge        String?
-  icon         String
-
-  onboardingProfiles UserSubject[]
-  boardClasses       BoardClassSubject[]
+  id                   Int                   @id
+  title                String
+  description          String
+  chapterCount         Int
+  level                String
+  badge                String?
+  icon                 String
+  activities           Activity[]
+  boardClasses         BoardClassSubject[]
+  chapters             Chapter[]
+  quizAttempts         QuizAttempt[]
+  studySessions        StudySession[]
+  studyTaskCompletions StudyTaskCompletion[]
+  onboardingProfiles   UserSubject[]
 }
 
-// Which classes a board offers.
 model BoardClass {
-  boardId String
-  classId Int
-
+  boardId     String
+  classId     Int
   board       Board       @relation(fields: [boardId], references: [id], onDelete: Cascade)
   schoolClass SchoolClass @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   @@id([boardId, classId])
 }
 
-// Which subjects a board+class combination offers.
 model BoardClassSubject {
-  boardId   String
-  classId   Int
-  subjectId Int
-
+  boardId     String
+  classId     Int
+  subjectId   Int
   board       Board       @relation(fields: [boardId], references: [id], onDelete: Cascade)
   schoolClass SchoolClass @relation(fields: [classId], references: [id], onDelete: Cascade)
   subject     Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade)
@@ -140,62 +137,55 @@ model BoardClassSubject {
 }
 
 model LearningStyle {
-  id          String @id
-  title       String
-  description String
-  icon        String
-  color       String
-
+  id                 String              @id
+  title              String
+  description        String
+  icon               String
+  color              String
   onboardingProfiles UserLearningStyle[]
 }
 
 model TargetScore {
-  id    Int    @id
-  score String
-  title String
-  desc  String
-
+  id                 Int                 @id
+  score              String
+  title              String
+  desc               String
   onboardingProfiles OnboardingProfile[]
 }
 
 model DailyGoal {
-  id       String @id
-  title    String
-  duration String
-  icon     String
-
+  id                 String              @id
+  title              String
+  duration           String
+  icon               String
   onboardingProfiles OnboardingProfile[]
 }
 
-// --- Per-user onboarding selections ---
-
 model OnboardingProfile {
-  id            String    @id @default(cuid())
-  userId        String    @unique
-  boardId       String?
-  classId       Int?
-  targetScoreId Int?
-  dailyGoalId   String?
-  examDate      DateTime?
-  completedAt   DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String              @id @default(cuid())
+  userId         String              @unique
+  boardId        String?
+  classId        Int?
+  targetScoreId  Int?
+  dailyGoalId    String?
+  examDate       DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
   board          Board?              @relation(fields: [boardId], references: [id])
   schoolClass    SchoolClass?        @relation(fields: [classId], references: [id])
-  targetScore    TargetScore?        @relation(fields: [targetScoreId], references: [id])
   dailyGoal      DailyGoal?          @relation(fields: [dailyGoalId], references: [id])
-  subjects       UserSubject[]
+  targetScore    TargetScore?        @relation(fields: [targetScoreId], references: [id])
+  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   learningStyles UserLearningStyle[]
+  subjects       UserSubject[]
 }
 
 model UserSubject {
   onboardingProfileId String
   subjectId           Int
-
-  onboardingProfile OnboardingProfile @relation(fields: [onboardingProfileId], references: [id], onDelete: Cascade)
-  subject           Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  onboardingProfile   OnboardingProfile @relation(fields: [onboardingProfileId], references: [id], onDelete: Cascade)
+  subject             Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
   @@id([onboardingProfileId, subjectId])
 }
@@ -203,9 +193,244 @@ model UserSubject {
 model UserLearningStyle {
   onboardingProfileId String
   learningStyleId     String
-
-  onboardingProfile OnboardingProfile @relation(fields: [onboardingProfileId], references: [id], onDelete: Cascade)
-  learningStyle     LearningStyle     @relation(fields: [learningStyleId], references: [id], onDelete: Cascade)
+  learningStyle       LearningStyle     @relation(fields: [learningStyleId], references: [id], onDelete: Cascade)
+  onboardingProfile   OnboardingProfile @relation(fields: [onboardingProfileId], references: [id], onDelete: Cascade)
 
   @@id([onboardingProfileId, learningStyleId])
+}
+
+model StudySession {
+  id          String   @id @default(cuid())
+  userId      String
+  subjectId   Int?
+  minutes     Int
+  createdAt   DateTime @default(now())
+  completedAt DateTime @default(now())
+  source      String   @default("study_plan_task")
+  updatedAt   DateTime @updatedAt
+  subject     Subject? @relation(fields: [subjectId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, completedAt])
+  @@index([userId, subjectId])
+}
+
+model Activity {
+  id        String       @id @default(cuid())
+  userId    String
+  type      ActivityType
+  subjectId Int?
+  title     String
+  xp        Int          @default(0)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  chapterId String?
+  lessonId  String?
+  chapter   Chapter?     @relation(fields: [chapterId], references: [id])
+  lesson    Lesson?      @relation(fields: [lessonId], references: [id])
+  subject   Subject?     @relation(fields: [subjectId], references: [id])
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([userId, subjectId])
+}
+
+model Chapter {
+  id          String        @id
+  subjectId   Int
+  boardId     String?
+  title       String
+  description String
+  order       Int
+  status      ContentStatus @default(PLACEHOLDER)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  activities  Activity[]
+  board       Board?        @relation(fields: [boardId], references: [id], onDelete: SetNull)
+  subject     Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  lessons     Lesson[]
+
+  @@unique([subjectId, boardId, order])
+  @@index([subjectId])
+  @@index([boardId])
+}
+
+model Lesson {
+  id               String             @id
+  chapterId        String
+  title            String
+  summary          String
+  content          String
+  analogy          String?
+  formula          String?
+  aiTeacherIntro   String?
+  order            Int
+  estimatedMinutes Int?
+  status           ContentStatus      @default(PLACEHOLDER)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  activities       Activity[]
+  chapter          Chapter            @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  completions      LessonCompletion[]
+  quizzes          Quiz[]
+  flashcards       Flashcard[]
+  notes            Note[]
+
+  @@unique([chapterId, order])
+  @@index([chapterId])
+}
+
+model LessonCompletion {
+  id          String   @id
+  userId      String
+  lessonId    String
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+}
+
+model QuizAttempt {
+  id             String             @id
+  userId         String
+  subjectId      Int
+  quizId         String?
+  totalQuestions Int
+  createdAt      DateTime           @default(now())
+  completedAt    DateTime           @default(now())
+  correctAnswers Int
+  duration       Int?
+  score          Int
+  updatedAt      DateTime           @updatedAt
+  quiz           Quiz?              @relation(fields: [quizId], references: [id], onDelete: SetNull)
+  subject        Subject            @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  responses      QuestionResponse[]
+
+  @@index([userId, completedAt])
+  @@index([userId, subjectId])
+  @@index([quizId])
+}
+
+model StudyTaskCompletion {
+  id        String   @id
+  userId    String
+  date      DateTime @db.Date
+  subjectId Int
+  taskType  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date, subjectId, taskType])
+}
+
+enum ActivityType {
+  TASK_COMPLETED
+  LESSON_STARTED
+  LESSON_COMPLETED
+  QUIZ_STARTED
+  QUIZ_COMPLETED
+  NOTE_CREATED
+  FLASHCARD_REVIEWED
+  STUDY_SESSION
+  STREAK_EARNED
+}
+
+enum ContentStatus {
+  PLACEHOLDER
+  PUBLISHED
+}
+
+model Quiz {
+  id        String        @id @default(cuid())
+  lessonId  String
+  title     String
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  lesson    Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  QuizAttempt[]
+
+  @@index([lessonId])
+}
+
+model Question {
+  id               String             @id @default(cuid())
+  quizId           String
+  order            Int
+  prompt           String
+  explanation      String?
+  aiHint           String?
+  marks            Int                @default(1)
+  timeLimitSeconds Int?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  quiz             Quiz               @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options          QuestionOption[]
+  responses        QuestionResponse[]
+
+  @@unique([quizId, order])
+  @@index([quizId])
+}
+
+model QuestionOption {
+  id         String             @id @default(cuid())
+  questionId String
+  order      Int
+  text       String
+  isCorrect  Boolean            @default(false)
+  question   Question           @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  responses  QuestionResponse[]
+
+  @@unique([questionId, order])
+  @@index([questionId])
+}
+
+model QuestionResponse {
+  id               String          @id @default(cuid())
+  quizAttemptId    String
+  questionId       String
+  selectedOptionId String?
+  isCorrect        Boolean
+  createdAt        DateTime        @default(now())
+  quizAttempt      QuizAttempt     @relation(fields: [quizAttemptId], references: [id], onDelete: Cascade)
+  question         Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  selectedOption   QuestionOption? @relation(fields: [selectedOptionId], references: [id], onDelete: SetNull)
+
+  @@unique([quizAttemptId, questionId])
+  @@index([quizAttemptId])
+}
+
+model Flashcard {
+  id        String   @id @default(cuid())
+  lessonId  String
+  order     Int
+  front     String
+  back      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, order])
+  @@index([lessonId])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  userId    String
+  lessonId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
 }

@@ -1,42 +1,15 @@
 "use client";
 
-const journey = [
-  {
-    icon: "menu_book",
-    title: "Study",
-    subtitle: "Organic Chem Prep",
-    progress: "33%",
-    border: "border-l-tertiary",
-    iconBg: "bg-tertiary/10",
-    iconColor: "text-tertiary",
-    progressColor: "bg-tertiary",
-    width: "33%",
-  },
-  {
-    icon: "fitness_center",
-    title: "Practice",
-    subtitle: "Physics Simulations",
-    progress: "50%",
-    border: "border-l-primary",
-    iconBg: "bg-primary/10",
-    iconColor: "text-primary",
-    progressColor: "bg-primary",
-    width: "50%",
-  },
-  {
-    icon: "history",
-    title: "Revision",
-    subtitle: "Quiz: Algebra II",
-    progress: "80%",
-    border: "border-l-secondary",
-    iconBg: "bg-secondary/10",
-    iconColor: "text-secondary",
-    progressColor: "bg-secondary",
-    width: "80%",
-  },
-];
+import SubjectCard from "@/components/subjects/SubjectCard";
+import type { SubjectSummary } from "@/lib/contentDal";
 
-export default function LearningJourney() {
+const ACCENTS: Array<"tertiary" | "primary" | "secondary" | "orange"> = ["tertiary", "primary", "secondary", "orange"];
+
+interface LearningJourneyProps {
+  subjects: SubjectSummary[];
+}
+
+export default function LearningJourney({ subjects }: LearningJourneyProps) {
   return (
     <section>
       {/* Header */}
@@ -47,71 +20,26 @@ export default function LearningJourney() {
         </h3>
       </div>
 
-      {/* Cards */}
-
-      <div className="flex overflow-x-auto hide-scrollbar gap-4 -mx-margin-mobile px-margin-mobile pb-2">
-        {journey.map((item) => (
-          <div
-            key={item.title}
-            className={`
-              flex-shrink-0
-              w-44
-
-              glass-card
-
-              rounded-2xl
-
-              p-4
-
-              border-l-4
-
-              ${item.border}
-            `}>
-            {/* Icon */}
-
-            <div
-              className={`
-                w-10
-                h-10
-
-                rounded-lg
-
-                flex
-
-                items-center
-
-                justify-center
-
-                mb-3
-
-                ${item.iconBg}
-              `}>
-              <span className={`material-symbols-outlined ${item.iconColor}`}>
-                {item.icon}
-              </span>
-            </div>
-
-            {/* Title */}
-
-            <h4 className="font-bold text-sm mb-1">{item.title}</h4>
-
-            <p className="text-[11px] text-on-surface-variant mb-3">
-              {item.subtitle}
-            </p>
-
-            {/* Progress */}
-
-            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-              <div
-                className={`h-full ${item.progressColor}`}
-                style={{
-                  width: item.width,
-                }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      {subjects.length === 0 ? (
+        <p className="text-on-surface-variant text-sm">No subjects selected yet.</p>
+      ) : (
+        <div className="flex overflow-x-auto hide-scrollbar gap-4 -mx-margin-mobile px-margin-mobile pb-2">
+          {subjects.map((subject, index) => (
+            <SubjectCard
+              key={subject.id}
+              id={subject.id}
+              name={subject.title}
+              icon={subject.icon}
+              chapterCount={subject.chapterCount}
+              lessonCount={subject.lessonCount}
+              completedLessonCount={subject.completedLessonCount}
+              progressPercent={subject.progressPercent}
+              href={subject.href}
+              accent={ACCENTS[index % ACCENTS.length]}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -1,8 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
-export default function TodaysMission() {
+import type { ContinueLearningItem } from "@/lib/contentDal";
+
+interface TodaysMissionProps {
+  continueLearning: ContinueLearningItem | null;
+}
+
+export default function TodaysMission({ continueLearning }: TodaysMissionProps) {
   return (
     <section>
       {/* Header */}
@@ -11,8 +18,6 @@ export default function TodaysMission() {
         <span className="text-on-surface-variant  text-xs uppercase tracking-[0.2em]">
           Active Mission
         </span>
-
-        <span className="text-primary  text-xs">Oct 14</span>
       </div>
 
       {/* Card */}
@@ -64,98 +69,25 @@ export default function TodaysMission() {
 
         <div className="relative z-10 flex justify-between items-start">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span
-                className="
-                px-2
-
-                py-0.5
-
-                rounded
-
-                bg-tertiary/20
-
-                text-tertiary
-
-                text-[10px]
-
-                uppercase
-
-                tracking-wider
-
-                font-bold
-              ">
-                Level : Hard
-              </span>
-
-              <span
-                className="
-                text-[10px]
-
-                uppercase
-
-                tracking-wider
-
-                font-bold
-
-                text-on-surface-variant
-              ">
-                45 MIN
-              </span>
-            </div>
-
             <h2 className="font-headline-lg-mobile text-2xl leading-tight mb-1">
-              Newton&apos;s First Law
+              {continueLearning ? continueLearning.lessonTitle : "No lessons available yet"}
             </h2>
 
             <p className="text-on-surface-variant text-sm mb-6">
-              Physics • Module 4.1
+              {continueLearning
+                ? `${continueLearning.subjectTitle} • ${continueLearning.chapterTitle}`
+                : "Select a subject to get started."}
             </p>
-          </div>
-
-          {/* Progress Ring */}
-
-          <div className="relative w-16 h-16 flex items-center justify-center">
-            <svg className="w-full h-full" viewBox="0 0 100 100">
-              <circle
-                cx="50"
-                cy="50"
-                r="42"
-                fill="transparent"
-                strokeWidth="6"
-                className="stroke-current text-surface-container-highest"
-              />
-
-              <circle
-                cx="50"
-                cy="50"
-                r="42"
-                fill="transparent"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeDasharray="264"
-                strokeDashoffset="66"
-                className="
-                stroke-current
-
-                text-primary
-
-                progress-ring__circle
-              "
-              />
-            </svg>
-
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold">75%</span>
-            </div>
           </div>
         </div>
 
         {/* Lesson */}
 
         <div className="space-y-4 relative z-10">
-          <div
-            className="
+          {continueLearning ? (
+            <>
+              <div
+                className="
             flex
 
             items-center
@@ -172,17 +104,16 @@ export default function TodaysMission() {
 
             border-white/5
           ">
-            <PlayCircle size={22} className="text-primary" />
+                <PlayCircle size={22} className="text-primary" />
 
-            <span className="text-sm font-medium">
-              Inertia & Motion Analysis
-            </span>
-          </div>
+                <span className="text-sm font-medium">{continueLearning.chapterTitle}</span>
+              </div>
 
-          {/* Button */}
+              {/* Button */}
 
-          <button
-            className="
+              <Link
+                href={continueLearning.href}
+                className="
             w-full
 
             py-4
@@ -211,11 +142,19 @@ export default function TodaysMission() {
 
             transition-transform
           ">
-            Resume Mission
-            <span className="material-symbols-outlined text-base">
-              arrow_forward
-            </span>
-          </button>
+                {continueLearning.label} Mission
+                <span className="material-symbols-outlined text-base">
+                  arrow_forward
+                </span>
+              </Link>
+            </>
+          ) : (
+            <button
+              disabled
+              className="w-full py-4 rounded-2xl bg-white/5 text-on-surface-variant font-bold flex items-center justify-center gap-2 cursor-not-allowed">
+              No Mission Available
+            </button>
+          )}
         </div>
       </div>
     </section>

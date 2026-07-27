@@ -1,86 +1,75 @@
 "use client";
 
-import { Zap, CheckCircle2, Brain } from "lucide-react";
+import { CheckCircle2, PlayCircle, Circle } from "lucide-react";
 
-const analytics = [
-  {
-    title: "Velocity",
-    value: "1.2 Ch/Day",
-    icon: Zap,
-    iconBg: "bg-primary/10",
-    iconColor: "text-primary",
-  },
-  {
-    title: "Accuracy",
-    value: "88.4%",
-    icon: CheckCircle2,
-    iconBg: "bg-tertiary/10",
-    iconColor: "text-tertiary",
-  },
-  {
-    title: "Retention",
-    value: "92%",
-    icon: Brain,
-    iconBg: "bg-secondary/10",
-    iconColor: "text-secondary",
-  },
-];
+import type { ChapterSummary } from "./SubjectPage";
 
-export default function AnalyticsCards() {
+interface AnalyticsCardsProps {
+  progressPercent: number;
+  quizAverageScore: number | null;
+  studyMinutes: number;
+  chapters: ChapterSummary[];
+}
+
+function formatStudyTime(minutes: number): string {
+  if (minutes <= 0) return "0m";
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  if (hours === 0) return `${mins}m`;
+  if (mins === 0) return `${hours}h`;
+  return `${hours}h ${mins}m`;
+}
+
+export default function AnalyticsCards({ progressPercent, quizAverageScore, studyMinutes, chapters }: AnalyticsCardsProps) {
+  const previewChapters = chapters.slice(0, 4);
+
   return (
     <>
       <section className="md:hidden mt-stack-md">
         <div className="px-margin-mobile flex justify-between items-center mb-stack-sm">
           <h3 className="font-headline-md text-headline-md">Your Journey</h3>
           <span className="font-mono-sm text-on-surface-variant">
-            Phase 2 of 4
+            {chapters.length} {chapters.length === 1 ? "Chapter" : "Chapters"}
           </span>
         </div>
         <div className="flex overflow-x-auto hide-scrollbar gap-stack-md px-margin-mobile py-stack-sm snap-x">
-          {/* Completed */}
-          <div className="snap-start flex-shrink-0 w-32 glass-card-no-border  p-stack-sm rounded-xl text-center border-l-4 border-l-primary/50">
-            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2 text-primary">
-              <span className="material-symbols-outlined">check_circle</span>
-            </div>
-            <p className="font-label-md text-on-surface truncate">Classical</p>
-            <span className="text-[10px] uppercase font-mono-sm text-primary">
-              Done
-            </span>
-          </div>
-          {/* Current */}
-          <div className="snap-start flex-shrink-0 w-32 glass-card-no-border  p-stack-sm rounded-xl text-center border-l-4 border-l-tertiary shadow-[0_0_20px_rgba(76,215,246,0.15)] bg-surface-container-high">
-            <div className="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center mx-auto mb-2 text-tertiary ai-glow">
-              <span
-                className="material-symbols-outlined"
-                style={{ fontVariationSettings: '"FILL" 1' }}>
-                play_circle
-              </span>
-            </div>
-            <p className="font-label-md text-on-surface truncate">Kinematics</p>
-            <span className="text-[10px] uppercase font-mono-sm text-tertiary">
-              Current
-            </span>
-          </div>
-          {/* Weak Area */}
-          <div className="snap-start flex-shrink-0 w-32 glass-card-no-border  p-stack-sm rounded-xl text-center border-l-4 border-l-error/50">
-            <div className="w-10 h-10 rounded-full bg-error/20 flex items-center justify-center mx-auto mb-2 text-error">
-              <span className="material-symbols-outlined">priority_high</span>
-            </div>
-            <p className="font-label-md text-on-surface truncate">Circular</p>
-            <span className="text-[10px] uppercase font-mono-sm text-error">
-              Weak
-            </span>
-          </div>
-          {/* Upcoming */}
-          <div className="snap-start flex-shrink-0 w-32 glass-card-no-border  p-stack-sm rounded-xl text-center border-l-4 border-l-white/10 opacity-50">
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-2 text-on-surface-variant">
-              <span className="material-symbols-outlined">lock</span>
-            </div>
-            <p className="font-label-md text-on-surface truncate">Dynamics</p>
-            <span className="text-[10px] uppercase font-mono-sm text-on-surface-variant">
-              Locked
-            </span>
-          </div>
+          {previewChapters.length === 0 && (
+            <p className="text-on-surface-variant font-body-md px-2">No chapters yet.</p>
+          )}
+          {previewChapters.map((chapter) => {
+            const isDone = chapter.progress === 100;
+            const isCurrent = !isDone && chapter.progress > 0;
+
+            return (
+              <div
+                key={chapter.id}
+                className={`snap-start flex-shrink-0 w-32 glass-card-no-border  p-stack-sm rounded-xl text-center border-l-4 ${
+                  isDone
+                    ? "border-l-primary/50"
+                    : isCurrent
+                      ? "border-l-tertiary shadow-[0_0_20px_rgba(76,215,246,0.15)] bg-surface-container-high"
+                      : "border-l-white/10 opacity-50"
+                }`}>
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2 ${
+                    isDone
+                      ? "bg-primary/20 text-primary"
+                      : isCurrent
+                        ? "bg-tertiary/20 text-tertiary ai-glow"
+                        : "bg-white/5 text-on-surface-variant"
+                  }`}>
+                  {isDone ? <CheckCircle2 size={20} /> : isCurrent ? <PlayCircle size={20} /> : <Circle size={20} />}
+                </div>
+                <p className="font-label-md text-on-surface truncate">{chapter.title}</p>
+                <span
+                  className={`text-[10px] uppercase font-mono-sm ${
+                    isDone ? "text-primary" : isCurrent ? "text-tertiary" : "text-on-surface-variant"
+                  }`}>
+                  {isDone ? "Done" : isCurrent ? "Current" : "Upcoming"}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -92,10 +81,8 @@ export default function AnalyticsCards() {
             <span className="material-symbols-outlined text-[24px]">bolt</span>
           </div>
           <div>
-            <p className="text-xs font-mono-sm text-on-surface-variant">
-              Velocity
-            </p>
-            <p className="font-bold">1.2 Ch/Day</p>
+            <p className="text-xs font-mono-sm text-on-surface-variant">Progress</p>
+            <p className="font-bold">{progressPercent}%</p>
           </div>
         </div>
         <div className="glass-card-no-border  p-stack-md rounded-xl flex items-center gap-stack-md">
@@ -105,10 +92,8 @@ export default function AnalyticsCards() {
             </span>
           </div>
           <div>
-            <p className="text-xs font-mono-sm text-on-surface-variant">
-              Accuracy
-            </p>
-            <p className="font-bold">88.4%</p>
+            <p className="text-xs font-mono-sm text-on-surface-variant">Quiz Avg</p>
+            <p className="font-bold">{quizAverageScore !== null ? `${quizAverageScore}%` : "—"}</p>
           </div>
         </div>
         <div className="glass-card-no-border  p-stack-md rounded-xl flex items-center gap-stack-md">
@@ -116,10 +101,8 @@ export default function AnalyticsCards() {
             <span className="material-symbols-outlined text-[24px]">grain</span>
           </div>
           <div>
-            <p className="text-xs font-mono-sm text-on-surface-variant">
-              Retention
-            </p>
-            <p className="font-bold">92%</p>
+            <p className="text-xs font-mono-sm text-on-surface-variant">Study Time</p>
+            <p className="font-bold">{formatStudyTime(studyMinutes)}</p>
           </div>
         </div>
       </div>

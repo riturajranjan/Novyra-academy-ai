@@ -2,7 +2,11 @@
 
 import { Bell, Rocket } from "lucide-react";
 
-export default function MobileHeader() {
+interface MobileHeaderProps {
+  streak?: number;
+}
+
+export default function MobileHeader({ streak }: MobileHeaderProps) {
   return (
     <header className="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-xl border-b border-white/5 lg:hidden">
       <div className="px-margin-mobile flex items-center justify-between h-16">
@@ -21,15 +25,17 @@ export default function MobileHeader() {
         {/* Right */}
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center bg-surface-container-high px-3 py-1 rounded-full gap-1 border border-white/5">
-            <span className="material-symbols-outlined text-tertiary text-sm">
-              local_fire_department
-            </span>
+          {typeof streak === "number" && streak > 0 && (
+            <div className="flex items-center bg-surface-container-high px-3 py-1 rounded-full gap-1 border border-white/5">
+              <span className="material-symbols-outlined text-tertiary text-sm">
+                local_fire_department
+              </span>
 
-            <span className="font-mono-sm text-xs text-tertiary font-bold">
-              12
-            </span>
-          </div>
+              <span className="font-mono-sm text-xs text-tertiary font-bold">
+                {streak}
+              </span>
+            </div>
+          )}
 
           <button
             className="

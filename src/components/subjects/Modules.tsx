@@ -1,6 +1,22 @@
 "use client";
 
-export default function Modules() {
+import Link from "next/link";
+
+import type { ChapterSummary } from "./SubjectPage";
+
+interface ModulesProps {
+  subjectId: number;
+  chapters: ChapterSummary[];
+}
+
+function progressRingOffset(progress: number): number {
+  const circumference = 226.2;
+  return circumference - (circumference * progress) / 100;
+}
+
+export default function Modules({ subjectId, chapters }: ModulesProps) {
+  const [activeChapter, ...restChapters] = chapters;
+
   return (
     <>
       <section className="md:hidden mt-stack-md">
@@ -39,148 +55,120 @@ export default function Modules() {
             View Roadmap
           </button>
         </div>
-        {/* Module Card: Active */}
-        <div className="glass-card p-stack-lg rounded-2xl md:flex gap-stack-lg items-center relative group">
-          <div className="absolute top-4 right-4 flex gap-stack-sm">
-            <span className="px-2 py-0.5 bg-tertiary/20 text-tertiary rounded text-[10px] font-bold uppercase tracking-widest">
-              AI Ready
-            </span>
-            <span className="px-2 py-0.5 bg-primary/20 text-primary rounded text-[10px] font-bold uppercase tracking-widest">
-              Voice
-            </span>
+
+        {!activeChapter && (
+          <div className="glass-card p-stack-lg rounded-2xl text-on-surface-variant">
+            No chapters yet.
           </div>
-          <div className="relative flex-shrink-0">
-            <svg className="w-20 h-20">
-              <circle
-                className="text-white/10"
-                cx={40}
-                cy={40}
-                fill="transparent"
-                r={36}
-                stroke="currentColor"
-                strokeWidth={4}
-              />
-              <circle
-                className="text-primary progress-ring-circle"
-                cx={40}
-                cy={40}
-                fill="transparent"
-                r={36}
-                stroke="currentColor"
-                strokeDasharray="226.2"
-                strokeDashoffset="33.9"
-                strokeLinecap="round"
-                strokeWidth={4}
-                style={{ strokeDashoffset: "33.9" }}
-              />
-            </svg>
-            <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono-sm font-bold text-lg">
-              85%
-            </span>
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-stack-sm mb-unit">
-              <span className="text-on-surface-variant font-mono-sm text-xs uppercase">
-                Chapter 4
-              </span>
-              <span className="h-1 w-1 bg-on-surface-variant rounded-full" />
-              <span className="text-tertiary font-mono-sm text-xs font-bold">
-                REVISION DUE
-              </span>
-            </div>
-            <h4 className="font-headline-md text-xl mb-stack-sm group-hover:text-primary transition-colors">
-              Dynamics &amp; Newton's Laws
-            </h4>
-            <div className="flex items-center gap-stack-lg">
-              <div className="flex items-center gap-unit">
-                <span className="material-symbols-outlined text-sm text-on-surface-variant">
-                  bar_chart
-                </span>
-                <span className="text-sm text-on-surface-variant">
-                  Difficulty: Hard
+        )}
+
+        {activeChapter && (
+          <Link
+            href={`/subject/${subjectId}/chapter/${activeChapter.id}`}
+            className="glass-card p-stack-lg rounded-2xl md:flex gap-stack-lg items-center relative group">
+            {activeChapter.status === "PLACEHOLDER" && (
+              <div className="absolute top-4 right-4 flex gap-stack-sm">
+                <span className="px-2 py-0.5 bg-surface-container-highest text-on-surface-variant rounded text-[10px] font-bold uppercase tracking-widest">
+                  Coming Soon
                 </span>
               </div>
-              <div className="flex items-center gap-unit">
-                <span className="material-symbols-outlined text-sm text-on-surface-variant">
-                  priority_high
-                </span>
-                <span className="text-sm text-on-surface-variant">
-                  Weightage: 18%
-                </span>
-              </div>
-            </div>
-          </div>
-          <button className="px-8 py-3 bg-primary text-on-primary font-bold rounded-xl transition-all hover:shadow-[0_0_20px_rgba(192,193,255,0.4)] active:scale-95">
-            Resume
-          </button>
-        </div>
-        {/* Module Card: Regular */}
-        <div className="glass-card p-stack-lg rounded-2xl md:flex gap-stack-lg items-center opacity-80 hover:opacity-100 transition-opacity">
-          <div className="relative flex-shrink-0">
-            <svg className="w-20 h-20">
-              <circle
-                className="text-white/10"
-                cx={40}
-                cy={40}
-                fill="transparent"
-                r={36}
-                stroke="currentColor"
-                strokeWidth={4}
-              />
-              <circle
-                className="text-on-surface-variant progress-ring-circle"
-                cx={40}
-                cy={40}
-                fill="transparent"
-                r={36}
-                stroke="currentColor"
-                strokeDasharray="226.2"
-                strokeDashoffset="226.2"
-                strokeLinecap="round"
-                strokeWidth={4}
-                style={{ strokeDashoffset: "226.2" }}
-              />
-            </svg>
-            <span className="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-on-surface-variant">
-              play_arrow
-            </span>
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-stack-sm mb-unit">
-              <span className="text-on-surface-variant font-mono-sm text-xs uppercase">
-                Chapter 5
-              </span>
-              <span className="h-1 w-1 bg-on-surface-variant rounded-full" />
-              <span className="text-on-surface-variant font-mono-sm text-xs">
-                NOT STARTED
+            )}
+            <div className="relative flex-shrink-0">
+              <svg className="w-20 h-20">
+                <circle
+                  className="text-white/10"
+                  cx={40}
+                  cy={40}
+                  fill="transparent"
+                  r={36}
+                  stroke="currentColor"
+                  strokeWidth={4}
+                />
+                <circle
+                  className="text-primary progress-ring-circle"
+                  cx={40}
+                  cy={40}
+                  fill="transparent"
+                  r={36}
+                  stroke="currentColor"
+                  strokeDasharray="226.2"
+                  strokeDashoffset={progressRingOffset(activeChapter.progress)}
+                  strokeLinecap="round"
+                  strokeWidth={4}
+                  style={{ strokeDashoffset: progressRingOffset(activeChapter.progress) }}
+                />
+              </svg>
+              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-mono-sm font-bold text-lg">
+                {activeChapter.progress}%
               </span>
             </div>
-            <h4 className="font-headline-md text-xl mb-stack-sm">
-              Work, Energy &amp; Power
-            </h4>
-            <div className="flex items-center gap-stack-lg">
-              <div className="flex items-center gap-unit">
-                <span className="material-symbols-outlined text-sm text-on-surface-variant">
-                  bar_chart
-                </span>
-                <span className="text-sm text-on-surface-variant">
-                  Difficulty: Medium
+            <div className="flex-1">
+              <div className="flex items-center gap-stack-sm mb-unit">
+                <span className="text-on-surface-variant font-mono-sm text-xs uppercase">
+                  Chapter {activeChapter.order}
                 </span>
               </div>
-              <div className="flex items-center gap-unit">
-                <span className="material-symbols-outlined text-sm text-on-surface-variant">
-                  priority_high
-                </span>
-                <span className="text-sm text-on-surface-variant">
-                  Weightage: 12%
-                </span>
-              </div>
+              <h4 className="font-headline-md text-xl mb-stack-sm group-hover:text-primary transition-colors">
+                {activeChapter.title}
+              </h4>
             </div>
-          </div>
-          <button className="px-8 py-3 border border-white/10 hover:border-primary text-on-surface font-bold rounded-xl transition-all">
-            Start
-          </button>
-        </div>
+            <button className="px-8 py-3 bg-primary text-on-primary font-bold rounded-xl transition-all hover:shadow-[0_0_20px_rgba(192,193,255,0.4)] active:scale-95">
+              {activeChapter.progress > 0 ? "Resume" : "Start"}
+            </button>
+          </Link>
+        )}
+
+        {restChapters.slice(0, 2).map((chapter) => (
+          <Link
+            key={chapter.id}
+            href={`/subject/${subjectId}/chapter/${chapter.id}`}
+            className="glass-card p-stack-lg rounded-2xl md:flex gap-stack-lg items-center opacity-80 hover:opacity-100 transition-opacity">
+            <div className="relative flex-shrink-0">
+              <svg className="w-20 h-20">
+                <circle
+                  className="text-white/10"
+                  cx={40}
+                  cy={40}
+                  fill="transparent"
+                  r={36}
+                  stroke="currentColor"
+                  strokeWidth={4}
+                />
+                <circle
+                  className="text-on-surface-variant progress-ring-circle"
+                  cx={40}
+                  cy={40}
+                  fill="transparent"
+                  r={36}
+                  stroke="currentColor"
+                  strokeDasharray="226.2"
+                  strokeDashoffset={progressRingOffset(chapter.progress)}
+                  strokeLinecap="round"
+                  strokeWidth={4}
+                  style={{ strokeDashoffset: progressRingOffset(chapter.progress) }}
+                />
+              </svg>
+              <span className="material-symbols-outlined absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-on-surface-variant">
+                play_arrow
+              </span>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-stack-sm mb-unit">
+                <span className="text-on-surface-variant font-mono-sm text-xs uppercase">
+                  Chapter {chapter.order}
+                </span>
+                <span className="h-1 w-1 bg-on-surface-variant rounded-full" />
+                <span className="text-on-surface-variant font-mono-sm text-xs">
+                  {chapter.status === "PLACEHOLDER" ? "COMING SOON" : "NOT STARTED"}
+                </span>
+              </div>
+              <h4 className="font-headline-md text-xl mb-stack-sm">{chapter.title}</h4>
+            </div>
+            <button className="px-8 py-3 border border-white/10 hover:border-primary text-on-surface font-bold rounded-xl transition-all">
+              Start
+            </button>
+          </Link>
+        ))}
       </div>
     </>
   );

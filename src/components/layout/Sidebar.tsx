@@ -63,8 +63,6 @@ const progress = [
 export default function Sidebar() {
   const pathname = usePathname();
 
-  console.log(pathname, "pathnamepathname");
-
   return (
     <aside className="w-64 border-r border-white/5 bg-surface-container-lowest flex flex-col z-50">
       <div className="p-stack-lg flex items-center gap-stack-sm">

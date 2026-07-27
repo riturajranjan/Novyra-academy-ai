@@ -7,7 +7,17 @@ config({ path: ".env.local" });
 
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import { seedLearningContent } from "./seed/content";
+import { seedDemoUser } from "./seed/demoUser";
+
+// Uses DIRECT_URL (unpooled), not the default pooled DATABASE_URL — a long
+// sequential script making many small round-trips over several minutes was
+// repeatedly hanging mid-run against the pooled PgBouncer connection with
+// no error, no timeout, and zero open sockets when inspected (a dropped
+// connection the driver never surfaced). Direct connections don't hit that.
+const prisma = new PrismaClient({
+  datasources: { db: { url: process.env.DIRECT_URL } },
+});
 
 // Mirrors src/constants/boards.ts (icon fields store the Lucide icon's component name).
 const boards = [
@@ -128,6 +138,9 @@ async function main() {
       }
     }
   }
+
+  await seedLearningContent(prisma);
+  await seedDemoUser(prisma);
 }
 
 main()
