@@ -9,13 +9,15 @@ interface RippleLinkProps {
   href: string;
   className?: string;
   children: ReactNode;
+  target?: string;
+  rel?: string;
 }
 
 let rippleId = 0;
 
 /** A Link with a Material-style click ripple — purely a visual click
  * acknowledgment layered inside the existing button, no size/layout change. */
-export function RippleLink({ href, className, children }: RippleLinkProps) {
+export function RippleLink({ href, className, children, target, rel }: RippleLinkProps) {
   const reduceMotion = useReducedMotion();
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
@@ -27,7 +29,7 @@ export function RippleLink({ href, className, children }: RippleLinkProps) {
   }
 
   return (
-    <Link href={href} className={cn("relative overflow-hidden", className)} onPointerDown={handlePointerDown}>
+    <Link href={href} target={target} rel={rel} className={cn("relative overflow-hidden", className)} onPointerDown={handlePointerDown}>
       {children}
       <AnimatePresence>
         {ripples.map((r) => (

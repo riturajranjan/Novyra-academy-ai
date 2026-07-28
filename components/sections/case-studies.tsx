@@ -31,7 +31,7 @@ export function CaseStudies() {
   const [featured, ...rest] = filtered.length > 0 ? filtered : conceptBuilds;
 
   return (
-    <section className="relative isolate overflow-hidden py-24 sm:py-32">
+    <section id="case-studies" className="relative isolate overflow-hidden py-24 sm:py-32">
       <CaseStudiesBackground />
 
       <Container className="flex flex-col gap-14">

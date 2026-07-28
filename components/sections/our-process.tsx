@@ -46,7 +46,7 @@ function MagneticButton({ children }: { children: ReactNode }) {
  * normal document flow — nothing here is absolutely positioned. */
 export function OurProcess() {
   return (
-    <section className="relative isolate py-16 md:py-24">
+    <section id="process" className="relative isolate py-16 md:py-24">
       <ProcessBackground />
 
       <Container>

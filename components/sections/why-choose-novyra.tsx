@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
  * satisfaction score, or years-in-business figure Novyra doesn't have. */
 export function WhyChooseNovyra() {
   return (
-    <section className="relative isolate overflow-hidden py-24 sm:py-32">
+    <section id="why-choose-novyra" className="relative isolate overflow-hidden py-24 sm:py-32">
       <WhyChooseBackground />
 
       <Container className="flex flex-col gap-16">
