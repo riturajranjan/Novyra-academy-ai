@@ -4,6 +4,7 @@ import {
   Brain,
   Briefcase,
   GraduationCap,
+  HeartPulse,
   Megaphone,
   Stethoscope,
   Users,
@@ -21,13 +22,14 @@ export interface HeroScreen {
 }
 
 /** Abstract UI states the central browser mockup cycles through, in a fixed
- * loop: Business Website → Hospital Management System → School ERP → CRM
- * Dashboard → AI Assistant → Digital Marketing Analytics → Business
- * Analytics → Portfolio Website → repeat. No real copy — these render as
- * geometric skeleton shapes, never readable text. */
+ * loop: Business Website → Hospital Website → Hospital ERP Dashboard →
+ * School ERP → CRM Dashboard → AI Assistant → Digital Marketing Analytics →
+ * Business Analytics → Portfolio Website → repeat. No real copy — these
+ * render as geometric skeleton shapes, never readable text. */
 export const heroScreens: HeroScreen[] = [
   { id: "business-website", layout: "content", icon: Globe, accent: "blue" },
-  { id: "hospital-dashboard", layout: "dashboard", icon: Stethoscope, accent: "cyan" },
+  { id: "hospital-website", layout: "content", icon: HeartPulse, accent: "cyan" },
+  { id: "hospital-erp-dashboard", layout: "dashboard", icon: Stethoscope, accent: "cyan" },
   { id: "school-erp", layout: "dashboard", icon: GraduationCap, accent: "purple" },
   { id: "crm-dashboard", layout: "kanban", icon: Users, accent: "pink" },
   { id: "ai-assistant", layout: "chat", icon: Brain, accent: "purple" },

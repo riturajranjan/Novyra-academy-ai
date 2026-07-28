@@ -16,13 +16,16 @@ export function BrowserFrame({ screen }: BrowserFrameProps) {
   const Icon = screen.icon;
 
   return (
-    <div className="relative w-full max-w-xl">
+    <div className="relative w-full max-w-2xl">
       {/* Soft volumetric light source behind the glass — recolors with the
-          screen's accent so the whole scene feels alive, not just the frame. */}
+          screen's accent so the whole scene feels alive, not just the frame.
+          Sized well beyond the frame itself so the glow bleeds into the
+          space around the browser, making it read as the hero's clear
+          focal point rather than an isolated card. */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] blur-3xl"
-        animate={{ backgroundColor: accentTint(screen.accent, 24) }}
+        className="pointer-events-none absolute -inset-20 -z-10 rounded-[4rem] blur-3xl sm:-inset-28"
+        animate={{ backgroundColor: accentTint(screen.accent, 32) }}
         transition={{ duration: 1.2, ease: easePremium }}
       />
       <motion.div
@@ -56,7 +59,7 @@ export function BrowserFrame({ screen }: BrowserFrameProps) {
             />
           </div>
         </div>
-        <div className="relative h-64 sm:h-72">
+        <div className="relative h-72 sm:h-80 lg:h-[22rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={screen.id}
