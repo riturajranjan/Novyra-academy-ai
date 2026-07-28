@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export type ScreenLayout = "content" | "dashboard" | "chat" | "kanban" | "chart" | "grid";
-export type AccentColor = "blue" | "purple" | "cyan" | "pink" | "emerald";
+export type AccentColor = "blue" | "purple" | "cyan" | "pink" | "emerald" | "amber";
 
 export interface HeroScreen {
   id: string;

@@ -8,6 +8,7 @@ export const accentBg: Record<AccentColor, string> = {
   cyan: "bg-brand-cyan",
   pink: "bg-brand-pink",
   emerald: "bg-brand-emerald",
+  amber: "bg-brand-amber",
 };
 
 export const accentText: Record<AccentColor, string> = {
@@ -16,6 +17,7 @@ export const accentText: Record<AccentColor, string> = {
   cyan: "text-brand-cyan",
   pink: "text-brand-pink",
   emerald: "text-brand-emerald",
+  amber: "text-brand-amber",
 };
 
 export const accentStroke: Record<AccentColor, string> = {
@@ -24,6 +26,7 @@ export const accentStroke: Record<AccentColor, string> = {
   cyan: "var(--color-brand-cyan)",
   pink: "var(--color-brand-pink)",
   emerald: "var(--color-brand-emerald)",
+  amber: "var(--color-brand-amber)",
 };
 
 /** Inline color-mix tint for skeleton shapes — dynamic per-accent value, so a

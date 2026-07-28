@@ -21,12 +21,22 @@
   --color-cyan: #0891b2;
   --color-pink: #db2777;
   --color-emerald: #16a34a;
+  --color-amber: #d97706;
 
   /* ---- Glassmorphism ---- */
   --glass-bg: rgba(255, 255, 255, 0.66);
   --glass-bg-strong: rgba(255, 255, 255, 0.92);
   --glass-border: rgba(15, 23, 42, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.9);
+
+  /* ---- Process cards: a lighter, more transparent frost than the
+     shared .glass utility — tuned for wide cinematic cards over a
+     colored ambient background rather than compact UI chrome. ---- */
+  --process-card-bg: linear-gradient(145deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.015));
+  --process-card-border: rgba(15, 23, 42, 0.1);
+  --process-card-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
   /* ---- Shadows (neutral) ---- */
   --shadow-color: 15 23 42;
@@ -54,11 +64,19 @@
   --color-cyan: #06b6d4;
   --color-pink: #ec4899;
   --color-emerald: #22c55e;
+  --color-amber: #f59e0b;
 
   --glass-bg: rgba(13, 18, 36, 0.55);
   --glass-bg-strong: rgba(13, 18, 36, 0.9);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.07);
+
+  --process-card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+  --process-card-border: rgba(255, 255, 255, 0.12);
+  --process-card-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.025);
 
   --shadow-color: 0 0 0;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 28px -8px rgb(0 0 0 / 0.5);
@@ -83,6 +101,7 @@
   --color-brand-cyan: var(--color-cyan);
   --color-brand-pink: var(--color-pink);
   --color-brand-emerald: var(--color-emerald);
+  --color-brand-amber: var(--color-amber);
 
   --color-glass: var(--glass-bg);
   --color-glass-strong: var(--glass-bg-strong);
