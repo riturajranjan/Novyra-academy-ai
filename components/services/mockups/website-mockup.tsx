@@ -6,17 +6,13 @@ import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { AccentColor } from "@/content/hero-screens";
 
-const navLinks = ["Home", "Work", "Pricing", "Contact"];
+const navLinks = ["Home", "Work", "Services", "Contact"];
 const features = [
   { icon: Zap, label: "Fast" },
   { icon: ShieldCheck, label: "Secure" },
   { icon: Smartphone, label: "Responsive" },
 ];
-const tiers = [
-  { name: "Starter", price: "$19/mo" },
-  { name: "Growth", price: "$49/mo" },
-  { name: "Scale", price: "$99/mo" },
-];
+const quickLinks = ["Features", "Services", "About", "Contact"];
 
 /** Full landing-page mockup (browser chrome, navbar, hero, feature cards,
  * testimonial, pricing, footer) for the Web Design service preview, with a
@@ -102,17 +98,16 @@ export function WebsiteMockup({ accent }: { accent: AccentColor }) {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-3 gap-2 px-4 py-2.5">
-          {tiers.map((tier, i) => (
+        <div className="grid grid-cols-4 gap-2 px-4 py-2.5">
+          {quickLinks.map((link, i) => (
             <motion.div
-              key={tier.name}
+              key={link}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.42 + i * 0.06, ease: easePremium }}
               className="border-border-subtle rounded-md border py-1.5 text-center"
             >
-              <p className="text-caption text-foreground-secondary">{tier.name}</p>
-              <p className="text-caption text-foreground font-semibold">{tier.price}</p>
+              <p className="text-caption text-foreground-secondary truncate">{link}</p>
             </motion.div>
           ))}
         </div>

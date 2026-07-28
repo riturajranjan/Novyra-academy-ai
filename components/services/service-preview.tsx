@@ -63,7 +63,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
           rotateY: reduceMotion ? 0 : springTiltY,
           transformPerspective: 1600,
         }}
-        className="glass-strong shadow-card relative isolate flex h-full min-h-[28rem] flex-col overflow-hidden rounded-[28px] sm:min-h-[32rem]"
+        className="glass-strong shadow-card relative isolate flex flex-col overflow-hidden rounded-[28px]"
       >
         <motion.div
           aria-hidden
@@ -76,7 +76,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
           className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-white/12 to-transparent"
         />
 
-        <div className="border-border-subtle relative z-10 flex items-center gap-3 border-b px-5 py-4 sm:px-7">
+        <div className="border-border-subtle relative z-10 flex items-center gap-3 border-b px-6 py-4">
           <span
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
             style={{ backgroundColor: accentTint(category.accent, 16) }}
@@ -89,7 +89,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
           </div>
         </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="relative h-[clamp(360px,38vw,500px)] overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={category.id}
@@ -97,7 +97,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -18, scale: 0.97 }}
               transition={{ duration: 0.42, ease: easePremium }}
-              className="h-full min-h-[22rem]"
+              className="h-full"
             >
               {visualMap[category.visual](category.accent)}
             </motion.div>

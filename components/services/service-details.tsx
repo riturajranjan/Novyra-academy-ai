@@ -66,7 +66,7 @@ function DetailGroup({ label, icon: Icon, accent, items, variant }: DetailGroupP
  * than being clipped or force-stretched to match it. */
 export function ServiceDetails({ category }: { category: ServiceCategory }) {
   return (
-    <div className="glass shadow-card h-full overflow-hidden rounded-[28px]">
+    <div className="glass shadow-card overflow-hidden rounded-[28px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={category.id}
@@ -74,7 +74,7 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -18 }}
           transition={{ duration: 0.42, ease: easePremium }}
-          className="flex h-full flex-col gap-6 p-6 sm:p-7"
+          className="flex flex-col gap-6 p-6"
         >
           <div>
             <p className="text-title-lg text-foreground font-semibold">{category.label}</p>
@@ -94,19 +94,28 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
 
           <DetailGroup label="Deliverables" icon={CheckCircle2} accent={category.accent} items={category.deliverables} variant="list" />
 
-          <div className="border-border-subtle mt-auto flex flex-col gap-2.5 border-t pt-6 sm:flex-row">
+          <div className="border-border-subtle grid grid-cols-1 gap-2.5 border-t pt-6 min-[1200px]:grid-cols-2">
             <RippleLink
               href="/contact"
-              className={cn(buttonVariants({ variant: "gradient", size: "md" }), "group flex-1")}
+              className={cn(
+                buttonVariants({ variant: "gradient", size: "md" }),
+                "group min-h-[46px] w-full min-w-0 px-3 text-[14px]",
+              )}
             >
-              Request Free Quote
-              <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
+              <span className="min-w-0 truncate">Request Free Quote</span>
+              <ArrowRight
+                className="h-4 w-4 shrink-0 transition-transform duration-fast group-hover:translate-x-0.5"
+                aria-hidden
+              />
             </RippleLink>
             <RippleLink
               href={category.cta.href}
-              className={cn(buttonVariants({ variant: "outline", size: "md" }), "flex-1")}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "md" }),
+                "min-h-[46px] w-full min-w-0 px-3 text-[14px]",
+              )}
             >
-              View Service
+              <span className="min-w-0 truncate">View Service</span>
             </RippleLink>
           </div>
         </motion.div>
