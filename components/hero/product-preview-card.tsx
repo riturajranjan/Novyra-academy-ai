@@ -116,7 +116,7 @@ export function ProductPreviewCard({
   const springTiltY = useSpring(tiltY, { stiffness: 220, damping: 18, mass: 0.4 });
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduceMotion) return;
+    if (reduceMotion || e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const px = (e.clientX - rect.left) / rect.width - 0.5;

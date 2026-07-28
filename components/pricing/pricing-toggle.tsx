@@ -18,7 +18,10 @@ export function PricingToggle({ active, onSelect, className }: PricingToggleProp
     <div
       role="tablist"
       aria-label="Choose a billing mode"
-      className={cn("glass relative mx-auto flex w-fit gap-1 rounded-pill p-1.5 shadow-[0_0_30px_-12px_var(--color-brand-purple)]", className)}
+      className={cn(
+        "glass relative mx-auto flex max-w-full gap-1 overflow-x-auto rounded-pill p-1.5 shadow-[0_0_30px_-12px_var(--color-brand-purple)] [scrollbar-width:none] sm:w-fit [&::-webkit-scrollbar]:hidden",
+        className,
+      )}
     >
       {billingModes.map((mode) => {
         const isActive = mode.id === active;
@@ -29,7 +32,7 @@ export function PricingToggle({ active, onSelect, className }: PricingToggleProp
             role="tab"
             aria-selected={isActive}
             onClick={() => onSelect(mode.id)}
-            className="text-body-sm relative shrink-0 rounded-pill px-5 py-2.5 font-medium whitespace-nowrap transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="text-caption sm:text-body-sm relative flex min-h-11 shrink-0 items-center rounded-pill px-3 py-2 font-medium whitespace-nowrap transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-5 sm:py-2.5"
           >
             {isActive ? (
               <motion.span

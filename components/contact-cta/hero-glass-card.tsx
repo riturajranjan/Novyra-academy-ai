@@ -22,6 +22,7 @@ export function HeroGlassCard() {
   const highlight = useMotionTemplate`radial-gradient(480px circle at ${mouseX}% ${mouseY}%, color-mix(in oklab, var(--color-brand-blue) 14%, transparent), transparent 70%)`;
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set(((e.clientX - rect.left) / rect.width) * 100);

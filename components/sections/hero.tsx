@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 /** Placeholder copy — swap for real Novyra copy once available. */
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[58rem] overflow-hidden sm:min-h-[64rem]">
+    <section className="relative isolate min-h-[46rem] w-full max-w-full overflow-hidden md:min-h-[64rem]">
       <div className="absolute inset-0 -z-10">
         <HeroScene />
       </div>
@@ -28,19 +28,19 @@ export function Hero() {
           AI-powered platforms for healthcare, education, and growing
           businesses.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Magnetic>
-            <AnimatedGradientBorder>
-              <RippleLink href="/contact" className={cn(buttonVariants({ variant: "gradient", size: "lg" }))}>
+        <div className="flex w-full max-w-sm flex-col items-stretch gap-3 min-[430px]:max-w-none min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:items-center min-[430px]:justify-center">
+          <Magnetic className="w-full min-[430px]:w-auto">
+            <AnimatedGradientBorder className="w-full min-[430px]:w-auto">
+              <RippleLink href="/contact" className={cn(buttonVariants({ variant: "gradient", size: "lg" }), "w-full min-[430px]:w-auto")}>
                 Start a Project
               </RippleLink>
             </AnimatedGradientBorder>
           </Magnetic>
-          <Magnetic>
-            <AnimatedGradientBorder>
+          <Magnetic className="w-full min-[430px]:w-auto">
+            <AnimatedGradientBorder className="w-full min-[430px]:w-auto">
               <RippleLink
                 href="/services"
-                className={cn(buttonVariants({ variant: "glass", size: "lg" }), "group")}
+                className={cn(buttonVariants({ variant: "glass", size: "lg" }), "group w-full min-[430px]:w-auto")}
               >
                 Explore Services
                 <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-0.5" />

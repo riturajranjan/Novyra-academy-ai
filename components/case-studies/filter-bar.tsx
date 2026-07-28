@@ -27,7 +27,7 @@ export function FilterBar({ active, onSelect }: FilterBarProps) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onSelect(filter)}
-            className="text-caption relative shrink-0 rounded-pill px-4 py-2 font-medium whitespace-nowrap transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="text-caption relative flex min-h-11 shrink-0 items-center rounded-pill px-4 py-2 font-medium whitespace-nowrap transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {isActive ? (
               <motion.span

@@ -91,9 +91,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
           >
             Your Recommended Roadmap
           </span>
-          <h3 className="text-balance font-bold text-white" style={{ fontSize: 56, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-            {result.service}
-          </h3>
+          <h3 className="text-headline sm:text-display-lg text-balance font-bold text-white">{result.service}</h3>
           <p className="text-body-lg max-w-[700px] text-balance text-center" style={{ color: "rgba(255,255,255,0.72)" }}>
             Based on your business goals, growth stage, and priorities, we&apos;ve created a tailored implementation
             roadmap designed for the fastest path to success.
@@ -142,7 +140,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.4, delay: i * 0.08, ease: easePremium }}
-              className="relative grid grid-cols-[56px_1fr] gap-5"
+              className="relative grid grid-cols-[56px_minmax(0,1fr)] gap-5"
             >
               {!isLast ? (
                 <motion.span

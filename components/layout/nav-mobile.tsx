@@ -62,7 +62,7 @@ export function NavMobile() {
         aria-controls="mobile-nav-panel"
         aria-label="Open menu"
         onClick={() => setOpen(true)}
-        className="glass flex h-10 w-10 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
+        className="glass flex h-12 w-12 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
       >
         <Menu className="h-5 w-5" aria-hidden />
       </button>
@@ -79,7 +79,8 @@ export function NavMobile() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25, ease: easePremium }}
-            className="glass-strong fixed inset-x-3 top-3 z-50 max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-2xl p-4 shadow-card lg:hidden"
+            className="glass-strong fixed inset-x-3 z-50 max-h-[calc(100dvh-1.5rem-env(safe-area-inset-top))] w-auto max-w-full overflow-y-auto rounded-2xl p-4 shadow-card lg:hidden"
+            style={{ top: "max(0.75rem, calc(env(safe-area-inset-top) + 0.5rem))" }}
           >
             <div className="flex items-center justify-between px-2 pb-4">
               <span className="text-title font-semibold text-foreground">Novyra</span>
@@ -88,7 +89,7 @@ export function NavMobile() {
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="glass flex h-9 w-9 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                className="glass flex h-11 w-11 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
               >
                 <X className="h-4 w-4" aria-hidden />
               </button>

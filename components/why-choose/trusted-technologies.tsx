@@ -56,7 +56,7 @@ export function TrustedTechnologies() {
         >
           Trusted Technologies
         </span>
-        <h3 className="text-foreground text-balance font-bold" style={{ fontSize: 56, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+        <h3 className="text-headline sm:text-display-lg text-foreground text-balance font-bold">
           Powered by Modern Technologies
         </h3>
         <p className="text-body-lg text-foreground-secondary text-balance">

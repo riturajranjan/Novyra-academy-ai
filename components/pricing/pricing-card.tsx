@@ -29,6 +29,7 @@ export function PricingCard({ plan, mode, index }: PricingCardProps) {
   const highlight = useMotionTemplate`radial-gradient(320px circle at ${mouseX}% ${mouseY}%, ${accentTint(plan.accent, 18)}, transparent 70%)`;
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set(((e.clientX - rect.left) / rect.width) * 100);

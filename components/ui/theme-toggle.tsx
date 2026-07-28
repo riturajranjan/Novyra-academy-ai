@@ -33,7 +33,7 @@ export function ThemeToggle() {
             title={label}
             onClick={() => setTheme(value)}
             className={cn(
-              "flex h-8 w-8 items-center justify-center rounded-pill transition-colors duration-fast",
+              "flex h-11 w-11 items-center justify-center rounded-pill transition-colors duration-fast",
               active
                 ? "bg-gradient-brand text-white"
                 : "text-foreground-secondary hover:text-foreground",

@@ -55,10 +55,10 @@ export function NewsletterCard() {
               <h4 className="text-body-sm text-foreground font-semibold">Stay Updated</h4>
               <p className="text-caption text-foreground-secondary">Receive occasional product updates.</p>
             </div>
-            <form onSubmit={handleSubmit} noValidate className="flex gap-2">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2 min-[430px]:flex-row">
               <div
                 className={cn(
-                  "border-border-subtle bg-surface/70 flex flex-1 items-center gap-2 rounded-xl border px-3 py-2 transition-colors duration-fast",
+                  "border-border-subtle bg-surface/70 flex min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 py-2 transition-colors duration-fast",
                   error && "border-red-500/50",
                 )}
               >
@@ -73,10 +73,10 @@ export function NewsletterCard() {
                   placeholder="you@company.com"
                   aria-invalid={error}
                   aria-label="Email address"
-                  className="text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full bg-transparent outline-none"
+                  className="text-[16px] sm:text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full min-w-0 bg-transparent outline-none"
                 />
               </div>
-              <button type="submit" className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "shrink-0")}>
+              <button type="submit" className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "w-full shrink-0 min-[430px]:w-auto")}>
                 Subscribe
               </button>
             </form>

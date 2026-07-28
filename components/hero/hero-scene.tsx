@@ -86,6 +86,7 @@ export function HeroScene() {
   const browserLift = useTransform(scrollYProgress, [0, 1], [0, -70]);
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
     const rect = e.currentTarget.getBoundingClientRect();
     const px = ((e.clientX - rect.left) / rect.width) * 100;
     const py = ((e.clientY - rect.top) / rect.height) * 100;

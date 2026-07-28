@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill text-body-sm font-medium transition-[transform,box-shadow,background-color,border-color] duration-fast ease-soft hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] active:translate-y-0",
+  "inline-flex items-center justify-center gap-2 text-center rounded-pill text-body-sm font-medium transition-[transform,box-shadow,background-color,border-color] duration-fast ease-soft hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] active:translate-y-0",
   {
     variants: {
       variant: {
@@ -17,10 +17,10 @@ export const buttonVariants = cva(
         link: "text-brand-blue underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4",
-        md: "h-11 px-6",
-        lg: "h-13 px-8 text-body",
-        icon: "h-11 w-11",
+        sm: "min-h-11 px-4 py-2",
+        md: "min-h-11 px-6 py-2.5",
+        lg: "min-h-13 px-6 py-3 text-body sm:px-8",
+        icon: "h-11 w-11 shrink-0",
       },
     },
     defaultVariants: {

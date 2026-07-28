@@ -23,7 +23,7 @@ export function Magnetic({ children, className, strength = 0.35 }: MagneticProps
   const springY = useSpring(y, { stiffness: 200, damping: 18, mass: 0.4 });
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduceMotion) return;
+    if (reduceMotion || e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     x.set((e.clientX - rect.left - rect.width / 2) * strength);

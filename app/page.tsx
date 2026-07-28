@@ -11,7 +11,7 @@ import { ContactCta } from "@/components/sections/contact-cta";
 
 export default function DesignSystemPreview() {
   return (
-    <main className="relative flex-1">
+    <main className="relative w-full max-w-full min-w-0 flex-1 overflow-x-clip">
       <Hero />
       <ServicesShowcase />
       <SolutionAdvisor />

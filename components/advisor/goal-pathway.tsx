@@ -191,7 +191,7 @@ export function GoalPathway({ options, selectedId, onSelect }: GoalPathwayProps)
     <div
       role="radiogroup"
       aria-label="What outcome matters most right now?"
-      className="grid w-full grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6"
+      className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6"
     >
       {options.map((option, i) => (
         <GoalCard key={option.id} option={option} isSelected={option.id === selectedId} onSelect={onSelect} index={i} />

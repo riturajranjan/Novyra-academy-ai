@@ -16,7 +16,7 @@ function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index
   const Glyph = socialGlyphs[link.id];
 
   function handlePointerMove(e: PointerEvent<HTMLAnchorElement>) {
-    if (reduceMotion) return;
+    if (reduceMotion || e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     x.set(((e.clientX - rect.left) / rect.width) * 100);

@@ -46,7 +46,7 @@ export function LanguageSwitcher() {
         aria-expanded={open}
         aria-label="Select language"
         onClick={() => setOpen((v) => !v)}
-        className="glass hover:border-brand-blue/40 flex h-10 items-center gap-1.5 rounded-pill px-3 text-body-sm font-medium text-foreground-secondary transition-colors duration-fast hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="glass hover:border-brand-blue/40 flex h-11 items-center gap-1.5 rounded-pill px-3 text-body-sm font-medium text-foreground-secondary transition-colors duration-fast hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
         <Languages className="h-4 w-4" aria-hidden />
         {current.code.toUpperCase()}

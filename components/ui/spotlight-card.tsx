@@ -12,6 +12,7 @@ export function SpotlightCard({
   const ref = useRef<HTMLDivElement>(null);
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();

@@ -33,7 +33,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
   const springTiltY = useSpring(tiltY, { stiffness: 120, damping: 20, mass: 0.5 });
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduceMotion) return;
+    if (reduceMotion || e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const px = (e.clientX - rect.left) / rect.width - 0.5;

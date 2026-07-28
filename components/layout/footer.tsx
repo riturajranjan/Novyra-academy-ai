@@ -31,7 +31,7 @@ export function Footer() {
   const spotlight = useMotionTemplate`radial-gradient(720px circle at ${mouseX}% ${mouseY}%, color-mix(in oklab, var(--color-brand-blue) 6%, transparent), transparent 70%)`;
 
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
-    if (reduceMotion) return;
+    if (reduceMotion || e.pointerType !== "mouse") return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set(((e.clientX - rect.left) / rect.width) * 100);

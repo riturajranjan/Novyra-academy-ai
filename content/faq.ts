@@ -21,7 +21,6 @@ export const faqPanelStats: FaqStat[] = [
 ];
 
 export type FaqCategory =
-  | "All"
   | "General"
   | "Pricing"
   | "Development"
@@ -31,7 +30,6 @@ export type FaqCategory =
   | "Integrations";
 
 export const faqCategories: FaqCategory[] = [
-  "All",
   "General",
   "Pricing",
   "Development",

@@ -31,7 +31,7 @@ export function FaqSearch({ value, onChange }: FaqSearchProps) {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           placeholder="Search your question..."
-          className="text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full bg-transparent outline-none"
+          className="text-[16px] sm:text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full bg-transparent outline-none"
         />
         {value ? (
           <button
