@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { BokehBackground } from "@/components/ui/bokeh-background";
 import { Hero } from "@/components/sections/hero";
+import { ServicesShowcase } from "@/components/sections/services-showcase";
+import { SolutionAdvisor } from "@/components/sections/solution-advisor";
 
 const colorTokens = [
   { name: "Blue", className: "bg-brand-blue" },
@@ -51,6 +53,8 @@ export default function DesignSystemPreview() {
   return (
     <main className="relative flex-1 pb-32">
       <Hero />
+      <ServicesShowcase />
+      <SolutionAdvisor />
 
       <Container className="flex flex-col gap-24 pt-24">
         <SectionHeading

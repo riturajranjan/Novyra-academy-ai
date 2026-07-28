@@ -146,7 +146,12 @@ export function ProductPreviewCard({
       }}
       animate={reduceMotion ? undefined : { y: [0, -bob, 0], rotate: [0, 1.2, 0] }}
       transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-      whileHover={{ scale: 1.08, boxShadow: accentGlow(product.accent), transition: { duration: 0.3, ease: "easeOut" } }}
+      whileHover={{
+        scale: 1.08,
+        y: -6,
+        boxShadow: `var(--shadow-card-hover), ${accentGlow(product.accent)}`,
+        transition: { duration: 0.3, ease: "easeOut" },
+      }}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerEnter={() => onHoverChange?.(product.id)}

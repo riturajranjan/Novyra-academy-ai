@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { easePremium } from "@/lib/motion";
 
-const words = ["hospitals", "schools", "businesses", "startups", "healthcare", "education", "growing companies"];
+const words = ["businesses", "hospitals", "schools", "startups", "growing companies", "healthcare", "education"];
 const INTERVAL_MS = 2600;
 
 /** Single rotating headline keyword — cycles through Novyra's core verticals
@@ -40,7 +40,7 @@ export function RotatingKeyword() {
           {words[index]}
         </motion.span>
       </AnimatePresence>
-      <span className="sr-only">hospitals, schools, businesses, startups, healthcare, education, and growing companies</span>
+      <span className="sr-only">businesses, hospitals, schools, startups, growing companies, healthcare, and education</span>
     </span>
   );
 }

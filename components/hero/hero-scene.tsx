@@ -15,14 +15,13 @@ import { GradientMesh } from "@/components/ui/gradient-mesh";
 import { LightRays } from "@/components/ui/light-rays";
 import { CursorSpotlight } from "@/components/ui/cursor-spotlight";
 import { Particles } from "@/components/hero/particles";
-import { ConnectionLines } from "@/components/hero/connection-lines";
 import { ProductPreviewCard } from "@/components/hero/product-preview-card";
 import { BrowserFrame } from "@/components/hero/browser-frame";
 import { heroScreens } from "@/content/hero-screens";
 import { heroProducts } from "@/content/hero-products";
 import { panelAnchors } from "@/content/hero-scene-layout";
 
-const CYCLE_MS = 5500;
+const CYCLE_MS = 4500;
 
 /** Float/position tuning per product card — kept separate from content so the
  * layout can be retuned without touching product data. */
@@ -118,8 +117,11 @@ export function HeroScene() {
         <Particles />
       </motion.div>
       {reduceMotion ? null : <CursorSpotlight x={spotSpringX} y={spotSpringY} />}
+      {/* Deliberately no wire/network-diagram lines here — glowing connectors
+          between the cards and browser read as a sci-fi data-flow motif, not
+          Apple/Stripe-style restraint. connection-lines.tsx is kept in the
+          codebase but intentionally unused in this composition. */}
       <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-overlay dark:opacity-[0.05]" aria-hidden />
-      <ConnectionLines />
 
       <motion.div
         className="relative mx-auto h-full max-w-5xl"

@@ -19,13 +19,11 @@ export function BrowserFrame({ screen }: BrowserFrameProps) {
     <div className="relative w-full max-w-2xl">
       {/* Soft volumetric light source behind the glass — recolors with the
           screen's accent so the whole scene feels alive, not just the frame.
-          Sized well beyond the frame itself so the glow bleeds into the
-          space around the browser, making it read as the hero's clear
-          focal point rather than an isolated card. */}
+          Restrained size/opacity so it reads as ambient depth, not glow. */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -inset-20 -z-10 rounded-[4rem] blur-3xl sm:-inset-28"
-        animate={{ backgroundColor: accentTint(screen.accent, 32) }}
+        className="pointer-events-none absolute -inset-12 -z-10 rounded-[3.5rem] blur-3xl sm:-inset-16"
+        animate={{ backgroundColor: accentTint(screen.accent, 24) }}
         transition={{ duration: 1.2, ease: easePremium }}
       />
       <motion.div
@@ -33,6 +31,14 @@ export function BrowserFrame({ screen }: BrowserFrameProps) {
         whileHover={{ scale: 1.015, rotate: -0.3 }}
         transition={{ type: "spring", stiffness: 220, damping: 22 }}
       >
+        {/* Static specular highlight — a fixed glass "catch light" in the
+            corner, distinct from the periodic shimmer sweep below. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-10 opacity-70 dark:opacity-40"
+          style={{ background: "radial-gradient(120% 60% at 15% 0%, rgba(255,255,255,0.35), transparent 55%)" }}
+        />
+
         {/* Moving light reflection sweeping across the glass surface. */}
         <div
           aria-hidden

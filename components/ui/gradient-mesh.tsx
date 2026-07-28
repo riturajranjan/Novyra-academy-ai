@@ -12,8 +12,8 @@ export function GradientMesh({ className }: GradientMeshProps) {
       aria-hidden
       className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}
     >
-      <div className="bg-gradient-mesh animate-mesh-a absolute -inset-1/4 opacity-25 blur-3xl will-change-transform dark:opacity-35" />
-      <div className="bg-gradient-mesh animate-mesh-b absolute -inset-1/4 opacity-15 blur-3xl will-change-transform dark:opacity-25" />
+      <div className="bg-gradient-mesh animate-mesh-a absolute -inset-1/4 opacity-[0.18] blur-3xl will-change-transform dark:opacity-[0.26]" />
+      <div className="bg-gradient-mesh animate-mesh-b absolute -inset-1/4 opacity-[0.1] blur-3xl will-change-transform dark:opacity-[0.18]" />
     </div>
   );
 }
