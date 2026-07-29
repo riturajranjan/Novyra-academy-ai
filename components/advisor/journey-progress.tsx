@@ -45,16 +45,23 @@ export function JourneyProgress({ currentStep, accent }: JourneyProgressProps) {
                   !isComplete && !isActive && "border-2 border-white/15 text-white/40",
                 )}
               >
-                {isActive && !reduceMotion ? (
+                {isActive && !isComplete ? (
                   <motion.span
                     aria-hidden
-                    className="absolute inset-0 rounded-full border"
-                    style={{ borderColor: accent.base }}
-                    animate={{ scale: [1, 1.5], opacity: [0.6, 0] }}
-                    transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+                    className="absolute -inset-1 rounded-full"
+                    style={{
+                      backgroundImage: `conic-gradient(from 0deg, ${accent.from}, ${accent.to}, ${accent.from})`,
+                      WebkitMask: "radial-gradient(closest-side, transparent calc(100% - 2px), black calc(100% - 1px))",
+                      mask: "radial-gradient(closest-side, transparent calc(100% - 2px), black calc(100% - 1px))",
+                      opacity: 0.7,
+                    }}
+                    animate={reduceMotion ? undefined : { rotate: 360 }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                   />
                 ) : null}
-                {isComplete ? <Check className="h-4 w-4" aria-hidden /> : <span aria-hidden>{i + 1}</span>}
+                <span className="relative">
+                  {isComplete ? <Check className="h-4 w-4" aria-hidden /> : <span aria-hidden>{i + 1}</span>}
+                </span>
               </span>
               <div className="flex flex-col items-center">
                 <span

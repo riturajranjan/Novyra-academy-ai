@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { AdvisorCanvasBackground } from "@/components/advisor/advisor-canvas-background";
 import { JourneyProgress } from "@/components/advisor/journey-progress";
-import { DecisionCanvas } from "@/components/advisor/decision-canvas";
+import { SolutionSelector } from "@/components/advisor/solution-selector";
 import { GoalPathway } from "@/components/advisor/goal-pathway";
 import { StageTimeline } from "@/components/advisor/stage-timeline";
 import { AdvisorOptionRow } from "@/components/advisor/advisor-option-row";
@@ -102,11 +102,11 @@ export function SolutionAdvisor() {
   }
 
   return (
-    <section className="relative isolate pt-14 pb-12 md:pt-40 md:pb-35">
+    <section className="relative isolate pt-14 pb-12 md:pt-28 md:pb-24">
       <AdvisorCanvasBackground />
 
       <Container className="flex flex-col items-center gap-5">
-        <div className="relative mb-8 flex flex-col items-center gap-5 md:mb-20">
+        <div className="relative mb-8 flex flex-col items-center gap-5 md:mb-12">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute top-1/2 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.16] blur-[100px]"
@@ -142,32 +142,38 @@ export function SolutionAdvisor() {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="flex w-full flex-col items-center gap-5"
                 >
+                  {step === 0 ? (
+                    <div className="flex w-full flex-col items-center gap-6 sm:gap-8">
+                      <div className="flex max-w-2xl flex-col items-center gap-2 px-2">
+                        <p className="text-[28px] leading-tight font-bold text-balance text-center text-white sm:text-headline">
+                          {question}
+                        </p>
+                        <p className="text-body-sm max-w-md text-balance text-center text-white/50">{hint}</p>
+                      </div>
+                      <SolutionSelector options={needOptions} hint={hint} selectedId={answers.need} onSelect={selectNeed} />
+                    </div>
+                  ) : null}
+
                   <div className="flex w-full max-w-md flex-col gap-7 md:hidden">
                     <div className="flex flex-col gap-2">
-                      <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
                       {step === 1 ? (
-                        <p className="text-body-sm text-balance text-center text-white/50">
-                          Choose the goal that best matches your current business priority.
-                        </p>
+                        <>
+                          <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
+                          <p className="text-body-sm text-balance text-center text-white/50">
+                            Choose the goal that best matches your current business priority.
+                          </p>
+                        </>
                       ) : null}
                       {step === 2 ? (
-                        <p className="text-body-sm text-balance text-center text-white/50">
-                          Choose the stage that best represents where your business is today.
-                        </p>
+                        <>
+                          <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
+                          <p className="text-body-sm text-balance text-center text-white/50">
+                            Choose the stage that best represents where your business is today.
+                          </p>
+                        </>
                       ) : null}
                     </div>
                     <div className="flex flex-col gap-3">
-                      {step === 0
-                        ? needOptions.map((o) => (
-                            <AdvisorOptionRow
-                              key={o.id}
-                              option={o}
-                              accent={getNeedAccent(o.id)}
-                              isSelected={o.id === answers.need}
-                              onSelect={selectNeed}
-                            />
-                          ))
-                        : null}
                       {step === 1
                         ? goalOptions.map((o) => (
                             <AdvisorOptionRow
@@ -194,15 +200,6 @@ export function SolutionAdvisor() {
                   </div>
 
                   <div className="hidden w-full md:block">
-                    {step === 0 ? (
-                      <DecisionCanvas
-                        options={needOptions}
-                        question={question}
-                        hint={hint}
-                        selectedId={answers.need}
-                        onSelect={selectNeed}
-                      />
-                    ) : null}
                     {step === 1 ? (
                       <div className="flex flex-col items-center gap-18">
                         <div className="mx-auto flex max-w-175 flex-col items-center gap-3">
