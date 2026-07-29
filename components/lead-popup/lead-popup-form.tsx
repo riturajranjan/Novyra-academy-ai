@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { ArrowRight, Check, ChevronDown, Loader2, MessageCircle } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AlertCircle, ArrowRight, Check, ChevronDown, Loader2, MessageCircle } from "lucide-react";
 import { Magnetic } from "@/components/ui/magnetic";
 import { budgetOptionIds, serviceOptionIds, whatsappHref } from "@/content/lead-popup";
+import { buildEnquiryFieldsSchema, type EnquiryFieldValues } from "@/lib/validation/enquiry";
 import { cn } from "@/lib/utils";
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_PATTERN = /^[+\d][\d\s()-]{6,}$/;
-const SUBMIT_DELAY_MS = 1100;
 const SUCCESS_FLASH_MS = 550;
 
-type SubmitStatus = "idle" | "submitting" | "success";
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 /** Shared focus ring + border treatment for every field — a controlled
  * blue-violet glow rather than the site's usual bright blue, per this
@@ -26,6 +26,7 @@ interface FieldProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   error?: string;
   type?: string;
   as?: "input" | "textarea";
@@ -37,14 +38,17 @@ interface FieldProps {
  * state — focus or a non-empty value — rather than a CSS `:placeholder-
  * shown` trick, so it composes cleanly with Framer Motion's own animation
  * model instead of fighting it. */
-function FloatingField({ id, label, value, onChange, error, type = "text", as = "input", required }: FieldProps) {
+function FloatingField({ id, label, value, onChange, onBlur, error, type = "text", as = "input", required }: FieldProps) {
   const [focused, setFocused] = useState(false);
   const floated = focused || value.length > 0;
   const sharedProps = {
     id,
     value,
     onFocus: () => setFocused(true),
-    onBlur: () => setFocused(false),
+    onBlur: () => {
+      setFocused(false);
+      onBlur?.();
+    },
     "aria-invalid": Boolean(error),
     "aria-required": required,
     className: cn(
@@ -79,6 +83,7 @@ function FloatingField({ id, label, value, onChange, error, type = "text", as = 
       <AnimatePresence>
         {error ? (
           <motion.p
+            role="alert"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -98,11 +103,12 @@ interface SelectFieldProps {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   options: { id: string; label: string }[];
   error?: string;
 }
 
-function SelectField({ id, label, placeholder, value, onChange, options, error }: SelectFieldProps) {
+function SelectField({ id, label, placeholder, value, onChange, onBlur, options, error }: SelectFieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-[11px] font-medium text-white/50">
@@ -113,6 +119,7 @@ function SelectField({ id, label, placeholder, value, onChange, options, error }
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
           aria-invalid={Boolean(error)}
           className={cn(
             "h-[52px] appearance-none px-4",
@@ -133,63 +140,95 @@ function SelectField({ id, label, placeholder, value, onChange, options, error }
         </select>
         <ChevronDown className="pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 text-white/40" aria-hidden />
       </div>
-      {error ? <p className="text-[11px] text-red-400">{error}</p> : null}
+      {error ? (
+        <p role="alert" className="text-[11px] text-red-400">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }
 
-interface FormValues {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  service: string;
-  budget: string;
-  message: string;
-}
-
-const initialValues: FormValues = { name: "", email: "", phone: "", company: "", service: "", budget: "", message: "" };
+const defaultValues: EnquiryFieldValues = {
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  message: "",
+  service: "" as EnquiryFieldValues["service"],
+  budget: "" as EnquiryFieldValues["budget"],
+};
 
 interface LeadPopupFormProps {
-  onSuccess: () => void;
+  onSuccess: (values: EnquiryFieldValues) => void;
 }
 
 /** The right-side form — floating-label fields, glass selects, a gradient
- * CTA with loading/hover states, and the trust row + WhatsApp fallback
- * beneath it. There's no backend wired up yet (same stage as the site's
- * footer newsletter form), so "submit" is a simulated delay that proves
- * the interaction end to end. */
+ * CTA with loading/error/success states, and the trust row + WhatsApp
+ * fallback beneath it. Validated with the same Zod schema the API route
+ * re-validates against, and submits to `POST /api/enquiries` for real —
+ * nothing here is simulated. */
 export function LeadPopupForm({ onSuccess }: LeadPopupFormProps) {
   const t = useTranslations("leadPopup");
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
-  const [values, setValues] = useState<FormValues>(initialValues);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const formRenderedAtRef = useRef<number>(undefined);
+  const errorBannerRef = useRef<HTMLDivElement>(null);
 
-  function setField<K extends keyof FormValues>(key: K, value: string) {
-    setValues((v) => ({ ...v, [key]: value }));
-    if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
-  }
+  useEffect(() => {
+    formRenderedAtRef.current = Date.now();
+  }, []);
 
-  function validate(): boolean {
-    const next: Partial<Record<keyof FormValues, string>> = {};
-    if (!values.name.trim()) next.name = t("form.name.error");
-    if (!EMAIL_PATTERN.test(values.email)) next.email = t("form.email.error");
-    if (!PHONE_PATTERN.test(values.phone.trim())) next.phone = t("form.phone.error");
-    if (!values.service) next.service = t("form.service.error");
-    if (!values.budget) next.budget = t("form.budget.error");
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  }
+  const schema = useMemo(
+    () =>
+      buildEnquiryFieldsSchema({
+        nameError: t("form.name.error"),
+        emailError: t("form.email.error"),
+        phoneError: t("form.phone.error"),
+        serviceError: t("form.service.error"),
+        budgetError: t("form.budget.error"),
+        messageMinError: t("form.message.minError"),
+        messageMaxError: t("form.message.maxError"),
+      }),
+    [t],
+  );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!validate() || status !== "idle") return;
+  const { control, handleSubmit, getValues } = useForm<EnquiryFieldValues>({
+    resolver: zodResolver(schema),
+    defaultValues,
+    mode: "onSubmit",
+  });
+
+  useEffect(() => {
+    if (status === "error") errorBannerRef.current?.focus();
+  }, [status]);
+
+  async function onSubmit(values: EnquiryFieldValues) {
+    if (status === "submitting") return;
     setStatus("submitting");
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...values,
+          honeypot: honeypotRef.current?.value ?? "",
+          formRenderedAt: formRenderedAtRef.current ?? Date.now(),
+          pageUrl: typeof window !== "undefined" ? window.location.href : "",
+          locale,
+          source: "consultation-popup",
+        }),
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data?.ok) throw new Error("submit_failed");
+
       setStatus("success");
-      setTimeout(onSuccess, SUCCESS_FLASH_MS);
-    }, SUBMIT_DELAY_MS);
+      setTimeout(() => onSuccess(getValues()), SUCCESS_FLASH_MS);
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -213,44 +252,114 @@ export function LeadPopupForm({ onSuccess }: LeadPopupFormProps) {
         {t("description")}
       </p>
 
-      <form onSubmit={handleSubmit} noValidate className="mt-[22px] flex flex-col gap-3.5">
-        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-          <FloatingField id="lead-name" label={t("form.name.label")} value={values.name} onChange={(v) => setField("name", v)} error={errors.name} required />
-          <FloatingField id="lead-email" label={t("form.email.label")} type="email" value={values.email} onChange={(v) => setField("email", v)} error={errors.email} required />
-          <FloatingField id="lead-phone" label={t("form.phone.label")} type="tel" value={values.phone} onChange={(v) => setField("phone", v)} error={errors.phone} required />
-          <FloatingField id="lead-company" label={t("form.company.label")} value={values.company} onChange={(v) => setField("company", v)} />
+      <form onSubmit={(e) => void handleSubmit(onSubmit)(e)} noValidate className="mt-[22px] flex flex-col gap-3.5">
+        {/* Honeypot — left un-labelled visually and pulled off-screen so
+            real (sighted or screen-reader) visitors never encounter it,
+            while scripted bots that fill every input they find trip it. */}
+        <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+          <label htmlFor="lead-website">Leave this field empty</label>
+          <input id="lead-website" name="website" type="text" tabIndex={-1} autoComplete="off" ref={honeypotRef} />
         </div>
 
         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
-          <SelectField
-            id="lead-service"
-            label={t("form.service.label")}
-            placeholder={t("form.service.label")}
-            value={values.service}
-            onChange={(v) => setField("service", v)}
-            error={errors.service}
-            options={serviceOptionIds.map((id) => ({ id, label: t(`form.service.options.${id}`) }))}
+          <Controller
+            name="name"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FloatingField id="lead-name" label={t("form.name.label")} value={field.value} onChange={field.onChange} onBlur={field.onBlur} error={fieldState.error?.message} required />
+            )}
           />
-          <SelectField
-            id="lead-budget"
-            label={t("form.budget.label")}
-            placeholder={t("form.budget.label")}
-            value={values.budget}
-            onChange={(v) => setField("budget", v)}
-            error={errors.budget}
-            options={budgetOptionIds.map((id) => ({ id, label: t(`form.budget.options.${id}`) }))}
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FloatingField id="lead-email" label={t("form.email.label")} type="email" value={field.value} onChange={field.onChange} onBlur={field.onBlur} error={fieldState.error?.message} required />
+            )}
+          />
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field, fieldState }) => (
+              <FloatingField id="lead-phone" label={t("form.phone.label")} type="tel" value={field.value} onChange={field.onChange} onBlur={field.onBlur} error={fieldState.error?.message} required />
+            )}
+          />
+          <Controller
+            name="company"
+            control={control}
+            render={({ field }) => (
+              <FloatingField id="lead-company" label={t("form.company.label")} value={field.value ?? ""} onChange={field.onChange} onBlur={field.onBlur} />
+            )}
           />
         </div>
 
-        <FloatingField id="lead-message" label={t("form.message.label")} as="textarea" value={values.message} onChange={(v) => setField("message", v)} />
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+          <Controller
+            name="service"
+            control={control}
+            render={({ field, fieldState }) => (
+              <SelectField
+                id="lead-service"
+                label={t("form.service.label")}
+                placeholder={t("form.service.label")}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+                options={serviceOptionIds.map((id) => ({ id, label: t(`form.service.options.${id}`) }))}
+              />
+            )}
+          />
+          <Controller
+            name="budget"
+            control={control}
+            render={({ field, fieldState }) => (
+              <SelectField
+                id="lead-budget"
+                label={t("form.budget.label")}
+                placeholder={t("form.budget.label")}
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={fieldState.error?.message}
+                options={budgetOptionIds.map((id) => ({ id, label: t(`form.budget.options.${id}`) }))}
+              />
+            )}
+          />
+        </div>
+
+        <Controller
+          name="message"
+          control={control}
+          render={({ field, fieldState }) => (
+            <FloatingField id="lead-message" label={t("form.message.label")} as="textarea" value={field.value} onChange={field.onChange} onBlur={field.onBlur} error={fieldState.error?.message} required />
+          )}
+        />
+
+        <AnimatePresence>
+          {status === "error" ? (
+            <motion.div
+              ref={errorBannerRef}
+              tabIndex={-1}
+              role="alert"
+              aria-live="assertive"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="flex items-start gap-2 overflow-hidden rounded-xl border border-red-400/30 bg-red-500/10 px-3.5 py-2.5 text-[13px] text-red-300 outline-none"
+            >
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+              <span>{t("error.message")}</span>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
 
         <Magnetic className="mt-1 w-full">
           <motion.button
             type="submit"
-            disabled={status !== "idle"}
+            disabled={status === "submitting"}
             data-cursor="cta"
-            whileHover={reduceMotion || status !== "idle" ? undefined : { y: -2 }}
-            whileTap={status !== "idle" ? undefined : { scale: 0.98 }}
+            whileHover={reduceMotion || status === "submitting" ? undefined : { y: -2 }}
+            whileTap={status === "submitting" ? undefined : { scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             className={cn(
               "bg-gradient-brand group relative flex h-[54px] w-full items-center justify-center gap-2 overflow-hidden rounded-2xl text-body font-semibold text-white transition-shadow duration-base",
@@ -277,6 +386,11 @@ export function LeadPopupForm({ onSuccess }: LeadPopupFormProps) {
                   className="flex items-center gap-2"
                 >
                   <Check className="h-4 w-4" aria-hidden />
+                </motion.span>
+              ) : status === "error" ? (
+                <motion.span key="retry" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">
+                  {t("error.retry")}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-1" aria-hidden />
                 </motion.span>
               ) : (
                 <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2">

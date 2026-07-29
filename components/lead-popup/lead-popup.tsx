@@ -8,6 +8,7 @@ import { useLeadPopupTrigger } from "@/lib/use-lead-popup";
 import { LeadPopupIllustration } from "@/components/lead-popup/lead-popup-illustration";
 import { LeadPopupForm } from "@/components/lead-popup/lead-popup-form";
 import { LeadPopupSuccess } from "@/components/lead-popup/lead-popup-success";
+import type { EnquiryFieldValues } from "@/lib/validation/enquiry";
 import { cn } from "@/lib/utils";
 
 const POPUP_EASE = [0.22, 1, 0.36, 1] as const;
@@ -37,6 +38,7 @@ export function LeadPopup() {
   const t = useTranslations("leadPopup");
   const { open, dismiss, markSubmitted } = useLeadPopupTrigger();
   const [submitted, setSubmitted] = useState(false);
+  const [submittedValues, setSubmittedValues] = useState<EnquiryFieldValues | null>(null);
   const reduceMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -90,7 +92,8 @@ export function LeadPopup() {
     mouseY.set(((e.clientY - rect.top) / rect.height) * 100);
   }
 
-  function handleSubmitSuccess() {
+  function handleSubmitSuccess(values: EnquiryFieldValues) {
+    setSubmittedValues(values);
     setSubmitted(true);
     markSubmitted();
   }
@@ -174,8 +177,8 @@ export function LeadPopup() {
 
               <div className="relative flex w-full flex-col overflow-y-auto sm:w-[62%] sm:min-h-0">
                 <AnimatePresence mode="wait">
-                  {submitted ? (
-                    <LeadPopupSuccess key="success" onContinue={dismiss} />
+                  {submitted && submittedValues ? (
+                    <LeadPopupSuccess key="success" onContinue={dismiss} values={submittedValues} />
                   ) : (
                     <LeadPopupForm key="form" onSuccess={handleSubmitSuccess} />
                   )}

@@ -1,18 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "@/i18n/navigation";
+import { isAnyModalOpen } from "@/lib/modal-registry";
 
+const SUBMITTED_KEY = "novyra_enquiry_submitted";
+const DISMISSED_AT_KEY = "novyra_enquiry_dismissed_at";
 const SESSION_KEY = "novyra:lead-popup:shown-this-session";
-const DISMISSED_UNTIL_KEY = "novyra:lead-popup:dismissed-until";
-const SUBMITTED_KEY = "novyra:lead-popup:submitted";
 
 const SHOW_DELAY_MS = 3000;
 const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
 /** Drives the lead popup's show/hide lifecycle:
- * - never again once the form has been submitted (until someone clears
- *   localStorage — that's the "manually reset" the spec asks for)
- * - not shown for 24h after being dismissed unanswered
+ * - never again once an enquiry has been submitted (`novyra_enquiry_submitted`)
+ * - not shown for 24h after being dismissed unanswered — a dismissal
+ *   *timestamp* is stored, and the 24h window is computed at read time
+ *   (`novyra_enquiry_dismissed_at`), rather than storing a precomputed
+ *   future unlock time
+ * - not shown on the Contact page, or while another modal (the mobile nav
+ *   drawer) is already open
  * - at most once per browser session otherwise
  * - appears 3s after mount if none of the above suppress it
  *
@@ -23,18 +29,22 @@ const DISMISS_COOLDOWN_MS = 24 * 60 * 60 * 1000;
  * and event handlers, so there's no hydration mismatch risk. */
 export function useLeadPopupTrigger() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname === "/contact" || pathname.startsWith("/contact/")) return;
+
     try {
       if (localStorage.getItem(SUBMITTED_KEY) === "true") return;
-      const dismissedUntil = Number(localStorage.getItem(DISMISSED_UNTIL_KEY) ?? 0);
-      if (dismissedUntil > Date.now()) return;
+      const dismissedAt = Number(localStorage.getItem(DISMISSED_AT_KEY) ?? 0);
+      if (dismissedAt > 0 && Date.now() - dismissedAt < DISMISS_COOLDOWN_MS) return;
       if (sessionStorage.getItem(SESSION_KEY) === "true") return;
     } catch {
       // Storage unavailable — fall through and show on this load anyway.
     }
 
     const timer = setTimeout(() => {
+      if (isAnyModalOpen()) return;
       setOpen(true);
       try {
         sessionStorage.setItem(SESSION_KEY, "true");
@@ -44,12 +54,12 @@ export function useLeadPopupTrigger() {
     }, SHOW_DELAY_MS);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname]);
 
   function dismiss() {
     setOpen(false);
     try {
-      localStorage.setItem(DISMISSED_UNTIL_KEY, String(Date.now() + DISMISS_COOLDOWN_MS));
+      localStorage.setItem(DISMISSED_AT_KEY, String(Date.now()));
     } catch {
       // Best-effort — if storage is unavailable there's no cooldown to persist.
     }

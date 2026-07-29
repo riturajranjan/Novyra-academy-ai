@@ -10,6 +10,7 @@ import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { Magnetic } from "@/components/ui/magnetic";
 import { NavDesktop } from "@/components/layout/nav-desktop";
 import { NavMobile } from "@/components/layout/nav-mobile";
+import Image from "next/image";
 
 export function Navbar() {
   const scrolled = useScrolled();
@@ -18,23 +19,29 @@ export function Navbar() {
   return (
     <header
       style={{ paddingTop: "env(safe-area-inset-top)" }}
-      className="fixed inset-x-0 top-0 z-50 w-full max-w-full"
-    >
-      <div className="mx-auto max-w-[90rem] px-5 pt-4 transition-[padding] duration-base ease-soft sm:px-6 sm:pt-[18px] lg:px-7">
+      className="fixed inset-x-0 top-0 z-50 w-full max-w-full">
+      <div className="mx-auto max-w-[90rem] px-3 md:px-5 pt-4 transition-[padding] duration-base ease-soft sm:px-6 sm:pt-[18px] lg:px-7">
         <div
           className={cn(
             "shadow-card flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
-            scrolled ? "glass-strong h-[60px] lg:h-[68px]" : "glass h-[68px] lg:h-[80px]",
-          )}
-        >
+            scrolled
+              ? "glass-strong h-[60px] lg:h-[68px]"
+              : "glass h-[68px] lg:h-[80px]",
+          )}>
           <Link
             href="/"
             className={cn(
               "text-title-lg lg:text-title text-foreground origin-left font-semibold transition-transform duration-base ease-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md",
               scrolled && "scale-90",
-            )}
-          >
-            Novyra<span className="text-gradient-brand">.</span>
+            )}>
+            {/* Novyra<span className="text-gradient-brand">.</span> */}
+            <Image
+              src="/logo.png"
+              alt="Novyra Technologies Logo"
+              width={120}
+              height={40}
+              className="h-auto w-auto"
+            />
           </Link>
 
           <NavDesktop />
@@ -47,8 +54,10 @@ export function Navbar() {
             <Magnetic className="hidden lg:inline-flex">
               <Link
                 href="/contact"
-                className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "inline-flex")}
-              >
+                className={cn(
+                  buttonVariants({ variant: "gradient", size: "sm" }),
+                  "inline-flex",
+                )}>
                 {t("startProject")}
               </Link>
             </Magnetic>

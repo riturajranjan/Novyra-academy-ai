@@ -43,10 +43,14 @@
         "b3LPlus": "₹3L+"
       }
     },
-    "message": { "label": "Message" }
+    "message": {
+      "label": "Message",
+      "minError": "Message must be at least 10 characters.",
+      "maxError": "Message must be under 1000 characters."
+    }
   },
   "cta": "Get Free Consultation",
-  "ctaSending": "Sending your enquiry",
+  "ctaSending": "Sending Enquiry...",
   "trust": {
     "freeConsultation": "Free Consultation",
     "noHiddenCharges": "No Hidden Charges",
@@ -54,10 +58,24 @@
   },
   "urgentHelp": "Need urgent help?",
   "whatsappChat": "WhatsApp Chat",
+  "whatsappMessageTemplate": "Hello Novyra Technologies,\n\nI am interested in {service}.\n\nMy name is {name}.\n\nMy estimated budget is {budget}.",
   "success": {
     "title": "Thank You!",
     "message": "We've received your enquiry. Our team will contact you within 24 hours.",
     "continueBrowsing": "Continue Browsing"
+  },
+  "error": {
+    "message": "We couldn't submit your enquiry. Please try again or contact us on WhatsApp.",
+    "retry": "Try Again"
+  },
+  "email": {
+    "confirmationSubject": "We received your enquiry — Novyra Technologies",
+    "confirmationGreeting": "Hi {name}, thank you for reaching out!",
+    "confirmationBody": "We've received your enquiry and our team will get back to you within 24 hours.",
+    "serviceLabel": "Service",
+    "phoneLabel": "Phone",
+    "websiteLabel": "Website",
+    "whatsappLabel": "Chat with us on WhatsApp"
   },
   "closeAriaLabel": "Close"
 }

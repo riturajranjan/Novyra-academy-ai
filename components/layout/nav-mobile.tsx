@@ -8,6 +8,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { easePremium } from "@/lib/motion";
 import { navItems } from "@/content/nav";
+import { registerModalOpen, registerModalClosed } from "@/lib/modal-registry";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
@@ -23,6 +24,7 @@ export function NavMobile() {
 
   useEffect(() => {
     if (!open) return;
+    registerModalOpen();
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
 
@@ -50,6 +52,7 @@ export function NavMobile() {
 
     document.addEventListener("keydown", onKeyDown);
     return () => {
+      registerModalClosed();
       document.body.style.overflow = "";
       document.removeEventListener("keydown", onKeyDown);
     };

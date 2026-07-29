@@ -1,11 +1,29 @@
 {
-  "badge": "Websites · SaaS · AI · Growth",
-  "headline": {
-    "before": "Technology built for",
-    "after": "that move fast"
+  "badge": {
+    "items": {
+      "websites": "Websites",
+      "saas": "SaaS",
+      "ai": "AI",
+      "growth": "Growth"
+    }
   },
-  "rotatingWords": ["businesses", "hospitals", "schools", "startups", "growing companies", "healthcare", "education"],
-  "rotatingWordsJoiner": "and",
-  "description": "Novyra Technologies designs and builds websites, SaaS products, and AI-powered platforms for healthcare, education, and growing businesses.",
-  "exploreServices": "Explore Services"
+  "headline": {
+    "before": "Technology Built For",
+    "highlight": "Businesses",
+    "after": "That Move Fast"
+  },
+  "description": "Novyra Technologies designs and builds premium websites, SaaS platforms, AI products, hospital ERP, school ERP and enterprise applications.",
+  "cta": {
+    "primary": "Start a Project",
+    "secondary": "Explore Services"
+  },
+  "trust": {
+    "items": {
+      "growingPortfolio": "Growing Portfolio",
+      "modernSaasDevelopment": "Modern SaaS Development",
+      "aiPowered": "AI Powered",
+      "enterpriseReady": "Enterprise Ready"
+    }
+  },
+  "imageAlt": "Preview of a Novyra-built product dashboard, showing growth analytics, an AI assistant, and project progress"
 }

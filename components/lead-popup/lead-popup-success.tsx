@@ -1,14 +1,17 @@
 "use client";
 
+import { useEffect, useMemo, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { MessageCircle } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { whatsappHref } from "@/content/lead-popup";
+import type { EnquiryFieldValues } from "@/lib/validation/enquiry";
 import { cn } from "@/lib/utils";
 
 interface LeadPopupSuccessProps {
   onContinue: () => void;
+  values: EnquiryFieldValues;
 }
 
 /** One tasteful confetti burst — a handful of small colored pieces flung
@@ -30,10 +33,28 @@ const confettiPieces = [
  * just closing the popup — confirms receipt and gives a next step (keep
  * browsing, or jump straight to WhatsApp) instead of leaving the visitor
  * wondering whether anything happened. */
-export function LeadPopupSuccess({ onContinue }: LeadPopupSuccessProps) {
+export function LeadPopupSuccess({ onContinue, values }: LeadPopupSuccessProps) {
   const t = useTranslations("leadPopup.success");
   const tPopup = useTranslations("leadPopup");
+  const tService = useTranslations("leadPopup.form.service.options");
+  const tBudget = useTranslations("leadPopup.form.budget.options");
   const reduceMotion = useReducedMotion();
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // Accessibility: focus moves onto the success state as soon as it
+  // mounts, since it replaces the form the visitor was just focused in.
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
+  const whatsappUrl = useMemo(() => {
+    const message = tPopup("whatsappMessageTemplate", {
+      service: tService(values.service),
+      name: values.name,
+      budget: tBudget(values.budget),
+    });
+    return `${whatsappHref}?text=${encodeURIComponent(message)}`;
+  }, [tPopup, tService, tBudget, values]);
 
   return (
     <motion.div
@@ -67,7 +88,7 @@ export function LeadPopupSuccess({ onContinue }: LeadPopupSuccessProps) {
       </motion.span>
 
       <div className="flex flex-col gap-2">
-        <h2 id="lead-popup-heading" className="text-title-lg font-semibold text-white">
+        <h2 ref={headingRef} tabIndex={-1} id="lead-popup-heading" className="text-title-lg font-semibold text-white outline-none">
           {t("title")}
         </h2>
         <p id="lead-popup-description" className="text-body-sm max-w-[320px] text-white/60 text-pretty">
@@ -80,7 +101,7 @@ export function LeadPopupSuccess({ onContinue }: LeadPopupSuccessProps) {
           {t("continueBrowsing")}
         </button>
         <a
-          href={whatsappHref}
+          href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(buttonVariants({ variant: "gradient", size: "lg" }), "w-full sm:w-auto")}
