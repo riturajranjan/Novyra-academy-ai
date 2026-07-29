@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ProcessCard } from "@/components/process/process-card";
 import { ProcessDot } from "@/components/process/process-dot";
 import { accentStroke, accentTint } from "@/lib/accent";
@@ -39,6 +40,7 @@ function CardConnector({ step, isActive }: { step: ProcessStep; isActive: boolea
  * is ever visible at a time. Hovering any card lights up its rail node and
  * connector, even though they live in separate grid rows. */
 export function ProcessTimeline() {
+  const t = useTranslations("process");
   const containerRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -139,7 +141,7 @@ export function ProcessTimeline() {
       </div>
 
       {/* Mobile (<768px) — vertical timeline, connector on the left */}
-      <ol aria-label="Our process" className="flex flex-col gap-5 min-[768px]:hidden">
+      <ol aria-label={t("timelineAriaLabel")} className="flex flex-col gap-5 min-[768px]:hidden">
         {processSteps.map((step, i) => {
           const Icon = step.icon;
           return (

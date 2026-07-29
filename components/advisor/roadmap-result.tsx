@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CalendarClock, CircleCheck, Layers, RotateCcw, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -65,7 +66,18 @@ function KpiCard({ icon: Icon, label, value, accent, delay }: KpiCardProps) {
  * or success-rate claims, since Novyra doesn't have historical data to
  * back those. */
 export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps) {
+  const t = useTranslations("advisor");
   const reduceMotion = useReducedMotion();
+
+  const service = t(`recommendations.${result.needId}.service`);
+  const insight = t(`recommendations.${result.needId}.insight`);
+  const technology = t.raw(`recommendations.${result.needId}.technology`) as string[];
+  const deliverables = t.raw(`recommendations.${result.needId}.deliverables`) as string[];
+  const focus = t(`focusByGoal.${result.goalId}`);
+  const timelineText = t(
+    result.timelineUnit === "weeksToLaunch" ? "timelineTemplates.weeksToLaunch" : "timelineTemplates.weeks",
+    { range: result.timeline },
+  );
 
   return (
     <motion.div
@@ -80,7 +92,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
           <span aria-hidden className="bg-gradient-shimmer animate-shimmer pointer-events-none absolute inset-0" />
           <span className="text-caption relative flex items-center gap-1.5 font-medium text-white">
             <Sparkles className="h-3.5 w-3.5" style={{ color: accent.base }} aria-hidden />
-            AI Recommended
+            {t("result.badge")}
           </span>
         </span>
 
@@ -89,12 +101,11 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
             className="text-caption font-medium tracking-[0.28em] uppercase"
             style={{ backgroundImage: "linear-gradient(90deg, #3B82F6, #22D3EE)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent" }}
           >
-            Your Recommended Roadmap
+            {t("result.eyebrow")}
           </span>
-          <h3 className="text-headline sm:text-display-lg text-balance font-bold text-white">{result.service}</h3>
+          <h3 className="text-headline sm:text-display-lg text-balance font-bold text-white">{service}</h3>
           <p className="text-body-lg max-w-[700px] text-balance text-center" style={{ color: "rgba(255,255,255,0.72)" }}>
-            Based on your business goals, growth stage, and priorities, we&apos;ve created a tailored implementation
-            roadmap designed for the fastest path to success.
+            {t("result.description")}
           </p>
         </div>
       </div>
@@ -121,21 +132,24 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
             <Sparkles className="h-5 w-5 text-white" aria-hidden />
           </span>
           <div className="flex flex-col gap-2 text-left">
-            <p className="text-caption font-semibold tracking-wide text-white/50 uppercase">AI Insight</p>
-            <p className="text-body-sm text-white/80">{result.insight}</p>
-            {result.focus ? <p className="text-body-sm text-white/55">{result.focus}</p> : null}
+            <p className="text-caption font-semibold tracking-wide text-white/50 uppercase">{t("result.insightLabel")}</p>
+            <p className="text-body-sm text-white/80">{insight}</p>
+            {focus ? <p className="text-body-sm text-white/55">{focus}</p> : null}
           </div>
         </div>
       </div>
 
       {/* roadmap timeline */}
       <ol className="flex w-full flex-col gap-3">
-        {result.roadmap.map((step, i) => {
-          const info = getRoadmapPhaseInfo(step);
+        {result.roadmap.map((phaseId, i) => {
+          const { statusCategory } = getRoadmapPhaseInfo(phaseId);
+          const phaseTitle = t(`roadmapPhases.${phaseId}.title`);
+          const phaseDescription = t(`roadmapPhases.${phaseId}.description`);
+          const status = t(`roadmapStatus.${statusCategory}`);
           const isLast = i === result.roadmap.length - 1;
           return (
             <motion.li
-              key={step}
+              key={phaseId}
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "150px" }}
@@ -175,15 +189,15 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
                 }}
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h4 className="text-body font-semibold text-white">{step}</h4>
+                  <h4 className="text-body font-semibold text-white">{phaseTitle}</h4>
                   <span
                     className="text-[11px] rounded-full border px-2.5 py-0.5 font-medium"
                     style={{ borderColor: hexToRgba(accent.base, 0.35), color: accent.base }}
                   >
-                    {info.status}
+                    {status}
                   </span>
                 </div>
-                <p className="text-body-sm mt-1.5 text-white/60">{info.description}</p>
+                <p className="text-body-sm mt-1.5 text-white/60">{phaseDescription}</p>
               </div>
             </motion.li>
           );
@@ -204,12 +218,12 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
           <div className="flex flex-col gap-4">
             <p className="text-caption flex items-center gap-1.5 font-semibold tracking-wide text-white/50 uppercase">
               <CircleCheck className="h-3.5 w-3.5" style={{ color: accent.base }} aria-hidden />
-              Suggested Deliverables
+              {t("result.deliverablesLabel")}
             </p>
             <ul className="flex flex-col gap-1">
-              {result.deliverables.map((item, i) => (
+              {deliverables.map((item, i) => (
                 <motion.li
-                  key={item}
+                  key={`deliverable-${i}`}
                   initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "150px" }}
@@ -230,16 +244,16 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
           <div className="flex flex-col gap-4">
             <p className="text-caption flex items-center gap-1.5 font-semibold tracking-wide text-white/50 uppercase">
               <CalendarClock className="h-3.5 w-3.5" style={{ color: accent.base }} aria-hidden />
-              Project Overview
+              {t("result.overviewLabel")}
             </p>
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <CalendarClock className="h-4 w-4 shrink-0" style={{ color: accent.base }} aria-hidden />
-                <span className="text-body-sm text-white/80">{result.timeline}</span>
+                <span className="text-body-sm text-white/80">{timelineText}</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {result.technology.map((tech) => (
-                  <span key={tech} className="text-caption rounded-full border border-white/12 px-2.5 py-1 text-white/70">
+                {technology.map((tech, i) => (
+                  <span key={`tech-${i}`} className="text-caption rounded-full border border-white/12 px-2.5 py-1 text-white/70">
                     {tech}
                   </span>
                 ))}
@@ -251,9 +265,21 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
 
       {/* project metrics */}
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
-        <KpiCard icon={CalendarClock} label="Estimated Timeline" value={result.timeline} accent={accent} delay={0} />
-        <KpiCard icon={Layers} label="Deliverables" value={`${result.deliverables.length} Included`} accent={accent} delay={0.06} />
-        <KpiCard icon={Sparkles} label="Roadmap" value={`${result.roadmap.length}-Step Plan`} accent={accent} delay={0.12} />
+        <KpiCard icon={CalendarClock} label={t("result.kpi.timeline")} value={timelineText} accent={accent} delay={0} />
+        <KpiCard
+          icon={Layers}
+          label={t("result.kpi.deliverables")}
+          value={t("result.kpi.deliverablesValue", { count: deliverables.length })}
+          accent={accent}
+          delay={0.06}
+        />
+        <KpiCard
+          icon={Sparkles}
+          label={t("result.kpi.roadmap")}
+          value={t("result.kpi.roadmapValue", { count: result.roadmap.length })}
+          accent={accent}
+          delay={0.12}
+        />
       </div>
 
       {/* CTA */}
@@ -270,7 +296,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
               aria-hidden
               className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-full"
             />
-            Book Free Consultation
+            {t("result.cta.consultation")}
             <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-1" aria-hidden />
           </RippleLink>
           <RippleLink
@@ -280,7 +306,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
               "flex-1 border-white/20 text-white hover:border-white/30 hover:bg-white/5",
             )}
           >
-            Request Custom Quote
+            {t("result.cta.quote")}
           </RippleLink>
         </div>
       </div>
@@ -291,7 +317,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
         className="text-caption flex items-center gap-1.5 font-medium text-white/50 transition-colors duration-fast hover:text-white"
       >
         <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-        Start Again
+        {t("result.restart")}
       </button>
     </motion.div>
   );

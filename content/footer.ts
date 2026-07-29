@@ -1,89 +1,85 @@
 import type { LucideIcon } from "lucide-react";
 import { CalendarClock, MessageCircle, Sparkles } from "lucide-react";
 
-export const footerHero = {
-  description:
-    "Whether you're launching your first website, building an enterprise platform, or creating an AI-powered product, Novyra Technologies is ready to help you build something exceptional.",
-};
-
 export interface FooterCta {
-  label: string;
+  id: string;
   icon: LucideIcon;
   href: string;
   variant: "gradient" | "glass" | "outline";
 }
 
+/** Structural data only — labels/descriptions live in
+ * messages/{locale}/footer.json, keyed by `id`. */
 export const footerCtas: FooterCta[] = [
-  { label: "Book Free Consultation", icon: Sparkles, href: "/contact", variant: "gradient" },
-  { label: "Schedule Discovery Call", icon: CalendarClock, href: "/contact", variant: "glass" },
-  { label: "WhatsApp", icon: MessageCircle, href: "https://wa.me/917903724407", variant: "outline" },
+  { id: "bookConsultation", icon: Sparkles, href: "/contact", variant: "gradient" },
+  { id: "scheduleCall", icon: CalendarClock, href: "/contact", variant: "glass" },
+  { id: "whatsapp", icon: MessageCircle, href: "https://wa.me/917903724407", variant: "outline" },
 ];
 
 export const companyInfo = {
   name: "Novyra Technologies",
-  description: "Building premium digital products for ambitious businesses worldwide.",
   email: "hello@novyratech.in",
   phone: "+91 7903724407",
-  location: "India",
 };
 
 export interface FooterLink {
-  label: string;
+  id: string;
   href: string;
   disabled?: boolean;
 }
 
 export interface FooterColumn {
-  title: string;
+  id: string;
   links: FooterLink[];
 }
 
 /** Links that already exist on this page use an in-page anchor so they
  * actually resolve today; links to pages that don't exist yet follow the
  * same future-route naming already established in content/nav.ts, so the
- * footer and the main nav stay architecturally consistent. */
+ * footer and the main nav stay architecturally consistent. Labels live in
+ * messages/{locale}/footer.json under `columns.{id}.links.{linkId}`. */
 export const footerColumns: FooterColumn[] = [
   {
-    title: "Company",
+    id: "company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Solutions", href: "/solutions" },
-      { label: "Case Studies", href: "/#case-studies" },
-      { label: "Pricing", href: "/#pricing" },
-      { label: "Blog", href: "/blog" },
-      { label: "Contact", href: "/#contact" },
-      { label: "Careers (Coming Soon)", href: "/careers", disabled: true },
+      { id: "about", href: "/about" },
+      { id: "solutions", href: "/solutions" },
+      { id: "caseStudies", href: "/#case-studies" },
+      { id: "pricing", href: "/#pricing" },
+      { id: "blog", href: "/blog" },
+      { id: "contact", href: "/#contact" },
+      { id: "careers", href: "/careers", disabled: true },
     ],
   },
   {
-    title: "Services",
+    id: "services",
     links: [
-      { label: "Business Websites", href: "/services/business-websites" },
-      { label: "Custom Web Applications", href: "/services/web-applications" },
-      { label: "SaaS Development", href: "/services/saas-development" },
-      { label: "AI Development", href: "/services/ai-development" },
-      { label: "Healthcare Solutions", href: "/services/healthcare-solutions" },
-      { label: "School ERP", href: "/services/school-erp" },
-      { label: "Hospital ERP", href: "/services/hospital-erp" },
-      { label: "CRM Systems", href: "/services/crm-systems" },
-      { label: "Digital Marketing", href: "/services/digital-marketing" },
-      { label: "UI/UX Design", href: "/services/ui-ux-design" },
-      { label: "SEO Optimization", href: "/services/seo-optimization" },
-      { label: "Website Redesign", href: "/services/website-redesign" },
+      { id: "businessWebsites", href: "/services/business-websites" },
+      { id: "webApplications", href: "/services/web-applications" },
+      { id: "saasDevelopment", href: "/services/saas-development" },
+      { id: "aiDevelopment", href: "/services/ai-development" },
+      { id: "healthcareSolutions", href: "/services/healthcare-solutions" },
+      { id: "schoolErp", href: "/services/school-erp" },
+      { id: "hospitalErp", href: "/services/hospital-erp" },
+      { id: "crmSystems", href: "/services/crm-systems" },
+      { id: "digitalMarketing", href: "/services/digital-marketing" },
+      { id: "uiUxDesign", href: "/services/ui-ux-design" },
+      { id: "seoOptimization", href: "/services/seo-optimization" },
+      { id: "websiteRedesign", href: "/services/website-redesign" },
     ],
   },
   {
-    title: "Resources",
+    id: "resources",
     links: [
-      { label: "FAQ", href: "/#faq" },
-      { label: "Project Process", href: "/#process" },
-      { label: "Technology Stack", href: "/#why-choose-novyra" },
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms & Conditions", href: "/terms" },
-      { label: "Cookie Policy", href: "/cookies" },
-      { label: "Free Consultation", href: "/#contact" },
-      { label: "Website Audit", href: "/audit" },
-      { label: "Roadmap Planner", href: "/roadmap-planner" },
+      { id: "faq", href: "/#faq" },
+      { id: "projectProcess", href: "/#process" },
+      { id: "technologyStack", href: "/#why-choose-novyra" },
+      { id: "privacyPolicy", href: "/privacy" },
+      { id: "termsConditions", href: "/terms" },
+      { id: "cookiePolicy", href: "/cookies" },
+      { id: "freeConsultation", href: "/#contact" },
+      { id: "websiteAudit", href: "/audit" },
+      { id: "roadmapPlanner", href: "/roadmap-planner" },
     ],
   },
 ];
@@ -95,7 +91,8 @@ export interface TechCapsule {
 
 /** Trimmed to the 12 highest-signal technologies — the full stack lives in
  * Why Choose Novyra's Trusted Technologies grid, so the footer only needs a
- * quick-glance chip row, not the complete list. */
+ * quick-glance chip row, not the complete list. Technology/product names
+ * are proper nouns and intentionally not translated. */
 export const techCapsules: TechCapsule[] = [
   { name: "React", color: "#22D3EE" },
   { name: "Next.js", color: "#94A3B8" },
@@ -112,7 +109,6 @@ export const techCapsules: TechCapsule[] = [
 ];
 
 export interface SocialLink {
-  label: string;
   id: "linkedin" | "github" | "instagram" | "facebook" | "x" | "youtube";
   href: string;
   disabled?: boolean;
@@ -120,20 +116,23 @@ export interface SocialLink {
 
 /** Real handles haven't been shared yet, so every link points to "#" for
  * now rather than guessing a URL — wire these up to the real profiles once
- * they exist. YouTube stays disabled per the spec's own "Coming Soon". */
+ * they exist. YouTube stays disabled per the spec's own "Coming Soon".
+ * Platform names are proper nouns (LinkedIn, GitHub, ...) and intentionally
+ * not translated; only the "(Coming Soon)" qualifier is localized, via
+ * messages/{locale}/footer.json `social.youtubeComingSoon`. */
 export const socialLinks: SocialLink[] = [
-  { label: "LinkedIn", id: "linkedin", href: "#" },
-  { label: "GitHub", id: "github", href: "#" },
-  { label: "Instagram", id: "instagram", href: "#" },
-  { label: "Facebook", id: "facebook", href: "#" },
-  { label: "X (Twitter)", id: "x", href: "#" },
-  { label: "YouTube (Coming Soon)", id: "youtube", href: "#", disabled: true },
+  { id: "linkedin", href: "#" },
+  { id: "github", href: "#" },
+  { id: "instagram", href: "#" },
+  { id: "facebook", href: "#" },
+  { id: "x", href: "#" },
+  { id: "youtube", href: "#", disabled: true },
 ];
 
 export const legalLinks: FooterLink[] = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
-  { label: "Cookies", href: "/cookies" },
-  { label: "Accessibility", href: "/accessibility" },
-  { label: "Sitemap", href: "/sitemap" },
+  { id: "privacyPolicy", href: "/privacy" },
+  { id: "terms", href: "/terms" },
+  { id: "cookies", href: "/cookies" },
+  { id: "accessibility", href: "/accessibility" },
+  { id: "sitemap", href: "/sitemap" },
 ];

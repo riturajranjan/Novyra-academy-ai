@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getStageAccent, hexToRgba } from "@/lib/advisor-accent";
@@ -22,6 +23,7 @@ const RAIL_GRADIENT = "linear-gradient(to right, #3B82F6, #8B5CF6, #EC4899)";
  * of which stage is active. Selected state stays dark glass with the
  * accent only as a border, glow, and pulse ring — never a solid fill. */
 export function StageTimeline({ options, selectedId, onSelect }: StageTimelineProps) {
+  const t = useTranslations("advisor");
   const reduceMotion = useReducedMotion();
   const selectedIndex = options.findIndex((o) => o.id === selectedId);
   const progress = selectedIndex === -1 ? 0 : (selectedIndex / (options.length - 1)) * 100;
@@ -29,7 +31,7 @@ export function StageTimeline({ options, selectedId, onSelect }: StageTimelinePr
   return (
     <div
       role="radiogroup"
-      aria-label="Where are you in your business journey?"
+      aria-label={t("stepQuestions.stage.question")}
       className="relative flex w-full items-start justify-between"
     >
       <span className="absolute top-9 right-0 left-0 h-0.5 rounded-full bg-white/[0.08]" aria-hidden />

@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import type { FooterColumn } from "@/content/footer";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -13,6 +14,8 @@ interface FooterNavColumnProps {
 
 /** One glass navigation column — Company / Services / Resources. */
 export function FooterNavColumn({ column, index }: FooterNavColumnProps) {
+  const t = useTranslations("footer.columns");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,7 +24,9 @@ export function FooterNavColumn({ column, index }: FooterNavColumnProps) {
       transition={{ duration: 0.5, delay: index * 0.08, ease: easePremium }}
       className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-5 backdrop-blur-xl"
     >
-      <h4 className="text-caption text-foreground-secondary font-semibold tracking-wide uppercase">{column.title}</h4>
+      <h4 className="text-caption text-foreground-secondary font-semibold tracking-wide uppercase">
+        {t(`${column.id}.title`)}
+      </h4>
       {/* Long lists (Services, Resources) wrap into two columns so one
        * column never towers over its neighbors and blows the compact
        * height budget — but only in the `sm`-to-`lg` range, where the outer
@@ -39,15 +44,16 @@ export function FooterNavColumn({ column, index }: FooterNavColumnProps) {
           column.links.length > 8 ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1" : "flex flex-col",
         )}
       >
-        {column.links.map((link) =>
-          link.disabled ? (
-            <li key={link.label} className="min-w-0">
+        {column.links.map((link) => {
+          const label = t(`${column.id}.links.${link.id}`);
+          return link.disabled ? (
+            <li key={link.id} className="min-w-0">
               <span className="text-body-sm text-foreground-secondary/50 block cursor-not-allowed break-words">
-                {link.label}
+                {label}
               </span>
             </li>
           ) : (
-            <li key={link.label} className="min-w-0">
+            <li key={link.id} className="min-w-0">
               <Link
                 href={link.href}
                 className={cn(
@@ -55,11 +61,11 @@ export function FooterNavColumn({ column, index }: FooterNavColumnProps) {
                   "hover:before:bg-gradient-brand before:absolute before:-bottom-0.5 before:left-0 before:h-px before:w-0 before:transition-[width] before:duration-base hover:before:w-full",
                 )}
               >
-                {link.label}
+                {label}
               </Link>
             </li>
-          ),
-        )}
+          );
+        })}
       </ul>
     </motion.div>
   );

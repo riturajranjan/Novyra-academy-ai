@@ -1,0 +1,11 @@
+{
+  "badge": "Websites · SaaS · AI · Growth",
+  "headline": {
+    "before": "Technology built for",
+    "after": "that move fast"
+  },
+  "rotatingWords": ["businesses", "hospitals", "schools", "startups", "growing companies", "healthcare", "education"],
+  "rotatingWordsJoiner": "and",
+  "description": "Novyra Technologies designs and builds websites, SaaS products, and AI-powered platforms for healthcare, education, and growing businesses.",
+  "exploreServices": "Explore Services"
+}

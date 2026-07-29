@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Database, FileCode2, Rocket, Server, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { AccentColor } from "@/content/hero-screens";
@@ -16,11 +17,11 @@ const codeLines: { indent: number; tokens: { text: string; tone: "keyword" | "st
 ];
 
 const status = [
-  { icon: Server, label: "API", state: "Operational" },
-  { icon: Database, label: "Database", state: "Connected" },
-  { icon: FileCode2, label: "CMS", state: "Synced" },
-  { icon: ShieldCheck, label: "Authentication", state: "Enabled" },
-  { icon: Rocket, label: "Deployment", state: "Production" },
+  { id: "api", icon: Server },
+  { id: "database", icon: Database },
+  { id: "cms", icon: FileCode2 },
+  { id: "auth", icon: ShieldCheck },
+  { id: "deployment", icon: Rocket },
 ];
 
 const terminalLines = ["$ npm run build", "✓ Compiled successfully", "$ npm run deploy", "✓ Live at novyra.app"];
@@ -37,6 +38,7 @@ const toneClass: Record<"keyword" | "string" | "plain" | "comment", string> = {
  * generic infrastructure states. Illustrative sample code, not real client
  * work. */
 export function DevMockup({ accent }: { accent: AccentColor }) {
+  const t = useTranslations("services");
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-5">
@@ -69,7 +71,7 @@ export function DevMockup({ accent }: { accent: AccentColor }) {
         <div className="col-span-2 flex flex-col justify-center gap-2 px-4 py-3">
           {status.map((s, i) => (
             <motion.div
-              key={s.label}
+              key={s.id}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease: easePremium }}
@@ -82,8 +84,12 @@ export function DevMockup({ accent }: { accent: AccentColor }) {
                 <s.icon className="h-3 w-3" style={{ color: accentStroke[accent] }} aria-hidden />
               </span>
               <div className="min-w-0">
-                <p className="text-caption text-foreground truncate font-medium">{s.label}</p>
-                <p className="text-caption text-foreground-secondary truncate">{s.state}</p>
+                <p className="text-caption text-foreground truncate font-medium">
+                  {t(`mockups.dev.status.${s.id}.label`)}
+                </p>
+                <p className="text-caption text-foreground-secondary truncate">
+                  {t(`mockups.dev.status.${s.id}.state`)}
+                </p>
               </div>
             </motion.div>
           ))}

@@ -1,0 +1,38 @@
+{
+  "about": {
+    "label": "About",
+    "children": {
+      "aboutUs": { "label": "About Us", "description": "Who we are and what drives us." },
+      "mission": { "label": "Our Mission", "description": "What we're building toward." },
+      "whyChooseUs": { "label": "Why Choose Us", "description": "What sets Novyra apart." },
+      "faq": { "label": "FAQ", "description": "Common questions, answered." },
+      "location": { "label": "Location", "description": "Find our office and hours." }
+    },
+    "featured": {
+      "title": "Meet the team",
+      "description": "The people building Novyra Technologies.",
+      "cta": "Explore About"
+    }
+  },
+  "services": {
+    "label": "Services",
+    "children": {
+      "webDesign": { "label": "Web Design & Development", "description": "Websites built for craft and speed." },
+      "digitalMarketing": { "label": "Digital Marketing", "description": "Growth-focused marketing strategy." },
+      "webApplications": { "label": "Web Applications", "description": "Custom apps for real workflows." },
+      "graphicDesign": { "label": "Graphic Design", "description": "Visual identity that stands out." },
+      "saasDevelopment": { "label": "SaaS Development", "description": "Full-stack SaaS product builds." }
+    },
+    "featured": {
+      "title": "Not sure where to start?",
+      "description": "Tell us about your project and we'll recommend a path.",
+      "cta": "Talk to us"
+    }
+  },
+  "solutions": { "label": "Solutions" },
+  "products": { "label": "Products" },
+  "pricing": { "label": "Pricing" },
+  "blog": { "label": "Blog" },
+  "clients": { "label": "Clients" },
+  "contact": { "label": "Contact Us" }
+}

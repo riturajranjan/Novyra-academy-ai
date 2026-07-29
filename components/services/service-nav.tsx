@@ -2,6 +2,7 @@
 
 import type { KeyboardEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { cn } from "@/lib/utils";
 import type { ServiceCategory } from "@/content/service-categories";
@@ -16,6 +17,7 @@ interface ServiceNavProps {
  * list above it. One markup, breakpoint-driven, so there's no split mobile /
  * desktop implementation to keep in sync. */
 export function ServiceNav({ categories, activeId, onSelect }: ServiceNavProps) {
+  const t = useTranslations("services");
   const reduceMotion = useReducedMotion();
 
   function handleKeyDown(e: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -39,7 +41,7 @@ export function ServiceNav({ categories, activeId, onSelect }: ServiceNavProps) 
   return (
     <div
       role="tablist"
-      aria-label="Novyra services"
+      aria-label={t("nav.ariaLabel")}
       aria-orientation="vertical"
       className="glass flex shrink-0 gap-2 overflow-x-auto rounded-[28px] p-2.5 lg:flex-col lg:overflow-visible lg:gap-1.5"
     >
@@ -95,10 +97,10 @@ export function ServiceNav({ categories, activeId, onSelect }: ServiceNavProps) 
                   isActive ? "text-foreground" : "text-foreground-secondary",
                 )}
               >
-                {category.label}
+                {t(`categories.${category.id}.label`)}
               </span>
               <span className="text-caption text-foreground-secondary hidden truncate lg:block">
-                {category.subtitle}
+                {t(`categories.${category.id}.subtitle`)}
               </span>
             </span>
           </button>

@@ -14,7 +14,18 @@ import { FooterBottom } from "@/components/footer/footer-bottom";
 import { footerColumns } from "@/content/footer";
 
 function Divider() {
-  return <div className="via-border-subtle h-px w-full bg-gradient-to-r from-transparent to-transparent" />;
+  return (
+    <div className="via-border-subtle relative h-px w-full overflow-hidden bg-gradient-to-r from-transparent to-transparent">
+      <motion.span
+        aria-hidden
+        className="bg-gradient-brand absolute inset-y-0 left-0 w-1/3 opacity-70"
+        initial={{ x: "-100%" }}
+        whileInView={{ x: "300%" }}
+        viewport={{ once: true, margin: "150px" }}
+        transition={{ duration: 1.1, ease: "easeInOut" }}
+      />
+    </div>
+  );
 }
 
 /** The site's closing scene — one compact floating glass container holding
@@ -62,7 +73,7 @@ export function Footer() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             <CompanyInfoCard />
             {footerColumns.map((column, i) => (
-              <FooterNavColumn key={column.title} column={column} index={i} />
+              <FooterNavColumn key={column.id} column={column} index={i} />
             ))}
           </div>
 

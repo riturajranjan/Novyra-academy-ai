@@ -3,11 +3,11 @@
 import { useRef, type PointerEvent } from "react";
 import { ArrowRight, CalendarClock, FileText } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Magnetic } from "@/components/ui/magnetic";
 import { buttonVariants } from "@/components/ui/button";
 import { RippleLink } from "@/components/ui/ripple-link";
 import { GlassOrb } from "@/components/contact-cta/glass-orb";
-import { heroCard } from "@/content/contact-cta";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
  * gradient border, a breathing aurora glow, and a cursor-following
  * highlight, holding the three primary conversion actions. */
 export function HeroGlassCard() {
+  const t = useTranslations("contact.heroCard");
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(50);
@@ -63,8 +64,8 @@ export function HeroGlassCard() {
         <GlassOrb />
 
         <div className="flex flex-col items-center gap-3">
-          <h3 className="text-headline sm:text-display-lg text-foreground font-semibold text-balance">{heroCard.title}</h3>
-          <p className="text-body sm:text-body-lg text-foreground-secondary max-w-xl text-pretty">{heroCard.description}</p>
+          <h3 className="text-headline sm:text-display-lg text-foreground font-semibold text-balance">{t("title")}</h3>
+          <p className="text-body sm:text-body-lg text-foreground-secondary max-w-xl text-pretty">{t("description")}</p>
         </div>
 
         <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
@@ -77,20 +78,20 @@ export function HeroGlassCard() {
                 aria-hidden
                 className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-full"
               />
-              🚀 Book Free Consultation
+              {t("bookConsultation")}
               <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
             </RippleLink>
           </Magnetic>
           <Magnetic className="w-full sm:w-auto">
             <RippleLink href="/contact" className={cn(buttonVariants({ variant: "glass", size: "lg" }), "w-full sm:w-auto")}>
               <FileText className="h-4 w-4" aria-hidden />
-              Request Custom Quote
+              {t("requestQuote")}
             </RippleLink>
           </Magnetic>
           <Magnetic className="w-full sm:w-auto">
             <RippleLink href="/contact" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}>
               <CalendarClock className="h-4 w-4" aria-hidden />
-              Schedule Discovery Call
+              {t("scheduleCall")}
             </RippleLink>
           </Magnetic>
         </div>

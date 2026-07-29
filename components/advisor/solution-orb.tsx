@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Sparkles } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { easePremium } from "@/lib/motion";
@@ -40,6 +41,7 @@ interface SolutionOrbProps {
  * to whichever service is hovered or selected via `accent`/`active`, but
  * never grows past ~230px or holds more than a two-line reactive caption. */
 export function SolutionOrb({ size, accent, title, subtitle, active, className }: SolutionOrbProps) {
+  const t = useTranslations("advisor");
   const reduceMotion = useReducedMotion();
 
   return (
@@ -96,7 +98,7 @@ export function SolutionOrb({ size, accent, title, subtitle, active, className }
           style={{ color: active ? accent.base : "rgba(255,255,255,0.55)" }}
           aria-hidden
         />
-        <span className="text-[10px] font-semibold tracking-[0.14em] text-white/45 uppercase">AI Advisor</span>
+        <span className="text-[10px] font-semibold tracking-[0.14em] text-white/45 uppercase">{t("orb.label")}</span>
         <AnimatePresence mode="wait">
           <motion.div
             key={`${title ?? ""}-${subtitle}`}

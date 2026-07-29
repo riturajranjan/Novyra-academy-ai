@@ -1,15 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { hexToRgba, type AdvisorAccent } from "@/lib/advisor-accent";
 
-const journeySteps = [
-  { label: "Discover", sublabel: "Discover your need" },
-  { label: "Define", sublabel: "Define your goal" },
-  { label: "Recommend", sublabel: "Get your roadmap" },
-];
+const journeyStepIds = ["discover", "define", "recommend"] as const;
 
 interface JourneyProgressProps {
   currentStep: number;
@@ -22,15 +19,16 @@ interface JourneyProgressProps {
  * Step 1, the active glow and connector fill switch to that category's
  * accent, carrying the same color through the rest of the journey. */
 export function JourneyProgress({ currentStep, accent }: JourneyProgressProps) {
+  const t = useTranslations("advisor");
   const reduceMotion = useReducedMotion();
 
   return (
-    <ol aria-label="Advisor journey" className="mx-auto flex w-full max-w-xl items-start">
-      {journeySteps.map((step, i) => {
+    <ol aria-label={t("journey.ariaLabel")} className="mx-auto flex w-full max-w-xl items-start">
+      {journeyStepIds.map((stepId, i) => {
         const isComplete = i < currentStep;
         const isActive = i === currentStep;
         return (
-          <li key={step.label} className={cn("flex items-start", i < journeySteps.length - 1 && "flex-1")}>
+          <li key={stepId} className={cn("flex items-start", i < journeyStepIds.length - 1 && "flex-1")}>
             <div className="flex flex-col items-center gap-2">
               <span
                 style={
@@ -70,13 +68,13 @@ export function JourneyProgress({ currentStep, accent }: JourneyProgressProps) {
                     isActive || isComplete ? "text-white" : "text-white/40",
                   )}
                 >
-                  {step.label}
+                  {t(`journey.${stepId}.label`)}
                 </span>
-                <span className="text-caption hidden text-white/40 sm:block">{step.sublabel}</span>
+                <span className="text-caption hidden text-white/40 sm:block">{t(`journey.${stepId}.sublabel`)}</span>
               </div>
             </div>
 
-            {i < journeySteps.length - 1 ? (
+            {i < journeyStepIds.length - 1 ? (
               <span className="relative mx-2 mt-4.5 h-px flex-1 overflow-hidden bg-white/10 sm:mx-3">
                 <motion.span
                   className="absolute inset-y-0 left-0"

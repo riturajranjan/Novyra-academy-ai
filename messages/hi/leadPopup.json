@@ -1,0 +1,63 @@
+{
+  "badge": "मुफ़्त परामर्श",
+  "heading": {
+    "before": "आइए बनाते हैं आपका अगला",
+    "highlight": "डिजिटल प्रोडक्ट"
+  },
+  "description": "अपने प्रोजेक्ट के बारे में बताएं और हम आपके लिए सबसे बेहतर रोडमैप, टाइमलाइन और प्राइसिंग तैयार करेंगे।",
+  "illustration": {
+    "heading": "आइए कुछ शानदार बनाते हैं",
+    "icons": {
+      "website": "वेबसाइट",
+      "ai": "AI",
+      "hospital": "अस्पताल",
+      "growth": "ग्रोथ"
+    }
+  },
+  "form": {
+    "name": { "label": "नाम", "error": "कृपया अपना नाम दर्ज करें।" },
+    "email": { "label": "ईमेल", "error": "एक मान्य ईमेल पता दर्ज करें।" },
+    "phone": { "label": "फ़ोन नंबर", "error": "एक मान्य फ़ोन नंबर दर्ज करें।" },
+    "company": { "label": "कंपनी (वैकल्पिक)" },
+    "service": {
+      "label": "सेवा",
+      "error": "कृपया एक सेवा चुनें।",
+      "options": {
+        "businessWebsite": "बिज़नेस वेबसाइट",
+        "webApplication": "वेब एप्लिकेशन",
+        "saasDevelopment": "SaaS डेवलपमेंट",
+        "hospitalErp": "हॉस्पिटल ERP",
+        "schoolErp": "स्कूल ERP",
+        "crm": "CRM",
+        "digitalMarketing": "डिजिटल मार्केटिंग",
+        "graphicDesign": "ग्राफ़िक डिज़ाइन"
+      }
+    },
+    "budget": {
+      "label": "बजट",
+      "error": "कृपया एक बजट चुनें।",
+      "options": {
+        "b25to50k": "₹25K–50K",
+        "b50kTo1L": "₹50K–1L",
+        "b1LTo3L": "₹1L–3L",
+        "b3LPlus": "₹3L+"
+      }
+    },
+    "message": { "label": "संदेश" }
+  },
+  "cta": "मुफ़्त परामर्श पाएं",
+  "ctaSending": "आपकी जानकारी भेजी जा रही है",
+  "trust": {
+    "freeConsultation": "मुफ़्त परामर्श",
+    "noHiddenCharges": "कोई छुपा शुल्क नहीं",
+    "response24h": "24 घंटे में जवाब"
+  },
+  "urgentHelp": "तुरंत मदद चाहिए?",
+  "whatsappChat": "व्हाट्सएप पर चैट करें",
+  "success": {
+    "title": "धन्यवाद!",
+    "message": "हमें आपकी जानकारी मिल गई है। हमारी टीम 24 घंटे के भीतर आपसे संपर्क करेगी।",
+    "continueBrowsing": "ब्राउज़िंग जारी रखें"
+  },
+  "closeAriaLabel": "बंद करें"
+}

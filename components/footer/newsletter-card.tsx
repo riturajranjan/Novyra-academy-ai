@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Mail } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { buttonVariants } from "@/components/ui/button";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * yet, so this only confirms the interaction works, the same stage every
  * other form on this site is currently at. Capped around 110–140px tall. */
 export function NewsletterCard() {
+  const t = useTranslations("footer.newsletter");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -47,13 +49,13 @@ export function NewsletterCard() {
             className="flex items-center gap-2 py-1.5"
           >
             <CheckCircle2 className="text-brand-emerald h-4 w-4 shrink-0" aria-hidden />
-            <span className="text-body-sm text-foreground font-medium">You&apos;re subscribed — welcome aboard.</span>
+            <span className="text-body-sm text-foreground font-medium">{t("successMessage")}</span>
           </motion.div>
         ) : (
           <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="flex flex-col gap-2">
             <div>
-              <h4 className="text-body-sm text-foreground font-semibold">Stay Updated</h4>
-              <p className="text-caption text-foreground-secondary">Receive occasional product updates.</p>
+              <h4 className="text-body-sm text-foreground font-semibold">{t("heading")}</h4>
+              <p className="text-caption text-foreground-secondary">{t("description")}</p>
             </div>
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2 min-[430px]:flex-row">
               <div
@@ -70,17 +72,17 @@ export function NewsletterCard() {
                     setEmail(e.target.value);
                     if (error) setError(false);
                   }}
-                  placeholder="you@company.com"
+                  placeholder={t("emailPlaceholder")}
                   aria-invalid={error}
-                  aria-label="Email address"
+                  aria-label={t("emailAriaLabel")}
                   className="text-[16px] sm:text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full min-w-0 bg-transparent outline-none"
                 />
               </div>
               <button type="submit" className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "w-full shrink-0 min-[430px]:w-auto")}>
-                Subscribe
+                {t("subscribe")}
               </button>
             </form>
-            {error ? <p className="text-caption text-red-400">Enter a valid email address.</p> : null}
+            {error ? <p className="text-caption text-red-400">{t("errorMessage")}</p> : null}
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,0 +1,38 @@
+{
+  "about": {
+    "label": "परिचय",
+    "children": {
+      "aboutUs": { "label": "हमारे बारे में", "description": "हम कौन हैं और हमें क्या प्रेरित करता है।" },
+      "mission": { "label": "हमारा उद्देश्य", "description": "हम किस दिशा में काम कर रहे हैं।" },
+      "whyChooseUs": { "label": "हमें क्यों चुनें", "description": "Novyra को खास क्या बनाता है।" },
+      "faq": { "label": "सामान्य प्रश्न", "description": "आम सवालों के जवाब।" },
+      "location": { "label": "स्थान", "description": "हमारा कार्यालय और समय जानें।" }
+    },
+    "featured": {
+      "title": "टीम से मिलें",
+      "description": "Novyra Technologies बनाने वाली टीम।",
+      "cta": "अधिक जानें"
+    }
+  },
+  "services": {
+    "label": "सेवाएं",
+    "children": {
+      "webDesign": { "label": "वेब डिज़ाइन और डेवलपमेंट", "description": "बेहतरीन गुणवत्ता और तेज़ गति वाली वेबसाइटें।" },
+      "digitalMarketing": { "label": "डिजिटल मार्केटिंग", "description": "विकास पर केंद्रित मार्केटिंग रणनीति।" },
+      "webApplications": { "label": "वेब एप्लिकेशन", "description": "आपकी ज़रूरतों के अनुसार बने कस्टम ऐप्स।" },
+      "graphicDesign": { "label": "ग्राफ़िक डिज़ाइन", "description": "एक विज़ुअल पहचान जो अलग नज़र आए।" },
+      "saasDevelopment": { "label": "SaaS डेवलपमेंट", "description": "फुल-स्टैक SaaS प्रोडक्ट निर्माण।" }
+    },
+    "featured": {
+      "title": "कहाँ से शुरू करें, तय नहीं कर पा रहे?",
+      "description": "अपने प्रोजेक्ट के बारे में बताएं, हम सही रास्ता सुझाएंगे।",
+      "cta": "हमसे बात करें"
+    }
+  },
+  "solutions": { "label": "समाधान" },
+  "products": { "label": "उत्पाद" },
+  "pricing": { "label": "प्राइसिंग" },
+  "blog": { "label": "ब्लॉग" },
+  "clients": { "label": "क्लाइंट्स" },
+  "contact": { "label": "संपर्क करें" }
+}

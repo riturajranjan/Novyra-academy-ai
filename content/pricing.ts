@@ -3,11 +3,13 @@ import {
   Briefcase,
   Code2,
   Compass,
+  FileCode,
   Landmark,
   LifeBuoy,
   Palette,
   Rocket,
   Rows3,
+  ScrollText,
   Sparkles,
   TestTube2,
   TrendingUp,
@@ -16,28 +18,38 @@ import {
 } from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
 
-export const pricingBadges = ["Free Consultation", "Transparent Pricing", "Custom Proposal", "No Hidden Charges"];
+/** Structural ids only — every user-facing string (badge text, plan name/
+ * tagline/features/cta, row & group titles, card copy, timeline/trust-strip
+ * labels) lives in messages/{locale}/pricing.json, keyed by these same ids,
+ * so this file doesn't change per locale. Ids are also what drives
+ * key props, Set membership, and lookup logic in the pricing components —
+ * translated text can't be used for any of that since it differs per
+ * locale. */
+export const pricingBadges = ["freeConsultation", "transparentPricing", "customProposal", "noHiddenCharges"];
 
 export type BillingMode = "project" | "retainer";
 
-export const billingModes: { id: BillingMode; label: string }[] = [
-  { id: "project", label: "Project Based" },
-  { id: "retainer", label: "Monthly Retainer" },
-];
+export const billingModes: { id: BillingMode }[] = [{ id: "project" }, { id: "retainer" }];
 
 export interface PricingPlan {
   id: string;
-  name: string;
-  tagline: string;
   icon: LucideIcon;
   accent: AccentColor;
   featured?: boolean;
-  priceLabel: string;
+  /** Whether the spotlight shows a small label above the price (e.g.
+   * "Starting From"). False for Enterprise, which prices as "Custom
+   * Pricing" with no label above it — this used to be modeled as an
+   * empty-string `priceLabel`; kept as an explicit boolean flag now that
+   * the label's actual text lives in messages/{locale}/pricing.json, so
+   * emptiness-as-a-flag can't accidentally become a truthy translated
+   * string. */
+  hasPriceLabel: boolean;
   price: Record<BillingMode, string>;
   priceSuffix: Record<BillingMode, string>;
   inheritsFrom?: string;
+  /** Feature ids, not display text — text is looked up per plan at
+   * `plans.<planId>.features.<featureId>` in messages/{locale}/pricing.json. */
   features: string[];
-  cta: string;
   ctaHref: string;
 }
 
@@ -48,102 +60,90 @@ export interface PricingPlan {
 export const pricingPlans: PricingPlan[] = [
   {
     id: "starter",
-    name: "Starter",
-    tagline: "Perfect for startups and small businesses.",
     icon: Rocket,
     accent: "blue",
-    priceLabel: "Starting From",
+    hasPriceLabel: true,
     price: { project: "₹29,999", retainer: "₹12,999" },
     priceSuffix: { project: "+", retainer: "+/mo" },
     features: [
-      "Responsive Website",
-      "Modern UI Design",
-      "Mobile Optimized",
-      "Contact Forms",
-      "Basic SEO",
-      "CMS Integration",
-      "Performance Optimized",
-      "Google Analytics",
-      "2 Weeks Support",
+      "responsiveWebsite",
+      "modernUiDesign",
+      "mobileOptimized",
+      "contactForms",
+      "basicSeo",
+      "cmsIntegration",
+      "performanceOptimized",
+      "googleAnalytics",
+      "twoWeeksSupport",
     ],
-    cta: "Get Started",
     ctaHref: "/contact",
   },
   {
     id: "professional",
-    name: "Professional",
-    tagline: "Most popular for scaling businesses.",
     icon: Sparkles,
     accent: "purple",
     featured: true,
-    priceLabel: "Starting From",
+    hasPriceLabel: true,
     price: { project: "₹79,999", retainer: "₹34,999" },
     priceSuffix: { project: "+", retainer: "+/mo" },
-    inheritsFrom: "Starter",
+    inheritsFrom: "starter",
     features: [
-      "Premium UI/UX",
-      "Custom Development",
-      "Advanced SEO",
-      "Blog System",
-      "Dashboard",
-      "API Integration",
-      "AI Features",
-      "Authentication",
-      "Analytics Dashboard",
-      "Performance Optimization",
-      "Security Hardening",
-      "One Month Support",
+      "premiumUiUx",
+      "customDevelopment",
+      "advancedSeo",
+      "blogSystem",
+      "dashboard",
+      "apiIntegration",
+      "aiFeatures",
+      "authentication",
+      "analyticsDashboard",
+      "performanceOptimization",
+      "securityHardening",
+      "oneMonthSupport",
     ],
-    cta: "Book Free Consultation",
     ctaHref: "/contact",
   },
   {
     id: "business",
-    name: "Business",
-    tagline: "Ideal for growing businesses.",
     icon: Briefcase,
     accent: "cyan",
-    priceLabel: "Starting From",
+    hasPriceLabel: true,
     price: { project: "₹1,49,999", retainer: "₹64,999" },
     priceSuffix: { project: "+", retainer: "+/mo" },
-    inheritsFrom: "Professional",
+    inheritsFrom: "professional",
     features: [
-      "CRM",
-      "ERP",
-      "Automation",
-      "AI Integration",
-      "Payment Gateway",
-      "Notifications",
-      "Reports",
-      "Multi-user Roles",
-      "Cloud Deployment",
-      "Training Sessions",
+      "crm",
+      "erp",
+      "automation",
+      "aiIntegration",
+      "paymentGateway",
+      "notifications",
+      "reports",
+      "multiUserRoles",
+      "cloudDeployment",
+      "trainingSessions",
     ],
-    cta: "Schedule Consultation",
     ctaHref: "/contact",
   },
   {
     id: "enterprise",
-    name: "Enterprise",
-    tagline: "Large organizations.",
     icon: Landmark,
     accent: "amber",
-    priceLabel: "",
+    hasPriceLabel: false,
     price: { project: "Custom Pricing", retainer: "Custom Pricing" },
     priceSuffix: { project: "", retainer: "" },
     features: [
-      "Dedicated Team",
-      "Architecture Planning",
-      "Enterprise Security",
-      "DevOps",
-      "Monitoring",
-      "SLA Support",
-      "Priority Development",
-      "Unlimited Scalability",
-      "Dedicated Project Manager",
-      "Ongoing Maintenance",
+      "dedicatedTeam",
+      "architecturePlanning",
+      "enterpriseSecurity",
+      "devOps",
+      "monitoring",
+      "slaSupport",
+      "priorityDevelopment",
+      "unlimitedScalability",
+      "dedicatedProjectManager",
+      "ongoingMaintenance",
     ],
-    cta: "Talk To Sales",
     ctaHref: "/contact",
   },
 ];
@@ -151,52 +151,187 @@ export const pricingPlans: PricingPlan[] = [
 export type CompareValue = true | false | string;
 
 export interface CompareRow {
-  label: string;
+  id: string;
   values: Record<string, CompareValue>;
 }
 
+/** String-valued cells double as translation-lookup flags now — the
+ * `Cell` renderer just checks `typeof value === "string"` and looks up
+ * `compareRows.<row.id>.values.<planId>` in messages/{locale}/pricing.json;
+ * the actual string kept here is never rendered directly, only used to
+ * distinguish a translatable cell from a plain boolean one. */
 export const compareRows: CompareRow[] = [
-  { label: "Responsive Design", values: { starter: true, professional: true, business: true, enterprise: true } },
-  { label: "SEO", values: { starter: "Basic", professional: "Advanced", business: "Advanced", enterprise: "Advanced" } },
-  { label: "CMS", values: { starter: true, professional: true, business: true, enterprise: true } },
-  { label: "Dashboard", values: { starter: false, professional: true, business: true, enterprise: true } },
-  { label: "AI Integration", values: { starter: false, professional: "Basic", business: true, enterprise: true } },
-  { label: "Payment Gateway", values: { starter: false, professional: false, business: true, enterprise: true } },
-  { label: "API Support", values: { starter: false, professional: true, business: true, enterprise: true } },
-  { label: "Analytics", values: { starter: "Basic", professional: "Advanced", business: true, enterprise: true } },
-  { label: "Performance", values: { starter: true, professional: true, business: true, enterprise: true } },
-  { label: "Security", values: { starter: false, professional: "Hardened", business: true, enterprise: "Enterprise-Grade" } },
-  { label: "Hosting Assistance", values: { starter: false, professional: false, business: true, enterprise: true } },
-  { label: "Maintenance", values: { starter: "2 Weeks", professional: "1 Month", business: "1 Month", enterprise: "Ongoing" } },
-  { label: "Training", values: { starter: false, professional: false, business: true, enterprise: true } },
+  { id: "responsiveDesign", values: { starter: true, professional: true, business: true, enterprise: true } },
+  { id: "seo", values: { starter: "Basic", professional: "Advanced", business: "Advanced", enterprise: "Advanced" } },
+  { id: "cms", values: { starter: true, professional: true, business: true, enterprise: true } },
+  { id: "dashboard", values: { starter: false, professional: true, business: true, enterprise: true } },
+  { id: "aiIntegration", values: { starter: false, professional: "Basic", business: true, enterprise: true } },
+  { id: "paymentGateway", values: { starter: false, professional: false, business: true, enterprise: true } },
+  { id: "apiSupport", values: { starter: false, professional: true, business: true, enterprise: true } },
+  { id: "analytics", values: { starter: "Basic", professional: "Advanced", business: true, enterprise: true } },
+  { id: "performance", values: { starter: true, professional: true, business: true, enterprise: true } },
+  { id: "security", values: { starter: false, professional: "Hardened", business: true, enterprise: "Enterprise-Grade" } },
+  { id: "hostingAssistance", values: { starter: false, professional: false, business: true, enterprise: true } },
+  { id: "maintenance", values: { starter: "2 Weeks", professional: "1 Month", business: "1 Month", enterprise: "Ongoing" } },
+  { id: "training", values: { starter: false, professional: false, business: true, enterprise: true } },
 ];
 
 export interface TimelineStep {
-  label: string;
+  id: string;
   icon: LucideIcon;
 }
 
 export const pricingTimeline: TimelineStep[] = [
-  { label: "Discovery", icon: Compass },
-  { label: "Planning", icon: Rows3 },
-  { label: "Design", icon: Palette },
-  { label: "Development", icon: Code2 },
-  { label: "Testing", icon: TestTube2 },
-  { label: "Launch", icon: Rocket },
-  { label: "Support", icon: LifeBuoy },
+  { id: "discovery", icon: Compass },
+  { id: "planning", icon: Rows3 },
+  { id: "design", icon: Palette },
+  { id: "development", icon: Code2 },
+  { id: "testing", icon: TestTube2 },
+  { id: "launch", icon: Rocket },
+  { id: "support", icon: LifeBuoy },
 ];
 
 export interface ValueCard {
-  title: string;
-  description: string;
+  id: string;
   icon: LucideIcon;
   accent: AccentColor;
 }
 
 export const valueCards: ValueCard[] = [
-  { title: "Transparent Pricing", description: "No hidden charges — the quote you agree to is the quote you pay.", icon: Wallet, accent: "blue" },
-  { title: "Scalable Packages", description: "Start where it makes sense and upgrade any time as your needs grow.", icon: TrendingUp, accent: "purple" },
-  { title: "Dedicated Team", description: "Real engineers and designers on your project, not a rotating pool.", icon: Users, accent: "cyan" },
-  { title: "Post Launch Support", description: "We stay on after launch to fix issues and help things run smoothly.", icon: LifeBuoy, accent: "amber" },
+  { id: "transparentPricing", icon: Wallet, accent: "blue" },
+  { id: "scalablePackages", icon: TrendingUp, accent: "purple" },
+  { id: "dedicatedTeam", icon: Users, accent: "cyan" },
+  { id: "postLaunchSupport", icon: LifeBuoy, accent: "amber" },
 ];
 
+/** Presentational-only grouping over each plan's existing `features` array
+ * — categorizes the same feature ids for the spotlight's scannable layout
+ * without touching the underlying feature data itself. Every feature id
+ * across all four plans is mapped explicitly; anything missed falls back to
+ * "Engineering" rather than being silently dropped. */
+export type FeatureCategory = "Design" | "Engineering" | "Growth" | "Support";
+
+export const FEATURE_CATEGORY_ORDER: { category: FeatureCategory; icon: LucideIcon }[] = [
+  { category: "Design", icon: Palette },
+  { category: "Engineering", icon: Code2 },
+  { category: "Growth", icon: TrendingUp },
+  { category: "Support", icon: LifeBuoy },
+];
+
+const FEATURE_CATEGORY: Record<string, FeatureCategory> = {
+  // Starter
+  responsiveWebsite: "Design",
+  modernUiDesign: "Design",
+  mobileOptimized: "Design",
+  contactForms: "Engineering",
+  basicSeo: "Growth",
+  cmsIntegration: "Engineering",
+  performanceOptimized: "Engineering",
+  googleAnalytics: "Growth",
+  twoWeeksSupport: "Support",
+  // Professional
+  premiumUiUx: "Design",
+  customDevelopment: "Engineering",
+  advancedSeo: "Growth",
+  blogSystem: "Engineering",
+  dashboard: "Engineering",
+  apiIntegration: "Engineering",
+  aiFeatures: "Engineering",
+  authentication: "Engineering",
+  analyticsDashboard: "Growth",
+  performanceOptimization: "Engineering",
+  securityHardening: "Engineering",
+  oneMonthSupport: "Support",
+  // Business
+  crm: "Engineering",
+  erp: "Engineering",
+  automation: "Engineering",
+  aiIntegration: "Engineering",
+  paymentGateway: "Engineering",
+  notifications: "Engineering",
+  reports: "Growth",
+  multiUserRoles: "Engineering",
+  cloudDeployment: "Engineering",
+  trainingSessions: "Support",
+  // Enterprise
+  dedicatedTeam: "Support",
+  architecturePlanning: "Engineering",
+  enterpriseSecurity: "Engineering",
+  devOps: "Engineering",
+  monitoring: "Engineering",
+  slaSupport: "Support",
+  priorityDevelopment: "Engineering",
+  unlimitedScalability: "Engineering",
+  dedicatedProjectManager: "Support",
+  ongoingMaintenance: "Support",
+};
+
+export interface FeatureGroup {
+  category: FeatureCategory;
+  icon: LucideIcon;
+  /** Feature ids belonging to this group — display text is looked up per
+   * plan at `plans.<planId>.features.<featureId>`. */
+  items: string[];
+}
+
+/** Buckets a plan's feature id list into category groups (in a fixed
+ * display order), dropping any category that has no matching items for
+ * that plan. */
+export function groupFeatures(features: string[]): FeatureGroup[] {
+  const byCategory = new Map<FeatureCategory, string[]>();
+  for (const feature of features) {
+    const category = FEATURE_CATEGORY[feature] ?? "Engineering";
+    byCategory.set(category, [...(byCategory.get(category) ?? []), feature]);
+  }
+  return FEATURE_CATEGORY_ORDER.filter(({ category }) => byCategory.has(category)).map(({ category, icon }) => ({
+    category,
+    icon,
+    items: byCategory.get(category)!,
+  }));
+}
+
+/** How many individual feature items to reveal before the spotlight's
+ * "View all features" control — cuts along whole-group boundaries so a
+ * group is never shown half-visible. Always shows at least the first group. */
+export function splitFeatureGroups(groups: FeatureGroup[], maxVisible: number) {
+  const visible: FeatureGroup[] = [];
+  const overflow: FeatureGroup[] = [];
+  let count = 0;
+  for (const group of groups) {
+    if (visible.length === 0 || count + group.items.length <= maxVisible) {
+      visible.push(group);
+      count += group.items.length;
+    } else {
+      overflow.push(group);
+    }
+  }
+  const overflowCount = overflow.reduce((sum, g) => sum + g.items.length, 0);
+  return { visible, overflow, overflowCount };
+}
+
+/** Presentational grouping over the existing `compareRows` — same row data,
+ * organized into scannable categories for the collapsible comparison panel.
+ * Every row id from `compareRows` is accounted for exactly once. */
+export const compareGroups: { id: string; rowIds: string[] }[] = [
+  { id: "essentials", rowIds: ["responsiveDesign", "cms", "performance"] },
+  { id: "designAndDevelopment", rowIds: ["dashboard", "apiSupport"] },
+  { id: "growthAndAnalytics", rowIds: ["seo", "analytics", "aiIntegration"] },
+  { id: "advancedFeatures", rowIds: ["paymentGateway", "security", "hostingAssistance"] },
+  { id: "supportAndDelivery", rowIds: ["maintenance", "training"] },
+];
+
+export interface TrustStripItem {
+  id: string;
+  icon: LucideIcon;
+}
+
+/** The compact strip below the comparison panel — distinct from the header's
+ * `pricingBadges` (broad reassurances) and the fuller `valueCards` section
+ * (kept as-is further down the page); this is the short, delivery-process
+ * version of the same trust story. */
+export const pricingTrustStrip: TrustStripItem[] = [
+  { id: "milestonePayments", icon: Wallet },
+  { id: "sourceCodeOwnership", icon: FileCode },
+  { id: "transparentScope", icon: ScrollText },
+  { id: "postLaunchSupport", icon: LifeBuoy },
+];

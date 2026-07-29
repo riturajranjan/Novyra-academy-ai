@@ -2,12 +2,24 @@
 
 import { useRef, type PointerEvent } from "react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { socialGlyphs } from "@/components/footer/social-icons";
 import { socialLinks } from "@/content/footer";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index: number }) {
+/** Platform names are proper nouns/trademarks — intentionally shown the
+ * same in every locale rather than translated. */
+const socialNames: Record<(typeof socialLinks)[number]["id"], string> = {
+  linkedin: "LinkedIn",
+  github: "GitHub",
+  instagram: "Instagram",
+  facebook: "Facebook",
+  x: "X (Twitter)",
+  youtube: "YouTube",
+};
+
+function SocialCard({ link, index, label }: { link: (typeof socialLinks)[number]; index: number; label: string }) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLAnchorElement>(null);
   const x = useMotionValue(50);
@@ -28,7 +40,7 @@ function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index
       <span
         aria-disabled
         className="border-border-subtle bg-surface/40 text-foreground-secondary/40 flex h-10 w-10 shrink-0 cursor-not-allowed items-center justify-center rounded-xl border"
-        title={link.label}
+        title={label}
       >
         <Glyph className="h-4.5 w-4.5" aria-hidden />
       </span>
@@ -47,7 +59,7 @@ function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index
       viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -3, scale: 1.05 }}
       transition={{ duration: 0.35, delay: index * 0.04, ease: easePremium }}
-      aria-label={link.label}
+      aria-label={label}
       className="group border-border-subtle bg-surface/60 relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border backdrop-blur-md transition-[box-shadow,border-color] duration-base hover:border-transparent hover:shadow-[0_0_16px_-4px_var(--color-brand-blue),0_0_0_1px_var(--color-brand-purple)]"
     >
       <motion.span aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ background: highlight }} />
@@ -60,10 +72,17 @@ function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index
  * edge on hover, and a disabled treatment for the one platform that isn't
  * live yet. */
 export function SocialGrid() {
+  const t = useTranslations("footer.social");
+
   return (
     <div className={cn("flex flex-wrap items-center justify-center gap-2")}>
       {socialLinks.map((link, i) => (
-        <SocialCard key={link.id} link={link} index={i} />
+        <SocialCard
+          key={link.id}
+          link={link}
+          index={i}
+          label={link.id === "youtube" ? t("youtubeComingSoon") : socialNames[link.id]}
+        />
       ))}
     </div>
   );

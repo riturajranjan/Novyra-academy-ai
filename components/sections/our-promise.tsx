@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { buttonVariants } from "@/components/ui/button";
@@ -20,20 +21,22 @@ import { cn } from "@/lib/utils";
  * commitment instead — the same premium interaction design a testimonials
  * section would use, without inventing the people behind it. */
 export function OurPromise() {
+  const t = useTranslations("promise");
+
   return (
     <section className="relative isolate overflow-hidden py-14 md:py-32">
       <PromiseBackground />
 
       <Container className="flex flex-col gap-10 md:gap-14">
         <SectionHeading
-          eyebrow="Our Promise"
+          eyebrow={t("sectionHeading.eyebrow")}
           title={
             <>
-              No Track Record to Show Yet.
-              <br className="hidden sm:block" /> <span className="text-gradient-brand">A Standard to Hold To.</span>
+              {t("sectionHeading.titleLine1")}
+              <br className="hidden sm:block" /> <span className="text-gradient-brand">{t("sectionHeading.titleHighlight")}</span>
             </>
           }
-          description="Novyra is a new studio, so we won't invent client stories we don't have. Here's exactly how we operate — commitments you can hold us to from the very first project."
+          description={t("sectionHeading.description")}
         />
 
         <TrustBar />
@@ -57,13 +60,10 @@ export function OurPromise() {
           <div className="flex flex-col gap-2">
             <span className="text-caption text-brand-emerald inline-flex w-fit items-center gap-1.5 font-semibold tracking-wide uppercase sm:mx-0">
               <Sparkles className="h-3.5 w-3.5" aria-hidden />
-              Founding Clients
+              {t("cta.badge")}
             </span>
-            <h3 className="text-title-lg text-foreground font-semibold">Be Among Our First Partners</h3>
-            <p className="text-body-sm text-foreground-secondary max-w-md">
-              Being new means founding clients get the whole team&apos;s attention, not a fraction of it — no account
-              layers, no legacy baggage, just focused execution.
-            </p>
+            <h3 className="text-title-lg text-foreground font-semibold">{t("cta.heading")}</h3>
+            <p className="text-body-sm text-foreground-secondary max-w-md">{t("cta.description")}</p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <RippleLink
@@ -74,11 +74,11 @@ export function OurPromise() {
                 aria-hidden
                 className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-full"
               />
-              Book Free Consultation
+              {t("cta.bookConsultation")}
               <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
             </RippleLink>
             <RippleLink href="/services" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}>
-              See Our Process
+              {t("cta.seeProcess")}
             </RippleLink>
           </div>
         </div>

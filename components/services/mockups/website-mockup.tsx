@@ -2,22 +2,24 @@
 
 import { motion } from "framer-motion";
 import { ShieldCheck, Smartphone, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { AccentColor } from "@/content/hero-screens";
 
-const navLinks = ["Home", "Work", "Services", "Contact"];
+const navLinkIds = ["home", "work", "services", "contact"] as const;
 const features = [
-  { icon: Zap, label: "Fast" },
-  { icon: ShieldCheck, label: "Secure" },
-  { icon: Smartphone, label: "Responsive" },
+  { id: "fast", icon: Zap },
+  { id: "secure", icon: ShieldCheck },
+  { id: "responsive", icon: Smartphone },
 ];
-const quickLinks = ["Features", "Services", "About", "Contact"];
+const quickLinkIds = ["features", "services", "about", "contact"] as const;
 
 /** Full landing-page mockup (browser chrome, navbar, hero, feature cards,
  * testimonial, pricing, footer) for the Web Design service preview, with a
  * small phone preview alongside it. Illustrative demo copy only. */
 export function WebsiteMockup({ accent }: { accent: AccentColor }) {
+  const t = useTranslations("services");
   const stroke = accentStroke[accent];
   const tint = (p: number) => accentTint(accent, p);
 
@@ -37,8 +39,8 @@ export function WebsiteMockup({ accent }: { accent: AccentColor }) {
           <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: stroke }} />
           <span className="bg-foreground/15 h-1.5 w-10 rounded-full" />
           <nav className="text-caption text-foreground-secondary ml-auto hidden gap-3 sm:flex">
-            {navLinks.map((link) => (
-              <span key={link}>{link}</span>
+            {navLinkIds.map((id) => (
+              <span key={id}>{t(`mockups.website.navLinks.${id}`)}</span>
             ))}
           </nav>
         </div>
@@ -50,15 +52,17 @@ export function WebsiteMockup({ accent }: { accent: AccentColor }) {
             transition={{ duration: 0.45, ease: easePremium }}
             className="min-w-0 flex-1"
           >
-            <p className="text-body-sm text-foreground truncate font-semibold">Build something remarkable</p>
+            <p className="text-body-sm text-foreground truncate font-semibold">
+              {t("mockups.website.hero.title")}
+            </p>
             <p className="text-caption text-foreground-secondary mt-1 truncate">
-              Launch a premium web presence in weeks, not months.
+              {t("mockups.website.hero.description")}
             </p>
             <span
               className="text-caption mt-2 inline-block rounded-full px-3 py-1 font-medium text-white"
               style={{ backgroundColor: stroke }}
             >
-              Get Started
+              {t("mockups.website.hero.cta")}
             </span>
           </motion.div>
           <motion.div
@@ -73,14 +77,16 @@ export function WebsiteMockup({ accent }: { accent: AccentColor }) {
         <div className="border-border-subtle grid grid-cols-3 gap-2 border-b px-4 py-2.5">
           {features.map((f, i) => (
             <motion.div
-              key={f.label}
+              key={f.id}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.2 + i * 0.06, ease: easePremium }}
               className="border-border-subtle flex items-center gap-1.5 rounded-md border px-2 py-1.5"
             >
               <f.icon className="h-3.5 w-3.5 shrink-0" style={{ color: stroke }} aria-hidden />
-              <span className="text-caption text-foreground-secondary truncate">{f.label}</span>
+              <span className="text-caption text-foreground-secondary truncate">
+                {t(`mockups.website.features.${f.id}`)}
+              </span>
             </motion.div>
           ))}
         </div>
@@ -99,15 +105,17 @@ export function WebsiteMockup({ accent }: { accent: AccentColor }) {
         </motion.div>
 
         <div className="grid grid-cols-4 gap-2 px-4 py-2.5">
-          {quickLinks.map((link, i) => (
+          {quickLinkIds.map((id, i) => (
             <motion.div
-              key={link}
+              key={id}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.42 + i * 0.06, ease: easePremium }}
               className="border-border-subtle rounded-md border py-1.5 text-center"
             >
-              <p className="text-caption text-foreground-secondary truncate">{link}</p>
+              <p className="text-caption text-foreground-secondary truncate">
+                {t(`mockups.website.quickLinks.${id}`)}
+              </p>
             </motion.div>
           ))}
         </div>

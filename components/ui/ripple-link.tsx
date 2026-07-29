@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState, type PointerEvent, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 interface RippleLinkProps {

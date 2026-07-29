@@ -1,0 +1,221 @@
+{
+  "showcase": {
+    "eyebrow": "Our Services",
+    "title": "Build the Right Digital Solution for Your Business",
+    "description": "Explore our services and instantly preview how each solution works, what technologies we use, what you'll receive, and why it's the right choice."
+  },
+  "nav": {
+    "ariaLabel": "Novyra services"
+  },
+  "categories": {
+    "web-design": {
+      "label": "Web Design",
+      "subtitle": "Modern business websites",
+      "description": "Premium, conversion-ready design systems that make your brand feel established from the first scroll.",
+      "bestFor": ["Startups", "Small Businesses", "Personal Brands", "Portfolios"],
+      "keyBenefits": [
+        "Stronger first impression with visitors",
+        "Higher on-page engagement and conversion",
+        "Consistent brand experience across devices",
+        "Faster page loads from lean, modern markup"
+      ],
+      "deliverables": [
+        "Responsive page designs",
+        "Reusable UI component library",
+        "Interactive prototypes",
+        "Handoff-ready design system"
+      ],
+      "timeline": "2–4 Weeks",
+      "cta": "View Portfolio"
+    },
+    "web-development": {
+      "label": "Web Development",
+      "subtitle": "Custom scalable applications",
+      "description": "Custom production-grade web applications built using modern technologies with scalability and performance in mind.",
+      "bestFor": ["Startups", "Businesses", "Healthcare", "Education"],
+      "keyBenefits": [
+        "Fast, SEO-friendly pages out of the box",
+        "Secure by default, built on modern standards",
+        "Easy to extend as your business grows",
+        "Clean handover with documented code"
+      ],
+      "deliverables": [
+        "Responsive UI",
+        "Admin Panel",
+        "Authentication",
+        "API Integration",
+        "CMS",
+        "Deployment"
+      ],
+      "timeline": "3–8 Weeks",
+      "cta": "View Service"
+    },
+    "saas-development": {
+      "label": "SaaS Development",
+      "subtitle": "Cloud software platforms",
+      "description": "Full products for healthcare, education, and business — built to scale from day one.",
+      "bestFor": ["Healthcare Providers", "Educational Institutions", "Growing Businesses", "Multi-location Operations"],
+      "keyBenefits": [
+        "One platform to run daily operations",
+        "Role-based access for every user type",
+        "Built to scale as usage grows",
+        "Actionable reporting out of the box"
+      ],
+      "deliverables": [
+        "Multi-role dashboard application",
+        "Database schema & API layer",
+        "Reporting & analytics views",
+        "Admin & user management console"
+      ],
+      "timeline": "6–14 Weeks",
+      "cta": "Request a Quote"
+    },
+    "digital-marketing": {
+      "label": "Digital Marketing",
+      "subtitle": "SEO & Growth",
+      "description": "Growth infrastructure — campaigns, content, and tracking — built and measured honestly.",
+      "bestFor": ["Local Businesses", "E-commerce Brands", "B2B Companies", "Service Providers"],
+      "keyBenefits": [
+        "Clearer visibility into what's driving results",
+        "Consistent lead flow from owned channels",
+        "Coordinated content and ad calendars",
+        "Transparent, trackable performance reporting"
+      ],
+      "deliverables": [
+        "SEO audit & growth roadmap",
+        "Ad campaign setup & tracking",
+        "Content calendar",
+        "Monthly performance dashboard"
+      ],
+      "timeline": "Ongoing — Monthly Retainer",
+      "cta": "Book a Consultation"
+    },
+    "graphic-design": {
+      "label": "Graphic Design",
+      "subtitle": "Brand identity & creatives",
+      "description": "Brand identity that holds up at any size, from a favicon to a billboard.",
+      "bestFor": ["New Brands", "Rebrands", "Marketing Teams", "Product Launches"],
+      "keyBenefits": [
+        "Consistent, recognizable brand identity",
+        "Assets ready for print and digital",
+        "Faster turnaround on new marketing material",
+        "A cohesive look across every touchpoint"
+      ],
+      "deliverables": [
+        "Logo suite & brand guidelines",
+        "Social media template kit",
+        "Business card & stationery designs",
+        "Source files in editable formats"
+      ],
+      "timeline": "1–3 Weeks",
+      "cta": "View Portfolio"
+    }
+  },
+  "details": {
+    "perfectFor": "Perfect For",
+    "technologies": "Technologies",
+    "timeline": "Timeline",
+    "deliverables": "Deliverables",
+    "requestQuote": "Request Free Quote",
+    "viewService": "View Service"
+  },
+  "trustCard": {
+    "title": "Need Help Choosing?",
+    "description": "Not sure which service fits your business? Book a free consultation and we'll recommend the best solution based on your goals, budget, and timeline.",
+    "consultation": "Get Free Consultation",
+    "whatsapp": "Chat on WhatsApp",
+    "points": {
+      "freeConsultation": "Free Consultation",
+      "fastResponse": "Fast Response",
+      "noObligation": "No Obligation"
+    }
+  },
+  "mockups": {
+    "saas": {
+      "nav": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "analytics": "Analytics",
+        "billing": "Billing",
+        "roles": "Roles"
+      },
+      "highlights": {
+        "roleBasedAccess": "Role-Based Access",
+        "customReports": "Custom Reports",
+        "realtimeAnalytics": "Real-time Analytics"
+      },
+      "modulesTitle": "Platform Modules",
+      "modules": {
+        "crm": "CRM",
+        "hospitalErp": "Hospital ERP",
+        "schoolErp": "School ERP"
+      }
+    },
+    "dev": {
+      "status": {
+        "api": { "label": "API", "state": "Operational" },
+        "database": { "label": "Database", "state": "Connected" },
+        "cms": { "label": "CMS", "state": "Synced" },
+        "auth": { "label": "Authentication", "state": "Enabled" },
+        "deployment": { "label": "Deployment", "state": "Production" }
+      }
+    },
+    "marketing": {
+      "seoScoreLabel": "SEO Score",
+      "keywordRankingTitle": "Keyword Ranking",
+      "leadFunnelTitle": "Lead Funnel",
+      "campaignTimelineTitle": "Campaign Timeline",
+      "channels": {
+        "googleAds": "Google Ads",
+        "metaAds": "Meta Ads"
+      },
+      "funnel": {
+        "visitors": "Visitors",
+        "leads": "Leads",
+        "customers": "Customers"
+      },
+      "timeline": {
+        "plan": "Plan",
+        "launch": "Launch",
+        "optimize": "Optimize",
+        "report": "Report"
+      }
+    },
+    "website": {
+      "navLinks": {
+        "home": "Home",
+        "work": "Work",
+        "services": "Services",
+        "contact": "Contact"
+      },
+      "features": {
+        "fast": "Fast",
+        "secure": "Secure",
+        "responsive": "Responsive"
+      },
+      "quickLinks": {
+        "features": "Features",
+        "services": "Services",
+        "about": "About",
+        "contact": "Contact"
+      },
+      "hero": {
+        "title": "Build something remarkable",
+        "description": "Launch a premium web presence in weeks, not months.",
+        "cta": "Get Started"
+      }
+    },
+    "design": {
+      "items": {
+        "logo": "Logo",
+        "brandKit": "Brand Kit",
+        "businessCard": "Business Card",
+        "instagramPost": "Instagram Post",
+        "websiteBanner": "Website Banner",
+        "brochure": "Brochure",
+        "packaging": "Packaging",
+        "presentation": "Presentation"
+      }
+    }
+  }
+}

@@ -2,27 +2,30 @@
 
 import { Moon, Sun, MonitorSmartphone } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { useIsMounted } from "@/lib/use-is-mounted";
 
 const options = [
-  { value: "light", label: "Light theme", icon: Sun },
-  { value: "system", label: "System theme", icon: MonitorSmartphone },
-  { value: "dark", label: "Dark theme", icon: Moon },
+  { value: "light", key: "light", icon: Sun },
+  { value: "system", key: "system", icon: MonitorSmartphone },
+  { value: "dark", key: "dark", icon: Moon },
 ] as const;
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const mounted = useIsMounted();
+  const t = useTranslations("common.theme");
 
   return (
     <div
       role="radiogroup"
-      aria-label="Theme"
+      aria-label={t("label")}
       className="glass inline-flex items-center gap-1 rounded-pill p-1"
     >
-      {options.map(({ value, label, icon: Icon }) => {
+      {options.map(({ value, key, icon: Icon }) => {
         const active = mounted && theme === value;
+        const label = t(key);
         return (
           <button
             key={value}

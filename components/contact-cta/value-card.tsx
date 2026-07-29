@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { ContactValueCard } from "@/content/contact-cta";
@@ -13,6 +14,7 @@ interface ValueCardProps {
 /** One "Why Contact Novyra?" glass card — icon, title, description, glow
  * on hover. */
 export function ValueCard({ card, index }: ValueCardProps) {
+  const t = useTranslations("contact.contactValueCards");
   const Icon = card.icon;
   const stroke = accentStroke[card.accent];
 
@@ -36,8 +38,8 @@ export function ValueCard({ card, index }: ValueCardProps) {
       >
         <Icon className="h-6 w-6" style={{ color: stroke }} aria-hidden />
       </span>
-      <h4 className="text-title text-foreground font-semibold">{card.title}</h4>
-      <p className="text-body-sm text-foreground-secondary">{card.description}</p>
+      <h4 className="text-title text-foreground font-semibold">{t(`${card.id}.title`)}</h4>
+      <p className="text-body-sm text-foreground-secondary">{t(`${card.id}.description`)}</p>
     </motion.div>
   );
 }

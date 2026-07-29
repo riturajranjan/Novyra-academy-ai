@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, type MouseEvent, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -13,9 +14,18 @@ import { StageTimeline } from "@/components/advisor/stage-timeline";
 import { AdvisorOptionRow } from "@/components/advisor/advisor-option-row";
 import { InsightPanel } from "@/components/advisor/insight-panel";
 import { RoadmapResult } from "@/components/advisor/roadmap-result";
-import { needOptions, goalOptions, stageOptions, getRecommendation, getInsight, type StageId } from "@/content/solution-advisor";
+import {
+  needOptions,
+  goalOptions,
+  stageOptions,
+  getRecommendation,
+  type AdvisorOption,
+  type StageId,
+} from "@/content/solution-advisor";
 import { getNeedAccent, getGoalAccent, getStageAccent } from "@/lib/advisor-accent";
 import { cn } from "@/lib/utils";
+
+const stepOrder = ["need", "goal", "stage"] as const;
 
 interface Answers {
   need?: string;
@@ -48,18 +58,45 @@ function MagneticButton({ children }: { children: ReactNode }) {
   );
 }
 
-const stepQuestions = [
-  { question: "What would you like to create or improve?", hint: "Choose the closest match — we'll tailor the rest." },
-  { question: "What outcome matters most right now?", hint: "Pick the outcome you care about most." },
-  { question: "Where are you in your business journey?", hint: "This only adjusts the estimated timeline." },
-];
-
 /** A guided "Business Pathway" experience — a decision canvas the visitor
  * moves through rather than a service catalog. Recommends one of Novyra's
  * five real service lines, never a fabricated offering or a price. */
 export function SolutionAdvisor() {
+  const t = useTranslations("advisor");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
+
+  const translatedNeedOptions = useMemo<AdvisorOption[]>(
+    () =>
+      needOptions.map((o) => ({
+        ...o,
+        label: t(`needOptions.${o.id}.label`),
+        description: t(`needOptions.${o.id}.description`),
+        badge: t(`needOptions.${o.id}.badge`),
+        timeline: t(`needOptions.${o.id}.timeline`),
+      })),
+    [t],
+  );
+  const translatedGoalOptions = useMemo<AdvisorOption[]>(
+    () =>
+      goalOptions.map((o) => ({
+        ...o,
+        label: t(`goalOptions.${o.id}.label`),
+        description: t(`goalOptions.${o.id}.description`),
+        badge: t(`goalOptions.${o.id}.badge`),
+        timeline: t(`goalOptions.${o.id}.timeline`),
+      })),
+    [t],
+  );
+  const translatedStageOptions = useMemo<(AdvisorOption & { id: StageId })[]>(
+    () =>
+      stageOptions.map((o) => ({
+        ...o,
+        label: t(`stageOptions.${o.id}.label`),
+        description: t(`stageOptions.${o.id}.description`),
+      })),
+    [t],
+  );
 
   const result = useMemo(() => {
     if (!answers.need || !answers.goal || !answers.stage) return null;
@@ -68,16 +105,18 @@ export function SolutionAdvisor() {
 
   const currentAnswerId = step === 0 ? answers.need : step === 1 ? answers.goal : answers.stage;
   const canContinue = Boolean(currentAnswerId);
-  const { question, hint } = stepQuestions[step] ?? stepQuestions[0];
+  const stepKey = stepOrder[step] ?? stepOrder[0];
+  const question = t(`stepQuestions.${stepKey}.question`);
+  const hint = t(`stepQuestions.${stepKey}.hint`);
   const accent = getNeedAccent(answers.need);
 
   const insightText =
     step === 0 && answers.need
-      ? getInsight(answers.need)
+      ? t(`recommendations.${answers.need}.insight`)
       : step === 1 && answers.goal
-        ? goalOptions.find((g) => g.id === answers.goal)?.description
+        ? translatedGoalOptions.find((g) => g.id === answers.goal)?.description
         : step === 2 && answers.stage
-          ? stageOptions.find((s) => s.id === answers.stage)?.description
+          ? translatedStageOptions.find((s) => s.id === answers.stage)?.description
           : undefined;
 
   function selectNeed(id: string) {
@@ -111,18 +150,14 @@ export function SolutionAdvisor() {
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute top-1/2 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.16] blur-[100px]"
           />
-          <SectionHeading
-            eyebrow="Smart Solution Advisor"
-            title="Find the Perfect Digital Solution for Your Business"
-            description="Answer a few quick questions and our AI-powered advisor will recommend the ideal digital solution tailored to your business goals, growth stage, and budget."
-          />
+          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {["Free Consultation", "Personalized Roadmap", "No Commitment"].map((point) => (
+            {(["freeConsultation", "personalizedRoadmap", "noCommitment"] as const).map((pointId) => (
               <span
-                key={point}
+                key={pointId}
                 className="text-caption rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1.5 text-white/70 backdrop-blur-sm"
               >
-                {point}
+                {t(`trustPoints.${pointId}`)}
               </span>
             ))}
           </div>
@@ -150,7 +185,12 @@ export function SolutionAdvisor() {
                         </p>
                         <p className="text-body-sm max-w-md text-balance text-center text-white/50">{hint}</p>
                       </div>
-                      <SolutionSelector options={needOptions} hint={hint} selectedId={answers.need} onSelect={selectNeed} />
+                      <SolutionSelector
+                        options={translatedNeedOptions}
+                        hint={hint}
+                        selectedId={answers.need}
+                        onSelect={selectNeed}
+                      />
                     </div>
                   ) : null}
 
@@ -159,23 +199,21 @@ export function SolutionAdvisor() {
                       {step === 1 ? (
                         <>
                           <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
-                          <p className="text-body-sm text-balance text-center text-white/50">
-                            Choose the goal that best matches your current business priority.
-                          </p>
+                          <p className="text-body-sm text-balance text-center text-white/50">{t("stepDescriptions.goalHint")}</p>
                         </>
                       ) : null}
                       {step === 2 ? (
                         <>
                           <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
                           <p className="text-body-sm text-balance text-center text-white/50">
-                            Choose the stage that best represents where your business is today.
+                            {t("stepDescriptions.stageHintShort")}
                           </p>
                         </>
                       ) : null}
                     </div>
                     <div className="flex flex-col gap-3">
                       {step === 1
-                        ? goalOptions.map((o) => (
+                        ? translatedGoalOptions.map((o) => (
                             <AdvisorOptionRow
                               key={o.id}
                               option={o}
@@ -186,7 +224,7 @@ export function SolutionAdvisor() {
                           ))
                         : null}
                       {step === 2
-                        ? stageOptions.map((o) => (
+                        ? translatedStageOptions.map((o) => (
                             <AdvisorOptionRow
                               key={o.id}
                               option={o}
@@ -210,10 +248,10 @@ export function SolutionAdvisor() {
                             {question}
                           </p>
                           <p className="text-body-lg max-w-175 text-balance text-center text-white/50">
-                            Choose the goal that best matches your current business priority.
+                            {t("stepDescriptions.goalHint")}
                           </p>
                         </div>
-                        <GoalPathway options={goalOptions} selectedId={answers.goal} onSelect={selectGoal} />
+                        <GoalPathway options={translatedGoalOptions} selectedId={answers.goal} onSelect={selectGoal} />
                       </div>
                     ) : null}
                     {step === 2 ? (
@@ -229,11 +267,10 @@ export function SolutionAdvisor() {
                             className="text-body-lg max-w-175 text-balance text-center"
                             style={{ color: "rgba(255,255,255,0.72)" }}
                           >
-                            Choose the stage that best represents where your business is today. We&apos;ll recommend the
-                            right digital solution for your current growth.
+                            {t("stepDescriptions.stageHintLong")}
                           </p>
                         </div>
-                        <StageTimeline options={stageOptions} selectedId={answers.stage} onSelect={selectStage} />
+                        <StageTimeline options={translatedStageOptions} selectedId={answers.stage} onSelect={selectStage} />
                       </div>
                     ) : null}
                   </div>
@@ -252,7 +289,7 @@ export function SolutionAdvisor() {
                       )}
                     >
                       <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
-                      Back
+                      {t("actions.back")}
                     </motion.button>
                     <MagneticButton>
                       <motion.button
@@ -270,7 +307,7 @@ export function SolutionAdvisor() {
                           aria-hidden
                           className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-700 ease-out group-active:translate-x-full md:hidden"
                         />
-                        Continue
+                        {t("actions.continue")}
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
                       </motion.button>
                     </MagneticButton>

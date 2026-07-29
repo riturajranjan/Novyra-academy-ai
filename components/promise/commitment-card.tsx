@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,7 @@ interface CommitmentCardProps {
 /** One bento card in the commitments grid — replaces a testimonial card
  * with an operating promise instead of an attributed client quote. */
 export function CommitmentCard({ card, index }: CommitmentCardProps) {
+  const t = useTranslations("promise.commitmentCards");
   const Icon = card.icon;
   const stroke = accentStroke[card.accent];
 
@@ -55,8 +57,8 @@ export function CommitmentCard({ card, index }: CommitmentCardProps) {
       </span>
 
       <div className="flex flex-col gap-2">
-        <h4 className="text-title text-foreground font-semibold">{card.title}</h4>
-        <p className="text-body-sm text-foreground-secondary max-w-md">{card.description}</p>
+        <h4 className="text-title text-foreground font-semibold">{t(`${card.id}.title`)}</h4>
+        <p className="text-body-sm text-foreground-secondary max-w-md">{t(`${card.id}.description`)}</p>
       </div>
     </motion.div>
   );

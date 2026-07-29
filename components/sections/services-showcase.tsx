@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { BokehBackground } from "@/components/ui/bokeh-background";
@@ -15,6 +16,7 @@ import { serviceCategories } from "@/content/service-categories";
  * `lg`. One layout, breakpoint-driven, so mobile/tablet/desktop never drift
  * into separate implementations. */
 export function ServicesShowcase() {
+  const t = useTranslations("services");
   const [activeId, setActiveId] = useState(serviceCategories[0].id);
   const activeCategory = serviceCategories.find((c) => c.id === activeId) ?? serviceCategories[0];
 
@@ -24,9 +26,9 @@ export function ServicesShowcase() {
 
       <Container className="flex flex-col gap-10 md:gap-14">
         <SectionHeading
-          eyebrow="Our Services"
-          title="Build the Right Digital Solution for Your Business"
-          description="Explore our services and instantly preview how each solution works, what technologies we use, what you'll receive, and why it's the right choice."
+          eyebrow={t("showcase.eyebrow")}
+          title={t("showcase.title")}
+          description={t("showcase.description")}
         />
 
         <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[300px_minmax(0,1fr)_300px]">

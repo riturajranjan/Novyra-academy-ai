@@ -1,16 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Magnetic } from "@/components/ui/magnetic";
 import { buttonVariants } from "@/components/ui/button";
 import { RippleLink } from "@/components/ui/ripple-link";
-import { footerCtas, footerHero } from "@/content/footer";
+import { footerCtas } from "@/content/footer";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 /** The footer's opening statement — the largest, most confident heading on
  * the page, with three magnetic/ripple CTAs underneath. */
 export function FooterHero() {
+  const t = useTranslations("footer");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -20,16 +23,17 @@ export function FooterHero() {
       className="flex flex-col items-center gap-5 text-center"
     >
       <h2 className="text-display-lg sm:text-display-xl text-foreground font-semibold text-balance">
-        Let&apos;s Build The Future <span className="text-gradient-brand">Together.</span>
+        {t("hero.heading")}
       </h2>
-      <p className="text-body sm:text-body-lg text-foreground-secondary max-w-2xl text-pretty">{footerHero.description}</p>
+      <p className="text-body sm:text-body-lg text-foreground-secondary max-w-2xl text-pretty">{t("hero.description")}</p>
 
       <div className="flex w-full flex-col items-center gap-2.5 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center">
         {footerCtas.map((cta) => {
           const Icon = cta.icon;
           const external = cta.href.startsWith("http");
+          const label = t(`ctas.${cta.id}`);
           return (
-            <Magnetic key={cta.label} className="w-full sm:w-auto">
+            <Magnetic key={cta.id} className="w-full sm:w-auto">
               <RippleLink
                 href={cta.href}
                 className={cn(buttonVariants({ variant: cta.variant, size: "lg" }), "group relative w-full overflow-hidden sm:w-auto")}
@@ -43,7 +47,7 @@ export function FooterHero() {
                   />
                 ) : null}
                 <Icon className="h-4 w-4" aria-hidden />
-                {cta.label}
+                {label}
               </RippleLink>
             </Magnetic>
           );

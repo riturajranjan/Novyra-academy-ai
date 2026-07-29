@@ -2,16 +2,18 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { CircleCheck, Headset } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { RippleLink } from "@/components/ui/ripple-link";
 
-const trustPoints = ["Free Consultation", "Fast Response", "No Obligation"];
+const trustPointIds = ["freeConsultation", "fastResponse", "noObligation"] as const;
 
 /** Glass "need help choosing?" card anchored below the service navigation —
  * a soft idle float at rest, and on hover a lift, a brighter gradient glow,
  * and a one-shot light-reflection sweep across the surface. */
 export function ServiceTrustCard() {
+  const t = useTranslations("services");
   const reduceMotion = useReducedMotion();
 
   return (
@@ -32,7 +34,7 @@ export function ServiceTrustCard() {
         />
 
         <div className="flex items-start justify-between gap-3">
-          <h3 className="text-title text-foreground font-semibold">Need Help Choosing?</h3>
+          <h3 className="text-title text-foreground font-semibold">{t("trustCard.title")}</h3>
           <span className="relative flex h-9 w-9 shrink-0 items-center justify-center">
             <motion.span
               aria-hidden
@@ -45,25 +47,22 @@ export function ServiceTrustCard() {
             </span>
           </span>
         </div>
-        <p className="text-body-sm text-foreground-secondary mt-2.5">
-          Not sure which service fits your business? Book a free consultation and we&apos;ll recommend the best
-          solution based on your goals, budget, and timeline.
-        </p>
+        <p className="text-body-sm text-foreground-secondary mt-2.5">{t("trustCard.description")}</p>
 
         <div className="mt-5 flex flex-col gap-2.5">
           <RippleLink href="/contact" className={cn(buttonVariants({ variant: "gradient", size: "md" }), "w-full")}>
-            <span aria-hidden>🚀</span> Get Free Consultation
+            <span aria-hidden>🚀</span> {t("trustCard.consultation")}
           </RippleLink>
           <RippleLink href="/contact" className={cn(buttonVariants({ variant: "glass", size: "md" }), "w-full")}>
-            <span aria-hidden>💬</span> Chat on WhatsApp
+            <span aria-hidden>💬</span> {t("trustCard.whatsapp")}
           </RippleLink>
         </div>
 
         <ul className="mt-5 flex flex-col gap-1.5">
-          {trustPoints.map((point) => (
-            <li key={point} className="text-caption text-foreground-secondary flex items-center gap-1.5">
+          {trustPointIds.map((id) => (
+            <li key={id} className="text-caption text-foreground-secondary flex items-center gap-1.5">
               <CircleCheck className="text-brand-emerald h-3.5 w-3.5 shrink-0" aria-hidden />
-              {point}
+              {t(`trustCard.points.${id}`)}
             </li>
           ))}
         </ul>

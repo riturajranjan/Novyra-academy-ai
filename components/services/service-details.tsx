@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CalendarClock, CheckCircle2, Sparkles, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -65,6 +66,10 @@ function DetailGroup({ label, icon: Icon, accent, items, variant }: DetailGroupP
  * category, so this panel is allowed to grow taller than the preview rather
  * than being clipped or force-stretched to match it. */
 export function ServiceDetails({ category }: { category: ServiceCategory }) {
+  const t = useTranslations("services");
+  const bestFor = t.raw(`categories.${category.id}.bestFor`) as string[];
+  const deliverables = t.raw(`categories.${category.id}.deliverables`) as string[];
+
   return (
     <div className="glass shadow-card overflow-hidden rounded-[28px]">
       <AnimatePresence mode="wait">
@@ -77,22 +82,32 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
           className="flex flex-col gap-5 p-5"
         >
           <div>
-            <p className="text-title-lg text-foreground font-semibold">{category.label}</p>
-            <p className="text-body-sm text-foreground-secondary mt-2">{category.description}</p>
+            <p className="text-title-lg text-foreground font-semibold">{t(`categories.${category.id}.label`)}</p>
+            <p className="text-body-sm text-foreground-secondary mt-2">
+              {t(`categories.${category.id}.description`)}
+            </p>
           </div>
 
-          <DetailGroup label="Perfect For" icon={Sparkles} accent={category.accent} items={category.bestFor} variant="chips" />
-          <DetailGroup label="Technologies" icon={Wrench} accent={category.accent} items={category.technologies} variant="chips" />
+          <DetailGroup label={t("details.perfectFor")} icon={Sparkles} accent={category.accent} items={bestFor} variant="chips" />
+          <DetailGroup
+            label={t("details.technologies")}
+            icon={Wrench}
+            accent={category.accent}
+            items={category.technologies}
+            variant="chips"
+          />
 
           <div>
             <p className="text-caption text-foreground-secondary flex items-center gap-1.5 font-semibold tracking-wide uppercase">
               <CalendarClock className="h-3.5 w-3.5" style={{ color: accentStroke[category.accent] }} aria-hidden />
-              Timeline
+              {t("details.timeline")}
             </p>
-            <p className="text-body-sm text-foreground mt-2.5 font-medium">{category.timeline}</p>
+            <p className="text-body-sm text-foreground mt-2.5 font-medium">
+              {t(`categories.${category.id}.timeline`)}
+            </p>
           </div>
 
-          <DetailGroup label="Deliverables" icon={CheckCircle2} accent={category.accent} items={category.deliverables} variant="list" />
+          <DetailGroup label={t("details.deliverables")} icon={CheckCircle2} accent={category.accent} items={deliverables} variant="list" />
 
           <div className="border-border-subtle grid grid-cols-1 gap-2.5 border-t pt-6 min-[1200px]:grid-cols-2">
             <RippleLink
@@ -102,7 +117,7 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
                 "group min-h-[46px] w-full min-w-0 px-3 text-[14px]",
               )}
             >
-              <span className="min-w-0 truncate">Request Free Quote</span>
+              <span className="min-w-0 truncate">{t("details.requestQuote")}</span>
               <ArrowRight
                 className="h-4 w-4 shrink-0 transition-transform duration-fast group-hover:translate-x-0.5"
                 aria-hidden
@@ -115,7 +130,7 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
                 "min-h-[46px] w-full min-w-0 px-3 text-[14px]",
               )}
             >
-              <span className="min-w-0 truncate">View Service</span>
+              <span className="min-w-0 truncate">{t("details.viewService")}</span>
             </RippleLink>
           </div>
         </motion.div>

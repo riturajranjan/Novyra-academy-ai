@@ -7,7 +7,6 @@ import {
   Cloud,
   Code2,
   HelpCircle,
-  LayoutDashboard,
   Mail,
   MapPin,
   Megaphone,
@@ -20,118 +19,60 @@ import {
 } from "lucide-react";
 
 export interface NavLeaf {
-  label: string;
+  id: string;
   href: string;
-  description: string;
   icon: LucideIcon;
 }
 
 export interface NavFeatured {
-  title: string;
-  description: string;
+  id: string;
   href: string;
-  cta: string;
 }
 
 export interface NavItem {
-  label: string;
+  id: string;
   href: string;
   icon: LucideIcon;
   children?: NavLeaf[];
   featured?: NavFeatured;
 }
 
+/** Structural data only — every label/description/title/cta string lives in
+ * messages/{locale}/nav.json, keyed by `id`, so this file doesn't change
+ * per locale. `id` is also what drives active/hover/open state in the nav
+ * components (translated `label` text can't be used as a stable key or
+ * identity — it differs per locale). */
 export const navItems: NavItem[] = [
   {
-    label: "About",
+    id: "about",
     href: "/about",
     icon: Building2,
     children: [
-      {
-        label: "About Us",
-        href: "/about#about-us",
-        description: "Who we are and what drives us.",
-        icon: Building2,
-      },
-      {
-        label: "Our Mission",
-        href: "/about#mission",
-        description: "What we're building toward.",
-        icon: Target,
-      },
-      {
-        label: "Why Choose Us",
-        href: "/about#why-choose-us",
-        description: "What sets Novyra apart.",
-        icon: Sparkles,
-      },
-      {
-        label: "FAQ",
-        href: "/about#faq",
-        description: "Common questions, answered.",
-        icon: HelpCircle,
-      },
-      {
-        label: "Location",
-        href: "/about#location",
-        description: "Find our office and hours.",
-        icon: MapPin,
-      },
+      { id: "aboutUs", href: "/about#about-us", icon: Building2 },
+      { id: "mission", href: "/about#mission", icon: Target },
+      { id: "whyChooseUs", href: "/about#why-choose-us", icon: Sparkles },
+      { id: "faq", href: "/about#faq", icon: HelpCircle },
+      { id: "location", href: "/about#location", icon: MapPin },
     ],
-    featured: {
-      title: "Meet the team",
-      description: "The people building Novyra Technologies.",
-      href: "/about#team",
-      cta: "Explore About",
-    },
+    featured: { id: "about", href: "/about#team" },
   },
   {
-    label: "Services",
+    id: "services",
     href: "/services",
     icon: Code2,
     children: [
-      {
-        label: "Web Design & Development",
-        href: "/services/web-design-development",
-        description: "Websites built for craft and speed.",
-        icon: Code2,
-      },
-      {
-        label: "Digital Marketing",
-        href: "/services/digital-marketing",
-        description: "Growth-focused marketing strategy.",
-        icon: Megaphone,
-      },
-      {
-        label: "Web Applications",
-        href: "/services/web-applications",
-        description: "Custom apps for real workflows.",
-        icon: AppWindow,
-      },
-      {
-        label: "Graphic Design",
-        href: "/services/graphic-design",
-        description: "Visual identity that stands out.",
-        icon: PenTool,
-      },
-      {
-        label: "SaaS Development",
-        href: "/services/saas-development",
-        description: "Full-stack SaaS product builds.",
-        icon: Cloud,
-      },
+      { id: "webDesign", href: "/services/web-design-development", icon: Code2 },
+      { id: "digitalMarketing", href: "/services/digital-marketing", icon: Megaphone },
+      { id: "webApplications", href: "/services/web-applications", icon: AppWindow },
+      { id: "graphicDesign", href: "/services/graphic-design", icon: PenTool },
+      { id: "saasDevelopment", href: "/services/saas-development", icon: Cloud },
     ],
-    featured: {
-      title: "Not sure where to start?",
-      description: "Tell us about your project and we'll recommend a path.",
-      href: "/contact",
-      cta: "Talk to us",
-    },
+    featured: { id: "services", href: "/contact" },
   },
-  { label: "Solutions", href: "/solutions", icon: Blocks },
-  { label: "Products", href: "/products", icon: Package },
-  { label: "Pricing", href: "/pricing", icon: BadgePercent },
-  { label: "Blog", href: "/blog", icon: Newspaper },
-  { label: "Clients", href: "/clients", icon: Users },
-  { label: "Contact Us", href: "/contact", icon: Mail },
+  { id: "solutions", href: "/solutions", icon: Blocks },
+  { id: "products", href: "/products", icon: Package },
+  { id: "pricing", href: "/pricing", icon: BadgePercent },
+  { id: "blog", href: "/blog", icon: Newspaper },
+  { id: "clients", href: "/clients", icon: Users },
+  { id: "contact", href: "/contact", icon: Mail },
 ];

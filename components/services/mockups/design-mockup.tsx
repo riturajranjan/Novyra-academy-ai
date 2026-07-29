@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Image as ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { AccentColor } from "@/content/hero-screens";
@@ -9,11 +10,12 @@ import type { AccentColor } from "@/content/hero-screens";
 /** Gallery of brand-collateral mockups for the Graphic Design service
  * preview. Shapes and labels only — no fabricated client artwork. */
 export function DesignMockup({ accent }: { accent: AccentColor }) {
+  const t = useTranslations("services");
   const tint = (p: number) => accentTint(accent, p);
 
-  const items: { label: string; content: React.ReactNode }[] = [
+  const items: { id: string; content: React.ReactNode }[] = [
     {
-      label: "Logo",
+      id: "logo",
       content: (
         <div className="flex h-full items-center justify-center">
           <div className="h-7 w-7 rounded-full" style={{ backgroundColor: accentStroke[accent] }} />
@@ -21,7 +23,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Brand Kit",
+      id: "brandKit",
       content: (
         <div className="flex h-full flex-col items-center justify-center gap-1.5">
           <div className="flex gap-1">
@@ -34,7 +36,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Business Card",
+      id: "businessCard",
       content: (
         <div className="flex h-full flex-col justify-center gap-1 px-2">
           <span className="h-2 w-2 rounded-full" style={{ backgroundColor: accentStroke[accent] }} />
@@ -44,7 +46,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Instagram Post",
+      id: "instagramPost",
       content: (
         <div className="flex h-full flex-col items-center justify-center gap-1">
           <ImageIcon className="h-4 w-4" style={{ color: accentStroke[accent] }} aria-hidden />
@@ -53,7 +55,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Website Banner",
+      id: "websiteBanner",
       content: (
         <div className="flex h-full items-center px-2">
           <span className="h-2 w-full rounded-full" style={{ backgroundColor: tint(24) }} />
@@ -61,7 +63,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Brochure",
+      id: "brochure",
       content: (
         <div className="flex h-full gap-1 p-1.5">
           {[26, 18, 12].map((p) => (
@@ -71,7 +73,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Packaging",
+      id: "packaging",
       content: (
         <div className="flex h-full items-center justify-center">
           <div
@@ -82,7 +84,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
       ),
     },
     {
-      label: "Presentation",
+      id: "presentation",
       content: (
         <div className="flex h-full flex-col justify-center gap-1 px-2">
           <span className="h-1.5 w-2/3 rounded-full" style={{ backgroundColor: accentStroke[accent] }} />
@@ -97,7 +99,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
     <div className="grid h-full grid-cols-3 gap-2 p-3 sm:grid-cols-4">
       {items.map((item, i) => (
         <motion.div
-          key={item.label}
+          key={item.id}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, delay: i * 0.05, ease: easePremium }}
@@ -105,7 +107,7 @@ export function DesignMockup({ accent }: { accent: AccentColor }) {
         >
           <div className="min-h-0 flex-1">{item.content}</div>
           <p className="text-caption text-foreground-secondary border-border-subtle truncate border-t px-1.5 py-1 text-center">
-            {item.label}
+            {t(`mockups.design.items.${item.id}`)}
           </p>
         </motion.div>
       ))}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { animate, motion, useInView, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { trustMetrics } from "@/content/contact-cta";
 import { easePremium } from "@/lib/motion";
 
@@ -40,20 +41,21 @@ function AnimatedMetricValue({ value }: { value: string }) {
  * Portfolio") simply fade in instead of counting, since not every honest
  * metric here is a number. */
 export function TrustMetrics() {
+  const t = useTranslations("contact.trustMetrics");
   return (
     <div className="glass-strong shadow-card relative grid grid-cols-2 gap-5 overflow-hidden rounded-[28px] p-5 sm:grid-cols-5 md:gap-6 md:p-10">
       <div aria-hidden className="bg-brand-blue/8 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       {trustMetrics.map((metric, i) => (
         <motion.div
-          key={metric.label}
+          key={metric.id}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.45, delay: i * 0.06, ease: easePremium }}
           className="flex flex-col items-center gap-1.5 text-center"
         >
-          <AnimatedMetricValue value={metric.value} />
-          <span className="text-caption text-foreground-secondary font-medium tracking-wide uppercase">{metric.label}</span>
+          <AnimatedMetricValue value={t(`${metric.id}.value`)} />
+          <span className="text-caption text-foreground-secondary font-medium tracking-wide uppercase">{t(`${metric.id}.label`)}</span>
         </motion.div>
       ))}
     </div>

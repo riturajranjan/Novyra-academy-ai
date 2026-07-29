@@ -2,17 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { easePremium } from "@/lib/motion";
 
-const words = ["businesses", "hospitals", "schools", "startups", "growing companies", "healthcare", "education"];
 const INTERVAL_MS = 2600;
 
 /** Single rotating headline keyword — cycles through Novyra's core verticals
- * with a blur/fade/slide transition. Sized via an invisible widest-word
- * sizer stacked in the same grid cell so the sentence never reflows. The
- * full word list is exposed to screen readers as static text; the animated
- * span itself is aria-hidden to avoid rapid re-announcements. */
+ * with a blur/fade/slide transition. Sized via an invisible sizer stacked in
+ * the same grid cell so the sentence never reflows — the sizer picks
+ * whichever translated word is longest at render time, since the widest
+ * word isn't the same one across locales/scripts. The full word list is
+ * exposed to screen readers as static text; the animated span itself is
+ * aria-hidden to avoid rapid re-announcements. */
 export function RotatingKeyword() {
+  const t = useTranslations("hero");
+  const words = t.raw("rotatingWords") as string[];
+  const joiner = t("rotatingWordsJoiner");
+  const widestWord = words.reduce((a, b) => (b.length > a.length ? b : a), "");
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
 
@@ -20,12 +26,14 @@ export function RotatingKeyword() {
     if (reduceMotion) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % words.length), INTERVAL_MS);
     return () => clearInterval(id);
-  }, [reduceMotion]);
+  }, [reduceMotion, words.length]);
+
+  const srText = `${words.slice(0, -1).join(", ")} ${joiner} ${words[words.length - 1]}`;
 
   return (
     <span className="relative inline-grid align-baseline text-left">
       <span className="invisible col-start-1 row-start-1" aria-hidden>
-        growing companies
+        {widestWord}
       </span>
       <AnimatePresence mode="wait">
         <motion.span
@@ -40,7 +48,7 @@ export function RotatingKeyword() {
           {words[index]}
         </motion.span>
       </AnimatePresence>
-      <span className="sr-only">businesses, hospitals, schools, startups, growing companies, healthcare, and education</span>
+      <span className="sr-only">{srText}</span>
     </span>
   );
 }

@@ -2,6 +2,7 @@
 
 import { Mail, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { companyInfo } from "@/content/footer";
 import { easePremium } from "@/lib/motion";
 
@@ -9,6 +10,8 @@ import { easePremium } from "@/lib/motion";
  * two-line description, and real contact details, kept to a single column
  * so it sits evenly alongside Company / Services / Resources. */
 export function CompanyInfoCard() {
+  const t = useTranslations("footer.companyInfo");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,7 +24,7 @@ export function CompanyInfoCard() {
         Novyra<span className="text-gradient-brand">.</span>
       </span>
 
-      <p className="text-body-sm text-foreground-secondary">{companyInfo.description}</p>
+      <p className="text-body-sm text-foreground-secondary">{t("description")}</p>
 
       <div className="border-border-subtle flex flex-col gap-1.5 border-t pt-3">
         <a href={`mailto:${companyInfo.email}`} className="text-body-sm text-foreground-secondary hover:text-foreground flex items-center gap-2 transition-colors duration-fast">
@@ -37,7 +40,7 @@ export function CompanyInfoCard() {
         </a>
         <div className="text-body-sm text-foreground-secondary flex items-center gap-2">
           <MapPin className="text-brand-blue h-3.5 w-3.5 shrink-0" aria-hidden />
-          {companyInfo.location}
+          {t("location")}
         </div>
       </div>
     </motion.div>

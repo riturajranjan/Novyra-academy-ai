@@ -52,7 +52,7 @@ export function TeamVisual() {
       <div className="absolute top-6 left-6 flex -space-x-3">
         {teamRoles.map((role, i) => (
           <motion.span
-            key={role.label}
+            key={role.id}
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "150px" }}

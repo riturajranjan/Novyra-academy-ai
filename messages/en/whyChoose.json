@@ -1,0 +1,87 @@
+{
+  "sectionHeading": {
+    "eyebrow": "Why Choose Novyra",
+    "titleBefore": "Why Businesses",
+    "titleHighlight": "Choose Novyra",
+    "description": "From strategy and product design to engineering, AI automation, SEO, and long-term support — we build digital products that scale with your business."
+  },
+  "heroBento": {
+    "heading": "Built by an Expert Product Team, Not Just Freelancers",
+    "description": "Every project is delivered by dedicated UI/UX designers, frontend engineers, backend developers, QA specialists, SEO experts, AI engineers, and project managers."
+  },
+  "heroBadges": {
+    "ai-powered": "AI-Powered",
+    "enterprise-grade": "Enterprise-Grade"
+  },
+  "capabilityChips": {
+    "ui-ux": "UI/UX Design",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "ai-automation": "AI Automation",
+    "seo": "SEO",
+    "cloud": "Cloud",
+    "qa": "QA",
+    "project-management": "Project Management",
+    "api-development": "API Development",
+    "analytics": "Analytics"
+  },
+  "featureCards": {
+    "seo-architecture": {
+      "title": "SEO First Architecture",
+      "description": "Every build starts with a structure search engines can actually read.",
+      "bullets": ["Semantic markup and clean URL structure", "Fast, crawlable page architecture", "Structured data where it matters"]
+    },
+    "performance": {
+      "title": "95+ Lighthouse Performance",
+      "description": "A performance budget the team designs and builds against, not an afterthought.",
+      "bullets": ["Optimised images and lazy loading", "Minimal JavaScript payloads", "Edge-ready hosting on Vercel"],
+      "metricLabel": "Performance Score",
+      "metricValue": "95+"
+    },
+    "custom-ui": {
+      "title": "Fully Custom UI/UX",
+      "description": "Designed around your brand in Figma, never a recycled template.",
+      "bullets": ["Designed for your brand, not a template", "Responsive across every device"]
+    },
+    "cms-dashboard": {
+      "title": "CMS & Admin Dashboard",
+      "description": "Manage content and operations without needing a developer on call.",
+      "bullets": ["Edit content without touching code", "Role-based access control"],
+      "metricLabel": "Response Time",
+      "metricValue": "<200ms"
+    },
+    "ai-integrations": {
+      "title": "AI & Third-Party Integrations",
+      "description": "Payments, CRM, analytics, and AI-assisted workflows wired in cleanly.",
+      "bullets": ["Payment, CRM, and analytics integrations", "AI-assisted workflows where useful"]
+    },
+    "post-launch": {
+      "title": "Post-Launch Support",
+      "description": "Launch day isn't the finish line — the team that built it stays on to support it.",
+      "bullets": ["Monitoring and bug fixes after launch", "Guidance from the team that built it, not a new one"]
+    }
+  },
+  "trustedTechnologies": {
+    "eyebrow": "Trusted Technologies",
+    "heading": "Powered by Modern Technologies",
+    "description": "We build fast, scalable, secure, and future-ready digital products using the world's most trusted technologies and cloud infrastructure."
+  },
+  "techCategories": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Database",
+    "cloud-devops": "Cloud & DevOps"
+  },
+  "featureStrip": {
+    "full-stack-engineering": { "label": "Full-Stack Engineering", "detail": "Every skill under one roof" },
+    "ai-powered-development": { "label": "AI-Powered Development", "detail": "Smarter workflows & automation" },
+    "enterprise-architecture": { "label": "Enterprise Architecture", "detail": "Scalable & secure codebase" },
+    "long-term-partnership": { "label": "Long-Term Partnership", "detail": "Support after launch" }
+  },
+  "trustMetrics": {
+    "modern-technologies": { "label": "Modern Technologies", "value": "19" },
+    "engineering-disciplines": { "label": "Engineering Disciplines", "value": "4" },
+    "lighthouse-target": { "label": "Lighthouse Target", "value": "95+" },
+    "typescript-codebase": { "label": "TypeScript Codebase", "value": "100%" }
+  }
+}

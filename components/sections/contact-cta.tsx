@@ -2,6 +2,7 @@
 
 import { CircleCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ContactCtaBackground } from "@/components/contact-cta/contact-cta-background";
@@ -17,6 +18,8 @@ import { easePremium } from "@/lib/motion";
 /** The final conversion section before the footer — the most visually
  * elaborate section on the page by design. */
 export function ContactCta() {
+  const t = useTranslations("contact");
+
   return (
     <section id="contact" className="relative isolate py-14 md:py-32">
       <ContactCtaBackground />
@@ -24,14 +27,14 @@ export function ContactCta() {
       <Container className="flex flex-col gap-10 md:gap-16">
         <div className="flex flex-col items-center gap-6">
           <SectionHeading
-            eyebrow="Let's Build Something Amazing"
-            title="Ready to Transform Your Business?"
-            description="Whether you need a premium business website, a scalable SaaS platform, AI automation, or a custom web application, our team is ready to bring your vision to life."
+            eyebrow={t("sectionHeading.eyebrow")}
+            title={t("sectionHeading.title")}
+            description={t("sectionHeading.description")}
           />
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {ctaTrustBadges.map((label, i) => (
+            {ctaTrustBadges.map((id, i) => (
               <motion.span
-                key={label}
+                key={id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "150px" }}
@@ -39,7 +42,7 @@ export function ContactCta() {
                 className="border-border-subtle bg-surface/60 text-body-sm text-foreground-secondary flex items-center gap-1.5 rounded-full border px-4 py-2 font-medium backdrop-blur-md"
               >
                 <CircleCheck className="text-brand-emerald h-4 w-4" aria-hidden />
-                {label}
+                {t(`ctaTrustBadges.${id}`)}
               </motion.span>
             ))}
           </div>
@@ -55,11 +58,11 @@ export function ContactCta() {
 
         <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h3 className="text-title-lg text-foreground font-semibold">Why Contact Novyra?</h3>
+            <h3 className="text-title-lg text-foreground font-semibold">{t("whyContact.heading")}</h3>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {contactValueCards.map((card, i) => (
-              <ValueCard key={card.title} card={card} index={i} />
+              <ValueCard key={card.id} card={card} index={i} />
             ))}
           </div>
         </div>

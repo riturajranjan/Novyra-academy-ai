@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const messageRows = [
   { from: "team", width: 62 },
@@ -9,7 +10,6 @@ const messageRows = [
   { from: "you", width: 36 },
 ];
 
-const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 const demoDayIndex = 2;
 
 /** An abstract "how we work" mockup — a message thread and a weekly-demo
@@ -17,6 +17,8 @@ const demoDayIndex = 2;
  * content or names. Standing in for a communication rhythm, not a specific
  * recorded conversation. */
 export function ProcessVisual() {
+  const t = useTranslations("promise.processVisual");
+  const weekDays = t.raw("weekDays") as string[];
   const reduceMotion = useReducedMotion();
 
   return (
@@ -32,7 +34,7 @@ export function ProcessVisual() {
             animate={reduceMotion ? undefined : { opacity: [1, 0.4, 1] }}
             transition={reduceMotion ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
-          This Week
+          {t("thisWeek")}
         </span>
       </div>
 
@@ -71,7 +73,7 @@ export function ProcessVisual() {
             </div>
           ))}
         </div>
-        <p className="text-caption text-foreground-secondary text-center">Recurring demo, every week</p>
+        <p className="text-caption text-foreground-secondary text-center">{t("recurringDemo")}</p>
       </div>
     </div>
   );

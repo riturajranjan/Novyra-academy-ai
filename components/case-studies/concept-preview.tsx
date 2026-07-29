@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { accentTint } from "@/lib/accent";
 import type { AccentColor } from "@/content/hero-screens";
@@ -16,6 +17,7 @@ interface ConceptPreviewProps {
  * a real screenshot, since this represents a concept build, not a
  * deployed product. */
 export function ConceptPreview({ accent }: ConceptPreviewProps) {
+  const t = useTranslations("caseStudies.preview");
   const reduceMotion = useReducedMotion();
 
   return (
@@ -31,7 +33,7 @@ export function ConceptPreview({ accent }: ConceptPreviewProps) {
             animate={reduceMotion ? undefined : { opacity: [1, 0.4, 1] }}
             transition={reduceMotion ? undefined : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
-          Concept Preview
+          {t("label")}
         </span>
       </div>
       <div className="grid flex-1 grid-cols-3 gap-3 p-4">
@@ -61,7 +63,7 @@ export function ConceptPreview({ accent }: ConceptPreviewProps) {
         transition={reduceMotion ? undefined : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="glass-strong shadow-card absolute right-4 bottom-4 rounded-xl px-3 py-2"
       >
-        <span className="text-caption text-foreground font-semibold">Live Metrics</span>
+        <span className="text-caption text-foreground font-semibold">{t("liveMetrics")}</span>
       </motion.div>
     </div>
   );

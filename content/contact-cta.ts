@@ -19,142 +19,99 @@ import {
 } from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
 
-export const ctaTrustBadges = ["Free Consultation", "Custom Proposal", "No Hidden Charges", "Fast Response", "Dedicated Team"];
+/** Structural data only — label text lives in messages/{locale}/contact.json
+ * under `ctaTrustBadges.<id>`. */
+export const ctaTrustBadges = [
+  "free-consultation",
+  "custom-proposal",
+  "no-hidden-charges",
+  "fast-response",
+  "dedicated-team",
+];
 
-export const heroCard = {
-  eyebrow: "Let's Build Something Amazing",
-  title: "Let's Turn Your Idea Into Reality",
-  description:
-    "Share your project goals, and we'll recommend the best technology, timeline, and solution tailored to your business.",
-};
+/** All text for the hero glass card (title/description) lives in
+ * messages/{locale}/contact.json under `heroCard` — there's no per-locale
+ * structural data to keep here, so this content module intentionally has
+ * no export for it. */
 
 export interface QuickContactCard {
   id: string;
-  title: string;
-  detail: string;
-  note: string;
   icon: LucideIcon;
   accent: AccentColor;
   href: string;
 }
 
 /** Real contact channels, not placeholder copy — matching the business
- * contact details Novyra actually publishes. */
+ * contact details Novyra actually publishes. Structural data only —
+ * title/detail/note text lives in messages/{locale}/contact.json under
+ * `quickContactCards.<id>`. */
 export const quickContactCards: QuickContactCard[] = [
-  {
-    id: "schedule-call",
-    title: "Schedule a Call",
-    detail: "Book a free strategy session.",
-    note: "Available Monday–Saturday",
-    icon: Calendar,
-    accent: "blue",
-    href: "/contact",
-  },
-  {
-    id: "email",
-    title: "Email Us",
-    detail: "hello@novyratech.in",
-    note: "Typical response within 24 hours.",
-    icon: Mail,
-    accent: "purple",
-    href: "mailto:hello@novyratech.in",
-  },
-  {
-    id: "call",
-    title: "Call Us",
-    detail: "+91 7903724407",
-    note: "Speak directly with our team.",
-    icon: Phone,
-    accent: "cyan",
-    href: "tel:+917903724407",
-  },
-  {
-    id: "whatsapp",
-    title: "WhatsApp",
-    detail: "Start a conversation instantly.",
-    note: "Quick project discussion.",
-    icon: MessageCircle,
-    accent: "emerald",
-    href: "https://wa.me/917903724407",
-  },
+  { id: "schedule-call", icon: Calendar, accent: "blue", href: "/contact" },
+  { id: "email", icon: Mail, accent: "purple", href: "mailto:hello@novyratech.in" },
+  { id: "call", icon: Phone, accent: "cyan", href: "tel:+917903724407" },
+  { id: "whatsapp", icon: MessageCircle, accent: "emerald", href: "https://wa.me/917903724407" },
 ];
 
 export interface ContactValueCard {
-  title: string;
-  description: string;
+  id: string;
   icon: LucideIcon;
   accent: AccentColor;
 }
 
+/** Structural data only — title/description text lives in
+ * messages/{locale}/contact.json under `contactValueCards.<id>`. */
 export const contactValueCards: ContactValueCard[] = [
-  {
-    title: "Free Discovery Session",
-    description: "Understand your requirements before spending anything.",
-    icon: Compass,
-    accent: "blue",
-  },
-  {
-    title: "Expert Consultation",
-    description: "Receive recommendations from experienced developers.",
-    icon: Users,
-    accent: "purple",
-  },
-  {
-    title: "Transparent Planning",
-    description: "Clear pricing, realistic timelines, and defined milestones.",
-    icon: Layers,
-    accent: "cyan",
-  },
-  {
-    title: "Long-Term Partnership",
-    description: "We continue supporting your product after launch.",
-    icon: Handshake,
-    accent: "amber",
-  },
+  { id: "free-discovery-session", icon: Compass, accent: "blue" },
+  { id: "expert-consultation", icon: Users, accent: "purple" },
+  { id: "transparent-planning", icon: Layers, accent: "cyan" },
+  { id: "long-term-partnership", icon: Handshake, accent: "amber" },
 ];
 
 export interface CtaTimelineStep {
-  label: string;
+  id: string;
   icon: LucideIcon;
 }
 
+/** Structural data only — label text lives in
+ * messages/{locale}/contact.json under `ctaTimeline.<id>`. */
 export const ctaTimeline: CtaTimelineStep[] = [
-  { label: "Discovery", icon: Compass },
-  { label: "Proposal", icon: FileSearch },
-  { label: "Design", icon: Palette },
-  { label: "Development", icon: Code2 },
-  { label: "Testing", icon: TestTube2 },
-  { label: "Launch", icon: Rocket },
-  { label: "Support", icon: LifeBuoy },
+  { id: "discovery", icon: Compass },
+  { id: "proposal", icon: FileSearch },
+  { id: "design", icon: Palette },
+  { id: "development", icon: Code2 },
+  { id: "testing", icon: TestTube2 },
+  { id: "launch", icon: Rocket },
+  { id: "support", icon: LifeBuoy },
 ];
 
 export interface TrustMetric {
-  label: string;
-  value: string;
+  id: string;
 }
 
 /** Only verifiable, forward-looking facts — a real technology count and
  * real operating commitments (100% custom development, 24h response, full
  * code ownership) — plus a deliberately non-numeric "Growing Portfolio" for
  * project count, since Novyra doesn't have a project history to cite as a
- * number yet. */
+ * number yet. Structural data only — label/value text lives in
+ * messages/{locale}/contact.json under `trustMetrics.<id>`. */
 export const trustMetrics: TrustMetric[] = [
-  { label: "Projects Planned", value: "Growing Portfolio" },
-  { label: "Modern Technologies", value: "19" },
-  { label: "Custom Development", value: "100%" },
-  { label: "Average Response Time", value: "24 Hours" },
-  { label: "Source Code Ownership", value: "100%" },
+  { id: "projects-planned" },
+  { id: "modern-technologies" },
+  { id: "custom-development" },
+  { id: "average-response-time" },
+  { id: "source-code-ownership" },
 ];
 
 export interface ContactDetail {
-  label: string;
-  value: string;
+  id: string;
   icon: LucideIcon;
 }
 
+/** Structural data only — label/value text lives in
+ * messages/{locale}/contact.json under `contactDetails.<id>`. */
 export const contactDetails: ContactDetail[] = [
-  { label: "Business Email", value: "hello@novyratech.in", icon: Mail },
-  { label: "Phone", value: "+91 7903724407", icon: Phone },
-  { label: "Location", value: "India", icon: MapPin },
-  { label: "Working Hours", value: "Monday – Saturday, 9:00 AM – 7:00 PM IST", icon: Clock },
+  { id: "business-email", icon: Mail },
+  { id: "phone", icon: Phone },
+  { id: "location", icon: MapPin },
+  { id: "working-hours", icon: Clock },
 ];

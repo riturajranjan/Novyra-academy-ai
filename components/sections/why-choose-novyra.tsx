@@ -2,6 +2,7 @@
 
 import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { WhyChooseBackground } from "@/components/why-choose/why-choose-background";
@@ -17,19 +18,21 @@ import { easePremium } from "@/lib/motion";
  * technical-standard claims only, never an invented project count, client
  * satisfaction score, or years-in-business figure Novyra doesn't have. */
 export function WhyChooseNovyra() {
+  const t = useTranslations("whyChoose");
+
   return (
     <section id="why-choose-novyra" className="relative isolate overflow-hidden py-14 md:py-32">
       <WhyChooseBackground />
 
       <Container className="flex flex-col gap-10 md:gap-16">
         <SectionHeading
-          eyebrow="Why Choose Novyra"
+          eyebrow={t("sectionHeading.eyebrow")}
           title={
             <>
-              Why Businesses <span className="text-gradient-brand">Choose Novyra</span>
+              {t("sectionHeading.titleBefore")} <span className="text-gradient-brand">{t("sectionHeading.titleHighlight")}</span>
             </>
           }
-          description="From strategy and product design to engineering, AI automation, SEO, and long-term support — we build digital products that scale with your business."
+          description={t("sectionHeading.description")}
         />
 
         {/* hero bento card */}
@@ -42,10 +45,10 @@ export function WhyChooseNovyra() {
             <div className="relative">
               <TeamVisual />
               <div className="border-border-subtle bg-surface/90 absolute -bottom-4 left-6 flex items-center gap-2 rounded-full border px-4 py-2 shadow-card backdrop-blur-md">
-                {heroBadges.map((badge, i) => (
-                  <span key={badge} className="flex items-center gap-1.5">
+                {heroBadges.map((badgeId, i) => (
+                  <span key={badgeId} className="flex items-center gap-1.5">
                     <CheckCircle2 className="text-brand-emerald h-3.5 w-3.5" aria-hidden />
-                    <span className="text-caption text-foreground font-medium">{badge}</span>
+                    <span className="text-caption text-foreground font-medium">{t(`heroBadges.${badgeId}`)}</span>
                     {i < heroBadges.length - 1 ? <span className="text-border-subtle mx-1">•</span> : null}
                   </span>
                 ))}
@@ -54,11 +57,10 @@ export function WhyChooseNovyra() {
 
             <div className="flex flex-col gap-6 pt-4 lg:pt-0">
               <h3 className="text-title-lg sm:text-headline text-foreground font-semibold text-balance">
-                Built by an Expert Product Team, Not Just Freelancers
+                {t("heroBento.heading")}
               </h3>
               <p className="text-body-sm sm:text-body text-foreground-secondary text-pretty">
-                Every project is delivered by dedicated UI/UX designers, frontend engineers, backend developers, QA
-                specialists, SEO experts, AI engineers, and project managers.
+                {t("heroBento.description")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {capabilityChips.map((chip, i) => {
@@ -75,7 +77,7 @@ export function WhyChooseNovyra() {
                       style={{ ["--chip-glow" as string]: accentTint(chip.accent, 45) }}
                     >
                       <Icon className="h-3.5 w-3.5" style={{ color: accentStroke[chip.accent] }} aria-hidden />
-                      <span className="text-caption text-foreground-secondary font-medium">{chip.label}</span>
+                      <span className="text-caption text-foreground-secondary font-medium">{t(`capabilityChips.${chip.id}`)}</span>
                     </motion.span>
                   );
                 })}

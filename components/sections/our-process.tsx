@@ -3,6 +3,7 @@
 import type { MouseEvent, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { buttonVariants } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import { ProcessBackground } from "@/components/process/process-background";
 import { ProcessTimeline } from "@/components/process/process-timeline";
 import { cn } from "@/lib/utils";
 
-const trustPoints = ["Transparent process", "Regular updates", "Post-launch support"];
+const trustPointIds = ["transparent-process", "regular-updates", "post-launch-support"];
 
 /** Small magnetic wrapper for the CTA buttons — nudges toward the pointer
  * within a subtle range and springs back on leave. Mouse-driven only;
@@ -45,6 +46,8 @@ function MagneticButton({ children }: { children: ReactNode }) {
  * steps and their real deliverables. Header, timeline, and CTA all sit in
  * normal document flow — nothing here is absolutely positioned. */
 export function OurProcess() {
+  const t = useTranslations("process");
+
   return (
     <section id="process" className="relative isolate py-14 md:py-24">
       <ProcessBackground />
@@ -56,20 +59,20 @@ export function OurProcess() {
             className="bg-gradient-brand pointer-events-none absolute top-1/2 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14] blur-[100px]"
           />
           <SectionHeading
-            eyebrow="How We Work"
+            eyebrow={t("sectionHeading.eyebrow")}
             title={
               <>
-                From Idea to Launch,
+                {t("sectionHeading.titleLine1")}
                 <br className="hidden sm:block" />{" "}
-                <span className="text-gradient-brand">A Clear and Proven Process</span>
+                <span className="text-gradient-brand">{t("sectionHeading.titleHighlight")}</span>
               </>
             }
-            description="Every project moves through a focused six-step workflow designed to keep communication clear, quality high, and delivery predictable."
+            description={t("sectionHeading.description")}
           />
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {trustPoints.map((point) => (
-              <span key={point} className="glass text-caption text-foreground-secondary rounded-full px-3.5 py-1.5">
-                {point}
+            {trustPointIds.map((id) => (
+              <span key={id} className="glass text-caption text-foreground-secondary rounded-full px-3.5 py-1.5">
+                {t(`trustPoints.${id}`)}
               </span>
             ))}
           </div>
@@ -90,11 +93,8 @@ export function OurProcess() {
                 <ArrowRight className="h-3 w-3" />
               </span>
               <div className="flex flex-col gap-2">
-                <h3 className="text-title-lg text-foreground font-semibold">Ready to Build Something Amazing?</h3>
-                <p className="text-body-sm text-foreground-secondary max-w-md">
-                  Start your project with a free strategy session and receive a personalized roadmap tailored to your
-                  business goals.
-                </p>
+                <h3 className="text-title-lg text-foreground font-semibold">{t("cta.heading")}</h3>
+                <p className="text-body-sm text-foreground-secondary max-w-md">{t("cta.description")}</p>
               </div>
               <div className="mx-auto grid w-full max-w-[480px] grid-cols-1 gap-3 sm:grid-cols-2">
                 <MagneticButton>
@@ -105,7 +105,7 @@ export function OurProcess() {
                       "group min-h-[50px] w-full px-5 whitespace-nowrap",
                     )}
                   >
-                    Start Your Project
+                    {t("cta.startProject")}
                     <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-1" aria-hidden />
                   </RippleLink>
                 </MagneticButton>
@@ -117,7 +117,7 @@ export function OurProcess() {
                       "min-h-[50px] w-full px-5 whitespace-nowrap",
                     )}
                   >
-                    Schedule Discovery Call
+                    {t("cta.scheduleCall")}
                   </RippleLink>
                 </MagneticButton>
               </div>

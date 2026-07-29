@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,8 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
 export function NavMobile() {
+  const t = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const [open, setOpen] = useState(false);
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -60,7 +63,7 @@ export function NavMobile() {
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        aria-label="Open menu"
+        aria-label={tCommon("openMenu")}
         onClick={() => setOpen(true)}
         className="glass flex h-12 w-12 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
       >
@@ -74,7 +77,7 @@ export function NavMobile() {
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Site navigation"
+            aria-label={tCommon("siteNavigation")}
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -87,7 +90,7 @@ export function NavMobile() {
               <button
                 ref={closeRef}
                 type="button"
-                aria-label="Close menu"
+                aria-label={tCommon("closeMenu")}
                 onClick={() => setOpen(false)}
                 className="glass flex h-11 w-11 items-center justify-center rounded-pill text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
               >
@@ -99,35 +102,36 @@ export function NavMobile() {
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const hasChildren = Boolean(item.children?.length);
-                const isExpanded = expandedKey === item.label;
+                const isExpanded = expandedKey === item.id;
+                const label = t(`${item.id}.label`);
 
                 if (!hasChildren) {
                   return (
-                    <li key={item.label}>
+                    <li key={item.id}>
                       <Link
                         href={item.href}
                         onClick={() => setOpen(false)}
                         className="hover:bg-foreground/5 flex items-center gap-3 rounded-xl px-3 py-3 text-body font-medium text-foreground transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
                       >
                         <Icon className="text-foreground-secondary h-5 w-5" aria-hidden />
-                        {item.label}
+                        {label}
                       </Link>
                     </li>
                   );
                 }
 
                 return (
-                  <li key={item.label}>
+                  <li key={item.id}>
                     <button
                       type="button"
                       aria-expanded={isExpanded}
-                      aria-controls={`mobile-panel-${item.label}`}
-                      onClick={() => setExpandedKey((k) => (k === item.label ? null : item.label))}
+                      aria-controls={`mobile-panel-${item.id}`}
+                      onClick={() => setExpandedKey((k) => (k === item.id ? null : item.id))}
                       className="hover:bg-foreground/5 flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-body font-medium text-foreground transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
                     >
                       <span className="flex items-center gap-3">
                         <Icon className="text-foreground-secondary h-5 w-5" aria-hidden />
-                        {item.label}
+                        {label}
                       </span>
                       <ChevronDown
                         className={cn(
@@ -138,7 +142,7 @@ export function NavMobile() {
                       />
                     </button>
                     <div
-                      id={`mobile-panel-${item.label}`}
+                      id={`mobile-panel-${item.id}`}
                       className={cn(
                         "grid transition-[grid-template-rows] duration-base ease-soft",
                         isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
@@ -147,13 +151,13 @@ export function NavMobile() {
                       <div className="overflow-hidden">
                         <ul className="flex flex-col gap-0.5 py-1 pl-11 pr-2">
                           {item.children!.map((child) => (
-                            <li key={child.label}>
+                            <li key={child.id}>
                               <Link
                                 href={child.href}
                                 onClick={() => setOpen(false)}
                                 className="hover:bg-foreground/5 block rounded-lg px-3 py-2 text-body-sm text-foreground-secondary transition-colors duration-fast hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
                               >
-                                {child.label}
+                                {t(`${item.id}.children.${child.id}.label`)}
                               </Link>
                             </li>
                           ))}
@@ -175,7 +179,7 @@ export function NavMobile() {
               onClick={() => setOpen(false)}
               className={cn(buttonVariants({ variant: "gradient", size: "md" }), "mt-4 w-full")}
             >
-              Start a Project
+              {tCommon("startProject")}
             </Link>
           </motion.div>
         ) : null}

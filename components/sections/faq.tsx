@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -11,10 +12,11 @@ import { FaqCategoryTabs } from "@/components/faq/faq-category-tabs";
 import { FaqAccordionItem } from "@/components/faq/faq-accordion-item";
 import { FaqInfoPanel } from "@/components/faq/faq-info-panel";
 import { FaqTrustBanner } from "@/components/faq/faq-trust-banner";
-import { faqEntries, faqTrustBadges, type FaqCategory } from "@/content/faq";
+import { faqEntries, faqTrustBadgeIds, type FaqCategory } from "@/content/faq";
 import { easePremium } from "@/lib/motion";
 
 export function Faq() {
+  const t = useTranslations("faq");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<FaqCategory>("General");
   const [openId, setOpenId] = useState<string | null>(
@@ -25,13 +27,15 @@ export function Faq() {
     const q = query.trim().toLowerCase();
     return faqEntries.filter((entry) => {
       const matchesCategory = entry.category === category;
-      const matchesQuery =
-        !q ||
-        entry.question.toLowerCase().includes(q) ||
-        entry.answer.toLowerCase().includes(q);
-      return matchesCategory && matchesQuery;
+      if (!matchesCategory) return false;
+      if (!q) return true;
+      // Search against the currently displayed (translated) text, not the
+      // English content ids, so search works correctly in every locale.
+      const question = t(`entries.${entry.id}.question`).toLowerCase();
+      const answer = t(`entries.${entry.id}.answer`).toLowerCase();
+      return question.includes(q) || answer.includes(q);
     });
-  }, [query, category]);
+  }, [query, category, t]);
 
   return (
     <section id="faq" className="relative isolate py-14 md:py-32">
@@ -40,14 +44,14 @@ export function Faq() {
       <Container className="flex flex-col gap-10 md:gap-14">
         <div className="flex flex-col items-center gap-6">
           <SectionHeading
-            eyebrow="Frequently Asked Questions"
-            title="Everything You Need to Know Before Starting Your Project"
-            description="We've answered the most common questions about pricing, timelines, development, support, and our workflow. If you still have questions, our team is always happy to help."
+            eyebrow={t("section.eyebrow")}
+            title={t("section.title")}
+            description={t("section.description")}
           />
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {faqTrustBadges.map((label, i) => (
+            {faqTrustBadgeIds.map((id, i) => (
               <motion.span
-                key={label}
+                key={id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "150px" }}
@@ -61,7 +65,7 @@ export function Faq() {
                   className="text-brand-emerald h-4 w-4"
                   aria-hidden
                 />
-                {label}
+                {t(`trustBadges.${id}`)}
               </motion.span>
             ))}
           </div>
@@ -93,8 +97,7 @@ export function Faq() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-body-sm text-foreground-secondary py-12 text-center">
-                    No questions match &quot;{query}&quot; — try a different
-                    search or category.
+                    {t("noResults", { query })}
                   </motion.p>
                 )}
               </AnimatePresence>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { PointerEvent } from "react";
+import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -187,10 +188,11 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
  * cards, one per accent color, replacing the earlier wavy pathway track.
  * Same selection logic and step position as before. */
 export function GoalPathway({ options, selectedId, onSelect }: GoalPathwayProps) {
+  const t = useTranslations("advisor");
   return (
     <div
       role="radiogroup"
-      aria-label="What outcome matters most right now?"
+      aria-label={t("stepQuestions.goal.question")}
       className="grid w-full grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6"
     >
       {options.map((option, i) => (

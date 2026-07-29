@@ -1,0 +1,16 @@
+{
+  "startProject": "Start a Project",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "siteNavigation": "Site navigation",
+  "theme": {
+    "label": "Theme",
+    "light": "Light theme",
+    "system": "System theme",
+    "dark": "Dark theme"
+  },
+  "language": {
+    "selectLanguage": "Select language",
+    "language": "Language"
+  }
+}

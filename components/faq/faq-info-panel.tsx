@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { Magnetic } from "@/components/ui/magnetic";
 import { buttonVariants } from "@/components/ui/button";
@@ -48,6 +49,9 @@ function GlassObject() {
 /** Left-column glass panel — "have more questions" invitation, real
  * response/engagement commitments (not a fabricated stat), and two CTAs. */
 export function FaqInfoPanel() {
+  const t = useTranslations("faq.infoPanel");
+  const tCta = useTranslations("faq.ctas");
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -62,11 +66,8 @@ export function FaqInfoPanel() {
       <GlassObject />
 
       <div className="flex flex-col gap-2.5">
-        <h3 className="text-title-lg text-foreground font-semibold">Have More Questions?</h3>
-        <p className="text-body-sm text-foreground-secondary max-w-sm">
-          Our team is available to discuss your project requirements, recommend the right solution, and answer any
-          technical or business questions.
-        </p>
+        <h3 className="text-title-lg text-foreground font-semibold">{t("heading")}</h3>
+        <p className="text-body-sm text-foreground-secondary max-w-sm">{t("description")}</p>
       </div>
 
       <div className="grid w-full grid-cols-2 gap-3">
@@ -74,11 +75,11 @@ export function FaqInfoPanel() {
           const Icon = stat.icon;
           return (
             <div
-              key={stat.label}
+              key={stat.id}
               className="border-border-subtle bg-surface/60 flex flex-col items-center gap-2 rounded-2xl border p-4 text-center lg:items-start lg:text-left"
             >
               <Icon className="text-brand-blue h-4.5 w-4.5" aria-hidden />
-              <span className="text-caption text-foreground font-semibold">{stat.label}</span>
+              <span className="text-caption text-foreground font-semibold">{t(`stats.${stat.id}`)}</span>
             </div>
           );
         })}
@@ -94,13 +95,13 @@ export function FaqInfoPanel() {
               aria-hidden
               className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-full"
             />
-            Book Free Consultation
+            {tCta("bookConsultation")}
             <ArrowRight className="h-4 w-4 transition-transform duration-fast group-hover:translate-x-0.5" aria-hidden />
           </RippleLink>
         </Magnetic>
         <Magnetic className="w-full">
           <RippleLink href="/contact" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}>
-            Contact Our Team
+            {tCta("contactTeam")}
           </RippleLink>
         </Magnetic>
       </div>

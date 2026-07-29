@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { filters, type CaseStudyFilter } from "@/content/case-studies";
@@ -10,12 +11,16 @@ interface FilterBarProps {
 }
 
 /** Floating glass filter pill — industry chips with a spring-animated
- * selection indicator, horizontally scrollable on mobile. */
+ * selection indicator, horizontally scrollable on mobile. Filter identity
+ * and comparison (`active`/`onSelect`) always use the stable
+ * `CaseStudyFilter` id; only the rendered label is translated. */
 export function FilterBar({ active, onSelect }: FilterBarProps) {
+  const t = useTranslations("caseStudies");
+
   return (
     <div
       role="tablist"
-      aria-label="Filter concept builds by industry"
+      aria-label={t("filterBar.ariaLabel")}
       className="glass mx-auto flex max-w-full gap-1.5 overflow-x-auto rounded-pill p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {filters.map((filter) => {
@@ -36,7 +41,9 @@ export function FilterBar({ active, onSelect }: FilterBarProps) {
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             ) : null}
-            <span className={cn("relative", isActive ? "text-white" : "text-foreground-secondary")}>{filter}</span>
+            <span className={cn("relative", isActive ? "text-white" : "text-foreground-secondary")}>
+              {t(`filters.${filter}`)}
+            </span>
           </button>
         );
       })}

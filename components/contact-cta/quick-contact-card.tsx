@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { QuickContactCard as QuickContactCardData } from "@/content/contact-cta";
@@ -13,9 +14,11 @@ interface QuickContactCardProps {
 /** One of the four quick-contact glass cards — floating icon, glow on
  * hover, gradient-tinted border, and a lift on hover. */
 export function QuickContactCard({ card, index }: QuickContactCardProps) {
+  const t = useTranslations("contact");
   const Icon = card.icon;
   const stroke = accentStroke[card.accent];
   const external = card.href.startsWith("http") || card.href.startsWith("mailto") || card.href.startsWith("tel");
+  const title = t(`quickContactCards.${card.id}.title`);
 
   return (
     <motion.a
@@ -28,7 +31,7 @@ export function QuickContactCard({ card, index }: QuickContactCardProps) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: easePremium }}
       className="group border-border-subtle bg-surface/70 relative flex min-h-[76px] flex-row items-center gap-3 overflow-hidden rounded-[24px] border p-4 backdrop-blur-xl transition-shadow duration-base md:flex-col md:items-start md:gap-3 md:p-6"
-      aria-label={`${card.title}${external ? " (opens in a new tab)" : ""}`}
+      aria-label={`${title}${external ? t("opensInNewTab") : ""}`}
     >
       <div
         aria-hidden
@@ -49,9 +52,9 @@ export function QuickContactCard({ card, index }: QuickContactCardProps) {
         <Icon className="h-5 w-5 md:h-6 md:w-6" style={{ color: stroke }} aria-hidden />
       </motion.span>
       <div className="flex min-w-0 flex-col gap-0.5 md:gap-1">
-        <h4 className="text-body-sm md:text-title text-foreground truncate font-semibold">{card.title}</h4>
-        <p className="text-caption md:text-body-sm text-foreground-secondary truncate">{card.detail}</p>
-        <p className="text-caption text-foreground-secondary/80 hidden md:block">{card.note}</p>
+        <h4 className="text-body-sm md:text-title text-foreground truncate font-semibold">{title}</h4>
+        <p className="text-caption md:text-body-sm text-foreground-secondary truncate">{t(`quickContactCards.${card.id}.detail`)}</p>
+        <p className="text-caption text-foreground-secondary/80 hidden md:block">{t(`quickContactCards.${card.id}.note`)}</p>
       </div>
     </motion.a>
   );

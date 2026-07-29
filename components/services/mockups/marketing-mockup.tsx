@@ -2,10 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Megaphone, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { AccentColor } from "@/content/hero-screens";
 
+/** Illustrative example search phrases — kept in English like real-world
+ * SEO keyword research/data would be, not translated as UI copy. */
 const keywords = [
   { term: "premium web design agency", position: "#3" },
   { term: "custom saas development", position: "#7" },
@@ -13,21 +16,22 @@ const keywords = [
 ];
 
 const channels = [
-  { icon: Search, label: "Google Ads" },
-  { icon: Megaphone, label: "Meta Ads" },
+  { id: "googleAds", icon: Search },
+  { id: "metaAds", icon: Megaphone },
 ];
 
-const campaignTimeline = ["Plan", "Launch", "Optimize", "Report"];
+const campaignTimelineIds = ["plan", "launch", "optimize", "report"] as const;
 const funnel = [
-  { label: "Visitors", width: "100%" },
-  { label: "Leads", width: "62%" },
-  { label: "Customers", width: "28%" },
+  { id: "visitors", width: "100%" },
+  { id: "leads", width: "62%" },
+  { id: "customers", width: "28%" },
 ];
 
 /** SEO score, ad channels, keyword ranking, lead funnel, and campaign
  * timeline for the Digital Marketing service preview. Deliberately no
  * revenue, ROAS, or ad-spend figures — process and rankings only. */
 export function MarketingMockup({ accent }: { accent: AccentColor }) {
+  const t = useTranslations("services");
   const r = 20;
   const c = 2 * Math.PI * r;
   const score = 92;
@@ -53,12 +57,12 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
         </svg>
         <div>
           <p className="text-title-lg text-foreground leading-none font-semibold">{score}/100</p>
-          <p className="text-caption text-foreground-secondary mt-1">SEO Score</p>
+          <p className="text-caption text-foreground-secondary mt-1">{t("mockups.marketing.seoScoreLabel")}</p>
         </div>
         <div className="ml-auto flex items-center gap-1.5">
           {channels.map((ch, i) => (
             <motion.span
-              key={ch.label}
+              key={ch.id}
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.15 + i * 0.08, ease: easePremium }}
@@ -66,7 +70,7 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
               style={{ backgroundColor: accentTint(accent, 12), color: accentTint(accent, 95) }}
             >
               <ch.icon className="h-3 w-3" aria-hidden />
-              {ch.label}
+              {t(`mockups.marketing.channels.${ch.id}`)}
             </motion.span>
           ))}
         </div>
@@ -74,7 +78,7 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
 
       <div className="border-border-subtle rounded-xl border p-3">
         <p className="text-caption text-foreground-secondary mb-2 font-medium tracking-[0.08em] uppercase">
-          Keyword Ranking
+          {t("mockups.marketing.keywordRankingTitle")}
         </p>
         <div className="flex flex-col gap-1.5">
           {keywords.map((k, i) => (
@@ -95,12 +99,12 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
       <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="border-border-subtle rounded-xl border p-3">
           <p className="text-caption text-foreground-secondary mb-2.5 font-medium tracking-[0.08em] uppercase">
-            Lead Funnel
+            {t("mockups.marketing.leadFunnelTitle")}
           </p>
           <div className="flex flex-col gap-1.5">
             {funnel.map((stage, i) => (
               <motion.div
-                key={stage.label}
+                key={stage.id}
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ duration: 0.4, delay: 0.5 + i * 0.1, ease: easePremium }}
@@ -111,7 +115,9 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
                   className="h-4 rounded-full"
                   style={{ width: stage.width, backgroundColor: accentTint(accent, 22 - i * 6) }}
                 />
-                <span className="text-caption text-foreground-secondary shrink-0">{stage.label}</span>
+                <span className="text-caption text-foreground-secondary shrink-0">
+                  {t(`mockups.marketing.funnel.${stage.id}`)}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -119,11 +125,11 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
 
         <div className="border-border-subtle rounded-xl border p-3">
           <p className="text-caption text-foreground-secondary mb-2.5 font-medium tracking-[0.08em] uppercase">
-            Campaign Timeline
+            {t("mockups.marketing.campaignTimelineTitle")}
           </p>
           <div className="flex flex-wrap items-center gap-1.5">
-            {campaignTimeline.map((step, i) => (
-              <motion.div key={step} className="flex items-center gap-1.5">
+            {campaignTimelineIds.map((id, i) => (
+              <motion.div key={id} className="flex items-center gap-1.5">
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -131,9 +137,9 @@ export function MarketingMockup({ accent }: { accent: AccentColor }) {
                   className="text-caption rounded-full px-2.5 py-1 font-medium"
                   style={{ backgroundColor: accentTint(accent, 12), color: accentTint(accent, 95) }}
                 >
-                  {step}
+                  {t(`mockups.marketing.timeline.${id}`)}
                 </motion.span>
-                {i < campaignTimeline.length - 1 ? (
+                {i < campaignTimelineIds.length - 1 ? (
                   <span className="text-foreground-secondary/40 text-caption">→</span>
                 ) : null}
               </motion.div>

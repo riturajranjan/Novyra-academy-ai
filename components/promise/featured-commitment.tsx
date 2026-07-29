@@ -2,14 +2,17 @@
 
 import { CircleCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { ProcessVisual } from "@/components/promise/process-visual";
-import { featuredCommitment } from "@/content/our-promise";
 import { easePremium } from "@/lib/motion";
 
 /** The large featured "how we work" card — a split glass hero, standing in
  * for a featured testimonial. Every claim is an operating commitment we make
  * going forward, never a quote attributed to a client that doesn't exist. */
 export function FeaturedCommitment() {
+  const t = useTranslations("promise.featuredCommitment");
+  const bullets = t.raw("bullets") as string[];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -31,16 +34,16 @@ export function FeaturedCommitment() {
 
         <div className="flex flex-col justify-center gap-6">
           <span className="text-caption bg-brand-emerald/12 text-brand-emerald inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-emerald/35 px-3 py-1 font-semibold tracking-wide uppercase">
-            {featuredCommitment.eyebrow}
+            {t("eyebrow")}
           </span>
 
           <div className="flex flex-col gap-3">
-            <h3 className="text-headline text-foreground font-semibold text-balance">{featuredCommitment.title}</h3>
-            <p className="text-body-sm sm:text-body text-foreground-secondary text-pretty">{featuredCommitment.description}</p>
+            <h3 className="text-headline text-foreground font-semibold text-balance">{t("title")}</h3>
+            <p className="text-body-sm sm:text-body text-foreground-secondary text-pretty">{t("description")}</p>
           </div>
 
           <ul className="grid grid-cols-1 gap-2">
-            {featuredCommitment.bullets.map((item) => (
+            {bullets.map((item) => (
               <li key={item} className="text-body-sm text-foreground-secondary flex items-start gap-2">
                 <CircleCheck className="text-brand-emerald mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
                 <span>{item}</span>
@@ -50,9 +53,9 @@ export function FeaturedCommitment() {
 
           <div className="border-border-subtle flex items-center gap-3 border-t pt-4">
             <p className="text-caption text-foreground-secondary font-semibold tracking-wide uppercase">
-              {featuredCommitment.metric.label}
+              {t("metricLabel")}
             </p>
-            <p className="text-title-lg text-brand-emerald font-semibold">{featuredCommitment.metric.value}</p>
+            <p className="text-title-lg text-brand-emerald font-semibold">{t("metricValue")}</p>
           </div>
         </div>
       </div>

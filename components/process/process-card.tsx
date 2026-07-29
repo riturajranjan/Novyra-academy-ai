@@ -2,6 +2,7 @@
 
 import { useRef, type PointerEvent } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -25,8 +26,10 @@ interface ProcessCardProps {
  * `min-height` only, so longer copy or an extra wrapped chip grows the
  * card instead of clipping or overflowing its slot. */
 export function ProcessCard({ step, from = "above", className, onActiveChange }: ProcessCardProps) {
+  const t = useTranslations("process.steps");
   const reduceMotion = useReducedMotion();
   const Icon = step.icon;
+  const deliverables = t.raw(`${step.id}.deliverables`) as string[];
   const stroke = accentStroke[step.accent];
   const numberGradient = `linear-gradient(135deg, ${stroke}, color-mix(in oklab, ${stroke} 45%, white))`;
   const cardRef = useRef<HTMLDivElement>(null);
@@ -126,8 +129,8 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-title text-foreground font-semibold tracking-wide uppercase">{step.title}</h3>
-        <p className="text-body-sm text-foreground-secondary">{step.description}</p>
+        <h3 className="text-title text-foreground font-semibold tracking-wide uppercase">{t(`${step.id}.title`)}</h3>
+        <p className="text-body-sm text-foreground-secondary">{t(`${step.id}.description`)}</p>
       </div>
 
       <motion.div
@@ -137,7 +140,7 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
         transition={{ staggerChildren: 0.06, delayChildren: 0.25 }}
         className="mt-auto flex flex-wrap gap-2"
       >
-        {step.deliverables.map((item) => (
+        {deliverables.map((item) => (
           <motion.span
             key={item}
             variants={{ hidden: { opacity: 0, y: 6 }, visible: { opacity: 1, y: 0 } }}

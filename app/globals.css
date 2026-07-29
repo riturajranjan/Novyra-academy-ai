@@ -172,8 +172,8 @@
   --duration-slow: 600ms;
   --duration-cinematic: 1400ms;
 
-  --animate-drift: drift 18s var(--ease-soft) infinite alternate;
-  --animate-drift-slow: drift 26s var(--ease-soft) infinite alternate-reverse;
+  --animate-drift: drift 28s var(--ease-soft) infinite alternate;
+  --animate-drift-slow: drift 38s var(--ease-soft) infinite alternate-reverse;
   --animate-aurora: aurora-shift 22s ease-in-out infinite;
   --animate-shimmer: shimmer 2.2s linear infinite;
   --animate-fade-in-up: fade-in-up var(--duration-slow) var(--ease-premium) both;
@@ -353,4 +353,32 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Lenis (components/providers/smooth-scroll-provider.tsx) recommends this
+   exact snippet: without it, native `scroll-behavior: smooth` on an anchor
+   jump can double up with Lenis's own smoothing and feel janky. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* components/ui/custom-cursor.tsx adds this class only after confirming a
+   fine, hover-capable pointer and no `prefers-reduced-motion` — the native
+   cursor is never hidden until a replacement is actually rendering. */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
 }

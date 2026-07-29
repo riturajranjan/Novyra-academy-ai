@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { TechBadge } from "@/components/why-choose/tech-badge";
 import { featureStrip, techCategories, trustMetrics, type TechCategory } from "@/content/why-choose";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 
 function TechCategoryCard({ category, index }: { category: TechCategory; index: number }) {
+  const t = useTranslations("whyChoose");
   const Icon = category.icon;
   return (
     <motion.div
@@ -24,7 +26,7 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
         <span className="bg-foreground/5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
           <Icon className="text-foreground-secondary h-5 w-5" aria-hidden />
         </span>
-        <p className="text-title text-foreground font-semibold">{category.label}</p>
+        <p className="text-title text-foreground font-semibold">{t(`techCategories.${category.id}`)}</p>
       </div>
       <div className="relative flex flex-wrap gap-2.5">
         {category.items.map((item, i) => (
@@ -41,6 +43,7 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
  * (a real technology count, a real engineering standard) — never an
  * invented project count, satisfaction score, or uptime figure. */
 export function TrustedTechnologies() {
+  const t = useTranslations("whyChoose");
   return (
     <div className="flex flex-col gap-9 md:gap-14">
       <div className="mx-auto flex max-w-[760px] flex-col items-center gap-3 text-center md:gap-4">
@@ -54,14 +57,13 @@ export function TrustedTechnologies() {
             color: "transparent",
           }}
         >
-          Trusted Technologies
+          {t("trustedTechnologies.eyebrow")}
         </span>
         <h3 className="text-headline sm:text-display-lg text-foreground text-balance font-bold">
-          Powered by Modern Technologies
+          {t("trustedTechnologies.heading")}
         </h3>
         <p className="text-body-lg text-foreground-secondary text-balance">
-          We build fast, scalable, secure, and future-ready digital products using the world&apos;s most trusted
-          technologies and cloud infrastructure.
+          {t("trustedTechnologies.description")}
         </p>
       </div>
 
@@ -81,7 +83,7 @@ export function TrustedTechnologies() {
           const Icon = item.icon;
           return (
             <motion.div
-              key={item.label}
+              key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "150px" }}
@@ -103,8 +105,8 @@ export function TrustedTechnologies() {
                 <Icon className="h-5 w-5" style={{ color: accentStroke[item.accent] }} aria-hidden />
               </motion.span>
               <div>
-                <p className="text-body text-foreground font-semibold">{item.label}</p>
-                <p className="text-body-sm text-foreground-secondary mt-1">{item.detail}</p>
+                <p className="text-body text-foreground font-semibold">{t(`featureStrip.${item.id}.label`)}</p>
+                <p className="text-body-sm text-foreground-secondary mt-1">{t(`featureStrip.${item.id}.detail`)}</p>
               </div>
             </motion.div>
           );
@@ -116,15 +118,15 @@ export function TrustedTechnologies() {
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
           {trustMetrics.map((metric, i) => (
             <motion.div
-              key={metric.label}
+              key={metric.id}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "150px" }}
               transition={{ duration: 0.4, delay: i * 0.06, ease: easePremium }}
               className="text-center"
             >
-              <p className="text-display-lg text-gradient-brand font-bold">{metric.value}</p>
-              <p className="text-caption text-foreground-secondary mt-1">{metric.label}</p>
+              <p className="text-display-lg text-gradient-brand font-bold">{t(`trustMetrics.${metric.id}.value`)}</p>
+              <p className="text-caption text-foreground-secondary mt-1">{t(`trustMetrics.${metric.id}.label`)}</p>
             </motion.div>
           ))}
         </div>

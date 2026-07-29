@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ function isItemActive(item: NavItem, pathname: string) {
 }
 
 export function NavDesktop() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -22,7 +23,7 @@ export function NavDesktop() {
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const activeItem = navItems.find((item) => isItemActive(item, pathname));
-  const displayKey = hoveredKey ?? activeItem?.label ?? null;
+  const displayKey = hoveredKey ?? activeItem?.id ?? null;
 
   useEffect(() => {
     if (!openKey) return;
@@ -52,24 +53,25 @@ export function NavDesktop() {
     >
       {navItems.map((item) => {
         const hasChildren = Boolean(item.children?.length);
-        const isOpen = openKey === item.label;
+        const isOpen = openKey === item.id;
+        const label = t(`${item.id}.label`);
 
         return (
           <li
-            key={item.label}
+            key={item.id}
             className="relative"
             onMouseEnter={() => {
-              setHoveredKey(item.label);
+              setHoveredKey(item.id);
               if (hasChildren) {
                 cancelClose();
-                setOpenKey(item.label);
+                setOpenKey(item.id);
               }
             }}
             onMouseLeave={() => {
               if (hasChildren) scheduleClose();
             }}
           >
-            {displayKey === item.label ? (
+            {displayKey === item.id ? (
               <motion.div
                 layoutId="nav-active-pill"
                 className="bg-gradient-brand absolute inset-0 -z-10 rounded-pill opacity-10 dark:opacity-20"
@@ -80,16 +82,16 @@ export function NavDesktop() {
             {hasChildren ? (
               <button
                 ref={(el) => {
-                  triggerRefs.current[item.label] = el;
+                  triggerRefs.current[item.id] = el;
                 }}
                 type="button"
                 aria-haspopup="true"
                 aria-expanded={isOpen}
-                aria-controls={`nav-panel-${item.label}`}
-                onClick={() => setOpenKey((k) => (k === item.label ? null : item.label))}
+                aria-controls={`nav-panel-${item.id}`}
+                onClick={() => setOpenKey((k) => (k === item.id ? null : item.id))}
                 className="hover:text-gradient-brand flex items-center gap-1 rounded-pill px-4 py-2 text-body-sm font-medium text-foreground transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                {item.label}
+                {label}
                 <ChevronDown
                   className={cn(
                     "h-3.5 w-3.5 transition-transform duration-fast",
@@ -103,7 +105,7 @@ export function NavDesktop() {
                 href={item.href}
                 className="hover:text-gradient-brand block rounded-pill px-4 py-2 text-body-sm font-medium text-foreground transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                {item.label}
+                {label}
               </Link>
             )}
 
@@ -111,9 +113,9 @@ export function NavDesktop() {
               <AnimatePresence>
                 {isOpen ? (
                   <motion.div
-                    id={`nav-panel-${item.label}`}
+                    id={`nav-panel-${item.id}`}
                     role="group"
-                    aria-label={`${item.label} menu`}
+                    aria-label={`${label} menu`}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
@@ -128,7 +130,7 @@ export function NavDesktop() {
                           const Icon = child.icon;
                           return (
                             <Link
-                              key={child.label}
+                              key={child.id}
                               href={child.href}
                               onClick={() => setOpenKey(null)}
                               className="hover:bg-foreground/5 group flex flex-col gap-2 rounded-xl p-3 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
@@ -137,10 +139,10 @@ export function NavDesktop() {
                                 <Icon className="text-brand-blue h-5 w-5" aria-hidden />
                               </span>
                               <span className="text-body-sm group-hover:text-gradient-brand font-medium text-foreground transition-colors">
-                                {child.label}
+                                {t(`${item.id}.children.${child.id}.label`)}
                               </span>
                               <span className="text-caption text-foreground-secondary">
-                                {child.description}
+                                {t(`${item.id}.children.${child.id}.description`)}
                               </span>
                             </Link>
                           );
@@ -156,14 +158,14 @@ export function NavDesktop() {
                           <div className="bg-gradient-aurora absolute inset-0 -z-10 opacity-40" />
                           <div>
                             <p className="text-body-sm font-semibold text-foreground">
-                              {item.featured.title}
+                              {t(`${item.id}.featured.title`)}
                             </p>
                             <p className="text-caption text-foreground-secondary mt-1">
-                              {item.featured.description}
+                              {t(`${item.id}.featured.description`)}
                             </p>
                           </div>
                           <span className="text-caption group-hover:text-gradient-brand mt-4 flex items-center gap-1 font-semibold text-foreground">
-                            {item.featured.cta}
+                            {t(`${item.id}.featured.cta`)}
                             <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                           </span>
                         </Link>

@@ -1,16 +1,19 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { useScrolled } from "@/lib/use-scrolled";
 import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { Magnetic } from "@/components/ui/magnetic";
 import { NavDesktop } from "@/components/layout/nav-desktop";
 import { NavMobile } from "@/components/layout/nav-mobile";
 
 export function Navbar() {
   const scrolled = useScrolled();
+  const t = useTranslations("common");
 
   return (
     <header
@@ -21,12 +24,15 @@ export function Navbar() {
         <div
           className={cn(
             "shadow-card flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
-            scrolled ? "glass-strong h-[60px] lg:h-16" : "glass h-[68px] lg:h-[72px]",
+            scrolled ? "glass-strong h-[60px] lg:h-[68px]" : "glass h-[68px] lg:h-[80px]",
           )}
         >
           <Link
             href="/"
-            className="text-title-lg lg:text-title font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
+            className={cn(
+              "text-title-lg lg:text-title text-foreground origin-left font-semibold transition-transform duration-base ease-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md",
+              scrolled && "scale-90",
+            )}
           >
             Novyra<span className="text-gradient-brand">.</span>
           </Link>
@@ -38,12 +44,14 @@ export function Navbar() {
               <LanguageSwitcher />
               <ThemeToggle />
             </div>
-            <Link
-              href="/contact"
-              className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "hidden lg:inline-flex")}
-            >
-              Start a Project
-            </Link>
+            <Magnetic className="hidden lg:inline-flex">
+              <Link
+                href="/contact"
+                className={cn(buttonVariants({ variant: "gradient", size: "sm" }), "inline-flex")}
+              >
+                {t("startProject")}
+              </Link>
+            </Magnetic>
             <NavMobile />
           </div>
         </div>

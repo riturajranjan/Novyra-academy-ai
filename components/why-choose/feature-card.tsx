@@ -2,6 +2,7 @@
 
 import { CircleCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -23,8 +24,10 @@ interface FeatureCardProps {
  * flat surface: gradient fill, top reflection, and an accent glow that
  * brightens on hover. */
 export function FeatureCard({ card, index }: FeatureCardProps) {
+  const t = useTranslations("whyChoose.featureCards");
   const Icon = card.icon;
   const stroke = accentStroke[card.accent];
+  const bullets = t.raw(`${card.id}.bullets`) as string[];
 
   return (
     <motion.div
@@ -61,23 +64,23 @@ export function FeatureCard({ card, index }: FeatureCardProps) {
         >
           <Icon className="h-6 w-6" style={{ color: stroke }} aria-hidden />
         </span>
-        {card.metric ? (
+        {card.hasMetric ? (
           <div className="text-right">
-            <p className="text-caption text-foreground-secondary uppercase tracking-wide">{card.metric.label}</p>
+            <p className="text-caption text-foreground-secondary uppercase tracking-wide">{t(`${card.id}.metricLabel`)}</p>
             <p className="text-title-lg font-semibold" style={{ color: stroke }}>
-              {card.metric.value}
+              {t(`${card.id}.metricValue`)}
             </p>
           </div>
         ) : null}
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-title text-foreground font-semibold">{card.title}</h3>
-        <p className="text-body-sm text-foreground-secondary max-w-md">{card.description}</p>
+        <h3 className="text-title text-foreground font-semibold">{t(`${card.id}.title`)}</h3>
+        <p className="text-body-sm text-foreground-secondary max-w-md">{t(`${card.id}.description`)}</p>
       </div>
 
       <ul className="mt-auto flex flex-col gap-2">
-        {card.bullets.map((bullet) => (
+        {bullets.map((bullet) => (
           <li key={bullet} className="text-body-sm text-foreground-secondary flex items-start gap-2">
             <CircleCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: stroke }} aria-hidden />
             <span>{bullet}</span>

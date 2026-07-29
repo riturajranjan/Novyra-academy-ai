@@ -1,0 +1,88 @@
+{
+  "sectionHeading": {
+    "eyebrow": "चलिए कुछ शानदार बनाते हैं",
+    "title": "अपने व्यवसाय को बदलने के लिए तैयार हैं?",
+    "description": "चाहे आपको एक प्रीमियम बिज़नेस वेबसाइट चाहिए, एक स्केलेबल SaaS प्लेटफ़ॉर्म, AI ऑटोमेशन, या एक कस्टम वेब एप्लिकेशन — हमारी टीम आपके विज़न को साकार करने के लिए तैयार है।"
+  },
+  "ctaTrustBadges": {
+    "free-consultation": "निःशुल्क परामर्श",
+    "custom-proposal": "कस्टम प्रस्ताव",
+    "no-hidden-charges": "कोई छिपा शुल्क नहीं",
+    "fast-response": "तेज़ प्रतिक्रिया",
+    "dedicated-team": "समर्पित टीम"
+  },
+  "heroCard": {
+    "title": "आइए आपके आइडिया को हकीकत में बदलें",
+    "description": "अपने प्रोजेक्ट के लक्ष्य साझा करें, और हम आपके व्यवसाय के अनुरूप सबसे अच्छी तकनीक, समयसीमा, और समाधान सुझाएंगे।",
+    "bookConsultation": "🚀 निःशुल्क परामर्श बुक करें",
+    "requestQuote": "कस्टम कोट का अनुरोध करें",
+    "scheduleCall": "डिस्कवरी कॉल शेड्यूल करें"
+  },
+  "quickContactCards": {
+    "schedule-call": {
+      "title": "एक कॉल शेड्यूल करें",
+      "detail": "एक निःशुल्क रणनीति सत्र बुक करें।",
+      "note": "सोमवार–शनिवार उपलब्ध"
+    },
+    "email": {
+      "title": "हमें ईमेल करें",
+      "detail": "hello@novyratech.in",
+      "note": "आमतौर पर 24 घंटों के भीतर प्रतिक्रिया।"
+    },
+    "call": {
+      "title": "हमें कॉल करें",
+      "detail": "+91 7903724407",
+      "note": "सीधे हमारी टीम से बात करें।"
+    },
+    "whatsapp": {
+      "title": "व्हाट्सएप",
+      "detail": "तुरंत बातचीत शुरू करें।",
+      "note": "त्वरित प्रोजेक्ट चर्चा।"
+    }
+  },
+  "opensInNewTab": " (नए टैब में खुलता है)",
+  "whyContact": {
+    "heading": "नोव्यरा से संपर्क क्यों करें?"
+  },
+  "contactValueCards": {
+    "free-discovery-session": {
+      "title": "निःशुल्क डिस्कवरी सत्र",
+      "description": "कुछ भी खर्च करने से पहले अपनी आवश्यकताओं को समझें।"
+    },
+    "expert-consultation": {
+      "title": "विशेषज्ञ परामर्श",
+      "description": "अनुभवी डेवलपर्स से सिफारिशें प्राप्त करें।"
+    },
+    "transparent-planning": {
+      "title": "पारदर्शी योजना",
+      "description": "स्पष्ट मूल्य निर्धारण, यथार्थवादी समयसीमा, और परिभाषित माइलस्टोन।"
+    },
+    "long-term-partnership": {
+      "title": "दीर्घकालिक साझेदारी",
+      "description": "हम लॉन्च के बाद भी आपके प्रोडक्ट को सपोर्ट करना जारी रखते हैं।"
+    }
+  },
+  "ctaTimeline": {
+    "heading": "आपके संपर्क करने के बाद क्या होता है",
+    "discovery": "डिस्कवरी",
+    "proposal": "प्रस्ताव",
+    "design": "डिज़ाइन",
+    "development": "डेवलपमेंट",
+    "testing": "टेस्टिंग",
+    "launch": "लॉन्च",
+    "support": "सपोर्ट"
+  },
+  "trustMetrics": {
+    "projects-planned": { "label": "योजनाबद्ध प्रोजेक्ट", "value": "बढ़ता पोर्टफोलियो" },
+    "modern-technologies": { "label": "आधुनिक तकनीकें", "value": "19" },
+    "custom-development": { "label": "कस्टम डेवलपमेंट", "value": "100%" },
+    "average-response-time": { "label": "औसत प्रतिक्रिया समय", "value": "24 घंटे" },
+    "source-code-ownership": { "label": "सोर्स कोड स्वामित्व", "value": "100%" }
+  },
+  "contactDetails": {
+    "business-email": { "label": "बिज़नेस ईमेल", "value": "hello@novyratech.in" },
+    "phone": { "label": "फ़ोन", "value": "+91 7903724407" },
+    "location": { "label": "स्थान", "value": "भारत" },
+    "working-hours": { "label": "कार्य समय", "value": "सोमवार – शनिवार, सुबह 9:00 – शाम 7:00 बजे (IST)" }
+  }
+}

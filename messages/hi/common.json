@@ -1,0 +1,16 @@
+{
+  "startProject": "प्रोजेक्ट शुरू करें",
+  "openMenu": "मेनू खोलें",
+  "closeMenu": "मेनू बंद करें",
+  "siteNavigation": "साइट नेविगेशन",
+  "theme": {
+    "label": "थीम",
+    "light": "लाइट थीम",
+    "system": "सिस्टम थीम",
+    "dark": "डार्क थीम"
+  },
+  "language": {
+    "selectLanguage": "भाषा चुनें",
+    "language": "भाषा"
+  }
+}

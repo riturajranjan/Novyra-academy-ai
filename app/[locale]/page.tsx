@@ -1,3 +1,4 @@
+import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/hero";
 import { ServicesShowcase } from "@/components/sections/services-showcase";
 import { SolutionAdvisor } from "@/components/sections/solution-advisor";
@@ -9,7 +10,14 @@ import { Pricing } from "@/components/sections/pricing";
 import { Faq } from "@/components/sections/faq";
 import { ContactCta } from "@/components/sections/contact-cta";
 
-export default function DesignSystemPreview() {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function DesignSystemPreview({ params }: PageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <main className="relative w-full max-w-full min-w-0 flex-1 overflow-x-clip">
       <Hero />

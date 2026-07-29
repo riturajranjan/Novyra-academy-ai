@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ConceptPreview } from "@/components/case-studies/concept-preview";
 import type { ConceptBuild } from "@/content/case-studies";
@@ -18,6 +19,8 @@ interface ConceptCardProps {
  * qualitative highlight. Tagged "Concept" rather than a launch year, since
  * nothing here has actually shipped for a client yet. */
 export function ConceptCard({ build, index, wide = false }: ConceptCardProps) {
+  const t = useTranslations("caseStudies");
+  const tBuild = useTranslations(`caseStudies.builds.${build.id}`);
   const Icon = build.icon;
   const stroke = accentStroke[build.accent];
 
@@ -51,18 +54,20 @@ export function ConceptCard({ build, index, wide = false }: ConceptCardProps) {
           style={{ borderColor: accentTint(build.accent, 35), color: stroke, backgroundColor: accentTint(build.accent, 12) }}
         >
           <Icon className="h-3 w-3" aria-hidden />
-          {build.industryLabel}
+          {tBuild("industryLabel")}
         </span>
-        <span className="border-border-subtle text-caption text-foreground-secondary rounded-full border px-2.5 py-1">Concept</span>
+        <span className="border-border-subtle text-caption text-foreground-secondary rounded-full border px-2.5 py-1">
+          {t("conceptBadge")}
+        </span>
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <h4 className="text-title text-foreground font-semibold">{build.title}</h4>
-        <p className="text-body-sm text-foreground-secondary line-clamp-2">{build.description}</p>
+        <h4 className="text-title text-foreground font-semibold">{tBuild("title")}</h4>
+        <p className="text-body-sm text-foreground-secondary line-clamp-2">{tBuild("description")}</p>
       </div>
 
       <p className="text-body-sm flex items-start gap-2" style={{ color: stroke }}>
-        {build.highlights[0]}
+        {tBuild.raw("highlights")[0]}
       </p>
 
       <div className="mt-auto flex flex-wrap gap-1.5">

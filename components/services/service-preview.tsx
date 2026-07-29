@@ -2,6 +2,7 @@
 
 import { useRef, type PointerEvent } from "react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
 import type { ServiceCategory, ServiceVisual } from "@/content/service-categories";
@@ -25,6 +26,7 @@ const visualMap: Record<ServiceVisual, (accent: AccentColor) => React.JSX.Elemen
  * active accent, and a glass reflection sheen. Content swaps with a
  * fade + slide + scale so it reads as a morph, not a hard cut. */
 export function ServicePreview({ category }: { category: ServiceCategory }) {
+  const t = useTranslations("services");
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const tiltX = useMotionValue(0);
@@ -84,8 +86,12 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
             <Icon className="h-5 w-5" style={{ color: accentStroke[category.accent] }} aria-hidden />
           </span>
           <div className="min-w-0">
-            <p className="text-body-sm text-foreground truncate font-semibold">{category.label}</p>
-            <p className="text-caption text-foreground-secondary truncate">{category.subtitle}</p>
+            <p className="text-body-sm text-foreground truncate font-semibold">
+              {t(`categories.${category.id}.label`)}
+            </p>
+            <p className="text-caption text-foreground-secondary truncate">
+              {t(`categories.${category.id}.subtitle`)}
+            </p>
           </div>
         </div>
 

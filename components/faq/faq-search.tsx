@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Search, X } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -12,6 +13,7 @@ interface FaqSearchProps {
 /** Glass search bar with an animated focus glow, a search icon, and a clear
  * button that appears once there's a query. */
 export function FaqSearch({ value, onChange }: FaqSearchProps) {
+  const t = useTranslations("faq.search");
   const [focused, setFocused] = useState(false);
 
   return (
@@ -30,14 +32,14 @@ export function FaqSearch({ value, onChange }: FaqSearchProps) {
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder="Search your question..."
+          placeholder={t("placeholder")}
           className="text-[16px] sm:text-body-sm text-foreground placeholder:text-foreground-secondary/70 w-full bg-transparent outline-none"
         />
         {value ? (
           <button
             type="button"
             onClick={() => onChange("")}
-            aria-label="Clear search"
+            aria-label={t("clearAriaLabel")}
             className="text-foreground-secondary hover:text-foreground shrink-0 transition-colors duration-fast"
           >
             <X className="h-4 w-4" aria-hidden />

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { faqCategories, type FaqCategory } from "@/content/faq";
@@ -10,12 +11,16 @@ interface FaqCategoryTabsProps {
 }
 
 /** Premium glass pill tabs with a spring-animated selection indicator —
- * horizontally scrollable so it stays swipeable on mobile. */
+ * horizontally scrollable so it stays swipeable on mobile. Tab identity and
+ * comparison (`active`/`onSelect`) always use the stable `FaqCategory` id;
+ * only the rendered label is translated. */
 export function FaqCategoryTabs({ active, onSelect }: FaqCategoryTabsProps) {
+  const t = useTranslations("faq");
+
   return (
     <div
       role="tablist"
-      aria-label="Filter questions by category"
+      aria-label={t("categoryTabs.ariaLabel")}
       className="glass flex max-w-full gap-1.5 overflow-x-auto rounded-pill p-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       {faqCategories.map((category) => {
@@ -36,7 +41,9 @@ export function FaqCategoryTabs({ active, onSelect }: FaqCategoryTabsProps) {
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             ) : null}
-            <span className={cn("relative", isActive ? "text-white" : "text-foreground-secondary")}>{category}</span>
+            <span className={cn("relative", isActive ? "text-white" : "text-foreground-secondary")}>
+              {t(`categories.${category}`)}
+            </span>
           </button>
         );
       })}
