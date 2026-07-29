@@ -14,7 +14,7 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: easePremium }}
-      className="border-border-subtle bg-surface/50 shadow-card relative flex flex-col gap-5 overflow-hidden rounded-[24px] border p-6 backdrop-blur-lg"
+      className="border-border-subtle bg-surface/50 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg md:gap-5 md:p-6"
     >
       <div
         aria-hidden
@@ -42,8 +42,8 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
  * invented project count, satisfaction score, or uptime figure. */
 export function TrustedTechnologies() {
   return (
-    <div className="flex flex-col gap-14">
-      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-4 text-center">
+    <div className="flex flex-col gap-9 md:gap-14">
+      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-3 text-center md:gap-4">
         <span
           className="text-caption font-medium uppercase"
           style={{
@@ -66,9 +66,9 @@ export function TrustedTechnologies() {
       </div>
 
       {/* main glass container */}
-      <div className="glass-strong shadow-card relative w-full overflow-hidden rounded-[32px] p-6 sm:p-12">
+      <div className="glass-strong shadow-card relative w-full overflow-hidden rounded-[32px] p-5 md:p-12">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 to-transparent" />
-        <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
           {techCategories.map((category, i) => (
             <TechCategoryCard key={category.id} category={category} index={i} />
           ))}
@@ -87,7 +87,7 @@ export function TrustedTechnologies() {
               viewport={{ once: true, margin: "-60px" }}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: easePremium }}
-              className="group border-border-subtle bg-surface/60 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-[24px] border p-6 backdrop-blur-lg transition-shadow duration-base"
+              className="group border-border-subtle bg-surface/60 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg transition-shadow duration-base md:gap-4 md:p-6"
             >
               <div
                 aria-hidden
@@ -112,8 +112,8 @@ export function TrustedTechnologies() {
       </div>
 
       {/* trust metrics */}
-      <div className="glass shadow-card rounded-3xl px-6 py-8 sm:px-10">
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+      <div className="glass shadow-card rounded-3xl px-5 py-6 md:px-10 md:py-8">
+        <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
           {trustMetrics.map((metric, i) => (
             <motion.div
               key={metric.label}

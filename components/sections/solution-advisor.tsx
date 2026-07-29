@@ -102,7 +102,7 @@ export function SolutionAdvisor() {
   }
 
   return (
-    <section className="relative isolate pt-18 pb-16 md:pt-40 md:pb-35">
+    <section className="relative isolate pt-14 pb-12 md:pt-40 md:pb-35">
       <AdvisorCanvasBackground />
 
       <Container className="flex flex-col items-center gap-5">
@@ -129,7 +129,7 @@ export function SolutionAdvisor() {
         </div>
 
         <div className="w-full">
-          <div className="flex flex-col items-center gap-16">
+          <div className="flex flex-col items-center gap-8 md:gap-16">
             <JourneyProgress currentStep={step} accent={accent} />
 
             <AnimatePresence mode="wait">
@@ -142,7 +142,7 @@ export function SolutionAdvisor() {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="flex w-full flex-col items-center gap-5"
                 >
-                  <div className="flex w-full max-w-md flex-col gap-8 md:hidden">
+                  <div className="flex w-full max-w-md flex-col gap-7 md:hidden">
                     <div className="flex flex-col gap-2">
                       <p className="text-title text-balance text-center font-semibold text-white">{question}</p>
                       {step === 1 ? (
@@ -156,39 +156,41 @@ export function SolutionAdvisor() {
                         </p>
                       ) : null}
                     </div>
-                    {step === 0
-                      ? needOptions.map((o) => (
-                          <AdvisorOptionRow
-                            key={o.id}
-                            option={o}
-                            accent={getNeedAccent(o.id)}
-                            isSelected={o.id === answers.need}
-                            onSelect={selectNeed}
-                          />
-                        ))
-                      : null}
-                    {step === 1
-                      ? goalOptions.map((o) => (
-                          <AdvisorOptionRow
-                            key={o.id}
-                            option={o}
-                            accent={getGoalAccent(o.id)}
-                            isSelected={o.id === answers.goal}
-                            onSelect={selectGoal}
-                          />
-                        ))
-                      : null}
-                    {step === 2
-                      ? stageOptions.map((o) => (
-                          <AdvisorOptionRow
-                            key={o.id}
-                            option={o}
-                            accent={getStageAccent(o.id)}
-                            isSelected={o.id === answers.stage}
-                            onSelect={(id) => selectStage(id as StageId)}
-                          />
-                        ))
-                      : null}
+                    <div className="flex flex-col gap-3">
+                      {step === 0
+                        ? needOptions.map((o) => (
+                            <AdvisorOptionRow
+                              key={o.id}
+                              option={o}
+                              accent={getNeedAccent(o.id)}
+                              isSelected={o.id === answers.need}
+                              onSelect={selectNeed}
+                            />
+                          ))
+                        : null}
+                      {step === 1
+                        ? goalOptions.map((o) => (
+                            <AdvisorOptionRow
+                              key={o.id}
+                              option={o}
+                              accent={getGoalAccent(o.id)}
+                              isSelected={o.id === answers.goal}
+                              onSelect={selectGoal}
+                            />
+                          ))
+                        : null}
+                      {step === 2
+                        ? stageOptions.map((o) => (
+                            <AdvisorOptionRow
+                              key={o.id}
+                              option={o}
+                              accent={getStageAccent(o.id)}
+                              isSelected={o.id === answers.stage}
+                              onSelect={(id) => selectStage(id as StageId)}
+                            />
+                          ))
+                        : null}
+                    </div>
                   </div>
 
                   <div className="hidden w-full md:block">
@@ -241,7 +243,7 @@ export function SolutionAdvisor() {
 
                   <InsightPanel text={insightText} accent={accent} />
 
-                  <div className="sticky justify-between bottom-4 z-10 mt-8 flex w-full max-w-[680px] items-center gap-3 rounded-[24px] border border-white/10 bg-white/[0.06] p-3 backdrop-blur-2xl md:static md:mt-12 md:min-h-[72px] md:justify-between md:gap-4 md:rounded-full md:border-white/10 md:bg-white/[0.04] md:p-2 md:pl-5">
+                  <div className="sticky justify-between bottom-4 z-10 mt-6 flex w-full max-w-[680px] items-center gap-2.5 rounded-[24px] border border-white/10 bg-white/[0.06] p-2.5 backdrop-blur-2xl md:static md:mt-12 md:min-h-[72px] md:justify-between md:gap-4 md:rounded-full md:border-white/10 md:bg-white/[0.04] md:p-2 md:pl-5">
                     <motion.button
                       type="button"
                       onClick={goBack}
@@ -262,8 +264,8 @@ export function SolutionAdvisor() {
                         disabled={!canContinue}
                         whileTap={{ scale: 0.98 }}
                         className={cn(
-                          "bg-gradient-brand px-3 text-caption group relative flex h-15 w-full flex-1 items-center justify-center gap-1.5 overflow-hidden rounded-2xl font-semibold text-white shadow-glow-blue transition-opacity duration-fast",
-                          "md:w-auto md:flex-none md:rounded-pill md:px-8",
+                          "bg-gradient-brand px-3 text-caption group relative flex h-13 w-full flex-1 items-center justify-center gap-1.5 overflow-hidden rounded-2xl font-semibold text-white shadow-glow-blue transition-opacity duration-fast",
+                          "md:h-15 md:w-auto md:flex-none md:rounded-pill md:px-8",
                           !canContinue && "pointer-events-none opacity-30",
                         )}
                       >

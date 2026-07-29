@@ -74,7 +74,7 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -18 }}
           transition={{ duration: 0.42, ease: easePremium }}
-          className="flex flex-col gap-6 p-6"
+          className="flex flex-col gap-5 p-5"
         >
           <div>
             <p className="text-title-lg text-foreground font-semibold">{category.label}</p>

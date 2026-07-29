@@ -1,11 +1,9 @@
 "use client";
 
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { buttonVariants } from "@/components/ui/button";
-import { RippleLink } from "@/components/ui/ripple-link";
 import { WhyChooseBackground } from "@/components/why-choose/why-choose-background";
 import { TeamVisual } from "@/components/why-choose/team-visual";
 import { FeatureCard } from "@/components/why-choose/feature-card";
@@ -13,7 +11,6 @@ import { TrustedTechnologies } from "@/components/why-choose/trusted-technologie
 import { capabilityChips, featureCards, heroBadges } from "@/content/why-choose";
 import { accentStroke, accentTint } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
-import { cn } from "@/lib/utils";
 
 /** "Why Choose Novyra" — a premium bento grid making the case for Novyra as
  * a technology partner. Every trust signal here is honest: capability and
@@ -21,10 +18,10 @@ import { cn } from "@/lib/utils";
  * satisfaction score, or years-in-business figure Novyra doesn't have. */
 export function WhyChooseNovyra() {
   return (
-    <section id="why-choose-novyra" className="relative isolate overflow-hidden py-24 sm:py-32">
+    <section id="why-choose-novyra" className="relative isolate overflow-hidden py-14 md:py-32">
       <WhyChooseBackground />
 
-      <Container className="flex flex-col gap-16">
+      <Container className="flex flex-col gap-10 md:gap-16">
         <SectionHeading
           eyebrow="Why Choose Novyra"
           title={
@@ -41,7 +38,7 @@ export function WhyChooseNovyra() {
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 to-transparent"
           />
-          <div className="grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:items-center">
+          <div className="grid grid-cols-1 gap-6 p-5 md:gap-8 md:p-10 lg:grid-cols-2 lg:items-center">
             <div className="relative">
               <TeamVisual />
               <div className="border-border-subtle bg-surface/90 absolute -bottom-4 left-6 flex items-center gap-2 rounded-full border px-4 py-2 shadow-card backdrop-blur-md">
@@ -97,7 +94,7 @@ export function WhyChooseNovyra() {
         <TrustedTechnologies />
 
         {/* CTA */}
-        <div className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[28px] p-8 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left">
+        {/* <div className="glass-strong shadow-card relative flex flex-col items-center gap-5 overflow-hidden rounded-[28px] p-6 text-center sm:flex-row sm:justify-between sm:text-left md:gap-6 md:p-10">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-20 blur-3xl"
@@ -124,7 +121,7 @@ export function WhyChooseNovyra() {
               Schedule a Call
             </RippleLink>
           </div>
-        </div>
+        </div> */}
       </Container>
     </section>
   );

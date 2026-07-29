@@ -39,18 +39,18 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative isolate py-8 sm:py-10">
+    <footer className="relative isolate pt-12 pb-8 sm:py-10">
       <FooterBackground />
 
       <Container>
         <motion.div
           ref={ref}
           onPointerMove={handlePointerMove}
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="glass-strong shadow-card relative flex flex-col gap-7 overflow-hidden rounded-[32px] p-5 sm:p-6 lg:p-8"
+          className="glass-strong shadow-card relative flex flex-col gap-5 overflow-hidden rounded-[32px] p-5 sm:p-6 lg:gap-7 lg:p-8"
         >
           <motion.div aria-hidden className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: spotlight }} />
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 rounded-t-[32px] bg-gradient-to-b from-white/8 to-transparent" />

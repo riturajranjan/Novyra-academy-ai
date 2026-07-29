@@ -18,10 +18,10 @@ import { easePremium } from "@/lib/motion";
  * elaborate section on the page by design. */
 export function ContactCta() {
   return (
-    <section id="contact" className="relative isolate py-24 sm:py-32">
+    <section id="contact" className="relative isolate py-14 md:py-32">
       <ContactCtaBackground />
 
-      <Container className="flex flex-col gap-16">
+      <Container className="flex flex-col gap-10 md:gap-16">
         <div className="flex flex-col items-center gap-6">
           <SectionHeading
             eyebrow="Let's Build Something Amazing"
@@ -53,7 +53,7 @@ export function ContactCta() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 md:gap-8">
           <div className="flex flex-col items-center gap-2 text-center">
             <h3 className="text-title-lg text-foreground font-semibold">Why Contact Novyra?</h3>
           </div>
@@ -64,7 +64,13 @@ export function ContactCta() {
           </div>
         </div>
 
-        <CtaTimeline />
+        {/* Same process steps already shown in Our Process and the
+         * Recommended Roadmap — kept for desktop context, hidden on mobile
+         * to avoid repeating the same timeline a third time on a page
+         * that's already long there. */}
+        <div className="hidden md:block">
+          <CtaTimeline />
+        </div>
 
         <TrustMetrics />
 

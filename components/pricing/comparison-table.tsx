@@ -1,7 +1,8 @@
 "use client";
 
-import { Minus } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ChevronDown, Minus } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { compareRows, pricingPlans, type CompareValue } from "@/content/pricing";
 import { accentStroke } from "@/lib/accent";
 import { easePremium } from "@/lib/motion";
@@ -39,11 +40,63 @@ function Cell({ value, color }: { value: CompareValue; color: string }) {
   );
 }
 
-/** Premium glass feature-comparison table — animated check glyphs, glass
- * rows, and a hover highlight per row. */
-export function ComparisonTable() {
+function MobileComparisonAccordion() {
+  const [openId, setOpenId] = useState<string | null>(pricingPlans[0]?.id ?? null);
+
   return (
-    <div className="glass-strong shadow-card overflow-hidden rounded-[28px]">
+    <div className="flex flex-col gap-2 md:hidden">
+      {pricingPlans.map((plan) => {
+        const isOpen = openId === plan.id;
+        const stroke = accentStroke[plan.accent];
+        return (
+          <div key={plan.id} className="border-border-subtle bg-surface/60 overflow-hidden rounded-2xl border backdrop-blur-xl">
+            <button
+              type="button"
+              onClick={() => setOpenId(isOpen ? null : plan.id)}
+              aria-expanded={isOpen}
+              className="flex min-h-13 w-full items-center justify-between px-4 py-3"
+            >
+              <span className="text-body-sm text-foreground font-semibold">{plan.name}</span>
+              <ChevronDown
+                className={cn("h-4 w-4 text-foreground-secondary transition-transform duration-fast", isOpen && "rotate-180")}
+                style={{ color: isOpen ? stroke : undefined }}
+                aria-hidden
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen ? (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: easePremium }}
+                  className="overflow-hidden"
+                >
+                  <ul className="border-border-subtle flex flex-col gap-2.5 border-t px-4 py-3">
+                    {compareRows.map((row) => (
+                      <li key={row.label} className="text-body-sm text-foreground-secondary flex items-center justify-between gap-3">
+                        <span>{row.label}</span>
+                        <Cell value={row.values[plan.id]} color={stroke} />
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Premium glass feature-comparison table — animated check glyphs, glass
+ * rows, and a hover highlight per row. Desktop only (md+): below that, a
+ * wide table can't shrink to a comfortable mobile width, so mobile gets a
+ * per-plan accordion showing the exact same data instead. */
+function DesktopComparisonTable() {
+  return (
+    <div className="glass-strong shadow-card hidden overflow-hidden rounded-[28px] md:block">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse">
           <thead>
@@ -77,5 +130,14 @@ export function ComparisonTable() {
         </table>
       </div>
     </div>
+  );
+}
+
+export function ComparisonTable() {
+  return (
+    <>
+      <MobileComparisonAccordion />
+      <DesktopComparisonTable />
+    </>
   );
 }

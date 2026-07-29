@@ -28,13 +28,13 @@ export function FeatureCard({ card, index }: FeatureCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.5, delay: index * 0.04, ease: easePremium }}
       className={cn(
-        "group border-border-subtle relative col-span-1 flex flex-col gap-4 overflow-hidden rounded-[28px] border p-7 backdrop-blur-xl transition-shadow duration-base",
+        "group border-border-subtle relative col-span-1 flex flex-col gap-3 overflow-hidden rounded-[28px] border p-5 backdrop-blur-xl transition-shadow duration-base md:gap-4 md:p-7",
         "bg-surface/70",
         SPAN_CLASS[card.span] ?? "sm:col-span-3 lg:col-span-2",
       )}

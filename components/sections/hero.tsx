@@ -12,13 +12,13 @@ import { cn } from "@/lib/utils";
 /** Placeholder copy — swap for real Novyra copy once available. */
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[46rem] w-full max-w-full overflow-hidden md:min-h-[64rem]">
+    <section className="relative isolate min-h-[42rem] w-full max-w-full overflow-hidden md:min-h-[50rem]">
       <div className="absolute inset-0 -z-10">
         <HeroScene />
       </div>
       <div className="from-background via-background/60 pointer-events-none absolute inset-x-0 top-0 -z-10 h-2/3 bg-gradient-to-b to-transparent" />
 
-      <Container className="flex flex-col items-center gap-6 pb-24 pt-28 text-center sm:pt-36">
+      <Container className="flex flex-col items-center gap-5 pt-20 pb-14 text-center md:pt-36 md:pb-24">
         <AnimatedBadge dotColor="purple">Websites · SaaS · AI · Growth</AnimatedBadge>
         <h1 className="text-display-lg sm:text-display-2xl max-w-3xl font-semibold text-balance text-foreground">
           Technology built for <RotatingKeyword /> that move fast

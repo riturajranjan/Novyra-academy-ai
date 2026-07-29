@@ -36,7 +36,7 @@ export function TechBadge({ name, color, index }: TechBadgeProps) {
       whileHover={reduceMotion ? undefined : { y: -4, scale: 1.04 }}
       transition={{ duration: 0.3, delay: index * 0.03, ease: easePremium }}
       style={{ ["--badge-border" as string]: hexToRgba(color, 0.45), ["--badge-glow" as string]: hexToRgba(color, 0.35) }}
-      className="border-border-subtle bg-surface/60 group relative flex shrink-0 items-center gap-2.5 overflow-hidden rounded-full border px-[22px] py-3.5 backdrop-blur-md transition-[box-shadow,border-color] duration-base hover:border-[color:var(--badge-border)] hover:shadow-[0_0_24px_-8px_var(--badge-glow)]"
+      className="border-border-subtle bg-surface/60 group relative flex h-9 shrink-0 items-center gap-2 overflow-hidden rounded-full border px-3 backdrop-blur-md transition-[box-shadow,border-color] duration-base hover:border-[color:var(--badge-border)] hover:shadow-[0_0_24px_-8px_var(--badge-glow)] md:h-auto md:gap-2.5 md:px-[22px] md:py-3.5"
     >
       <motion.span
         aria-hidden

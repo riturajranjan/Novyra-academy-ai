@@ -21,10 +21,10 @@ import { cn } from "@/lib/utils";
  * section would use, without inventing the people behind it. */
 export function OurPromise() {
   return (
-    <section className="relative isolate overflow-hidden py-24 sm:py-32">
+    <section className="relative isolate overflow-hidden py-14 md:py-32">
       <PromiseBackground />
 
-      <Container className="flex flex-col gap-14">
+      <Container className="flex flex-col gap-10 md:gap-14">
         <SectionHeading
           eyebrow="Our Promise"
           title={

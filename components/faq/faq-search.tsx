@@ -22,7 +22,7 @@ export function FaqSearch({ value, onChange }: FaqSearchProps) {
         animate={{ opacity: focused ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       />
-      <div className="border-border-subtle bg-surface/70 relative flex items-center gap-3 rounded-2xl border px-5 py-4 backdrop-blur-xl">
+      <div className="border-border-subtle bg-surface/70 relative flex items-center gap-3 rounded-2xl border px-4 py-3 backdrop-blur-xl md:px-5 md:py-4">
         <Search className="text-foreground-secondary h-4.5 w-4.5 shrink-0" aria-hidden />
         <input
           type="text"

@@ -29,13 +29,13 @@ export function Navbar() {
           className={cn(
             "flex h-16 items-center justify-between gap-4 px-4 transition-all duration-base ease-soft sm:px-6 lg:px-8",
             scrolled
-              ? "glass-strong shadow-card rounded-2xl border"
+              ? "glass-strong shadow-card rounded-xl border lg:rounded-2xl"
               : "border border-transparent bg-transparent",
           )}
         >
           <Link
             href="/"
-            className="text-title font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
+            className="text-title-lg lg:text-title font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md"
           >
             Novyra<span className="text-gradient-brand">.</span>
           </Link>

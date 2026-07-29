@@ -71,7 +71,8 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
         boxShadow: "var(--process-card-shadow)",
       }}
       className={cn(
-        "group relative isolate flex min-h-[290px] w-full flex-col gap-[18px] overflow-hidden rounded-[30px] border p-7",
+        "group relative isolate flex min-h-[240px] w-full flex-col gap-4 overflow-hidden rounded-[30px] border p-5",
+        "min-[1200px]:min-h-[290px] min-[1200px]:gap-[18px] min-[1200px]:p-7",
         "backdrop-blur-[30px] backdrop-saturate-[1.4] transition-[backdrop-filter,box-shadow] duration-[400ms] ease-out group-hover:backdrop-blur-[38px]",
         className,
       )}

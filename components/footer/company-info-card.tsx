@@ -15,7 +15,7 @@ export function CompanyInfoCard() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: easePremium }}
-      className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-6 backdrop-blur-xl"
+      className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-5 backdrop-blur-xl"
     >
       <span className="text-title-lg text-foreground font-semibold">
         Novyra<span className="text-gradient-brand">.</span>

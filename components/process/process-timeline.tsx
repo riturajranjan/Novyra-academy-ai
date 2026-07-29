@@ -139,13 +139,13 @@ export function ProcessTimeline() {
       </div>
 
       {/* Mobile (<768px) — vertical timeline, connector on the left */}
-      <ol aria-label="Our process" className="flex flex-col gap-6 min-[768px]:hidden">
+      <ol aria-label="Our process" className="flex flex-col gap-5 min-[768px]:hidden">
         {processSteps.map((step, i) => {
           const Icon = step.icon;
           return (
             <li key={step.id} className="relative flex gap-4">
               {i < processSteps.length - 1 ? (
-                <span className="bg-border-subtle absolute top-9 bottom-[-24px] left-[17px] w-px" aria-hidden />
+                <span className="bg-border-subtle absolute top-9 bottom-[-20px] left-[17px] w-px" aria-hidden />
               ) : null}
               <span
                 className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2"

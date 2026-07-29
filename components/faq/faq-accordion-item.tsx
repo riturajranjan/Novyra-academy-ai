@@ -51,7 +51,7 @@ export function FaqAccordionItem({ entry, isOpen, onToggle, index }: FaqAccordio
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left sm:px-7 sm:py-6"
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-7 sm:py-6"
       >
         <span className="text-body sm:text-body-lg text-foreground font-semibold">{entry.question}</span>
         <span className="border-border-subtle bg-surface relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border">
@@ -74,7 +74,7 @@ export function FaqAccordionItem({ entry, isOpen, onToggle, index }: FaqAccordio
             transition={{ duration: 0.35, ease: easePremium }}
             className="overflow-hidden"
           >
-            <p className="text-body-sm sm:text-body text-foreground-secondary px-6 pb-6 sm:px-7">{entry.answer}</p>
+            <p className="text-body-sm sm:text-body text-foreground-secondary px-5 pb-[18px] sm:px-7 sm:pb-6">{entry.answer}</p>
           </motion.div>
         ) : null}
       </AnimatePresence>

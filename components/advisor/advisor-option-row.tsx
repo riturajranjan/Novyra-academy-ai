@@ -64,7 +64,7 @@ export function AdvisorOptionRow({ option, accent, isSelected, onSelect }: Advis
 
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[16px] leading-tight font-bold text-white">{option.label}</span>
-        <span className="mt-0.5 block truncate text-[12px] font-medium text-white/55">{option.description}</span>
+        <span className="mt-0.5 block truncate text-[14px] font-medium text-white/55">{option.description}</span>
         {option.badge || option.timeline ? (
           <span className="mt-2 flex flex-wrap items-center gap-2">
             {option.badge ? (

@@ -1,5 +1,11 @@
 import type { LucideIcon } from "lucide-react";
-import { GraduationCap, Stethoscope, TrendingUp, Users, Brain } from "lucide-react";
+import {
+  GraduationCap,
+  Stethoscope,
+  TrendingUp,
+  Users,
+  Brain,
+} from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
 
 export type ProductFrame = "card" | "macbook" | "tablet" | "phone";
@@ -25,9 +31,46 @@ export interface HeroProduct {
  * compact KPI cards. Kept to five total so the hero stays premium and
  * uncluttered rather than a wall of decorative widgets. */
 export const heroProducts: HeroProduct[] = [
-  { id: "hospital-erp", label: "Hospital ERP", icon: Stethoscope, accent: "cyan", frame: "macbook", screenIndex: 2 },
-  { id: "school-erp", label: "School Attendance", icon: GraduationCap, accent: "purple", frame: "card", visual: "grades", screenIndex: 3 },
-  { id: "crm", label: "CRM Leads", icon: Users, accent: "pink", frame: "tablet", screenIndex: 4 },
-  { id: "ai-assistant", label: "AI Assistant", icon: Brain, accent: "purple", frame: "phone", screenIndex: 5 },
-  { id: "analytics", label: "Revenue Analytics", icon: TrendingUp, accent: "blue", frame: "card", visual: "counter", screenIndex: 7 },
+  {
+    id: "hospital-erp",
+    label: "Hospital ERP",
+    icon: Stethoscope,
+    accent: "cyan",
+    frame: "macbook",
+    screenIndex: 2,
+  },
+  {
+    id: "school-erp",
+    label: "School Attendance",
+    icon: GraduationCap,
+    accent: "purple",
+    frame: "card",
+    visual: "grades",
+    screenIndex: 3,
+  },
+  {
+    id: "crm",
+    label: "CRM Leads",
+    icon: Users,
+    accent: "pink",
+    frame: "tablet",
+    screenIndex: 4,
+  },
+  {
+    id: "ai-assistant",
+    label: "AI Assistant",
+    icon: Brain,
+    accent: "purple",
+    frame: "phone",
+    screenIndex: 5,
+  },
+  {
+    id: "analytics",
+    label: "Revenue Analytics",
+    icon: TrendingUp,
+    accent: "blue",
+    frame: "card",
+    visual: "counter",
+    screenIndex: 7,
+  },
 ];

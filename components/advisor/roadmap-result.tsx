@@ -72,7 +72,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: easePremium }}
-      className="mx-auto flex w-full max-w-4xl flex-col items-center gap-16 pt-8"
+      className="mx-auto flex w-full max-w-4xl flex-col items-center gap-9 pt-8 md:gap-16"
     >
       {/* header */}
       <div className="flex flex-col items-center gap-6 text-center">
@@ -167,7 +167,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
                 {String(i + 1).padStart(2, "0")}
               </motion.span>
               <div
-                className="rounded-[22px] border p-5 backdrop-blur-[28px] transition-[box-shadow,border-color] duration-base hover:shadow-[0_0_24px_-10px_var(--rc-glow)]"
+                className="rounded-[22px] border p-4 backdrop-blur-[28px] transition-[box-shadow,border-color] duration-base hover:shadow-[0_0_24px_-10px_var(--rc-glow)]"
                 style={{
                   ["--rc-glow" as string]: hexToRgba(accent.base, 0.4),
                   borderColor: "rgba(255,255,255,0.12)",
@@ -192,7 +192,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
 
       {/* deliverables + project overview */}
       <div
-        className="relative w-full overflow-hidden rounded-[28px] border p-8 backdrop-blur-[34px]"
+        className="relative w-full overflow-hidden rounded-[28px] border p-5 backdrop-blur-[34px] md:p-8"
         style={{
           borderColor: "rgba(255,255,255,0.12)",
           background: "rgba(255,255,255,0.05)",
@@ -200,7 +200,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
         }}
       >
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/8 to-transparent" />
-        <div className="relative grid grid-cols-1 gap-8 text-left sm:grid-cols-2">
+        <div className="relative grid grid-cols-1 gap-5 text-left sm:grid-cols-2 md:gap-8">
           <div className="flex flex-col gap-4">
             <p className="text-caption flex items-center gap-1.5 font-semibold tracking-wide text-white/50 uppercase">
               <CircleCheck className="h-3.5 w-3.5" style={{ color: accent.base }} aria-hidden />

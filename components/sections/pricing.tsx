@@ -20,11 +20,11 @@ export function Pricing() {
   const [mode, setMode] = useState<BillingMode>("project");
 
   return (
-    <section id="pricing" className="relative isolate overflow-hidden py-24 sm:py-32">
+    <section id="pricing" className="relative isolate overflow-hidden py-14 md:py-32">
       <PricingBackground />
 
-      <Container className="flex flex-col gap-16">
-        <div className="flex flex-col items-center gap-8">
+      <Container className="flex flex-col gap-10 md:gap-16">
+        <div className="flex flex-col items-center gap-6 md:gap-8">
           <SectionHeading
             eyebrow="Pricing"
             title={
@@ -58,7 +58,7 @@ export function Pricing() {
         <PricingTimeline />
 
         {/* why our pricing works */}
-        <div className="glass-strong shadow-card relative flex flex-col gap-8 overflow-hidden rounded-[32px] p-8 sm:p-10">
+        <div className="glass-strong shadow-card relative flex flex-col gap-6 overflow-hidden rounded-[32px] p-6 sm:p-10 md:gap-8">
           <div
             aria-hidden
             className="bg-brand-emerald/10 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl"
@@ -79,7 +79,7 @@ export function Pricing() {
         </div>
 
         {/* final CTA */}
-        <div className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[28px] p-8 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left">
+        <div className="glass-strong shadow-card relative flex flex-col items-center gap-5 overflow-hidden rounded-[28px] p-6 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left md:gap-6">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-20 blur-3xl"

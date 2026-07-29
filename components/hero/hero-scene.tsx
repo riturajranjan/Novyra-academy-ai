@@ -122,9 +122,9 @@ export function HeroScene() {
           between the cards and browser read as a sci-fi data-flow motif, not
           Apple/Stripe-style restraint. connection-lines.tsx is kept in the
           codebase but intentionally unused in this composition. */}
-      <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-overlay dark:opacity-[0.05]" aria-hidden />
+      {/* <div className="bg-noise pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-overlay dark:opacity-[0.05]" aria-hidden /> */}
 
-      <motion.div
+      {/* <motion.div
         className="relative mx-auto h-full max-w-5xl"
         style={{
           transformStyle: "preserve-3d",
@@ -138,7 +138,7 @@ export function HeroScene() {
         transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
       >
         <motion.div style={reduceMotion ? undefined : { y: parallaxY }}>
-          {/* Spotlight vignette around the browser mockup's position (lower half of the scene) */}
+         
           <div
             className="pointer-events-none absolute inset-0 z-10"
             style={{
@@ -177,7 +177,7 @@ export function HeroScene() {
             );
           })}
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }

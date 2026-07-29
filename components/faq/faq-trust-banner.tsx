@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * FAQ without reaching out. */
 export function FaqTrustBanner() {
   return (
-    <div className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[28px] p-8 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left">
+    <div className="glass-strong shadow-card relative flex flex-col items-center gap-5 overflow-hidden rounded-[28px] p-6 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left md:gap-6">
       <div
         aria-hidden
         className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-20 blur-3xl"

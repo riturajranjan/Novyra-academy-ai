@@ -41,7 +41,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
  * metric here is a number. */
 export function TrustMetrics() {
   return (
-    <div className="glass-strong shadow-card relative grid grid-cols-2 gap-6 overflow-hidden rounded-[28px] p-8 sm:grid-cols-5 sm:p-10">
+    <div className="glass-strong shadow-card relative grid grid-cols-2 gap-5 overflow-hidden rounded-[28px] p-5 sm:grid-cols-5 md:gap-6 md:p-10">
       <div aria-hidden className="bg-brand-blue/8 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       {trustMetrics.map((metric, i) => (
         <motion.div

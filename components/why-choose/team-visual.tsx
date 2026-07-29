@@ -14,7 +14,7 @@ export function TeamVisual() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="bg-gradient-mesh border-border-subtle relative h-full min-h-[300px] w-full overflow-hidden rounded-[24px] border">
+    <div className="bg-gradient-mesh border-border-subtle relative aspect-[16/10] w-full overflow-hidden rounded-[24px] border lg:aspect-auto lg:h-full">
       <div className="border-border-subtle bg-surface/70 absolute inset-5 overflow-hidden rounded-2xl border backdrop-blur-md">
         <div className="border-border-subtle flex items-center gap-1.5 border-b px-4 py-2.5">
           <span className="bg-foreground/15 h-2 w-2 rounded-full" />
@@ -40,7 +40,7 @@ export function TeamVisual() {
       </div>
 
       <motion.div
-        animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+        animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
         transition={reduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
         className="glass-strong shadow-card absolute right-6 bottom-8 flex h-28 w-40 flex-col gap-2 rounded-xl p-3.5"
       >

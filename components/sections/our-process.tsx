@@ -46,11 +46,11 @@ function MagneticButton({ children }: { children: ReactNode }) {
  * normal document flow — nothing here is absolutely positioned. */
 export function OurProcess() {
   return (
-    <section id="process" className="relative isolate py-16 md:py-24">
+    <section id="process" className="relative isolate py-14 md:py-24">
       <ProcessBackground />
 
       <Container>
-        <div className="relative mx-auto mb-18 flex max-w-[820px] flex-col items-center gap-5 text-center">
+        <div className="relative mx-auto mb-10 flex max-w-[820px] flex-col items-center gap-5 text-center md:mb-18">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute top-1/2 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14] blur-[100px]"
@@ -77,7 +77,7 @@ export function OurProcess() {
 
         <ProcessTimeline />
 
-        <div className="relative mx-auto mt-18 w-full max-w-[760px]">
+        <div className="relative mx-auto mt-10 w-full max-w-[760px] md:mt-18">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-[48px] opacity-25 blur-3xl"

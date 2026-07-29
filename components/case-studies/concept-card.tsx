@@ -24,13 +24,13 @@ export function ConceptCard({ build, index, wide = false }: ConceptCardProps) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -12 }}
       whileHover={{ y: -6, scale: 1.01 }}
       transition={{ duration: 0.4, delay: index * 0.05, ease: easePremium }}
       className={cn(
-        "group border-border-subtle bg-surface/70 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-[28px] border p-6 backdrop-blur-xl transition-shadow duration-base hover:shadow-card-hover",
+        "group border-border-subtle bg-surface/70 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-[28px] border p-5 backdrop-blur-xl transition-shadow duration-base hover:shadow-card-hover md:gap-4 md:p-6",
         wide && "lg:col-span-2",
       )}
     >
@@ -66,7 +66,7 @@ export function ConceptCard({ build, index, wide = false }: ConceptCardProps) {
       </p>
 
       <div className="mt-auto flex flex-wrap gap-1.5">
-        {build.techStack.map((tech) => (
+        {build.techStack.slice(0, 3).map((tech) => (
           <span key={tech} className="border-border-subtle text-caption text-foreground-secondary rounded-full border px-2.5 py-1">
             {tech}
           </span>

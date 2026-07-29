@@ -23,7 +23,7 @@ export function FeaturedConcept({ build }: FeaturedConceptProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease: easePremium }}
@@ -36,12 +36,12 @@ export function FeaturedConcept({ build }: FeaturedConceptProps) {
         style={{ backgroundColor: accentTint(build.accent, 16) }}
       />
 
-      <div className="grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:items-stretch lg:gap-10">
-        <div className="min-h-[280px] lg:min-h-[420px]">
+      <div className="grid grid-cols-1 gap-5 p-5 md:gap-8 md:p-10 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+        <div className="aspect-[16/10] lg:aspect-auto lg:min-h-[420px]">
           <ConceptPreview accent={build.accent} />
         </div>
 
-        <div className="flex flex-col justify-center gap-6">
+        <div className="flex flex-col justify-center gap-5 md:gap-6">
           <span
             className="text-caption inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 font-semibold tracking-wide uppercase"
             style={{ borderColor: accentTint(build.accent, 35), color: stroke, backgroundColor: accentTint(build.accent, 12) }}

@@ -34,10 +34,10 @@ export function Faq() {
   }, [query, category]);
 
   return (
-    <section id="faq" className="relative isolate py-24 sm:py-32">
+    <section id="faq" className="relative isolate py-14 md:py-32">
       <FaqBackground />
 
-      <Container className="flex flex-col gap-14">
+      <Container className="flex flex-col gap-10 md:gap-14">
         <div className="flex flex-col items-center gap-6">
           <SectionHeading
             eyebrow="Frequently Asked Questions"
@@ -67,14 +67,14 @@ export function Faq() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-10">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-10">
           <FaqInfoPanel />
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5 md:gap-6">
             <FaqSearch value={query} onChange={setQuery} />
             <FaqCategoryTabs active={category} onSelect={setCategory} />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               <AnimatePresence mode="popLayout">
                 {filtered.length > 0 ? (
                   filtered.map((entry, i) => (

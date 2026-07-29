@@ -18,7 +18,7 @@ export function GlassOrb() {
   return (
     <motion.div
       className="relative flex h-44 w-44 shrink-0 items-center justify-center sm:h-52 sm:w-52"
-      animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
+      animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     >
       {satellites.map((s, i) => {

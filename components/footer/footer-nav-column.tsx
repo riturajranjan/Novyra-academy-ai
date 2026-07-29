@@ -19,7 +19,7 @@ export function FooterNavColumn({ column, index }: FooterNavColumnProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: easePremium }}
-      className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-6 backdrop-blur-xl"
+      className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-5 backdrop-blur-xl"
     >
       <h4 className="text-caption text-foreground-secondary font-semibold tracking-wide uppercase">{column.title}</h4>
       {/* Long lists (Services) wrap into two columns so one column never

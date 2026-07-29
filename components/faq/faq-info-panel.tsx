@@ -36,7 +36,7 @@ function GlassObject() {
       />
       <motion.div
         className="glass-strong shadow-card relative flex h-16 w-16 items-center justify-center rounded-3xl"
-        animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+        animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       >
         <MessageCircle className="text-brand-blue h-7 w-7" aria-hidden />
@@ -50,11 +50,11 @@ function GlassObject() {
 export function FaqInfoPanel() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5, ease: easePremium }}
-      className="glass-strong shadow-card relative flex flex-col items-center gap-8 overflow-hidden rounded-[32px] p-8 text-center sm:p-10 lg:sticky lg:top-24 lg:items-start lg:text-left"
+      className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[32px] p-6 text-center sm:p-10 md:gap-8 lg:sticky lg:top-24 lg:items-start lg:text-left"
     >
       <div aria-hidden className="bg-brand-blue/12 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 to-transparent" />
