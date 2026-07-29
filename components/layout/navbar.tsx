@@ -15,22 +15,13 @@ export function Navbar() {
   return (
     <header
       style={{ paddingTop: "env(safe-area-inset-top)" }}
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full max-w-full transition-colors duration-base ease-soft",
-      )}
+      className="fixed inset-x-0 top-0 z-50 w-full max-w-full"
     >
-      <div
-        className={cn(
-          "mx-auto mt-0 max-w-[90rem] transition-all duration-base ease-soft",
-          scrolled ? "px-3 pt-3" : "px-0 pt-0",
-        )}
-      >
+      <div className="mx-auto max-w-[90rem] px-5 pt-4 transition-[padding] duration-base ease-soft sm:px-6 sm:pt-[18px] lg:px-7">
         <div
           className={cn(
-            "flex h-16 items-center justify-between gap-4 px-4 transition-all duration-base ease-soft sm:px-6 lg:px-8",
-            scrolled
-              ? "glass-strong shadow-card rounded-xl border lg:rounded-2xl"
-              : "border border-transparent bg-transparent",
+            "shadow-card flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
+            scrolled ? "glass-strong h-[60px] lg:h-16" : "glass h-[68px] lg:h-[72px]",
           )}
         >
           <Link
