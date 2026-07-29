@@ -16,7 +16,7 @@ export function TrustBar() {
             key={item.label}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, margin: "150px" }}
             transition={{ duration: 0.45, delay: i * 0.05, ease: easePremium }}
             className="flex items-center gap-2.5"
           >

@@ -24,7 +24,7 @@ export function SectionHeading({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       variants={fadeInUp}
       className={cn(
         "flex flex-col gap-4",

@@ -43,7 +43,7 @@ export function ProcessVisual() {
               key={i}
               initial={{ opacity: 0, x: row.from === "you" ? 12 : -12 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "150px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               className={`flex ${row.from === "you" ? "justify-end" : "justify-start"}`}
             >

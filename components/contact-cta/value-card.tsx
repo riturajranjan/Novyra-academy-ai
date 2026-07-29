@@ -20,7 +20,7 @@ export function ValueCard({ card, index }: ValueCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: easePremium }}
       className="group border-border-subtle bg-surface/60 relative flex flex-col items-center gap-2.5 overflow-hidden rounded-[24px] border p-5 text-center backdrop-blur-xl transition-shadow duration-base md:gap-3 md:p-6"

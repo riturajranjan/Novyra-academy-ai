@@ -24,7 +24,7 @@ export function CtaTimeline() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true, margin: "150px" }}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.4, delay: i * 0.06, ease: easePremium }}
                 className="group border-border-subtle bg-surface/70 relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border backdrop-blur-md"
@@ -42,7 +42,7 @@ export function CtaTimeline() {
                     className="bg-gradient-brand absolute inset-y-0 left-0"
                     initial={{ width: "0%" }}
                     whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "150px" }}
                     transition={{ duration: 0.6, delay: i * 0.1, ease: easePremium }}
                   />
                 </span>

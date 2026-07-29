@@ -48,7 +48,7 @@ export function Footer() {
           onPointerMove={handlePointerMove}
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.5 }}
           className="glass-strong shadow-card relative flex flex-col gap-5 overflow-hidden rounded-[32px] p-5 sm:p-6 lg:gap-7 lg:p-8"
         >

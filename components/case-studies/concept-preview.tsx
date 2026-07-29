@@ -47,7 +47,7 @@ export function ConceptPreview({ accent }: ConceptPreviewProps) {
                 key={i}
                 initial={{ height: 0 }}
                 whileInView={{ height: `${h}%` }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "150px" }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="flex-1 rounded-t-sm"
                 style={{ backgroundColor: accentTint(accent, i % 2 ? 60 : 32) }}

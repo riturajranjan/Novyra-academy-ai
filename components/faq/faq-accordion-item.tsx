@@ -37,7 +37,7 @@ export function FaqAccordionItem({ entry, isOpen, onToggle, index }: FaqAccordio
       layout
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.4, delay: reduceMotion ? 0 : index * 0.04, ease: easePremium }}
       className={cn(
         "group border-border-subtle bg-surface/70 relative overflow-hidden rounded-[24px] border backdrop-blur-2xl transition-colors duration-base",

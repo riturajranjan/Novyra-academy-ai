@@ -32,7 +32,7 @@ export function TechBadge({ name, color, index }: TechBadgeProps) {
       onPointerMove={handlePointerMove}
       initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={reduceMotion ? undefined : { y: -4, scale: 1.04 }}
       transition={{ duration: 0.3, delay: index * 0.03, ease: easePremium }}
       style={{ ["--badge-border" as string]: hexToRgba(color, 0.45), ["--badge-glow" as string]: hexToRgba(color, 0.35) }}

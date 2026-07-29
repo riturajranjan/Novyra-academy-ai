@@ -64,7 +64,7 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
         onPointerMove={handlePointerMove}
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: "150px" }}
         animate={{
           scale: isSelected ? 1.03 : 1,
           backgroundColor: isSelected ? hexToRgba(accent.base, 0.12) : "rgba(0,0,0,0)",

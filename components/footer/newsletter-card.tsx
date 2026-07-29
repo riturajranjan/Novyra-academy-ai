@@ -32,7 +32,7 @@ export function NewsletterCard() {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
       className="border-border-subtle bg-surface/60 flex flex-col justify-center gap-2 rounded-[20px] border p-4 backdrop-blur-xl"
     >

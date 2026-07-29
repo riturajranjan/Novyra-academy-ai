@@ -68,7 +68,7 @@ export function WhyChooseNovyra() {
                       key={chip.id}
                       initial={{ opacity: 0, y: 8 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: true, margin: "150px" }}
                       whileHover={{ y: -2, scale: 1.04 }}
                       transition={{ duration: 0.3, delay: i * 0.03, ease: easePremium }}
                       className="border-border-subtle bg-surface/60 shadow-card flex items-center gap-1.5 rounded-full border px-3 py-1.5 backdrop-blur-sm transition-shadow duration-base hover:shadow-card-hover"

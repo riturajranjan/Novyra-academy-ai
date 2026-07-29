@@ -44,7 +44,7 @@ function SocialCard({ link, index }: { link: (typeof socialLinks)[number]; index
       onPointerMove={handlePointerMove}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -3, scale: 1.05 }}
       transition={{ duration: 0.35, delay: index * 0.04, ease: easePremium }}
       aria-label={link.label}

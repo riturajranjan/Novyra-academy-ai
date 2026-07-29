@@ -30,7 +30,7 @@ export function TeamVisual() {
               key={i}
               initial={{ opacity: 0, x: -8 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "150px" }}
               transition={{ duration: 0.3, delay: i * 0.06 }}
               className="bg-foreground/10 h-2 rounded-full"
               style={{ width: `${w}%` }}
@@ -55,7 +55,7 @@ export function TeamVisual() {
             key={role.label}
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "150px" }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
             className="glass-strong shadow-card border-background flex h-11 w-11 items-center justify-center rounded-full border-2"
           >

@@ -15,7 +15,7 @@ export function FooterHero() {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.6, ease: easePremium }}
       className="flex flex-col items-center gap-5 text-center"
     >

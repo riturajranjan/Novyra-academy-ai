@@ -48,7 +48,7 @@ export function TrustMetrics() {
           key={metric.label}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.45, delay: i * 0.06, ease: easePremium }}
           className="flex flex-col items-center gap-1.5 text-center"
         >

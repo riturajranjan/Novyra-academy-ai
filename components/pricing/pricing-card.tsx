@@ -55,7 +55,7 @@ export function PricingCard({ plan, mode, index }: PricingCardProps) {
       onPointerMove={handlePointerMove}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -8 }}
       animate={reduceMotion || !plan.featured ? undefined : { y: [0, -8, 0] }}
       transition={
@@ -87,7 +87,7 @@ export function PricingCard({ plan, mode, index }: PricingCardProps) {
         <motion.span
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="bg-gradient-brand shadow-glow-purple absolute -top-3.5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1.5 rounded-full px-4 py-1.5 text-caption font-semibold text-white">
           <motion.span

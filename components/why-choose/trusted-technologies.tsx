@@ -12,7 +12,7 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: easePremium }}
       className="border-border-subtle bg-surface/50 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg md:gap-5 md:p-6"
     >
@@ -84,7 +84,7 @@ export function TrustedTechnologies() {
               key={item.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "150px" }}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: easePremium }}
               className="group border-border-subtle bg-surface/60 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg transition-shadow duration-base md:gap-4 md:p-6"
@@ -119,7 +119,7 @@ export function TrustedTechnologies() {
               key={metric.label}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "150px" }}
               transition={{ duration: 0.4, delay: i * 0.06, ease: easePremium }}
               className="text-center"
             >

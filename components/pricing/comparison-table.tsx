@@ -15,7 +15,7 @@ function CheckGlyph({ color }: { color: string }) {
       className="mx-auto h-5 w-5"
       initial={{ pathLength: 0, opacity: 0 }}
       whileInView={{ pathLength: 1, opacity: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
     >
       <motion.path

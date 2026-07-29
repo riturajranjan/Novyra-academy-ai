@@ -27,7 +27,7 @@ export function CommitmentCard({ card, index }: CommitmentCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: easePremium }}
       className={cn(

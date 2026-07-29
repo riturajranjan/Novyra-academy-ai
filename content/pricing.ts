@@ -129,8 +129,8 @@ export const pricingPlans: PricingPlan[] = [
     icon: Landmark,
     accent: "amber",
     priceLabel: "",
-    price: { project: "Custom", retainer: "Custom" },
-    priceSuffix: { project: "Pricing", retainer: "Pricing" },
+    price: { project: "Custom Pricing", retainer: "Custom Pricing" },
+    priceSuffix: { project: "", retainer: "" },
     features: [
       "Dedicated Team",
       "Architecture Planning",

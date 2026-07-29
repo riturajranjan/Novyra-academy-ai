@@ -33,7 +33,7 @@ function KpiCard({ icon: Icon, label, value, accent, delay }: KpiCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.4, delay, ease: easePremium }}
       className="flex flex-col gap-3 rounded-[22px] border p-5 backdrop-blur-[28px] transition-shadow duration-base hover:shadow-[0_0_28px_-10px_var(--kpi-glow)]"
@@ -138,7 +138,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
               key={step}
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "150px" }}
               transition={{ duration: 0.4, delay: i * 0.08, ease: easePremium }}
               className="relative grid grid-cols-[56px_minmax(0,1fr)] gap-5"
             >
@@ -148,7 +148,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
                   className="absolute top-14 left-7 w-px origin-top"
                   initial={{ scaleY: 0 }}
                   whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true, margin: "150px" }}
                   transition={{ duration: 0.5, delay: i * 0.08 + 0.1, ease: "easeOut" }}
                   style={{ height: "calc(100% + 0.75rem)", backgroundImage: RAIL_GRADIENT, opacity: 0.6 }}
                 />
@@ -212,7 +212,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
                   key={item}
                   initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "150px" }}
                   transition={{ duration: 0.3, delay: i * 0.05, ease: easePremium }}
                   className="-mx-2 flex items-center gap-3 rounded-xl px-2 py-1.5 transition-colors duration-base hover:bg-white/[0.04]"
                 >

@@ -35,7 +35,7 @@ export function HeroGlassCard() {
       onPointerMove={handlePointerMove}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       animate={reduceMotion ? undefined : { y: [0, -5, 0] }}
       transition={
         reduceMotion

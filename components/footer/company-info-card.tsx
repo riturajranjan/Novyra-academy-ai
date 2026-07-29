@@ -13,7 +13,7 @@ export function CompanyInfoCard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
       className="border-border-subtle bg-surface/60 flex flex-col gap-3 rounded-[24px] border p-5 backdrop-blur-xl"
     >

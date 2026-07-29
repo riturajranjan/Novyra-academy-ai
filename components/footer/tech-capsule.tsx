@@ -33,7 +33,7 @@ export function TechCapsule({ name, color, index }: TechCapsuleProps) {
       onPointerMove={handlePointerMove}
       initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={reduceMotion ? undefined : { y: -3, scale: 1.04 }}
       transition={{ duration: 0.3, delay: index * 0.02, ease: easePremium }}
       style={{ ["--capsule-border" as string]: hexToRgba(color, 0.5), ["--capsule-glow" as string]: hexToRgba(color, 0.35) }}

@@ -59,7 +59,7 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
       onHoverEnd={() => onActiveChange?.(false)}
       initial={{ opacity: 0, y: from === "above" ? 20 : -20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -10, scale: 1.02 }}
       transition={{ duration: 0.4, ease: easePremium }}
       style={{
@@ -115,7 +115,7 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
         <motion.span
           initial={{ opacity: 0, scale: 0.7 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.4, delay: 0.15, ease: easePremium }}
           className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/15 backdrop-blur-sm transition-transform duration-[400ms] ease-out group-hover:rotate-[8deg] group-hover:scale-110"
           style={{ backgroundColor: accentTint(step.accent, 18) }}
@@ -133,7 +133,7 @@ export function ProcessCard({ step, from = "above", className, onActiveChange }:
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: "150px" }}
         transition={{ staggerChildren: 0.06, delayChildren: 0.25 }}
         className="mt-auto flex flex-wrap gap-2"
       >

@@ -80,7 +80,7 @@ export function CaseStudies() {
                       className="bg-gradient-brand absolute inset-y-0 left-0"
                       initial={{ width: "0%" }}
                       whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
+                      viewport={{ once: true, margin: "150px" }}
                       transition={{ duration: 0.6, delay: i * 0.1, ease: easePremium }}
                     />
                   </span>

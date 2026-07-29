@@ -52,7 +52,7 @@ export function FaqInfoPanel() {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
       className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[32px] p-6 text-center sm:p-10 md:gap-8 lg:sticky lg:top-24 lg:items-start lg:text-left"
     >
