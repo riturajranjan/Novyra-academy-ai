@@ -25,6 +25,7 @@ const namespaces = [
   "contact",
   "metadata",
   "leadPopup",
+  "about",
 ] as const;
 
 async function loadMessages(locale: string) {

@@ -41,6 +41,7 @@ export async function generateMetadata({ params }: Pick<LocaleLayoutProps, "para
   return {
     title: t("title"),
     description: t("description"),
+    metadataBase: new URL("https://novyratech.in"),
     alternates: {
       canonical: `/${locale}`,
       languages: {

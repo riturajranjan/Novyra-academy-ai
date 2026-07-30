@@ -46,6 +46,15 @@
     0 28px 85px rgba(15, 23, 42, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
+  /* ---- Mobile nav panel: near-opaque — this floats full-height over
+     ordinary page content (tag lists, footer sections), so it needs much
+     more coverage than .glass-strong's cards-over-hero tuning. ---- */
+  --mobile-nav-bg: rgba(255, 255, 255, 0.98);
+  --mobile-nav-border: rgba(15, 23, 42, 0.08);
+  --mobile-nav-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
   /* ---- Shadows (neutral) ---- */
   --shadow-color: 15 23 42;
   --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 12px 28px -8px rgb(var(--shadow-color) / 0.12);
@@ -90,6 +99,12 @@
   --mega-menu-border: rgba(255, 255, 255, 0.09);
   --mega-menu-shadow:
     0 28px 85px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --mobile-nav-bg: rgba(7, 11, 26, 0.98);
+  --mobile-nav-border: rgba(255, 255, 255, 0.09);
+  --mobile-nav-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
   --shadow-color: 0 0 0;

@@ -76,6 +76,20 @@ export function NavMobile() {
       <AnimatePresence>
         {open ? (
           <motion.div
+            aria-hidden
+            onClick={() => setOpen(false)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: easePremium }}
+            className="fixed inset-0 z-105 bg-black/60 backdrop-blur-sm lg:hidden"
+          />
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
             id="mobile-nav-panel"
             ref={panelRef}
             role="dialog"
@@ -85,8 +99,13 @@ export function NavMobile() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25, ease: easePremium }}
-            className="glass-strong fixed inset-x-3 z-50 max-h-[calc(100dvh-1.5rem-env(safe-area-inset-top))] w-auto max-w-full overflow-y-auto rounded-2xl p-4 shadow-card lg:hidden"
-            style={{ top: "max(0.75rem, calc(env(safe-area-inset-top) + 0.5rem))" }}
+            style={{
+              top: "max(0.75rem, calc(env(safe-area-inset-top) + 0.5rem))",
+              background: "var(--mobile-nav-bg)",
+              border: "1px solid var(--mobile-nav-border)",
+              boxShadow: "var(--mobile-nav-shadow)",
+            }}
+            className="fixed inset-x-3 z-110 max-h-[calc(100dvh-1.5rem-env(safe-area-inset-top))] w-auto max-w-full overflow-y-auto rounded-2xl p-4 backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
           >
             <div className="flex items-center justify-between px-2 pb-4">
               <span className="text-title font-semibold text-foreground">Novyra</span>
