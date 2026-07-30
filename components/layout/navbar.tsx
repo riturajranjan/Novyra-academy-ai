@@ -19,7 +19,7 @@ export function Navbar() {
   return (
     <header
       style={{ paddingTop: "env(safe-area-inset-top)" }}
-      className="fixed inset-x-0 top-0 z-50 w-full max-w-full">
+      className="fixed inset-x-0 top-0 z-[100] w-full max-w-full">
       <div className="mx-auto max-w-[90rem] px-3 md:px-5 pt-4 transition-[padding] duration-base ease-soft sm:px-6 sm:pt-[18px] lg:px-7">
         <div
           style={{ backdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)`, WebkitBackdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)` }}

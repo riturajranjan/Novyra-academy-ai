@@ -1,32 +1,26 @@
 {
   "about": {
     "label": "About",
+    "helper": "Learn more about Novyra.",
+    "explore": "Explore About",
     "children": {
-      "aboutUs": { "label": "About Us", "description": "Who we are and what drives us." },
-      "mission": { "label": "Our Mission", "description": "What we're building toward." },
-      "whyChooseUs": { "label": "Why Choose Us", "description": "What sets Novyra apart." },
-      "faq": { "label": "FAQ", "description": "Common questions, answered." },
-      "location": { "label": "Location", "description": "Find our office and hours." }
-    },
-    "featured": {
-      "title": "Meet the team",
-      "description": "The people building Novyra Technologies.",
-      "cta": "Explore About"
+      "aboutUs": { "label": "About Us", "description": "Who we are." },
+      "mission": { "label": "Mission & Vision", "description": "What drives us." },
+      "whyChooseUs": { "label": "Why Choose Us", "description": "Why businesses trust Novyra." },
+      "faq": { "label": "FAQ", "description": "Quick answers." }
     }
   },
   "services": {
     "label": "Services",
+    "helper": "Explore what we build.",
+    "exploreAll": "Explore All Services",
+    "getRecommendation": "Get a Recommendation",
     "children": {
-      "webDesign": { "label": "Web Design & Development", "description": "Websites built for craft and speed." },
-      "digitalMarketing": { "label": "Digital Marketing", "description": "Growth-focused marketing strategy." },
-      "webApplications": { "label": "Web Applications", "description": "Custom apps for real workflows." },
-      "graphicDesign": { "label": "Graphic Design", "description": "Visual identity that stands out." },
-      "saasDevelopment": { "label": "SaaS Development", "description": "Full-stack SaaS product builds." }
-    },
-    "featured": {
-      "title": "Not sure where to start?",
-      "description": "Tell us about your project and we'll recommend a path.",
-      "cta": "Talk to us"
+      "webDesign": { "label": "Web Design & Development", "description": "Premium business websites." },
+      "digitalMarketing": { "label": "Digital Marketing", "description": "SEO, ads, and growth." },
+      "webApplications": { "label": "Web Applications", "description": "Custom scalable platforms." },
+      "graphicDesign": { "label": "Graphic & Logo Design", "description": "Brand identity and visuals." },
+      "saasDevelopment": { "label": "SaaS Development", "description": "Cloud products built to scale." }
     }
   },
   "solutions": { "label": "Solutions" },
