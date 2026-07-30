@@ -178,12 +178,16 @@
   --text-caption--line-height: 1.4;
   --text-caption--letter-spacing: 0.01em;
 
-  /* ---- Radius ---- */
+  /* ---- Radius ----
+     `hero` documents what was already the de facto most-used card radius
+     sitewide (28px, ~33 call sites) before this token existed — formalizing
+     the existing convention rather than introducing a new visual value. */
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
+  --radius-hero: 1.75rem;
   --radius-pill: 999px;
 
   /* ---- Shadows ---- */

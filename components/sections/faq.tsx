@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
-import { CircleCheck } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FaqBackground } from "@/components/faq/faq-background";
@@ -12,8 +11,7 @@ import { FaqCategoryTabs } from "@/components/faq/faq-category-tabs";
 import { FaqAccordionItem } from "@/components/faq/faq-accordion-item";
 import { FaqInfoPanel } from "@/components/faq/faq-info-panel";
 import { FaqTrustBanner } from "@/components/faq/faq-trust-banner";
-import { faqEntries, faqTrustBadgeIds, type FaqCategory } from "@/content/faq";
-import { easePremium } from "@/lib/motion";
+import { faqEntries, type FaqCategory } from "@/content/faq";
 
 export function Faq() {
   const t = useTranslations("faq");
@@ -38,38 +36,15 @@ export function Faq() {
   }, [query, category, t]);
 
   return (
-    <section id="faq" className="relative isolate py-14 md:py-32">
+    <section id="faq" className="relative isolate py-14 md:py-20">
       <FaqBackground />
 
       <Container className="flex flex-col gap-10 md:gap-14">
-        <div className="flex flex-col items-center gap-6">
-          <SectionHeading
-            eyebrow={t("section.eyebrow")}
-            title={t("section.title")}
-            description={t("section.description")}
-          />
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {faqTrustBadgeIds.map((id, i) => (
-              <motion.span
-                key={id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "150px" }}
-                transition={{
-                  duration: 0.4,
-                  delay: i * 0.05,
-                  ease: easePremium,
-                }}
-                className="border-border-subtle bg-surface/60 text-body-sm text-foreground-secondary flex items-center gap-1.5 rounded-full border px-4 py-2 font-medium backdrop-blur-md">
-                <CircleCheck
-                  className="text-brand-emerald h-4 w-4"
-                  aria-hidden
-                />
-                {t(`trustBadges.${id}`)}
-              </motion.span>
-            ))}
-          </div>
-        </div>
+        <SectionHeading
+          eyebrow={t("section.eyebrow")}
+          title={t("section.title")}
+          description={t("section.description")}
+        />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start lg:gap-10">
           <FaqInfoPanel />

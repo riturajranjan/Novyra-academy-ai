@@ -17,7 +17,7 @@ export function ComparePanel() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="glass-strong shadow-card overflow-hidden rounded-[28px]">
+    <div className="glass-strong shadow-card overflow-hidden rounded-hero">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

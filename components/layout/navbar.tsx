@@ -24,7 +24,7 @@ export function Navbar() {
         <div
           style={{ backdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)`, WebkitBackdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)` }}
           className={cn(
-            "flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
+            "flex items-center justify-between gap-4 rounded-hero border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-2xl lg:px-8",
             scrolled
               ? "glass-strong shadow-card-hover h-[60px] lg:h-[68px]"
               : "glass shadow-card h-[68px] lg:h-[80px]",
@@ -45,7 +45,9 @@ export function Navbar() {
             />
           </Link>
 
-          <NavDesktop />
+          <nav aria-label={t("siteNavigation")}>
+            <NavDesktop />
+          </nav>
 
           <div className="flex items-center gap-2">
             <div className="hidden items-center gap-2 lg:flex">

@@ -1,7 +1,7 @@
 {
   "eyebrow": "Smart Solution Advisor",
-  "title": "Find the Perfect Digital Solution for Your Business",
-  "description": "Answer a few quick questions and our AI-powered advisor will recommend the ideal digital solution tailored to your business goals, growth stage, and budget.",
+  "title": "Find the Right Solution for Your Business",
+  "description": "Answer three quick questions and get a solution matched to your goals, stage, and budget.",
   "trustPoints": {
     "freeConsultation": "Free Consultation",
     "personalizedRoadmap": "Personalized Roadmap",
@@ -13,9 +13,9 @@
     "stage": { "question": "Where are you in your business journey?", "hint": "This only adjusts the estimated timeline." }
   },
   "stepDescriptions": {
-    "goalHint": "Choose the goal that best matches your current business priority.",
-    "stageHintShort": "Choose the stage that best represents where your business is today.",
-    "stageHintLong": "Choose the stage that best represents where your business is today. We'll recommend the right digital solution for your current growth."
+    "goalHint": "Choose the goal that matches your current priority.",
+    "stageHintShort": "Choose the stage that describes your business today.",
+    "stageHintLong": "Choose the stage that describes your business today — we'll match the recommendation to it."
   },
   "actions": {
     "back": "Back",
@@ -27,19 +27,19 @@
     "hospital-software": { "label": "Hospital Platform", "description": "Digitise healthcare operations", "badge": "Enterprise Ready", "timeline": "8–10 Weeks" },
     "school-erp": { "label": "School ERP", "description": "Manage academics and administration", "badge": "Enterprise Ready", "timeline": "8–10 Weeks" },
     "saas-product": { "label": "SaaS Product", "description": "Launch a scalable platform", "badge": "Scalable Platform", "timeline": "6–9 Weeks" },
-    "crm": { "label": "CRM System", "description": "Organise leads and customers", "badge": "Best for Teams", "timeline": "6–8 Weeks" },
+    "crm": { "label": "CRM System", "description": "Organise leads and customers", "badge": "Built for Teams", "timeline": "6–8 Weeks" },
     "branding": { "label": "Brand Identity", "description": "Create a professional visual system", "badge": "Fast Launch", "timeline": "2–3 Weeks" },
     "digital-marketing": { "label": "Digital Marketing", "description": "Build visibility and generate leads", "badge": "Popular Choice", "timeline": "3–4 Weeks" }
   },
   "goalOptions": {
-    "generate-leads": { "label": "Generate More Leads", "description": "Turn visitors into enquiries", "badge": "🚀 Fast Growth", "timeline": "2–4 Weeks" },
-    "sell-online": { "label": "Sell Online", "description": "Open a direct online sales channel", "badge": "⭐ Popular", "timeline": "4–6 Weeks" },
-    "automate-operations": { "label": "Automate Operations", "description": "Remove manual, repetitive work", "badge": "🤖 AI Recommended", "timeline": "6–8 Weeks" },
-    "launch-mvp": { "label": "Launch an MVP", "description": "Prove the concept with the smallest scope", "badge": "⚡ Quick Launch", "timeline": "3–5 Weeks" },
-    "improve-brand": { "label": "Improve Brand Presence", "description": "Build a consistent, recognisable identity", "badge": "🏢 Enterprise", "timeline": "2–3 Weeks" },
-    "manage-customers": { "label": "Manage Customers", "description": "Keep every lead and client organised", "badge": "📈 High ROI", "timeline": "6–8 Weeks" },
-    "improve-seo": { "label": "Improve SEO Visibility", "description": "Rank higher for the searches that matter", "badge": "⭐ Popular", "timeline": "3–4 Weeks" },
-    "scale-product": { "label": "Scale an Existing Product", "description": "Grow what's already working", "badge": "🚀 Fast Growth", "timeline": "8–10 Weeks" }
+    "generate-leads": { "label": "Generate More Leads", "description": "Turn visitors into enquiries", "badge": "Fast Growth", "timeline": "2–4 Weeks" },
+    "sell-online": { "label": "Sell Online", "description": "Open a direct online sales channel", "badge": "Popular", "timeline": "4–6 Weeks" },
+    "automate-operations": { "label": "Automate Operations", "description": "Remove manual, repetitive work", "badge": "AI Recommended", "timeline": "6–8 Weeks" },
+    "launch-mvp": { "label": "Launch an MVP", "description": "Prove the concept with the smallest scope", "badge": "Quick Launch", "timeline": "3–5 Weeks" },
+    "improve-brand": { "label": "Improve Brand Presence", "description": "Build a consistent, recognisable identity", "badge": "Enterprise", "timeline": "2–3 Weeks" },
+    "manage-customers": { "label": "Manage Customers", "description": "Keep every lead and client organised", "badge": "High ROI", "timeline": "6–8 Weeks" },
+    "improve-seo": { "label": "Improve SEO Visibility", "description": "Rank higher for the searches that matter", "badge": "Popular", "timeline": "3–4 Weeks" },
+    "scale-product": { "label": "Scale an Existing Product", "description": "Grow what's already working", "badge": "Fast Growth", "timeline": "8–10 Weeks" }
   },
   "stageOptions": {
     "idea": { "label": "Idea Stage", "description": "Planning something new" },

@@ -9,25 +9,6 @@ import dashboardPreview from "@/public/hero2.png";
 
 const IMAGE_SIZES = "(max-width: 1024px) 88vw, 640px";
 
-const PARTICLES = [
-  { top: "6%", left: "10%", size: 3, delay: 0 },
-  { top: "72%", left: "4%", size: 2, delay: 1.2 },
-  { top: "14%", left: "90%", size: 2, delay: 0.6 },
-  { top: "82%", left: "92%", size: 3, delay: 1.8 },
-  { top: "46%", left: "0%", size: 2, delay: 0.3 },
-  { top: "52%", left: "98%", size: 2, delay: 2.2 },
-];
-
-/** Small bright dots tracing the orbit ring — 16–22s so the motion stays
- * unmistakably slow and ambient, never brighter or more prominent than the
- * dashboard itself. Capped at 4 per the "no clutter" direction. */
-const ORBIT_NODES = [
-  { color: "var(--color-brand-blue)", duration: 18, delay: 0 },
-  { color: "var(--color-brand-purple)", duration: 20, delay: 4 },
-  { color: "var(--color-brand-pink)", duration: 22, delay: 9 },
-  { color: "var(--color-brand-cyan)", duration: 19, delay: 14 },
-];
-
 /** Two tech-adjacent icons, positioned just inside the image's own edges
  * (never a negative offset that would spill into the gap toward the left
  * content column) — decorative only (aria-hidden). `hideBelow` trims the
@@ -39,11 +20,14 @@ const FLOATING_ICONS = [
 
 /** The hero's centerpiece — the real, provided product-dashboard image,
  * used exactly as given (no redraw, no recreation). Every effect here lives
- * *around* the image (ambient glow, a glass reflection echo, orbit ring,
- * particles, a small set of floating icons, one shield accent) — the
- * `<Image>` itself only ever gets a `drop-shadow` filter, never a
- * recolor/crop/edit of its pixels. Sized to stay clearly smaller than the
- * left content column so it supports the pitch instead of dominating it. */
+ * *around* the image (ambient glow, a glass reflection echo, a small set of
+ * floating capability icons, two edge trust badges) — the `<Image>` itself
+ * only ever gets a `drop-shadow` filter, never a recolor/crop/edit of its
+ * pixels. Deliberately no purely-ornamental motion (no particle sparkles,
+ * no orbit ring) — every element here carries real meaning (a capability or
+ * a trust signal), not just movement for its own sake. Sized to stay
+ * clearly smaller than the left content column so it supports the pitch
+ * instead of dominating it. */
 export function HeroImageShowcase() {
   const t = useTranslations("hero");
   const reduceMotion = useReducedMotion();
@@ -56,34 +40,6 @@ export function HeroImageShowcase() {
         <div className="bg-brand-blue absolute top-[8%] left-[4%] h-56 w-56 rounded-full opacity-[0.22] blur-[90px]" />
         <div className="bg-brand-purple absolute top-[2%] right-[6%] h-64 w-64 rounded-full opacity-[0.22] blur-[100px]" />
         <div className="bg-brand-pink absolute bottom-[6%] left-1/3 h-52 w-52 rounded-full opacity-[0.16] blur-[90px]" />
-      </div>
-
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
-        {ORBIT_NODES.map((node, i) => (
-          <motion.div
-            key={i}
-            className="absolute top-1/2 left-1/2 h-[92%] w-[92%] -translate-x-1/2 -translate-y-1/2"
-            animate={reduceMotion ? undefined : { rotate: 360 }}
-            transition={{ duration: node.duration, repeat: Infinity, ease: "linear", delay: node.delay }}
-          >
-            <span
-              className="absolute top-0 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full opacity-80"
-              style={{ backgroundColor: node.color, boxShadow: `0 0 8px 1.5px ${node.color}` }}
-            />
-          </motion.div>
-        ))}
-      </div>
-
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block">
-        {PARTICLES.map((p, i) => (
-          <motion.span
-            key={i}
-            className="bg-brand-cyan absolute rounded-full"
-            style={{ top: p.top, left: p.left, width: p.size, height: p.size }}
-            animate={reduceMotion ? { opacity: 0.4 } : { opacity: [0, 0.8, 0], y: [0, -14, 0] }}
-            transition={{ duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
-          />
-        ))}
       </div>
 
       <div aria-hidden className="pointer-events-none absolute inset-0">

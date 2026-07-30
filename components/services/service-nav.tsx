@@ -43,7 +43,7 @@ export function ServiceNav({ categories, activeId, onSelect }: ServiceNavProps) 
       role="tablist"
       aria-label={t("nav.ariaLabel")}
       aria-orientation="vertical"
-      className="glass flex shrink-0 gap-2 overflow-x-auto rounded-[28px] p-2.5 lg:flex-col lg:overflow-visible lg:gap-1.5"
+      className="glass flex shrink-0 gap-2 overflow-x-auto rounded-hero p-2.5 lg:flex-col lg:overflow-visible lg:gap-1.5"
     >
       {categories.map((category, index) => {
         const Icon = category.icon;

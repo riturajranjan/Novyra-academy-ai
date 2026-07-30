@@ -14,7 +14,7 @@ export function TeamVisual() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="bg-gradient-mesh border-border-subtle relative aspect-[16/10] w-full overflow-hidden rounded-[24px] border lg:aspect-auto lg:h-[300px]">
+    <div className="bg-gradient-mesh border-border-subtle relative aspect-[16/10] w-full overflow-hidden rounded-xl border lg:aspect-auto lg:h-[300px]">
       <div className="border-border-subtle bg-surface/70 absolute inset-5 overflow-hidden rounded-2xl border backdrop-blur-md">
         <div className="border-border-subtle flex items-center gap-1.5 border-b px-4 py-2.5">
           <span className="bg-foreground/15 h-2 w-2 rounded-full" />

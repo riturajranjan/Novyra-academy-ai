@@ -57,6 +57,9 @@ export function HeroGlassCard() {
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
+      {/* 35px = the 36px outer gradient-border wrapper's radius minus the
+          1px inset, keeping the inner and outer corners concentric.
+          Documented exception to the radius scale. */}
       <div className="bg-surface/85 relative flex flex-col items-center gap-6 rounded-[35px] p-6 text-center backdrop-blur-2xl sm:px-14 sm:py-16">
         <motion.div aria-hidden className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: highlight }} />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 rounded-t-[35px] bg-gradient-to-b from-white/10 to-transparent" />

@@ -21,7 +21,7 @@ export function WhyChooseNovyra() {
   const t = useTranslations("whyChoose");
 
   return (
-    <section id="why-choose-novyra" className="relative isolate overflow-hidden py-14 md:py-32">
+    <section id="why-choose-novyra" className="relative isolate overflow-hidden py-14 md:py-20">
       <WhyChooseBackground />
 
       <Container className="flex flex-col gap-10 md:gap-16">
@@ -36,7 +36,7 @@ export function WhyChooseNovyra() {
         />
 
         {/* hero bento card */}
-        <div className="glass-strong shadow-card relative overflow-hidden rounded-[32px]">
+        <div className="glass-strong shadow-card relative overflow-hidden rounded-2xl">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 to-transparent"
@@ -96,7 +96,7 @@ export function WhyChooseNovyra() {
         <TrustedTechnologies />
 
         {/* CTA */}
-        {/* <div className="glass-strong shadow-card relative flex flex-col items-center gap-5 overflow-hidden rounded-[28px] p-6 text-center sm:flex-row sm:justify-between sm:text-left md:gap-6 md:p-10">
+        {/* <div className="glass-strong shadow-card relative flex flex-col items-center gap-5 overflow-hidden rounded-hero p-6 text-center sm:flex-row sm:justify-between sm:text-left md:gap-6 md:p-10">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-20 blur-3xl"

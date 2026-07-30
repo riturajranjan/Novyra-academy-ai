@@ -24,10 +24,10 @@ export function ServiceTrustCard() {
     >
       <div
         aria-hidden
-        className="bg-gradient-brand pointer-events-none absolute -inset-3 -z-10 rounded-[32px] opacity-40 blur-2xl transition-opacity duration-slow ease-soft group-hover:opacity-70"
+        className="bg-gradient-brand pointer-events-none absolute -inset-3 -z-10 rounded-2xl opacity-40 blur-2xl transition-opacity duration-slow ease-soft group-hover:opacity-70"
       />
 
-      <div className="glass shadow-card relative overflow-hidden rounded-[24px] p-5 transition-[transform,box-shadow] duration-slow ease-soft group-hover:-translate-y-1 group-hover:shadow-card-hover sm:p-6">
+      <div className="glass shadow-card relative overflow-hidden rounded-xl p-5 transition-[transform,box-shadow] duration-slow ease-soft group-hover:-translate-y-1 group-hover:shadow-card-hover sm:p-6">
         <span
           aria-hidden
           className="bg-gradient-shimmer pointer-events-none absolute inset-0 -translate-x-full transition-transform duration-slow ease-soft group-hover:translate-x-full"

@@ -1,8 +1,8 @@
 {
   "showcase": {
     "eyebrow": "Our Services",
-    "title": "Build the Right Digital Solution for Your Business",
-    "description": "Explore our services and instantly preview how each solution works, what technologies we use, what you'll receive, and why it's the right choice."
+    "title": "From Design to Deployment.",
+    "description": "Pick a service to see how it works, what you'll get, and how long it takes."
   },
   "nav": {
     "ariaLabel": "Novyra services"
@@ -11,7 +11,7 @@
     "web-design": {
       "label": "Web Design",
       "subtitle": "Modern business websites",
-      "description": "Premium, conversion-ready design systems that make your brand feel established from the first scroll.",
+      "description": "A website that builds trust the moment it loads.",
       "bestFor": ["Startups", "Small Businesses", "Personal Brands", "Portfolios"],
       "keyBenefits": [
         "Stronger first impression with visitors",
@@ -31,7 +31,7 @@
     "web-development": {
       "label": "Web Development",
       "subtitle": "Custom scalable applications",
-      "description": "Custom production-grade web applications built using modern technologies with scalability and performance in mind.",
+      "description": "Web applications built to handle real traffic and grow with your business.",
       "bestFor": ["Startups", "Businesses", "Healthcare", "Education"],
       "keyBenefits": [
         "Fast, SEO-friendly pages out of the box",
@@ -53,7 +53,7 @@
     "saas-development": {
       "label": "SaaS Development",
       "subtitle": "Cloud software platforms",
-      "description": "Full products for healthcare, education, and business — built to scale from day one.",
+      "description": "Multi-tenant platforms for healthcare, education, and growing businesses.",
       "bestFor": ["Healthcare Providers", "Educational Institutions", "Growing Businesses", "Multi-location Operations"],
       "keyBenefits": [
         "One platform to run daily operations",
@@ -121,7 +121,7 @@
   },
   "trustCard": {
     "title": "Need Help Choosing?",
-    "description": "Not sure which service fits your business? Book a free consultation and we'll recommend the best solution based on your goals, budget, and timeline.",
+    "description": "Not sure which service fits your business? Book a free consultation and we'll recommend the right solution for your goals, budget, and timeline.",
     "consultation": "Get Free Consultation",
     "whatsapp": "Chat on WhatsApp",
     "points": {

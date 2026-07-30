@@ -115,7 +115,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate min-h-160 w-full max-w-full overflow-hidden md:min-h-192">
+      className="relative isolate min-h-140 w-full max-w-full overflow-hidden md:min-h-160">
       <motion.div
         className="absolute inset-0 -z-10"
         style={reduceMotion ? undefined : { y: bgY }}>
@@ -124,7 +124,7 @@ export function Hero() {
 
       <Container
         size="wide"
-        className="grid grid-cols-1 items-center gap-10 pt-28 pb-16 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-8 lg:pt-34 lg:pb-15 xl:gap-9">
+        className="grid grid-cols-1 items-center gap-10 pt-28 pb-16 lg:grid-cols-[minmax(0,1.222fr)_minmax(0,1fr)] lg:gap-8 lg:pt-30 lg:pb-16 xl:gap-9">
         <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
           <HeroBadge />
 

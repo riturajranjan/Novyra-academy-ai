@@ -4,12 +4,6 @@
     "title": "Everything You Need to Know Before Starting Your Project",
     "description": "We've answered the most common questions about pricing, timelines, development, support, and our workflow. If you still have questions, our team is always happy to help."
   },
-  "trustBadges": {
-    "freeConsultation": "Free Consultation",
-    "transparentProcess": "Transparent Process",
-    "fastResponse": "Fast Response",
-    "expertTeam": "Expert Team"
-  },
   "search": {
     "placeholder": "Search your question...",
     "clearAriaLabel": "Clear search"
@@ -30,7 +24,7 @@
   "entries": {
     "general-why-novyra": {
       "question": "Why should I choose Novyra Technologies?",
-      "answer": "We build premium websites, web applications, and AI-powered solutions using modern technologies with a focus on quality, speed, and scalability. Our goal is to create digital products that not only look great but also perform well and help your business grow."
+      "answer": "We build websites, applications, and AI-powered solutions engineered for speed, scale, and real business results."
     },
     "general-industries": {
       "question": "Which industries do you work with?",
@@ -58,7 +52,7 @@
     },
     "pricing-consultation-free": {
       "question": "Is the consultation free?",
-      "answer": "Yes. Your first consultation is completely free. We'll discuss your goals, recommend the best solution, and answer your questions without any obligation."
+      "answer": "Yes. Your first consultation is completely free. We'll discuss your goals, recommend the right solution, and answer your questions without any obligation."
     },
     "pricing-hidden-charges": {
       "question": "Are there any hidden charges?",
@@ -138,7 +132,7 @@
     },
     "ai-models": {
       "question": "Which AI models do you support?",
-      "answer": "We work with OpenAI, Claude, Google Gemini, and other modern AI platforms. The best AI solution is selected based on your business needs."
+      "answer": "We work with OpenAI, Claude, Google Gemini, and other modern AI platforms. We select the model that fits your use case."
     },
     "ai-automate": {
       "question": "Can AI automate business tasks?",

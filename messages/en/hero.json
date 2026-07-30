@@ -8,21 +8,21 @@
     }
   },
   "headline": {
-    "before": "Technology Built For",
-    "highlight": "Businesses",
-    "after": "That Move Fast"
+    "before": "Engineering",
+    "highlight": "Software",
+    "after": "That Scales."
   },
-  "description": "Novyra Technologies designs and builds premium websites, SaaS platforms, AI products, hospital ERP, school ERP and enterprise applications.",
+  "description": "We design and build the software businesses run on — modern websites, platforms, and applications engineered to scale.",
   "cta": {
     "primary": "Start a Project",
     "secondary": "Explore Services"
   },
   "trust": {
     "items": {
-      "growingPortfolio": "Growing Portfolio",
-      "modernSaasDevelopment": "Modern SaaS Development",
-      "aiPowered": "Digital Marketing & AI Powered",
-      "enterpriseReady": "Enterprise Ready"
+      "nextjsSpecialists": "React & Next.js Specialists",
+      "aiPoweredDevelopment": "AI-Powered Development",
+      "enterpriseArchitecture": "Enterprise Architecture",
+      "productionReady": "Production Ready"
     }
   },
   "imageAlt": "Preview of a Novyra-built product dashboard, showing growth analytics, an AI assistant, and project progress"

@@ -25,11 +25,11 @@ export function ValueCard({ card, index }: ValueCardProps) {
       viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: easePremium }}
-      className="group border-border-subtle bg-surface/60 relative flex flex-col items-center gap-2.5 overflow-hidden rounded-[24px] border p-5 text-center backdrop-blur-xl transition-shadow duration-base md:gap-3 md:p-6"
+      className="group border-border-subtle bg-surface/60 relative flex flex-col items-center gap-2.5 overflow-hidden rounded-xl border p-5 text-center backdrop-blur-xl transition-shadow duration-base md:gap-3 md:p-6"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-8 -z-10 rounded-[32px] opacity-0 blur-2xl transition-opacity duration-slow group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-8 -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-slow group-hover:opacity-100"
         style={{ backgroundColor: accentTint(card.accent, 20) }}
       />
       <span

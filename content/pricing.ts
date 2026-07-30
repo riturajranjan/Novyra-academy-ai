@@ -18,15 +18,12 @@ import {
 } from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
 
-/** Structural ids only — every user-facing string (badge text, plan name/
- * tagline/features/cta, row & group titles, card copy, timeline/trust-strip
- * labels) lives in messages/{locale}/pricing.json, keyed by these same ids,
- * so this file doesn't change per locale. Ids are also what drives
- * key props, Set membership, and lookup logic in the pricing components —
- * translated text can't be used for any of that since it differs per
- * locale. */
-export const pricingBadges = ["freeConsultation", "transparentPricing", "customProposal", "noHiddenCharges"];
-
+/** Structural ids only — every user-facing string (plan name/tagline/
+ * features/cta, row & group titles, card copy, timeline/trust-strip labels)
+ * lives in messages/{locale}/pricing.json, keyed by these same ids, so this
+ * file doesn't change per locale. Ids are also what drives key props, Set
+ * membership, and lookup logic in the pricing components — translated text
+ * can't be used for any of that since it differs per locale. */
 export type BillingMode = "project" | "retainer";
 
 export const billingModes: { id: BillingMode }[] = [{ id: "project" }, { id: "retainer" }];
@@ -325,10 +322,9 @@ export interface TrustStripItem {
   icon: LucideIcon;
 }
 
-/** The compact strip below the comparison panel — distinct from the header's
- * `pricingBadges` (broad reassurances) and the fuller `valueCards` section
- * (kept as-is further down the page); this is the short, delivery-process
- * version of the same trust story. */
+/** The compact strip below the comparison panel — distinct from the fuller
+ * `valueCards` section further down the page; this is the short,
+ * delivery-process version of the same trust story. */
 export const pricingTrustStrip: TrustStripItem[] = [
   { id: "milestonePayments", icon: Wallet },
   { id: "sourceCodeOwnership", icon: FileCode },

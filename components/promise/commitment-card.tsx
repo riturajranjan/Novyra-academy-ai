@@ -33,7 +33,7 @@ export function CommitmentCard({ card, index }: CommitmentCardProps) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: easePremium }}
       className={cn(
-        "group border-border-subtle bg-surface/70 relative col-span-1 flex flex-col gap-4 overflow-hidden rounded-[28px] border p-7 backdrop-blur-xl transition-shadow duration-base",
+        "group border-border-subtle bg-surface/70 relative col-span-1 flex flex-col gap-4 overflow-hidden rounded-hero border p-7 backdrop-blur-xl transition-shadow duration-base",
         SPAN_CLASS[card.span] ?? "sm:col-span-3 lg:col-span-2",
       )}
     >
@@ -45,7 +45,7 @@ export function CommitmentCard({ card, index }: CommitmentCardProps) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[28px] opacity-0 transition-opacity duration-base group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-hero opacity-0 transition-opacity duration-base group-hover:opacity-100"
         style={{ boxShadow: `inset 0 0 0 1px ${accentTint(card.accent, 45)}` }}
       />
 

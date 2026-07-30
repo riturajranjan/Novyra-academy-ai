@@ -43,7 +43,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
 export function TrustMetrics() {
   const t = useTranslations("contact.trustMetrics");
   return (
-    <div className="glass-strong shadow-card relative grid grid-cols-2 gap-5 overflow-hidden rounded-[28px] p-5 sm:grid-cols-5 md:gap-6 md:p-10">
+    <div className="glass-strong shadow-card relative grid grid-cols-2 gap-5 overflow-hidden rounded-hero p-5 sm:grid-cols-5 md:gap-6 md:p-10">
       <div aria-hidden className="bg-brand-blue/8 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       {trustMetrics.map((metric, i) => (
         <motion.div

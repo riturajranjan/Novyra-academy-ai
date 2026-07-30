@@ -10,7 +10,7 @@ import { easePremium } from "@/lib/motion";
 export function TrustBar() {
   const t = useTranslations("promise.trustBar");
   return (
-    <div className="glass mx-auto flex max-w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-[28px] px-6 py-5 sm:gap-x-10">
+    <div className="glass mx-auto flex max-w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-hero px-6 py-5 sm:gap-x-10">
       {trustBarItems.map((item, i) => {
         const Icon = item.icon;
         return (

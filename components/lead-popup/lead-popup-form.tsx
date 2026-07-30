@@ -19,6 +19,9 @@ type SubmitStatus = "idle" | "submitting" | "success" | "error";
  * blue-violet glow rather than the site's usual bright blue, per this
  * pass's contrast/legibility fix. */
 const FIELD_FOCUS = "focus:shadow-[0_0_0_3px_rgba(120,110,255,0.12),0_10px_30px_rgba(90,70,220,0.10)]";
+// 16px below (not the `text-body` token) at every size, not just mobile: this
+// form is reached from a popup that opens on any device, and 16px is the
+// floor that keeps iOS Safari from auto-zooming on focus. Documented exception.
 const FIELD_BASE = "w-full rounded-2xl border bg-white/[0.055] text-[16px] text-white/[0.94] outline-none backdrop-blur-md transition-[border-color,box-shadow] duration-base placeholder:text-white/48";
 
 interface FieldProps {
@@ -56,7 +59,7 @@ function FloatingField({ id, label, value, onChange, onBlur, error, type = "text
       FIELD_BASE,
       FIELD_FOCUS,
       as === "textarea" ? "min-h-[112px] resize-none" : "h-[52px]",
-      error ? "border-red-400/60" : "border-white/[0.11] focus:border-[rgba(120,110,255,0.70)]",
+      error ? "border-red-400/60" : "border-white/11 focus:border-[rgba(120,110,255,0.70)]",
     ),
   };
 
@@ -126,7 +129,7 @@ function SelectField({ id, label, placeholder, value, onChange, onBlur, options,
             FIELD_BASE,
             FIELD_FOCUS,
             value ? "text-white/[0.94]" : "text-white/48",
-            error ? "border-red-400/60" : "border-white/[0.11] focus:border-[rgba(120,110,255,0.70)]",
+            error ? "border-red-400/60" : "border-white/11 focus:border-[rgba(120,110,255,0.70)]",
           )}
         >
           <option value="" disabled className="bg-[#12162d] text-white/50">

@@ -131,7 +131,7 @@ export function LeadPopup() {
             animate="visible"
             exit="exit"
             className={cn(
-              "relative isolate z-[910] w-full overflow-hidden rounded-t-[22px] sm:w-[min(920px,calc(100vw-48px))] sm:rounded-[28px]",
+              "relative isolate z-[910] w-full overflow-hidden rounded-t-[22px] sm:w-[min(920px,calc(100vw-48px))] sm:rounded-hero",
             )}
           >
             {/* Localized accent glows — three small corner lights, not one

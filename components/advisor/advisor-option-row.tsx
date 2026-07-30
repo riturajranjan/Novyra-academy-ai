@@ -41,7 +41,7 @@ export function AdvisorOptionRow({ option, accent, isSelected, onSelect }: Advis
           : "inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
       className={cn(
-        "group relative flex min-h-[112px] w-full items-center gap-4 overflow-hidden rounded-[28px] border p-4 text-left backdrop-blur-[30px] transition-[box-shadow,border-color] duration-base",
+        "group relative flex min-h-[112px] w-full items-center gap-4 overflow-hidden rounded-hero border p-4 text-left backdrop-blur-[30px] transition-[box-shadow,border-color] duration-base",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-[#05060f]",
         !isSelected && "border-white/10",
       )}
@@ -63,8 +63,8 @@ export function AdvisorOptionRow({ option, accent, isSelected, onSelect }: Advis
       </motion.span>
 
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[16px] leading-tight font-bold text-white">{option.label}</span>
-        <span className="mt-0.5 block truncate text-[14px] font-medium text-white/55">{option.description}</span>
+        <span className="block text-[16px] leading-tight font-bold text-white">{option.label}</span>
+        <span className="mt-0.5 line-clamp-2 block text-[14px] font-medium text-white/55">{option.description}</span>
         {option.badge || option.timeline ? (
           <span className="mt-2 flex flex-wrap items-center gap-2">
             {option.badge ? (
@@ -75,7 +75,7 @@ export function AdvisorOptionRow({ option, accent, isSelected, onSelect }: Advis
                 {option.badge}
               </span>
             ) : null}
-            {option.timeline ? <span className="text-[13px] text-white/40">• {option.timeline}</span> : null}
+            {option.timeline ? <span className="text-caption text-white/40">• {option.timeline}</span> : null}
           </span>
         ) : null}
       </span>

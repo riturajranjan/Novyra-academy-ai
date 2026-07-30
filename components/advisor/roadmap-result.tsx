@@ -112,7 +112,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
 
       {/* AI insight card */}
       <div
-        className="relative w-full overflow-hidden rounded-[28px] border p-6 backdrop-blur-[34px]"
+        className="relative w-full overflow-hidden rounded-hero border p-6 backdrop-blur-[34px]"
         style={{ borderColor: hexToRgba(accent.base, 0.28), background: "rgba(255,255,255,0.04)" }}
       >
         {!reduceMotion ? (
@@ -206,7 +206,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
 
       {/* deliverables + project overview */}
       <div
-        className="relative w-full overflow-hidden rounded-[28px] border p-5 backdrop-blur-[34px] md:p-8"
+        className="relative w-full overflow-hidden rounded-hero border p-5 backdrop-blur-[34px] md:p-8"
         style={{
           borderColor: "rgba(255,255,255,0.12)",
           background: "rgba(255,255,255,0.05)",
@@ -284,7 +284,7 @@ export function RoadmapResult({ result, accent, onRestart }: RoadmapResultProps)
 
       {/* CTA */}
       <div
-        className="w-full overflow-hidden rounded-[28px] border p-3 backdrop-blur-2xl sm:p-4"
+        className="w-full overflow-hidden rounded-hero border p-3 backdrop-blur-2xl sm:p-4"
         style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.05)" }}
       >
         <div className="flex flex-col gap-3 sm:flex-row">

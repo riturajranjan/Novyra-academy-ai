@@ -37,7 +37,7 @@ export function FeatureCard({ card, index }: FeatureCardProps) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.5, delay: index * 0.04, ease: easePremium }}
       className={cn(
-        "group border-border-subtle relative col-span-1 flex flex-col gap-3 overflow-hidden rounded-[28px] border p-5 backdrop-blur-xl transition-shadow duration-base md:gap-4 md:p-7",
+        "group border-border-subtle relative col-span-1 flex flex-col gap-3 overflow-hidden rounded-hero border p-5 backdrop-blur-xl transition-shadow duration-base md:gap-4 md:p-7",
         "bg-surface/70",
         SPAN_CLASS[card.span] ?? "sm:col-span-3 lg:col-span-2",
       )}
@@ -53,7 +53,7 @@ export function FeatureCard({ card, index }: FeatureCardProps) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[28px] opacity-0 transition-opacity duration-base group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-hero opacity-0 transition-opacity duration-base group-hover:opacity-100"
         style={{ boxShadow: `inset 0 0 0 1px ${accentTint(card.accent, 45)}` }}
       />
 

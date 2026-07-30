@@ -32,7 +32,7 @@ export function AboutWhyChoose() {
           whileInView="visible"
           viewport={{ once: true, margin: "120px" }}
           variants={fadeInUp}
-          className="glass-strong shadow-card-hover overflow-hidden rounded-[32px] p-7 sm:p-9 md:p-10"
+          className="glass-strong shadow-card-hover overflow-hidden rounded-2xl p-7 sm:p-9 md:p-10"
         >
           <div className="mx-auto max-w-[820px] text-center">
             <span className="text-gradient-brand text-sm font-semibold tracking-[0.14em] uppercase">

@@ -1,33 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  Calendar,
-  Clock,
-  Code2,
-  Compass,
-  FileSearch,
-  Handshake,
-  Layers,
-  LifeBuoy,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Palette,
-  Phone,
-  Rocket,
-  TestTube2,
-  Users,
-} from "lucide-react";
+import { Calendar, Clock, Compass, Handshake, Layers, Mail, MapPin, MessageCircle, Phone, Users } from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
-
-/** Structural data only — label text lives in messages/{locale}/contact.json
- * under `ctaTrustBadges.<id>`. */
-export const ctaTrustBadges = [
-  "free-consultation",
-  "custom-proposal",
-  "no-hidden-charges",
-  "fast-response",
-  "dedicated-team",
-];
 
 /** All text for the hero glass card (title/description) lives in
  * messages/{locale}/contact.json under `heroCard` — there's no per-locale
@@ -65,23 +38,6 @@ export const contactValueCards: ContactValueCard[] = [
   { id: "expert-consultation", icon: Users, accent: "purple" },
   { id: "transparent-planning", icon: Layers, accent: "cyan" },
   { id: "long-term-partnership", icon: Handshake, accent: "amber" },
-];
-
-export interface CtaTimelineStep {
-  id: string;
-  icon: LucideIcon;
-}
-
-/** Structural data only — label text lives in
- * messages/{locale}/contact.json under `ctaTimeline.<id>`. */
-export const ctaTimeline: CtaTimelineStep[] = [
-  { id: "discovery", icon: Compass },
-  { id: "proposal", icon: FileSearch },
-  { id: "design", icon: Palette },
-  { id: "development", icon: Code2 },
-  { id: "testing", icon: TestTube2 },
-  { id: "launch", icon: Rocket },
-  { id: "support", icon: LifeBuoy },
 ];
 
 export interface TrustMetric {

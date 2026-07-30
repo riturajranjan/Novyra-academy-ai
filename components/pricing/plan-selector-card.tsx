@@ -18,32 +18,37 @@ interface PlanSelectorCardProps {
    * only, since a 150-180px-wide scroll-snap card can't also fit a
    * description and benefit list without cramming. */
   layout: "stack" | "row";
-  /** id of the tabpanel this card controls — must match whichever
-   * PlanSpotlight instance is rendered in the same responsive tier. */
-  panelId: string;
+  /** Native radio `name` for whichever responsive tier this card belongs
+   * to — must be distinct per tier (mobile vs. desktop each render their
+   * own full set of plans) so the two hidden DOM trees never cross-group. */
+  groupName: string;
   index?: number;
 }
 
-/** One compact, clickable plan card — the left-column selector on desktop,
- * or a horizontal tab below `lg`. Selecting it makes it the spotlight
- * plan. Selection is never color-alone: a rotating accent border, a
- * floating checkmark badge, and a "Selected" label all carry the state
- * together. */
-export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, panelId, index = 0 }: PlanSelectorCardProps) {
+/** One compact, selectable plan card — the left-column selector on
+ * desktop, or a horizontal row below `lg`. All four plans always render
+ * here, in every tier, including the currently selected one: this is a
+ * single-selection control (a plan is "chosen", not a tab with separate
+ * content panels), so it's built as a native radio — a visually-hidden
+ * `<input type="radio">` inside the card's own `<label>` — rather than a
+ * button wearing `role="tab"`. That gets native keyboard behavior for
+ * free (arrow keys move + select, wraparound at the ends, Tab enters/exits
+ * the group as one stop) instead of reimplementing it. Selection is never
+ * color-alone: a rotating accent border, a floating checkmark badge, and a
+ * "Selected" label all carry the state together. */
+export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, groupName, index = 0 }: PlanSelectorCardProps) {
   const t = useTranslations("pricing");
   const reduceMotion = useReducedMotion();
   const Icon = plan.icon;
   const stroke = accentStroke[plan.accent];
   const benefits = plan.features.slice(0, 3);
   const isStack = layout === "stack";
+  const planName = t(`plans.${plan.id}.name`);
+  const priceSuffix = plan.priceSuffix[mode];
+  const accessibleLabel = `${planName}, ${plan.price[mode]}${priceSuffix ? ` ${priceSuffix}` : ""}`;
 
   return (
-    <motion.button
-      type="button"
-      role="tab"
-      aria-selected={isSelected}
-      aria-controls={panelId}
-      onClick={() => onSelect(plan.id)}
+    <motion.label
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "150px" }}
@@ -68,14 +73,26 @@ export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, pan
           : "inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
       className={cn(
-        "group relative flex shrink-0 flex-col overflow-hidden rounded-[22px] border p-4 text-left transition-[box-shadow] duration-[260ms]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "group relative flex shrink-0 cursor-pointer flex-col overflow-hidden rounded-[22px] border p-4 text-left transition-[box-shadow] duration-[260ms]",
+        "has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-brand-blue has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background",
         !isSelected && "opacity-[0.86] hover:opacity-100",
         isStack ? "min-h-[150px] w-full" : "min-h-[112px] w-[160px] snap-start sm:w-[172px]",
       )}
     >
+      <input
+        type="radio"
+        name={groupName}
+        value={plan.id}
+        checked={isSelected}
+        onChange={() => onSelect(plan.id)}
+        aria-label={accessibleLabel}
+        className="sr-only"
+      />
+
       {/* Rotating accent gradient border — selection is never color-alone,
-          but this is the primary "this one's active" signal. */}
+          but this is the primary "this one's active" signal. 23px = the
+          card's own 22px radius plus ~1px so the ring stays concentric at
+          its -1.5px outset. Documented exception to the radius scale. */}
       {isSelected ? (
         <motion.span
           aria-hidden
@@ -99,6 +116,7 @@ export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, pan
       {/* Floating checkmark badge — top-right, independent of border color. */}
       {isSelected ? (
         <motion.span
+          aria-hidden
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
@@ -114,44 +132,46 @@ export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, pan
 
       <div className={cn("flex items-center gap-2", isStack ? "mb-2.5" : "mb-1.5")}>
         <span
+          aria-hidden
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform duration-base group-hover:-translate-y-0.5"
           style={{ backgroundColor: accentTint(plan.accent, isSelected ? 22 : 12) }}
         >
           <Icon className="h-4 w-4" style={{ color: stroke }} aria-hidden />
         </span>
         {isSelected ? (
-          <span className="text-[9px] font-semibold tracking-wide uppercase" style={{ color: stroke }}>
+          <span aria-hidden className="text-[9px] font-semibold tracking-wide uppercase" style={{ color: stroke }}>
             {t("selected")}
           </span>
         ) : plan.featured ? (
-          <span className="text-[9px] font-semibold tracking-wide text-white/40 uppercase">{t("popular")}</span>
+          <span aria-hidden className="text-[9px] font-semibold tracking-wide text-white/40 uppercase">
+            {t("popular")}
+          </span>
         ) : null}
       </div>
 
       <span
+        aria-hidden
         className={cn("text-body-sm font-semibold", isSelected ? "text-foreground" : "text-foreground/90")}
         style={{ marginBottom: isStack ? 6 : 0 }}
       >
-        {t(`plans.${plan.id}.name`)}
+        {planName}
       </span>
 
       {isStack ? (
-        <span className="text-caption text-foreground-secondary mb-3 line-clamp-1">
+        <span aria-hidden className="text-caption text-foreground-secondary mb-3 line-clamp-1">
           {t(`plans.${plan.id}.tagline`)}
         </span>
       ) : null}
 
-      <span className={cn("flex items-baseline gap-1", isStack ? "mb-3" : "mt-auto")}>
+      <span aria-hidden className={cn("flex items-baseline gap-1", isStack ? "mb-3" : "mt-auto")}>
         <span className="text-title-lg font-semibold" style={{ color: isSelected ? stroke : "var(--color-foreground)" }}>
           {plan.price[mode]}
         </span>
-        {plan.priceSuffix[mode] ? (
-          <span className="text-caption text-foreground-secondary">{plan.priceSuffix[mode]}</span>
-        ) : null}
+        {priceSuffix ? <span className="text-caption text-foreground-secondary">{priceSuffix}</span> : null}
       </span>
 
       {isStack ? (
-        <ul className="mt-auto flex flex-col gap-[6px]">
+        <ul aria-hidden className="mt-auto flex flex-col gap-[6px]">
           {benefits.map((feature) => (
             <li key={feature} className="text-caption text-foreground-secondary flex items-center gap-1.5">
               <span aria-hidden className="h-1 w-1 shrink-0 rounded-full" style={{ backgroundColor: stroke }} />
@@ -160,6 +180,6 @@ export function PlanSelectorCard({ plan, mode, isSelected, onSelect, layout, pan
           ))}
         </ul>
       ) : null}
-    </motion.button>
+    </motion.label>
   );
 }

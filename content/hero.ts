@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Layers, ShieldCheck, Sparkles, TrendingUp } from "lucide-react";
+import { CircleCheckBig, Code2, ShieldCheck, Sparkles } from "lucide-react";
 import type { AccentColor } from "@/content/hero-screens";
 
 export interface HeroBadgeItem {
@@ -22,12 +22,13 @@ export interface HeroTrustItem {
   accent: AccentColor;
 }
 
-/** A row of honest capability claims, shown as glass pills — never a star
- * rating or fake review. Label text lives in messages/{locale}/hero.json
- * under `trust.items.<id>`. */
+/** Capability-based proof, never time/volume-based (no years-in-business,
+ * no client/project counts) — Novyra has no history to cite yet, so trust
+ * is earned through what the team actually builds. Label text lives in
+ * messages/{locale}/hero.json under `trust.items.<id>`. */
 export const heroTrustItems: HeroTrustItem[] = [
-  { id: "growingPortfolio", icon: TrendingUp, accent: "blue" },
-  { id: "modernSaasDevelopment", icon: Layers, accent: "purple" },
-  { id: "aiPowered", icon: Sparkles, accent: "pink" },
-  { id: "enterpriseReady", icon: ShieldCheck, accent: "emerald" },
+  { id: "nextjsSpecialists", icon: Code2, accent: "blue" },
+  { id: "aiPoweredDevelopment", icon: Sparkles, accent: "pink" },
+  { id: "enterpriseArchitecture", icon: ShieldCheck, accent: "emerald" },
+  { id: "productionReady", icon: CircleCheckBig, accent: "purple" },
 ];

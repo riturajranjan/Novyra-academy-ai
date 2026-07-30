@@ -6,8 +6,8 @@
     "description": "From strategy and product design to engineering, AI automation, SEO, and long-term support — we build digital products that scale with your business."
   },
   "heroBento": {
-    "heading": "Built by an Expert Product Team, Not Just Freelancers",
-    "description": "Every project is delivered by dedicated UI/UX designers, frontend engineers, backend developers, QA specialists, SEO experts, AI engineers, and project managers."
+    "heading": "Full Product Coverage, Not a Freelancer Handoff.",
+    "description": "Design, engineering, QA, and growth — covered end-to-end, without juggling multiple freelancers."
   },
   "heroBadges": {
     "ai-powered": "AI-Powered",
@@ -64,13 +64,13 @@
   "trustedTechnologies": {
     "eyebrow": "Trusted Technologies",
     "heading": "Powered by Modern Technologies",
-    "description": "We build fast, scalable, secure, and future-ready digital products using the world's most trusted technologies and cloud infrastructure."
+    "description": "We choose technologies for what they deliver — speed, security, and code that's easy to maintain."
   },
   "techCategories": {
-    "frontend": "Frontend",
-    "backend": "Backend",
-    "database": "Database",
-    "cloud-devops": "Cloud & DevOps"
+    "frontend": { "label": "Frontend", "reason": "For fast, accessible interfaces users enjoy using." },
+    "backend": { "label": "Backend", "reason": "For APIs that stay reliable under real load." },
+    "database": { "label": "Database", "reason": "For data that stays consistent as you scale." },
+    "cloud-devops": { "label": "Cloud & DevOps", "reason": "For deployments that ship without downtime." }
   },
   "featureStrip": {
     "full-stack-engineering": { "label": "Full-Stack Engineering", "detail": "Every skill under one roof" },

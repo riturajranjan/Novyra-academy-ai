@@ -49,7 +49,7 @@ export function OurProcess() {
   const t = useTranslations("process");
 
   return (
-    <section id="process" className="relative isolate py-14 md:py-24">
+    <section id="process" className="relative isolate py-14 md:py-20">
       <ProcessBackground />
 
       <Container>
@@ -85,8 +85,11 @@ export function OurProcess() {
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-[48px] opacity-25 blur-3xl"
           />
-          <div className="relative overflow-hidden rounded-[32px] p-px">
+          <div className="relative overflow-hidden rounded-2xl p-px">
             <div aria-hidden className="bg-gradient-brand absolute inset-0 -z-10 opacity-60" />
+            {/* 31px = the 2xl (32px) outer wrapper's radius minus the 1px
+                gradient-border inset — keeps the inner and outer corners
+                concentric. Documented exception to the radius scale. */}
             <div className="glass-strong relative flex flex-col items-center gap-6 rounded-[31px] p-8 text-center sm:p-10">
               <span aria-hidden className="text-foreground-secondary/40 flex items-center gap-2">
                 <span className="via-foreground-secondary/40 h-px w-16 bg-gradient-to-r from-transparent to-transparent" />

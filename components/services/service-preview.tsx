@@ -65,7 +65,7 @@ export function ServicePreview({ category }: { category: ServiceCategory }) {
           rotateY: reduceMotion ? 0 : springTiltY,
           transformPerspective: 1600,
         }}
-        className="glass-strong shadow-card relative isolate flex flex-col overflow-hidden rounded-[28px]"
+        className="glass-strong shadow-card relative isolate flex flex-col overflow-hidden rounded-hero"
       >
         <motion.div
           aria-hidden

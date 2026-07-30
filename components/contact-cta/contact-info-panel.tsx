@@ -14,7 +14,7 @@ export function ContactInfoPanel() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
-      className="glass-strong shadow-card relative overflow-hidden rounded-[28px] p-5 md:p-10"
+      className="glass-strong shadow-card relative overflow-hidden rounded-hero p-5 md:p-10"
     >
       <div aria-hidden className="bg-brand-cyan/10 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

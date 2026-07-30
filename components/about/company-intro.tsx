@@ -26,7 +26,7 @@ export function CompanyIntro() {
           whileInView="visible"
           viewport={{ once: true, margin: "120px" }}
           variants={fadeInUp}
-          className="glass-strong shadow-card rounded-[28px] p-7 sm:p-9 md:p-10"
+          className="glass-strong shadow-card rounded-hero p-7 sm:p-9 md:p-10"
         >
           <span className="text-gradient-brand text-sm font-semibold tracking-[0.14em] uppercase">
             {t("eyebrow")}

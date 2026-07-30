@@ -52,7 +52,7 @@ export function SolutionCard({ option, accent, isSelected, onSelect, side, onHov
           : "0 16px 45px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.08)",
       }}
       className={cn(
-        "group relative flex min-h-24 max-h-28 w-full items-center gap-3 overflow-hidden rounded-[21px] border p-4 text-left backdrop-blur-[22px] backdrop-saturate-[1.45] transition-[box-shadow,border-color] duration-base",
+        "group relative flex min-h-24 w-full items-center gap-3 overflow-hidden rounded-[21px] border p-4 text-left backdrop-blur-[22px] backdrop-saturate-[1.45] transition-[box-shadow,border-color] duration-base",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05060f]",
         isSelected ? "opacity-100" : "opacity-[0.85] hover:opacity-100",
       )}
@@ -73,8 +73,8 @@ export function SolutionCard({ option, accent, isSelected, onSelect, side, onHov
       </span>
 
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[15px] leading-tight font-semibold text-white">{option.label}</span>
-        <span className="mt-0.5 block truncate text-[13px] text-white/50">{option.description}</span>
+        <span className="block text-[15px] leading-tight font-semibold text-white">{option.label}</span>
+        <span className="text-caption mt-0.5 line-clamp-2 block text-white/50">{option.description}</span>
         {option.badge ? (
           <span
             className="mt-1.5 inline-block rounded-full border px-2 py-0.5 text-[10px] font-medium tracking-wide uppercase"

@@ -1,17 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { BadgeIndianRupee, Clock, ShieldCheck, Users } from "lucide-react";
 
-/** Structural ids only — labels live in messages/{locale}/faq.json under
- * `trustBadges`, keyed by `id`. */
-export const faqTrustBadgeIds = [
-  "freeConsultation",
-  "transparentProcess",
-  "fastResponse",
-  "expertTeam",
-] as const;
-
-export type FaqTrustBadgeId = (typeof faqTrustBadgeIds)[number];
-
 export interface FaqStat {
   id: string;
   icon: LucideIcon;

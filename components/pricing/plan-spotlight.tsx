@@ -24,7 +24,10 @@ interface PlanSpotlightProps {
   /** This renders once per responsive tier (a mobile/tablet instance and a
    * separate desktop instance, toggled with CSS display), so the id must be
    * distinct per instance to stay valid HTML — two elements can never share
-   * an id even when only one is visible at a time. */
+   * an id even when only one is visible at a time. Kept as a stable DOM id
+   * for reference even though nothing points to it via `aria-controls`
+   * anymore — this is a plain content region reacting to the pricing
+   * radiogroup's selection, not an ARIA tabpanel. */
   panelId: string;
 }
 
@@ -46,7 +49,11 @@ export function PlanSpotlight({ plan, mode, panelId }: PlanSpotlightProps) {
   return (
     <div
       id={panelId}
-      role="tabpanel"
+      // 30px/29px (below): an intentional pair outside the sm/md/lg/xl/2xl/
+      // hero scale — the outer wrapper's radius plus a -1px inner companion
+      // for the gradient border, chosen distinct from `hero` (28px) so this
+      // card doesn't read as the same size class as the page's large glass
+      // panels. Left as a documented exception rather than forced to scale.
       className="relative isolate flex flex-col overflow-hidden rounded-[30px] p-[1px] transition-[background-image] duration-500"
       style={{
         backgroundImage: `linear-gradient(135deg, ${accentTint(plan.accent, 55)}, ${accentTint(plan.accent, 15)}, ${accentTint(plan.accent, 40)})`,

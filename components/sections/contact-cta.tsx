@@ -1,7 +1,5 @@
 "use client";
 
-import { CircleCheck } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -9,11 +7,9 @@ import { ContactCtaBackground } from "@/components/contact-cta/contact-cta-backg
 import { HeroGlassCard } from "@/components/contact-cta/hero-glass-card";
 import { QuickContactCard } from "@/components/contact-cta/quick-contact-card";
 import { ValueCard } from "@/components/contact-cta/value-card";
-import { CtaTimeline } from "@/components/contact-cta/cta-timeline";
 import { TrustMetrics } from "@/components/contact-cta/trust-metrics";
 import { ContactInfoPanel } from "@/components/contact-cta/contact-info-panel";
-import { ctaTrustBadges, quickContactCards, contactValueCards } from "@/content/contact-cta";
-import { easePremium } from "@/lib/motion";
+import { quickContactCards, contactValueCards } from "@/content/contact-cta";
 
 /** The final conversion section before the footer — the most visually
  * elaborate section on the page by design. */
@@ -21,7 +17,7 @@ export function ContactCta() {
   const t = useTranslations("contact");
 
   return (
-    <section id="contact" className="relative isolate py-14 md:py-32">
+    <section id="contact" className="relative isolate py-14 md:py-20">
       <ContactCtaBackground />
 
       <Container className="flex flex-col gap-10 md:gap-16">
@@ -31,21 +27,6 @@ export function ContactCta() {
             title={t("sectionHeading.title")}
             description={t("sectionHeading.description")}
           />
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {ctaTrustBadges.map((id, i) => (
-              <motion.span
-                key={id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "150px" }}
-                transition={{ duration: 0.4, delay: i * 0.05, ease: easePremium }}
-                className="border-border-subtle bg-surface/60 text-body-sm text-foreground-secondary flex items-center gap-1.5 rounded-full border px-4 py-2 font-medium backdrop-blur-md"
-              >
-                <CircleCheck className="text-brand-emerald h-4 w-4" aria-hidden />
-                {t(`ctaTrustBadges.${id}`)}
-              </motion.span>
-            ))}
-          </div>
         </div>
 
         <HeroGlassCard />
@@ -65,14 +46,6 @@ export function ContactCta() {
               <ValueCard key={card.id} card={card} index={i} />
             ))}
           </div>
-        </div>
-
-        {/* Same process steps already shown in Our Process and the
-         * Recommended Roadmap — kept for desktop context, hidden on mobile
-         * to avoid repeating the same timeline a third time on a page
-         * that's already long there. */}
-        <div className="hidden md:block">
-          <CtaTimeline />
         </div>
 
         <TrustMetrics />

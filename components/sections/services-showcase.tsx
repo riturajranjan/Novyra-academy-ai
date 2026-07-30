@@ -21,7 +21,7 @@ export function ServicesShowcase() {
   const activeCategory = serviceCategories.find((c) => c.id === activeId) ?? serviceCategories[0];
 
   return (
-    <section className="relative isolate overflow-hidden pt-14 pb-14 md:pt-18 md:pb-20 lg:pt-24">
+    <section className="relative isolate overflow-hidden py-14 md:py-20">
       <BokehBackground className="opacity-70" />
 
       <Container className="flex flex-col gap-10 md:gap-14">

@@ -141,7 +141,7 @@ export function SolutionAdvisor() {
   }
 
   return (
-    <section className="relative isolate pt-14 pb-12 md:pt-28 md:pb-24">
+    <section className="relative isolate py-14 md:py-20">
       <AdvisorCanvasBackground />
 
       <Container className="flex flex-col items-center gap-5">
@@ -277,7 +277,7 @@ export function SolutionAdvisor() {
 
                   <InsightPanel text={insightText} accent={accent} />
 
-                  <div className="sticky justify-between bottom-4 z-10 mt-6 flex w-full max-w-[680px] items-center gap-2.5 rounded-[24px] border border-white/10 bg-white/[0.06] p-2.5 backdrop-blur-2xl md:static md:mt-12 md:min-h-[72px] md:justify-between md:gap-4 md:rounded-full md:border-white/10 md:bg-white/[0.04] md:p-2 md:pl-5">
+                  <div className="sticky justify-between bottom-4 z-10 mt-6 flex w-full max-w-[680px] items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] p-2.5 backdrop-blur-2xl md:static md:mt-12 md:min-h-[72px] md:justify-between md:gap-4 md:rounded-full md:border-white/10 md:bg-white/[0.04] md:p-2 md:pl-5">
                     <motion.button
                       type="button"
                       onClick={goBack}

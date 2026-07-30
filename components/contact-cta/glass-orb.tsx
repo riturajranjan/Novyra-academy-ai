@@ -63,7 +63,7 @@ export function GlassOrb() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="glass-strong shadow-card relative flex h-20 w-20 items-center justify-center rounded-[28px] sm:h-24 sm:w-24">
+      <div className="glass-strong shadow-card relative flex h-20 w-20 items-center justify-center rounded-hero sm:h-24 sm:w-24">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[28px] bg-gradient-to-b from-white/15 to-transparent" />
         <Rocket className="text-brand-blue h-8 w-8 sm:h-10 sm:w-10" aria-hidden />
       </div>

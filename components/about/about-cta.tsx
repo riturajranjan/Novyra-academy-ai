@@ -42,7 +42,7 @@ export function AboutCta() {
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-[56px] opacity-25 blur-3xl"
           />
 
-          <div className="relative overflow-hidden rounded-[32px] p-px">
+          <div className="relative overflow-hidden rounded-2xl p-px">
             <motion.div
               aria-hidden
               className="absolute inset-[-60%] -z-10"
@@ -54,6 +54,9 @@ export function AboutCta() {
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
             />
 
+            {/* 31px = the 2xl (32px) outer wrapper's radius minus the 1px
+                gradient-border inset — keeps the inner and outer corners
+                concentric. Documented exception to the radius scale. */}
             <div className="glass-strong relative overflow-hidden rounded-[31px] px-7 py-10 text-center sm:px-10 sm:py-12">
               <div
                 aria-hidden

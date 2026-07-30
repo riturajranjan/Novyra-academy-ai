@@ -16,7 +16,7 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: easePremium }}
-      className="border-border-subtle bg-surface/50 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg md:gap-5 md:p-6"
+      className="border-border-subtle bg-surface/50 shadow-card relative flex flex-col gap-4 overflow-hidden rounded-xl border p-5 backdrop-blur-lg md:gap-5 md:p-6"
     >
       <div
         aria-hidden
@@ -26,8 +26,9 @@ function TechCategoryCard({ category, index }: { category: TechCategory; index: 
         <span className="bg-foreground/5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
           <Icon className="text-foreground-secondary h-5 w-5" aria-hidden />
         </span>
-        <p className="text-title text-foreground font-semibold">{t(`techCategories.${category.id}`)}</p>
+        <p className="text-title text-foreground font-semibold">{t(`techCategories.${category.id}.label`)}</p>
       </div>
+      <p className="text-body-sm text-foreground-secondary relative -mt-2">{t(`techCategories.${category.id}.reason`)}</p>
       <div className="relative flex flex-wrap gap-2.5">
         {category.items.map((item, i) => (
           <TechBadge key={item.name} name={item.name} color={item.color} index={i} />
@@ -68,7 +69,7 @@ export function TrustedTechnologies() {
       </div>
 
       {/* main glass container */}
-      <div className="glass-strong shadow-card relative w-full overflow-hidden rounded-[32px] p-5 md:p-12">
+      <div className="glass-strong shadow-card relative w-full overflow-hidden rounded-2xl p-5 md:p-12">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/10 to-transparent" />
         <div className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
           {techCategories.map((category, i) => (
@@ -89,7 +90,7 @@ export function TrustedTechnologies() {
               viewport={{ once: true, margin: "150px" }}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: easePremium }}
-              className="group border-border-subtle bg-surface/60 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-[24px] border p-5 backdrop-blur-lg transition-shadow duration-base md:gap-4 md:p-6"
+              className="group border-border-subtle bg-surface/60 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-xl border p-5 backdrop-blur-lg transition-shadow duration-base md:gap-4 md:p-6"
             >
               <div
                 aria-hidden

@@ -48,7 +48,7 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
       {isSelected && !reduceMotion ? (
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute -inset-[1.5px] rounded-[28px]"
+          className="pointer-events-none absolute -inset-[1.5px] rounded-hero"
           style={{
             background: `conic-gradient(from 0deg, ${accent.base} 0%, rgba(255,255,255,0.35) 50%, ${accent.base} 100%)`,
           }}
@@ -93,7 +93,7 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
             : "inset 0 1px 0 rgba(255,255,255,0.07)",
         }}
         className={cn(
-          "group relative flex min-h-[120px] w-full items-center gap-3 overflow-hidden rounded-[28px] border p-[18px] text-left backdrop-blur-[36px] backdrop-saturate-[1.6] transition-[box-shadow,border-color] duration-base",
+          "group relative flex min-h-[120px] w-full items-center gap-3 overflow-hidden rounded-hero border p-[18px] text-left backdrop-blur-[36px] backdrop-saturate-[1.6] transition-[box-shadow,border-color] duration-base",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gp-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#05060f]",
           !isSelected &&
             "border-white/10 opacity-90 hover:border-[color:var(--gp-hover-border)] hover:opacity-100 hover:shadow-[0_0_24px_-8px_var(--gp-hover-glow)]",
@@ -102,7 +102,7 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
         {/* cursor spotlight */}
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[28px] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 rounded-hero opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{ background: spotlightBackground }}
         />
         {/* top reflection */}
@@ -129,7 +129,7 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
         {isSelected && !reduceMotion ? (
           <motion.span
             aria-hidden
-            className="absolute inset-0 rounded-[28px]"
+            className="absolute inset-0 rounded-hero"
             style={{ boxShadow: `0 0 0 1px ${hexToRgba(accent.base, 0.5)}` }}
             initial={{ opacity: 0.7, scale: 1 }}
             animate={{ opacity: 0, scale: 1.1 }}
@@ -150,9 +150,9 @@ function GoalCard({ option, isSelected, onSelect, index }: GoalCardProps) {
         </motion.span>
 
         <span className="min-w-0 flex-1 pr-8">
-          <span className="block truncate text-[15px] font-semibold text-white">{option.label}</span>
+          <span className="text-body-sm block font-semibold text-white">{option.label}</span>
           <span
-            className="mt-0.5 block truncate text-caption"
+            className="text-caption mt-0.5 line-clamp-2 block"
             style={{ color: isSelected ? "rgba(255,255,255,0.72)" : "rgba(255,255,255,0.5)" }}
           >
             {option.description}

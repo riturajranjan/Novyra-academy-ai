@@ -58,7 +58,7 @@ export function FaqInfoPanel() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.5, ease: easePremium }}
-      className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[32px] p-6 text-center sm:p-10 md:gap-8 lg:sticky lg:top-24 lg:items-start lg:text-left"
+      className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-2xl p-6 text-center sm:p-10 md:gap-8 lg:sticky lg:top-24 lg:items-start lg:text-left"
     >
       <div aria-hidden className="bg-brand-blue/12 pointer-events-none absolute -inset-20 -z-10 rounded-full blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/10 to-transparent" />

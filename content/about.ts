@@ -24,6 +24,7 @@ import {
   Rocket,
   Search,
   Server,
+  ShieldCheck,
   ShoppingCart,
   Shuffle,
   Smartphone,
@@ -63,11 +64,14 @@ export interface HeroTrustChip {
   accent: AccentColor;
 }
 
+/** Capability-based proof, never time/volume-based — no years-in-business,
+ * client counts, or project counts. Complementary to the homepage hero's
+ * trust set (see content/hero.ts) rather than repeating it verbatim. */
 export const heroTrustChips: HeroTrustChip[] = [
-  { id: "premium-ui-ux", icon: Palette, accent: "purple" },
-  { id: "modern-engineering", icon: Code2, accent: "blue" },
-  { id: "ai-ready", icon: Sparkles, accent: "pink" },
-  { id: "direct-support", icon: MessageCircle, accent: "emerald" },
+  { id: "full-stack-engineering", icon: Server, accent: "blue" },
+  { id: "scalable-solutions", icon: Layers, accent: "purple" },
+  { id: "security-focused", icon: ShieldCheck, accent: "emerald" },
+  { id: "pixel-perfect-ui", icon: Palette, accent: "pink" },
 ];
 
 /** ---- Section 2: Company Introduction — four capability tiles ---- */

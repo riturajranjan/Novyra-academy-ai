@@ -42,7 +42,7 @@ export function FaqAccordionItem({ entry, isOpen, onToggle, index }: FaqAccordio
       viewport={{ once: true, margin: "150px" }}
       transition={{ duration: 0.4, delay: reduceMotion ? 0 : index * 0.04, ease: easePremium }}
       className={cn(
-        "group border-border-subtle bg-surface/70 relative overflow-hidden rounded-[24px] border backdrop-blur-2xl transition-colors duration-base",
+        "group border-border-subtle bg-surface/70 relative overflow-hidden rounded-xl border backdrop-blur-2xl transition-colors duration-base",
         isOpen && "border-brand-blue/40",
       )}
     >

@@ -86,7 +86,7 @@ export function AboutEcosystemVisual() {
         );
       })}
 
-      <div className="glass-strong shadow-card-hover absolute top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-[28px] px-7 py-6 text-center">
+      <div className="glass-strong shadow-card-hover absolute top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-hero px-7 py-6 text-center">
         <span className="text-[28px] leading-tight font-semibold tracking-[-0.03em] text-gradient-brand">
           {t("centerTitle")}
         </span>

@@ -30,17 +30,17 @@ export function QuickContactCard({ card, index }: QuickContactCardProps) {
       viewport={{ once: true, margin: "150px" }}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: easePremium }}
-      className="group border-border-subtle bg-surface/70 relative flex min-h-[76px] flex-row items-center gap-3 overflow-hidden rounded-[24px] border p-4 backdrop-blur-xl transition-shadow duration-base md:flex-col md:items-start md:gap-3 md:p-6"
+      className="group border-border-subtle bg-surface/70 relative flex min-h-[76px] flex-row items-center gap-3 overflow-hidden rounded-xl border p-4 backdrop-blur-xl transition-shadow duration-base md:flex-col md:items-start md:gap-3 md:p-6"
       aria-label={`${title}${external ? t("opensInNewTab") : ""}`}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[32px] opacity-0 blur-2xl transition-opacity duration-slow group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-10 -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-slow group-hover:opacity-100"
         style={{ backgroundColor: accentTint(card.accent, 20) }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-base group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-base group-hover:opacity-100"
         style={{ boxShadow: `inset 0 0 0 1px ${accentTint(card.accent, 45)}` }}
       />
       <motion.span

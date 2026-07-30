@@ -61,7 +61,7 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "150px" }}
           transition={{ duration: 0.5 }}
-          className="glass-strong shadow-card relative flex flex-col gap-5 overflow-hidden rounded-[32px] p-5 sm:p-6 lg:gap-7 lg:p-8"
+          className="glass-strong shadow-card relative flex flex-col gap-5 overflow-hidden rounded-2xl p-5 sm:p-6 lg:gap-7 lg:p-8"
         >
           <motion.div aria-hidden className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: spotlight }} />
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 rounded-t-[32px] bg-gradient-to-b from-white/8 to-transparent" />

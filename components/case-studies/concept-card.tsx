@@ -33,7 +33,7 @@ export function ConceptCard({ build, index, wide = false }: ConceptCardProps) {
       whileHover={{ y: -6, scale: 1.01 }}
       transition={{ duration: 0.4, delay: index * 0.05, ease: easePremium }}
       className={cn(
-        "group border-border-subtle bg-surface/70 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-[28px] border p-5 backdrop-blur-xl transition-shadow duration-base hover:shadow-card-hover md:gap-4 md:p-6",
+        "group border-border-subtle bg-surface/70 shadow-card relative flex flex-col gap-3 overflow-hidden rounded-hero border p-5 backdrop-blur-xl transition-shadow duration-base hover:shadow-card-hover md:gap-4 md:p-6",
         wide && "lg:col-span-2",
       )}
     >

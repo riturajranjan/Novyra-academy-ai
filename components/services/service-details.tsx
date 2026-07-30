@@ -71,7 +71,7 @@ export function ServiceDetails({ category }: { category: ServiceCategory }) {
   const deliverables = t.raw(`categories.${category.id}.deliverables`) as string[];
 
   return (
-    <div className="glass shadow-card overflow-hidden rounded-[28px]">
+    <div className="glass shadow-card overflow-hidden rounded-hero">
       <AnimatePresence mode="wait">
         <motion.div
           key={category.id}

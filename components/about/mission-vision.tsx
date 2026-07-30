@@ -26,7 +26,7 @@ function Panel({ icon: Icon, accent, label, headline, paragraph, chips }: PanelP
       whileInView="visible"
       viewport={{ once: true, margin: "120px" }}
       variants={fadeInUp}
-      className="glass-strong shadow-card flex flex-1 flex-col gap-5 rounded-[28px] p-7 sm:p-9"
+      className="glass-strong shadow-card flex flex-1 flex-col gap-5 rounded-hero p-7 sm:p-9"
     >
       <span
         className="flex h-14 w-14 items-center justify-center rounded-2xl"

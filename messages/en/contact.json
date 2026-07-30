@@ -1,20 +1,13 @@
 {
   "sectionHeading": {
-    "eyebrow": "Let's Build Something Amazing",
-    "title": "Ready to Transform Your Business?",
-    "description": "Whether you need a premium business website, a scalable SaaS platform, AI automation, or a custom web application, our team is ready to bring your vision to life."
-  },
-  "ctaTrustBadges": {
-    "free-consultation": "Free Consultation",
-    "custom-proposal": "Custom Proposal",
-    "no-hidden-charges": "No Hidden Charges",
-    "fast-response": "Fast Response",
-    "dedicated-team": "Dedicated Team"
+    "eyebrow": "Get In Touch",
+    "title": "Let's Build Your Project.",
+    "description": "Tell us what you're building — a website, a platform, or something more complex — and we'll help you scope it."
   },
   "heroCard": {
-    "title": "Let's Turn Your Idea Into Reality",
-    "description": "Share your project goals, and we'll recommend the best technology, timeline, and solution tailored to your business.",
-    "bookConsultation": "🚀 Book Free Consultation",
+    "title": "Tell Us About Your Project",
+    "description": "Share your goals and we'll recommend the right technology, timeline, and approach.",
+    "bookConsultation": "Book Free Consultation",
     "requestQuote": "Request Custom Quote",
     "scheduleCall": "Schedule Discovery Call"
   },
@@ -61,16 +54,6 @@
       "title": "Long-Term Partnership",
       "description": "We continue supporting your product after launch."
     }
-  },
-  "ctaTimeline": {
-    "heading": "What Happens After You Reach Out",
-    "discovery": "Discovery",
-    "proposal": "Proposal",
-    "design": "Design",
-    "development": "Development",
-    "testing": "Testing",
-    "launch": "Launch",
-    "support": "Support"
   },
   "trustMetrics": {
     "projects-planned": { "label": "Projects Planned", "value": "Growing Portfolio" },

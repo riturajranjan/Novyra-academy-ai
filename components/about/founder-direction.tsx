@@ -70,7 +70,7 @@ export function FounderDirection() {
             <div className="bg-brand-blue absolute top-[10%] left-[10%] h-40 w-40 rounded-full opacity-20 blur-[80px]" />
             <div className="bg-brand-purple absolute right-[10%] bottom-[10%] h-44 w-44 rounded-full opacity-20 blur-[90px]" />
           </div>
-          <div aria-hidden className="glass-strong shadow-card-hover absolute inset-4 rounded-[28px]" />
+          <div aria-hidden className="glass-strong shadow-card-hover absolute inset-4 rounded-hero" />
           <div className="relative z-10 flex flex-col items-center gap-3">
             <span className="bg-brand-soft flex h-16 w-16 items-center justify-center rounded-full">
               <TeamIcon className="text-brand-blue h-7 w-7" aria-hidden />

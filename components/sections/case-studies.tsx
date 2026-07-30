@@ -33,7 +33,7 @@ export function CaseStudies() {
   const [featured, ...rest] = filtered.length > 0 ? filtered : conceptBuilds;
 
   return (
-    <section id="case-studies" className="relative isolate overflow-hidden py-14 md:py-32">
+    <section id="case-studies" className="relative isolate overflow-hidden py-14 md:py-20">
       <CaseStudiesBackground />
 
       <Container className="flex flex-col gap-10 md:gap-14">
@@ -116,7 +116,7 @@ export function CaseStudies() {
         </div>
 
         {/* CTA */}
-        <div className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-[28px] p-8 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left">
+        <div className="glass-strong shadow-card relative flex flex-col items-center gap-6 overflow-hidden rounded-hero p-8 text-center sm:flex-row sm:justify-between sm:p-10 sm:text-left">
           <div
             aria-hidden
             className="bg-gradient-brand pointer-events-none absolute -inset-16 -z-10 rounded-full opacity-20 blur-3xl"

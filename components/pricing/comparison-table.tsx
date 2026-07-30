@@ -72,7 +72,7 @@ function DesktopGroupedTable() {
   }
 
   return (
-    <div className="glass-strong shadow-card hidden overflow-hidden rounded-[28px] md:block">
+    <div className="glass-strong shadow-card hidden overflow-hidden rounded-hero md:block">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse">
           <thead>

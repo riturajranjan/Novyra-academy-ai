@@ -13,10 +13,10 @@
     "description": "Novyra Technologies designs and develops premium websites, SaaS platforms, AI-powered products, web applications, and digital growth systems for modern businesses.",
     "cta": { "primary": "Start a Project", "secondary": "Explore Our Services" },
     "trust": {
-      "premium-ui-ux": "Premium UI/UX",
-      "modern-engineering": "Modern Engineering",
-      "ai-ready": "AI-Ready Solutions",
-      "direct-support": "Direct Support"
+      "full-stack-engineering": "Full-Stack Engineering",
+      "scalable-solutions": "Scalable Solutions",
+      "security-focused": "Security Focused",
+      "pixel-perfect-ui": "Pixel-Perfect UI"
     },
     "ecosystem": {
       "centerTitle": "NOVYRA",
@@ -55,7 +55,7 @@
     "vision": {
       "label": "Vision",
       "headline": "Where We're Headed",
-      "paragraph": "Become a trusted technology partner for businesses building the next generation of digital products and services.",
+      "paragraph": "Become the technology partner businesses rely on to build their most important digital products.",
       "chips": ["Scalable", "Intelligent", "Future-ready"]
     }
   },
