@@ -72,11 +72,20 @@ export function NavDesktop() {
             }}
           >
             {displayKey === item.id ? (
-              <motion.div
-                layoutId="nav-active-pill"
-                className="bg-gradient-brand absolute inset-0 -z-10 rounded-pill opacity-10 dark:opacity-20"
-                transition={{ type: "spring", stiffness: 500, damping: 35 }}
-              />
+              <>
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="bg-gradient-brand absolute inset-0 -z-10 rounded-pill opacity-10 dark:opacity-20"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+                <motion.span
+                  layoutId="nav-active-underline"
+                  aria-hidden
+                  className="bg-gradient-brand absolute inset-x-3 bottom-0.5 h-0.5 rounded-full"
+                  style={{ boxShadow: "0 0 8px 1px color-mix(in oklab, var(--color-brand-blue) 55%, transparent)" }}
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              </>
             ) : null}
 
             {hasChildren ? (

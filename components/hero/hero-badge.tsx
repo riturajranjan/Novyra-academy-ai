@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { heroBadgeItems } from "@/content/hero";
 import { accentBg, accentStroke } from "@/lib/accent";
-import { easePremium } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const SPARKLES = [
@@ -16,16 +15,16 @@ const SPARKLES = [
 
 /** The floating four-item glass badge above the headline — Websites · SaaS
  * · AI · Automation, each with its own colored dot, plus a handful of tiny
- * glowing particles drifting just outside its edges. */
+ * glowing particles drifting just outside its edges. Mount entrance is
+ * driven by the hero's GSAP timeline (step 1, targeting `[data-hero-badge]`);
+ * this component only owns the idle sparkle motion. */
 export function HeroBadge() {
   const t = useTranslations("hero.badge.items");
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: easePremium }}
+    <div
+      data-hero-badge
       className="glass relative inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-pill px-4 py-2 text-caption font-medium text-foreground-secondary"
     >
       {SPARKLES.map((s, i) => (
@@ -55,6 +54,6 @@ export function HeroBadge() {
           </span>
         </span>
       ))}
-    </motion.div>
+    </div>
   );
 }

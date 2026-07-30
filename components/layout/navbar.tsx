@@ -22,11 +22,12 @@ export function Navbar() {
       className="fixed inset-x-0 top-0 z-50 w-full max-w-full">
       <div className="mx-auto max-w-[90rem] px-3 md:px-5 pt-4 transition-[padding] duration-base ease-soft sm:px-6 sm:pt-[18px] lg:px-7">
         <div
+          style={{ backdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)`, WebkitBackdropFilter: `blur(${scrolled ? 28 : 20}px) saturate(180%)` }}
           className={cn(
-            "shadow-card flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
+            "flex items-center justify-between gap-4 rounded-[28px] border px-4 transition-all duration-base ease-soft sm:px-6 lg:rounded-[32px] lg:px-8",
             scrolled
-              ? "glass-strong h-[60px] lg:h-[68px]"
-              : "glass h-[68px] lg:h-[80px]",
+              ? "glass-strong shadow-card-hover h-[60px] lg:h-[68px]"
+              : "glass shadow-card h-[68px] lg:h-[80px]",
           )}>
           <Link
             href="/"

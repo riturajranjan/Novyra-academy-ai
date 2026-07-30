@@ -19,14 +19,15 @@ export const heroBadgeItems: HeroBadgeItem[] = [
 export interface HeroTrustItem {
   id: string;
   icon: LucideIcon;
+  accent: AccentColor;
 }
 
-/** A flat row of honest capability claims — never a star rating or fake
- * review. Label text lives in messages/{locale}/hero.json under
- * `trust.items.<id>`. */
+/** A row of honest capability claims, shown as glass pills — never a star
+ * rating or fake review. Label text lives in messages/{locale}/hero.json
+ * under `trust.items.<id>`. */
 export const heroTrustItems: HeroTrustItem[] = [
-  { id: "growingPortfolio", icon: TrendingUp },
-  { id: "modernSaasDevelopment", icon: Layers },
-  { id: "aiPowered", icon: Sparkles },
-  { id: "enterpriseReady", icon: ShieldCheck },
+  { id: "growingPortfolio", icon: TrendingUp, accent: "blue" },
+  { id: "modernSaasDevelopment", icon: Layers, accent: "purple" },
+  { id: "aiPowered", icon: Sparkles, accent: "pink" },
+  { id: "enterpriseReady", icon: ShieldCheck, accent: "emerald" },
 ];
